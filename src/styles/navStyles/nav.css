@@ -1,0 +1,65 @@
+.navigationDiv{
+    background-color: #52b788;
+    color: ivory;
+    padding: 10px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.navigationDiv h3, h5{
+    cursor: pointer;
+    padding: 5px 5px;
+}
+
+.navigationDiv i{
+    cursor: pointer;
+}
+
+.navigationLeftSide{
+    display: flex;
+    justify-content: space-around;
+    align-items: baseline;
+    width: 30%;
+}
+
+.navigationLeftSide div{
+    display: flex;
+    align-items: center;
+    padding: 5px 5px;
+    border-radius: 5px;
+}
+
+.navigationRightSide div{
+    display: flex;
+    align-items: center;
+    padding: 5px 5px;
+    border-radius: 5px;
+}
+
+.navigationLeftSide div:hover{
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+.navigationRightSide div:hover{
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+.navigationRightSide{
+    display: flex;
+    width: 20%;
+    justify-content: space-around;
+    align-items: baseline;
+}
+
+.navigationLogo{
+    letter-spacing: 2px;
+}
