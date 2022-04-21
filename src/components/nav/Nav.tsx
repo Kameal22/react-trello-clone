@@ -1,16 +1,28 @@
 import "../../styles/navStyles/nav.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
+import NavWorkspaces from "./navMenu/WorkspaceMenu";
+import { useState } from "react";
 
 const Nav: React.FC = () => {
+  const [navDropdown, setNavDropdown] = useState<string>();
+
   return (
     <div className="navigationDiv">
       <div className="navigationLeftSide">
         <h3 className="navigationLogo">Trello</h3>
-        <div className="navigationWorkspace">
+        <div
+          onClick={
+            navDropdown === "workspaces"
+              ? () => setNavDropdown("")
+              : () => setNavDropdown("workspaces")
+          }
+          className="navigationWorkspace"
+        >
           <h5>Workspaces</h5>
           <i className="bi bi-chevron-down"></i>
         </div>
-        <div className="navigationRevent">
+        {navDropdown === "workspaces" ? <NavWorkspaces /> : null}
+        <div className="navigationRecent">
           <h5>Recent</h5>
           <i className="bi bi-chevron-down"></i>
         </div>
