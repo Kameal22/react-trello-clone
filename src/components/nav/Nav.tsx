@@ -2,6 +2,8 @@ import "../../styles/navStyles/nav.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import NavWorkspaces from "./navMenu/WorkspaceMenu";
 import { useState } from "react";
+import NavRecent from "./navMenu/RecentMenu";
+import NavStarred from "./navMenu/StarredMenu";
 
 const Nav: React.FC = () => {
   const [navDropdown, setNavDropdown] = useState<string>();
@@ -22,14 +24,24 @@ const Nav: React.FC = () => {
           <i className="bi bi-chevron-down"></i>
         </div>
         {navDropdown === "workspaces" ? <NavWorkspaces /> : null}
-        <div className="navigationRecent">
+        <div onClick={
+          navDropdown === "recent"
+            ? () => setNavDropdown("")
+            : () => setNavDropdown("recent")
+        } className="navigationRecent">
           <h5>Recent</h5>
           <i className="bi bi-chevron-down"></i>
         </div>
-        <div className="navigationStarred">
+        {navDropdown === "recent" ? <NavRecent /> : null}
+        <div onClick={
+          navDropdown === "starred"
+            ? () => setNavDropdown("")
+            : () => setNavDropdown("starred")
+        } className="navigationStarred">
           <h5>Starred</h5>
           <i className="bi bi-chevron-down"></i>
         </div>
+        {navDropdown === "starred" ? <NavStarred /> : null}
       </div>
 
       <div className="navigationRightSide">
