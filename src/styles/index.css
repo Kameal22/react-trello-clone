@@ -6,3 +6,12 @@
   box-sizing: border-box;
   font-family: 'Inter', sans-serif;
 }
+
+input:focus{
+  outline: none;
+  border-color: darkgray;
+}
+
+input{
+  caret-color: #52b788;
+}
