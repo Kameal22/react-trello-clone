@@ -25,6 +25,7 @@ export const registerSlice = createSlice({
     logoutUser: (state) => {
       state.user = { name: "", password: "" };
       window.localStorage.removeItem("user");
+      window.location.reload();
     },
   },
 });

@@ -1,7 +1,7 @@
 import "../../styles/navStyles/navRegister.css";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { registerUser, logoutUser } from "../../redux/features/registerSlice";
+import { registerUser } from "../../redux/features/registerSlice";
 
 interface RegisterProps {
   setRegistering: () => void;
@@ -26,6 +26,8 @@ const Register: React.FC<RegisterProps> = (props) => {
     event.preventDefault();
     if (name === "" || password === "") {
       setError("Please provide name and password");
+    } else if (password.length < 5) {
+      setError("Password must contain at least 5 characters");
     } else {
       dispatch(registerUser({ name, password }));
       props.setRegistering();

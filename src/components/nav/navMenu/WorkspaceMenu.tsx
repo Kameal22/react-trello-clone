@@ -1,11 +1,15 @@
 import "../../../styles/navStyles/navMenuStyles/workspaceMenu.css";
 
-const NavWorkspaces: React.FC = () => {
+interface workspaceProps {
+  closeDropdown: () => void;
+}
+
+const NavWorkspaces: React.FC<workspaceProps> = (props) => {
   return (
     <div className="navWorkspacesDiv">
       <div className="navWorkspacesHeading">
         <p>Workspaces</p>
-        <i className="bi bi-x"></i>
+        <i onClick={() => props.closeDropdown()} className="bi bi-x"></i>
       </div>
 
       <div className="navWorkspaceChoices">
