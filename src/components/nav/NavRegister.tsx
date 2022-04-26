@@ -2,17 +2,18 @@ import "../../styles/navStyles/navRegister.css";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { registerUser } from "../../redux/features/registerSlice";
+import { showDropdown } from "../../redux/features/navigationSlice";
 
-interface RegisterProps {
-  setRegistering: () => void;
-}
-
-const Register: React.FC<RegisterProps> = (props) => {
+const Register: React.FC = () => {
   const [name, setName] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<string>("");
 
   const dispatch = useDispatch();
+
+  const setDropdown = (dropdownItem: string) => {
+    dispatch(showDropdown({ dropdownItem }));
+  };
 
   const handleNameChange = (e: React.FormEvent<HTMLInputElement>): void => {
     setName(e.currentTarget.value);
@@ -30,7 +31,7 @@ const Register: React.FC<RegisterProps> = (props) => {
       setError("Password must contain at least 5 characters");
     } else {
       dispatch(registerUser({ name, password }));
-      props.setRegistering();
+      setDropdown("");
     }
   };
 

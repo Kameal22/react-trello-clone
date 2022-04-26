@@ -1,15 +1,19 @@
 import "../../../styles/navStyles/navMenuStyles/workspaceMenu.css";
+import { showDropdown } from "../../../redux/features/navigationSlice";
+import { useDispatch } from "react-redux";
 
-interface workspaceProps {
-  closeDropdown: () => void;
-}
+const NavWorkspaces: React.FC = () => {
+  const dispatch = useDispatch();
 
-const NavWorkspaces: React.FC<workspaceProps> = (props) => {
+  const setDropdown = (dropdownItem: string) => {
+    dispatch(showDropdown({ dropdownItem }));
+  };
+
   return (
     <div className="navWorkspacesDiv">
       <div className="navWorkspacesHeading">
         <p>Workspaces</p>
-        <i onClick={() => props.closeDropdown()} className="bi bi-x"></i>
+        <i onClick={() => setDropdown("")} className="bi bi-x"></i>
       </div>
 
       <div className="navWorkspaceChoices">

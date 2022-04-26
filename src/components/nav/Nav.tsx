@@ -1,34 +1,26 @@
 import "../../styles/navStyles/nav.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import NavWorkspaces from "./navMenu/WorkspaceMenu";
-import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../redux/Store";
 import NavRecent from "./navMenu/RecentMenu";
 import NavStarred from "./navMenu/StarredMenu";
 import NavSearchBar from "./NavSearch";
 import Register from "./NavRegister";
-import { logoutUser } from "../../redux/features/registerSlice";
+import { showDropdown } from "../../redux/features/navigationSlice";
+import NavUserMenu from "./navMenu/UserMenu";
 
 const Nav: React.FC = () => {
-  const [navDropdown, setNavDropdown] = useState<string>("");
-  const [registering, setRegistering] = useState<boolean>(false);
-  const [loggingOutDropdown, setLoggingOutDropdown] = useState<boolean>(false);
-
   const dispatch = useDispatch();
 
   const user = useSelector((state: RootState) => state.users.user);
 
-  const closeDropdown = () => {
-    setNavDropdown("");
-  };
+  const dropdown = useSelector(
+    (state: RootState) => state.dropdown.navDropdown
+  );
 
-  const stopRegistering = () => {
-    setRegistering(false);
-  };
-
-  const logout = () => {
-    dispatch(logoutUser());
+  const setDropdown = (dropdownItem: string) => {
+    dispatch(showDropdown({ dropdownItem }));
   };
 
   return (
@@ -37,46 +29,40 @@ const Nav: React.FC = () => {
         <h3 className="navigationLogo">Trello</h3>
         <div
           onClick={
-            navDropdown === "workspaces"
-              ? () => setNavDropdown("")
-              : () => setNavDropdown("workspaces")
+            dropdown === "workspaces"
+              ? () => setDropdown("")
+              : () => setDropdown("workspaces")
           }
           className="navigationWorkspace"
         >
           <h5>Workspaces</h5>
           <i className="bi bi-chevron-down"></i>
         </div>
-        {navDropdown === "workspaces" ? (
-          <NavWorkspaces closeDropdown={closeDropdown} />
-        ) : null}
+        {dropdown === "workspaces" ? <NavWorkspaces /> : null}
         <div
           onClick={
-            navDropdown === "recent"
-              ? () => setNavDropdown("")
-              : () => setNavDropdown("recent")
+            dropdown === "recent"
+              ? () => setDropdown("")
+              : () => setDropdown("recent")
           }
           className="navigationRecent"
         >
           <h5>Recent</h5>
           <i className="bi bi-chevron-down"></i>
         </div>
-        {navDropdown === "recent" ? (
-          <NavRecent closeDropdown={closeDropdown} />
-        ) : null}
+        {dropdown === "recent" ? <NavRecent /> : null}
         <div
           onClick={
-            navDropdown === "starred"
-              ? () => setNavDropdown("")
-              : () => setNavDropdown("starred")
+            dropdown === "starred"
+              ? () => setDropdown("")
+              : () => setDropdown("starred")
           }
           className="navigationStarred"
         >
           <h5>Starred</h5>
           <i className="bi bi-chevron-down"></i>
         </div>
-        {navDropdown === "starred" ? (
-          <NavStarred closeDropdown={closeDropdown} />
-        ) : null}
+        {dropdown === "starred" ? <NavStarred /> : null}
       </div>
 
       <div className="navigationRightSide">
@@ -85,25 +71,29 @@ const Nav: React.FC = () => {
         </div>
         <div className="navigationRegister">
           {user.name ? (
-            <h5 onMouseEnter={() => setLoggingOutDropdown(true)}>
+            <h5
+              onClick={
+                dropdown === "userChoices"
+                  ? () => setDropdown("")
+                  : () => setDropdown("userChoices")
+              }
+            >
               {user.name}
             </h5>
           ) : (
-            <h5 onClick={() => setRegistering(!registering)}>Register</h5>
-          )}
-          {registering ? <Register setRegistering={stopRegistering} /> : null}
-
-          {loggingOutDropdown ? (
-            <div
-              onMouseLeave={() => setLoggingOutDropdown(false)}
-              className="logoutDiv"
+            <h5
+              onClick={
+                dropdown === "registering"
+                  ? () => setDropdown("")
+                  : () => setDropdown("registering")
+              }
             >
-              <p onClick={() => logout()} className="logout">
-                Logout
-              </p>
-              <i onClick={() => logout()} className="bi bi-door-closed"></i>
-            </div>
-          ) : null}
+              Register
+            </h5>
+          )}
+          {dropdown === "registering" ? <Register /> : null}
+
+          {dropdown === "userChoices" ? <NavUserMenu /> : null}
         </div>
       </div>
     </div>
