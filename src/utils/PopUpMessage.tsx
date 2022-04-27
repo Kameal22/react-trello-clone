@@ -13,7 +13,16 @@ const PopUp: React.FC = () => {
   };
 
   if (message) {
-    return <div className="popUpDiv">{message}</div>;
+    return (
+      <div className="popUpDiv">
+        <p>{message}</p>
+        <i
+          onClick={() => setMessage("")}
+          id="popUpIcon"
+          className="bi bi-x"
+        ></i>
+      </div>
+    );
   } else {
     return null;
   }

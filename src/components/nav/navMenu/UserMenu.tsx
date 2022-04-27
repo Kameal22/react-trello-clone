@@ -19,6 +19,11 @@ const NavUserMenu: React.FC = () => {
       </div>
 
       <div className="userChoiceDiv">
+        <p className="userChoice">Your workspaces</p>
+        <i className="bi bi-person-workspace"></i>
+      </div>
+
+      <div className="userChoiceDiv">
         <p className="userChoice">Your boards</p>
         <i className="bi bi-clipboard"></i>
       </div>

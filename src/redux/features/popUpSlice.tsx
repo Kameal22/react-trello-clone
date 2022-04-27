@@ -5,7 +5,7 @@ interface PopUpInterface {
 }
 
 const initialState: PopUpInterface = {
-  popUpMessage: "INITIAL MESSAGE",
+  popUpMessage: "",
 };
 
 export const popUpSlice = createSlice({

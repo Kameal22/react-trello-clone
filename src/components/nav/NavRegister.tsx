@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { registerUser } from "../../redux/features/registerSlice";
 import { showDropdown } from "../../redux/features/navigationSlice";
+import { setPopUpMessage } from "../../redux/features/popUpSlice";
 
 const Register: React.FC = () => {
   const [name, setName] = useState<string>("");
@@ -13,6 +14,15 @@ const Register: React.FC = () => {
 
   const setDropdown = (dropdownItem: string) => {
     dispatch(showDropdown({ dropdownItem }));
+  };
+
+  const setMessage = (message: string) => {
+    dispatch(setPopUpMessage({ message }));
+    dispatch(
+      setTimeout(() => {
+        setMessage("");
+      }, 1500)
+    );
   };
 
   const handleNameChange = (e: React.FormEvent<HTMLInputElement>): void => {
@@ -32,6 +42,7 @@ const Register: React.FC = () => {
     } else {
       dispatch(registerUser({ name, password }));
       setDropdown("");
+      setMessage(`${name} registered in`);
     }
   };
 
