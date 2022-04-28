@@ -3,3 +3,112 @@
     display: flex;
     flex-direction: column;
 }
+
+.menuBoards{
+    display: flex;
+    font-weight: bold;
+    font-size: .9em;
+    margin-top: 2vh;
+    margin-bottom: .5vh;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.menuBoards:hover{
+    background-color: rgba(224, 224, 224, 0.562);
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.menuBoards i{
+    margin-left: .5em;
+}
+
+.menuBoards p{
+    margin-left: 1em;
+}
+
+.menuHome{
+    display: flex;
+    font-weight: bold;
+    font-size: .9em;
+    margin-bottom: .5vh;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.menuHome:hover{
+    background-color: rgba(224, 224, 224, 0.562);
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.menuHome i{
+    margin-left: .5em;
+}
+
+.menuHome p{
+    margin-left: 1em;
+}
+
+.menuWorkspacesHeading{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: rgb(131, 130, 130);
+    font-size: .8em;
+    margin-top: 4vh;
+}
+
+.menuWorkspacesHeading i{
+    margin-right: .4em;
+}
+
+.menuWorkspaces{
+    margin-top: 1vh;
+}
+
+.workspace{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 4px;
+}
+
+.workspace:hover{
+    background-color: rgba(224, 224, 224, 0.562);
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.workspace p{
+    font-weight: bold;
+    font-size: .95em;
+}
+
+.workspaceOption{
+    display: flex;
+    font-weight: bold;
+    font-size: .9em;
+    margin-top: 1vh;
+    margin-bottom: .5vh;
+    margin-left: 1.5em;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: .8em;
+    color: rgb(82, 81, 81);
+}
+
+.workspaceOption:hover{
+    background-color: rgba(224, 224, 224, 0.562);
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.workspaceOption i{
+    margin-left: .5em;
+}
+
+.workspaceOption p{
+    margin-left: 1em;
+}
