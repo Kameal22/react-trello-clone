@@ -38,7 +38,7 @@ const MainSectionMenu: React.FC = () => {
           </div>
           <div className="workspaceOption">
             <i className="bi bi-gear"></i>
-            <p className="menuBoardsDescription">Highlights</p>
+            <p className="menuBoardsDescription">Settings</p>
           </div>
         </div>
       </div>
