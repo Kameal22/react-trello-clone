@@ -1,0 +1,69 @@
+.createWorkspacePopUp{
+    width: 65%;
+    margin-left: auto;
+    margin-right: auto;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    height: 70vh;
+    background: rgba(221, 224, 251, 0.21);
+    border-radius: 10px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(3.7px);
+    -webkit-backdrop-filter: blur(3.7px);
+    border: 2px solid rgba(85, 85, 85, 0.623);
+    display: flex;
+    align-items: center;
+}
+
+.createWorkspace{
+    border-right: 2px solid #52b788;
+    width: 50%;
+    height: 90%;
+}
+
+.createWorkspacePopUp i{
+    position: absolute;
+    color: black;
+    font-size: 1.2em;
+    font-weight: bold;
+    top: 15px;
+    right: 20px;
+    cursor: pointer;
+}
+
+.createWorkspace h2{
+    width: 80%;
+    margin-top: 4vh;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+}
+
+.createWorkspaceDescription{
+    width: 80%;
+    color: rgb(92, 92, 92);
+    text-align: left;
+    margin-top: 1vh;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.createWorkspaceFormDiv{
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 4vh;
+    border: 1px solid red;
+    height: 60%;
+}
+
+.workspaceName{
+    font-weight: bold;
+    font-size: .85em;
+}
+
+.createWorkspaceForm{
+    margin-top: 1vh;
+}

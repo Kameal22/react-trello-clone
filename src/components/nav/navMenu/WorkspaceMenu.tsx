@@ -1,6 +1,7 @@
 import "../../../styles/navStyles/navMenuStyles/workspaceMenu.css";
 import { showDropdown } from "../../../redux/features/navigationSlice";
-import { useDispatch } from "react-redux";
+import { RootState } from "../../../redux/Store";
+import { useDispatch, useSelector } from "react-redux";
 
 const NavWorkspaces: React.FC = () => {
   const dispatch = useDispatch();
@@ -9,6 +10,12 @@ const NavWorkspaces: React.FC = () => {
     dispatch(showDropdown({ dropdownItem }));
   };
 
+  const workspaces = useSelector(
+    (state: RootState) => state.workspace.workspaces
+  );
+
+  const isWorkspace = workspaces[0].workspaceName;
+
   return (
     <div className="navWorkspacesDiv">
       <div className="navWorkspacesHeading">
@@ -16,14 +23,20 @@ const NavWorkspaces: React.FC = () => {
         <i onClick={() => setDropdown("")} className="bi bi-x"></i>
       </div>
 
-      <div className="navWorkspaceChoices">
-        <p className="navYourWorkspaces">Your workspaces</p>
+      {isWorkspace ? (
+        <div className="navWorkspaceChoices">
+          <p className="navYourWorkspaces">Your workspaces</p>
 
-        <div className="navWorkspaceItems">
-          <p className="navWorkspaceItemHeading">Final project</p>
-          <p className="navWorkspaceItemHeading">Callendar</p>
+          <div className="navWorkspaceItems">
+            <p className="navWorkspaceItemHeading">Final project</p>
+            <p className="navWorkspaceItemHeading">Callendar</p>
+          </div>
         </div>
-      </div>
+      ) : (
+        <div className="navWorkspaceChoices">
+          <p className="navCreateWorkspace">Create workspace</p>
+        </div>
+      )}
     </div>
   );
 };
