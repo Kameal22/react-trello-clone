@@ -10,7 +10,11 @@ import Register from "./NavRegister";
 import { showDropdown } from "../../redux/features/navigationSlice";
 import NavUserMenu from "./navMenu/UserMenu";
 
-const Nav: React.FC = () => {
+interface NavProps {
+  showCreateWorkspace: () => void;
+}
+
+const Nav: React.FC<NavProps> = (props) => {
   const dispatch = useDispatch();
 
   const user = useSelector((state: RootState) => state.users.user);
@@ -38,7 +42,9 @@ const Nav: React.FC = () => {
           <h5>Workspaces</h5>
           <i className="bi bi-chevron-down"></i>
         </div>
-        {dropdown === "workspaces" ? <NavWorkspaces /> : null}
+        {dropdown === "workspaces" ? (
+          <NavWorkspaces showCreateWorkspace={props.showCreateWorkspace} />
+        ) : null}
         <div
           onClick={
             dropdown === "recent"

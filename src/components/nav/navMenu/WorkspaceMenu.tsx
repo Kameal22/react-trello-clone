@@ -3,7 +3,11 @@ import { showDropdown } from "../../../redux/features/navigationSlice";
 import { RootState } from "../../../redux/Store";
 import { useDispatch, useSelector } from "react-redux";
 
-const NavWorkspaces: React.FC = () => {
+interface WorkspaceProps {
+  showCreateWorkspace: () => void;
+}
+
+const NavWorkspaces: React.FC<WorkspaceProps> = (props) => {
   const dispatch = useDispatch();
 
   const setDropdown = (dropdownItem: string) => {
@@ -34,7 +38,12 @@ const NavWorkspaces: React.FC = () => {
         </div>
       ) : (
         <div className="navWorkspaceChoices">
-          <p className="navCreateWorkspace">Create workspace</p>
+          <p
+            onClick={() => props.showCreateWorkspace()}
+            className="navCreateWorkspace"
+          >
+            Create workspace
+          </p>
         </div>
       )}
     </div>

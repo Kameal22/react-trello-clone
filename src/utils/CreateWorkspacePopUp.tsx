@@ -1,7 +1,11 @@
 import "../styles/popUpStyles/createWorkspacePopUp.css";
 import { useState } from "react";
 
-const CreateWorkspacePopUp: React.FC = () => {
+interface WorkspacePopUpProps {
+  showCreateWorkspace: () => void;
+}
+
+const CreateWorkspacePopUp: React.FC<WorkspacePopUpProps> = (props) => {
   const [workspaceName, setWorkspaceName] = useState<string>("");
   const [workspaceDescription, setWorkspaceDescription] = useState<string>("");
 
@@ -23,7 +27,7 @@ const CreateWorkspacePopUp: React.FC = () => {
 
   return (
     <div className="createWorkspacePopUp">
-      <i className="bi bi-x-lg"></i>
+      <i onClick={() => props.showCreateWorkspace()} className="bi bi-x-lg"></i>
       <div className="createWorkspace">
         <div className="createWorkspaceInfo">
           <h2>Let's build a Workspace</h2>
