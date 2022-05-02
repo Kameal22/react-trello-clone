@@ -62,6 +62,11 @@
 
 .menuWorkspacesHeading i{
     margin-right: .4em;
+    cursor: pointer;
+}
+
+.menuWorkspacesHeading i:hover{
+    background-color: rgba(224, 224, 224, 0.562);
 }
 
 .menuWorkspaces{

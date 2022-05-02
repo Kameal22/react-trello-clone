@@ -3,10 +3,14 @@ import MainSectionMenu from "./MainSectionMenu";
 import MainSectionHighlights from "./MainSectionHighlights";
 import MainSectionRecent from "./MainSectionRecent";
 
-const MainSection: React.FC = () => {
+interface MainSectionProps {
+  showCreateWorkspace: () => void;
+}
+
+const MainSection: React.FC<MainSectionProps> = (props) => {
   return (
     <div className="mainSectionDiv">
-      <MainSectionMenu />
+      <MainSectionMenu showCreateWorkspace={props.showCreateWorkspace} />
       <MainSectionHighlights />
       <MainSectionRecent />
     </div>

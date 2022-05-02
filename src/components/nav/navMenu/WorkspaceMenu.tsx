@@ -20,6 +20,11 @@ const NavWorkspaces: React.FC<WorkspaceProps> = (props) => {
 
   const isWorkspace = workspaces[0].workspaceName;
 
+  const showCreateWorkspacePopUp = () => {
+    props.showCreateWorkspace();
+    dispatch(setDropdown(""));
+  };
+
   return (
     <div className="navWorkspacesDiv">
       <div className="navWorkspacesHeading">
@@ -39,7 +44,7 @@ const NavWorkspaces: React.FC<WorkspaceProps> = (props) => {
       ) : (
         <div className="navWorkspaceChoices">
           <p
-            onClick={() => props.showCreateWorkspace()}
+            onClick={() => showCreateWorkspacePopUp()}
             className="navCreateWorkspace"
           >
             Create workspace

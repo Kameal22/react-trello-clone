@@ -1,6 +1,10 @@
 import "../../styles/mainSectionStyles/mainSectionMenu.css";
 
-const MainSectionMenu: React.FC = () => {
+interface MainSectionProps {
+  showCreateWorkspace: () => void;
+}
+
+const MainSectionMenu: React.FC<MainSectionProps> = (props) => {
   return (
     <div className="mainSectionMenuDiv">
       <h3>Menu</h3>
@@ -16,7 +20,11 @@ const MainSectionMenu: React.FC = () => {
 
       <div className="menuWorkspacesHeading">
         <p>Workspaces</p>
-        <i style={{ fontSize: "1.2em" }} className="bi bi-plus"></i>
+        <i
+          onClick={() => props.showCreateWorkspace()}
+          style={{ fontSize: "1.2em" }}
+          className="bi bi-plus"
+        ></i>
       </div>
 
       <div className="menuWorkspaces">

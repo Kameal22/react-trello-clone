@@ -16,7 +16,7 @@ const LandingPage: React.FC = () => {
   return (
     <div className="landingPageDiv">
       <Nav showCreateWorkspace={showWorkspaceCreation} />
-      <MainSection />
+      <MainSection showCreateWorkspace={showWorkspaceCreation} />
       {createWorkspacePopUp ? (
         <CreateWorkspacePopUp showCreateWorkspace={showWorkspaceCreation} />
       ) : null}

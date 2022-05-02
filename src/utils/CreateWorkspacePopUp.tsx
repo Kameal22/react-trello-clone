@@ -30,7 +30,9 @@ const CreateWorkspacePopUp: React.FC<WorkspacePopUpProps> = (props) => {
       <i onClick={() => props.showCreateWorkspace()} className="bi bi-x-lg"></i>
       <div className="createWorkspace">
         <div className="createWorkspaceInfo">
-          <h2>Let's build a Workspace</h2>
+          <h2>
+            Let's build a <span>Workspace</span>
+          </h2>
           <p className="createWorkspaceDescription">
             Boost your productivity by making it easier for everyone to access
             boards in one location.
@@ -43,23 +45,33 @@ const CreateWorkspacePopUp: React.FC<WorkspacePopUpProps> = (props) => {
             autoComplete="off"
             onSubmit={handleSubmit}
           >
-            <div className="workspaceNameInput">
+            <div className="workspaceNameInputDiv">
               <p className="workspaceName">Workspace name</p>
               <input
+                className="workspaceNameInput"
+                placeholder="Code together"
                 value={workspaceName}
                 onChange={handleWorkspaceNameChange}
                 type="text"
                 name="workspaceName"
               />
+              <p className="workspaceNameInfo">
+                This is the name of your company, team or organization.
+              </p>
             </div>
-            <div className="workspaceDescriptionInput">
+            <div className="workspaceDescriptionInputDiv">
               <p className="workspaceDescription">Workspace description</p>
               <input
+                placeholder="We organize everything here"
+                className="workspaceDescriptionInput"
                 value={workspaceDescription}
                 onChange={handleWorkspaceDescriptionChange}
                 type="password"
                 name="workspaceName"
               />
+              <p className="workspaceDescriptionInfo">
+                Get your members on board with a few words about your Workspace.
+              </p>
             </div>
             <button className="submitBtn" type="submit">
               Submit
@@ -67,6 +79,7 @@ const CreateWorkspacePopUp: React.FC<WorkspacePopUpProps> = (props) => {
           </form>
         </div>
       </div>
+      <div className="createWorkspaceRIGHTSIDE"></div>
     </div>
   );
 };
