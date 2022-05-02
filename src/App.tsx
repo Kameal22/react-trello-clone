@@ -1,4 +1,4 @@
-import LandingPage from "./components/mainPage/LandingPage";
+import LandingPage from "./components/landingPage/LandingPage";
 import "./styles/App.css";
 
 function App() {

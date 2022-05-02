@@ -1,15 +1,19 @@
 import "../../../styles/navStyles/navMenuStyles/starredMenu.css";
+import { showDropdown } from "../../../redux/features/navigationSlice";
+import { useDispatch } from "react-redux";
 
-interface starredProps {
-  closeDropdown: () => void;
-}
+const NavStarred: React.FC = () => {
+  const dispatch = useDispatch();
 
-const NavStarred: React.FC<starredProps> = (props) => {
+  const setDropdown = (dropdownItem: string) => {
+    dispatch(showDropdown({ dropdownItem }));
+  };
+
   return (
     <div className="navStarredDiv">
       <div className="navStarredHeading">
         <p>Starred boards</p>
-        <i onClick={() => props.closeDropdown()} className="bi bi-x"></i>
+        <i onClick={() => setDropdown("")} className="bi bi-x"></i>
       </div>
 
       <div className="navStarredChoices">

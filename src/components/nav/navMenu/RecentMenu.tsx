@@ -1,15 +1,19 @@
 import "../../../styles/navStyles/navMenuStyles/recentMenu.css";
+import { showDropdown } from "../../../redux/features/navigationSlice";
+import { useDispatch } from "react-redux";
 
-interface recentProps {
-  closeDropdown: () => void;
-}
+const NavRecent: React.FC = () => {
+  const dispatch = useDispatch();
 
-const NavRecent: React.FC<recentProps> = (props) => {
+  const setDropdown = (dropdownItem: string) => {
+    dispatch(showDropdown({ dropdownItem }));
+  };
+
   return (
     <div className="navRecentDiv">
       <div className="navRecentHeading">
         <p>Recent boards</p>
-        <i onClick={() => props.closeDropdown()} className="bi bi-x"></i>
+        <i onClick={() => setDropdown("")} className="bi bi-x"></i>
       </div>
 
       <div className="navRecentChoices">

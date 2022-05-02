@@ -1,25 +1,56 @@
 import "../../../styles/navStyles/navMenuStyles/workspaceMenu.css";
+import { showDropdown } from "../../../redux/features/navigationSlice";
+import { RootState } from "../../../redux/Store";
+import { useDispatch, useSelector } from "react-redux";
 
-interface workspaceProps {
-  closeDropdown: () => void;
+interface WorkspaceProps {
+  showCreateWorkspace: () => void;
 }
 
-const NavWorkspaces: React.FC<workspaceProps> = (props) => {
+const NavWorkspaces: React.FC<WorkspaceProps> = (props) => {
+  const dispatch = useDispatch();
+
+  const setDropdown = (dropdownItem: string) => {
+    dispatch(showDropdown({ dropdownItem }));
+  };
+
+  const workspaces = useSelector(
+    (state: RootState) => state.workspace.workspaces
+  );
+
+  const isWorkspace = workspaces[0].workspaceName;
+
+  const showCreateWorkspacePopUp = () => {
+    props.showCreateWorkspace();
+    dispatch(setDropdown(""));
+  };
+
   return (
     <div className="navWorkspacesDiv">
       <div className="navWorkspacesHeading">
         <p>Workspaces</p>
-        <i onClick={() => props.closeDropdown()} className="bi bi-x"></i>
+        <i onClick={() => setDropdown("")} className="bi bi-x"></i>
       </div>
 
-      <div className="navWorkspaceChoices">
-        <p className="navYourWorkspaces">Your workspaces</p>
+      {isWorkspace ? (
+        <div className="navWorkspaceChoices">
+          <p className="navYourWorkspaces">Your workspaces</p>
 
-        <div className="navWorkspaceItems">
-          <p className="navWorkspaceItemHeading">Final project</p>
-          <p className="navWorkspaceItemHeading">Callendar</p>
+          <div className="navWorkspaceItems">
+            <p className="navWorkspaceItemHeading">Final project</p>
+            <p className="navWorkspaceItemHeading">Callendar</p>
+          </div>
         </div>
-      </div>
+      ) : (
+        <div className="navWorkspaceChoices">
+          <p
+            onClick={() => showCreateWorkspacePopUp()}
+            className="navCreateWorkspace"
+          >
+            Create workspace
+          </p>
+        </div>
+      )}
     </div>
   );
 };

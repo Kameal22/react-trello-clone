@@ -1,0 +1,24 @@
+.popUpDiv{
+    width: 250px;
+    height: 60px;
+    background: rgba(221, 224, 251, 0.21);
+    border-radius: 25px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(3.7px);
+    -webkit-backdrop-filter: blur(3.7px);
+    border: 2px solid rgba(85, 85, 85, 0.623);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#popUpIcon{
+    position: absolute;
+    top: 3.5px;
+    right: 10px;
+    cursor: pointer;
+}
