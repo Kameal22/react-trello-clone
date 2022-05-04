@@ -73,6 +73,12 @@
     font-size: .8em;
 }
 
+.workspaceNameError{
+    font-weight: bold;
+    font-size: .8em;
+    color: red;
+}
+
 .workspaceNameInfo{
     font-size: .75em;
     color: rgb(63, 63, 63);
@@ -92,6 +98,12 @@
 .workspaceDescription{
     font-weight: bold;
     font-size: .8em;
+}
+
+.workspaceDescriptionError{
+    font-weight: bold;
+    font-size: .8em;
+    color: red;
 }
 
 .workspaceDescriptionInfo{

@@ -1,5 +1,10 @@
 import "../styles/popUpStyles/createWorkspacePopUp.css";
 import { useState } from "react";
+import { addWorkspace } from "../redux/features/WorkspaceSlice";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../redux/Store";
+import { workspaceDate } from "../utils/GetDate";
+import { guestName } from "../utils/RandomizeGuestName";
 
 interface WorkspacePopUpProps {
   showCreateWorkspace: () => void;
@@ -8,6 +13,15 @@ interface WorkspacePopUpProps {
 const CreateWorkspacePopUp: React.FC<WorkspacePopUpProps> = (props) => {
   const [workspaceName, setWorkspaceName] = useState<string>("");
   const [workspaceDescription, setWorkspaceDescription] = useState<string>("");
+  const [workspaceNameError, setWorkspaceNameError] = useState<string>("");
+  const [workspaceDescriptionError, setWorkspaceDescriptionError] =
+    useState<string>("");
+
+  const dispatch = useDispatch();
+
+  const user = useSelector((state: RootState) => state.users.user);
+
+  const workspaceMember = guestName;
 
   const handleWorkspaceNameChange = (
     e: React.FormEvent<HTMLInputElement>
@@ -23,6 +37,21 @@ const CreateWorkspacePopUp: React.FC<WorkspacePopUpProps> = (props) => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (!workspaceName) {
+      setWorkspaceNameError("Please provide a workspace name");
+    } else if (!workspaceDescription) {
+      setWorkspaceDescriptionError("Please provide a workspace description");
+    } else {
+      // Create workspace here, and route to it.
+      dispatch(
+        addWorkspace({
+          workspaceName,
+          workspaceDescription,
+          workspaceDate,
+          workspaceMember,
+        })
+      );
+    }
   };
 
   return (
@@ -55,9 +84,13 @@ const CreateWorkspacePopUp: React.FC<WorkspacePopUpProps> = (props) => {
                 type="text"
                 name="workspaceName"
               />
-              <p className="workspaceNameInfo">
-                This is the name of your company, team or organization.
-              </p>
+              {workspaceNameError ? (
+                <p className="workspaceNameError">{workspaceNameError}</p>
+              ) : (
+                <p className="workspaceNameInfo">
+                  This is the name of your company, team or organization.
+                </p>
+              )}
             </div>
             <div className="workspaceDescriptionInputDiv">
               <p className="workspaceDescription">Workspace description</p>
@@ -69,9 +102,16 @@ const CreateWorkspacePopUp: React.FC<WorkspacePopUpProps> = (props) => {
                 type="password"
                 name="workspaceName"
               />
-              <p className="workspaceDescriptionInfo">
-                Get your members on board with a few words about your Workspace.
-              </p>
+              {workspaceDescriptionError ? (
+                <p className="workspaceDescriptionError">
+                  {workspaceDescriptionError}
+                </p>
+              ) : (
+                <p className="workspaceDescriptionInfo">
+                  Get your members on board with a few words about your
+                  Workspace.
+                </p>
+              )}
             </div>
             <button className="submitBtn" type="submit">
               Submit
