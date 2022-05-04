@@ -3,7 +3,7 @@ import { useState } from "react";
 import { addWorkspace } from "../redux/features/WorkspaceSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../redux/Store";
-import { workspaceDate } from "../utils/GetDate";
+import { date } from "../utils/GetDate";
 import { guestName } from "../utils/RandomizeGuestName";
 
 interface WorkspacePopUpProps {
@@ -20,8 +20,6 @@ const CreateWorkspacePopUp: React.FC<WorkspacePopUpProps> = (props) => {
   const dispatch = useDispatch();
 
   const user = useSelector((state: RootState) => state.users.user);
-
-  const workspaceMember = guestName;
 
   const handleWorkspaceNameChange = (
     e: React.FormEvent<HTMLInputElement>
@@ -43,14 +41,25 @@ const CreateWorkspacePopUp: React.FC<WorkspacePopUpProps> = (props) => {
       setWorkspaceDescriptionError("Please provide a workspace description");
     } else {
       // Create workspace here, and route to it.
-      dispatch(
-        addWorkspace({
-          workspaceName,
-          workspaceDescription,
-          workspaceDate,
-          workspaceMember,
-        })
-      );
+      if (user.name) {
+        dispatch(
+          addWorkspace({
+            workspaceName,
+            workspaceDescription,
+            workspaceDate: date,
+            workspaceMember: user.name,
+          })
+        );
+      } else {
+        dispatch(
+          addWorkspace({
+            workspaceName,
+            workspaceDescription,
+            workspaceDate: date,
+            workspaceMember: guestName,
+          })
+        );
+      }
     }
   };
 

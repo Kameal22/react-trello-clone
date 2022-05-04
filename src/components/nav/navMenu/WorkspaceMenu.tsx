@@ -15,7 +15,7 @@ const NavWorkspaces: React.FC<WorkspaceProps> = (props) => {
   };
 
   const workspaces = useSelector(
-    (state: RootState) => state.workspace.workspaces
+    (state: RootState) => state.workspace.workspace
   );
 
   const isWorkspace = workspaces[0].workspaceName;

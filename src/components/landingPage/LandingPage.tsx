@@ -29,7 +29,7 @@ const LandingPage: React.FC = () => {
   return (
     <div
       className="landingPageDiv"
-      onClick={dropdown ? () => setDropdown("") : undefined}
+      // onClick={dropdown ? () => setDropdown("") : undefined}
     >
       <Nav showCreateWorkspace={showWorkspaceCreation} />
       <MainSection showCreateWorkspace={showWorkspaceCreation} />

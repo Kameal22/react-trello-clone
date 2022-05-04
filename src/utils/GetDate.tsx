@@ -1,1 +1,1 @@
-export const workspaceDate = new Date().toLocaleDateString();
+export const date = new Date().toLocaleDateString();
