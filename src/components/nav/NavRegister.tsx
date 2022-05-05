@@ -18,11 +18,6 @@ const Register: React.FC = () => {
 
   const setMessage = (message: string) => {
     dispatch(setPopUpMessage({ message }));
-    // dispatch(
-    //   setTimeout(() => {
-    //     setMessage("");
-    //   }, 1500)
-    // );                           THIS PART IS FUCKED UP
   };
 
   const handleNameChange = (e: React.FormEvent<HTMLInputElement>): void => {
@@ -43,6 +38,9 @@ const Register: React.FC = () => {
       dispatch(registerUser({ name, password }));
       setDropdown("");
       setMessage(`${name} registered in`);
+      setTimeout(() => {
+        setMessage("");
+      }, 1500);
     }
   };
 

@@ -1,4 +1,4 @@
-import "../../../styles/navStyles/navMenuStyles/starredMenu.css";
+import "../../../styles/navStyles/navMenuStyles/userMenu.css";
 import { useDispatch } from "react-redux";
 import { logoutUser } from "../../../redux/features/registerSlice";
 

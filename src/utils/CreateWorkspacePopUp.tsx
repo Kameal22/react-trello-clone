@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../redux/Store";
 import { date } from "../utils/GetDate";
 import { guestName } from "../utils/RandomizeGuestName";
+import { setPopUpMessage } from "../redux/features/popUpSlice";
 
 interface WorkspacePopUpProps {
   showCreateWorkspace: () => void;
@@ -20,6 +21,10 @@ const CreateWorkspacePopUp: React.FC<WorkspacePopUpProps> = (props) => {
   const dispatch = useDispatch();
 
   const user = useSelector((state: RootState) => state.users.user);
+
+  const setMessage = (message: string) => {
+    dispatch(setPopUpMessage({ message }));
+  };
 
   const handleWorkspaceNameChange = (
     e: React.FormEvent<HTMLInputElement>
@@ -50,6 +55,11 @@ const CreateWorkspacePopUp: React.FC<WorkspacePopUpProps> = (props) => {
             workspaceMember: user.name,
           })
         );
+        props.showCreateWorkspace();
+        setMessage("Workspace created succesfully");
+        setTimeout(() => {
+          setMessage("");
+        }, 1500);
       } else {
         dispatch(
           addWorkspace({
@@ -59,6 +69,11 @@ const CreateWorkspacePopUp: React.FC<WorkspacePopUpProps> = (props) => {
             workspaceMember: guestName,
           })
         );
+        props.showCreateWorkspace();
+        setMessage("Workspace created succesfully");
+        setTimeout(() => {
+          setMessage("");
+        }, 1500);
       }
     }
   };
@@ -108,7 +123,7 @@ const CreateWorkspacePopUp: React.FC<WorkspacePopUpProps> = (props) => {
                 className="workspaceDescriptionInput"
                 value={workspaceDescription}
                 onChange={handleWorkspaceDescriptionChange}
-                type="password"
+                type="text"
                 name="workspaceName"
               />
               {workspaceDescriptionError ? (

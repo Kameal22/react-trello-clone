@@ -5,6 +5,7 @@ interface Workspace {
   workspaceDescription: string;
   workspaceDate: string;
   workspaceMember: string;
+  workspaceBoards?: [{ boardName: string }];
 }
 
 interface WorkspaceState {
@@ -20,7 +21,7 @@ export const workspaceSlice = createSlice({
   initialState,
   reducers: {
     addWorkspace: (state, action: PayloadAction<Workspace>) => {
-      console.log(action.payload);
+      state.workspace.push(action.payload);
     },
   },
 });

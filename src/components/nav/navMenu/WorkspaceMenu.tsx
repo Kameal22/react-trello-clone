@@ -18,7 +18,7 @@ const NavWorkspaces: React.FC<WorkspaceProps> = (props) => {
     (state: RootState) => state.workspace.workspace
   );
 
-  const isWorkspace = workspaces[0].workspaceName;
+  const isWorkspace = workspaces[0];
 
   const showCreateWorkspacePopUp = () => {
     props.showCreateWorkspace();
@@ -36,10 +36,15 @@ const NavWorkspaces: React.FC<WorkspaceProps> = (props) => {
         <div className="navWorkspaceChoices">
           <p className="navYourWorkspaces">Your workspaces</p>
 
-          <div className="navWorkspaceItems">
-            <p className="navWorkspaceItemHeading">Final project</p>
-            <p className="navWorkspaceItemHeading">Callendar</p>
-          </div>
+          {workspaces.map((workspace) => {
+            return (
+              <div className="navWorkspaceItems">
+                <p className="navWorkspaceItemHeading">
+                  {workspace.workspaceName}
+                </p>
+              </div>
+            );
+          })}
         </div>
       ) : (
         <div className="navWorkspaceChoices">
