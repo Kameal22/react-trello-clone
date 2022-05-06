@@ -1,6 +1,7 @@
 import "../../styles/mainSectionStyles/mainSectionMenu.css";
 import { RootState } from "../../redux/Store";
 import { useDispatch, useSelector } from "react-redux";
+import { showWorkspaceDropdown } from "../../redux/features/WorkspaceSlice";
 
 interface MainSectionProps {
   showCreateWorkspace: () => void;
@@ -12,6 +13,10 @@ const MainSectionMenu: React.FC<MainSectionProps> = (props) => {
   const workspaces = useSelector(
     (state: RootState) => state.workspace.workspace
   );
+
+  const showDropdown = (id: number) => {
+    dispatch(showWorkspaceDropdown({ id }));
+  };
 
   const isWorkspace = workspaces[0];
 
@@ -53,27 +58,36 @@ const MainSectionMenu: React.FC<MainSectionProps> = (props) => {
         ? workspaces.map((workspace) => {
             return (
               <div className="menuWorkspaces">
-                <div className="workspace">
+                <div
+                  onClick={() => showDropdown(workspace.workspaceId)}
+                  className="workspace"
+                >
                   <p>{workspace.workspaceName}</p>
                   <i
                     style={{ fontSize: "1.3em" }}
-                    className="bi bi-arrow-down-short"
+                    className={
+                      workspace.workspaceLandingPageMenu
+                        ? "bi bi-arrow-up-short"
+                        : "bi bi-arrow-down-short"
+                    }
                   ></i>
                 </div>
-                <div className="workspaceSettings">
-                  <div className="workspaceOption">
-                    <i className="bi bi-calendar-check"></i>
-                    <p className="menuBoardsDescription">Boards</p>
+                {workspace.workspaceLandingPageMenu ? (
+                  <div className="workspaceSettings">
+                    <div className="workspaceOption">
+                      <i className="bi bi-calendar-check"></i>
+                      <p className="menuBoardsDescription">Boards</p>
+                    </div>
+                    <div className="workspaceOption">
+                      <i className="bi bi-suit-heart"></i>
+                      <p className="menuBoardsDescription">Highlights</p>
+                    </div>
+                    <div className="workspaceOption">
+                      <i className="bi bi-gear"></i>
+                      <p className="menuBoardsDescription">Settings</p>
+                    </div>
                   </div>
-                  <div className="workspaceOption">
-                    <i className="bi bi-suit-heart"></i>
-                    <p className="menuBoardsDescription">Highlights</p>
-                  </div>
-                  <div className="workspaceOption">
-                    <i className="bi bi-gear"></i>
-                    <p className="menuBoardsDescription">Settings</p>
-                  </div>
-                </div>
+                ) : null}
               </div>
             );
           })

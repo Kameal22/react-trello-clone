@@ -53,6 +53,9 @@ const CreateWorkspacePopUp: React.FC<WorkspacePopUpProps> = (props) => {
             workspaceDescription,
             workspaceDate: date,
             workspaceMember: user.name,
+            workspaceBoards: undefined,
+            workspaceLandingPageMenu: false,
+            workspaceId: Math.random(),
           })
         );
         props.showCreateWorkspace();
@@ -67,6 +70,9 @@ const CreateWorkspacePopUp: React.FC<WorkspacePopUpProps> = (props) => {
             workspaceDescription,
             workspaceDate: date,
             workspaceMember: guestName,
+            workspaceBoards: undefined,
+            workspaceLandingPageMenu: false,
+            workspaceId: Math.random(),
           })
         );
         props.showCreateWorkspace();

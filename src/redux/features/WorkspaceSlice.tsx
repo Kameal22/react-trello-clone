@@ -5,7 +5,9 @@ interface Workspace {
   workspaceDescription: string;
   workspaceDate: string;
   workspaceMember: string;
-  workspaceBoards?: [{ boardName: string }];
+  workspaceId: number;
+  workspaceBoards: [{ boardName: string }] | undefined;
+  workspaceLandingPageMenu: boolean;
 }
 
 interface WorkspaceState {
@@ -23,9 +25,17 @@ export const workspaceSlice = createSlice({
     addWorkspace: (state, action: PayloadAction<Workspace>) => {
       state.workspace.push(action.payload);
     },
+    showWorkspaceDropdown: (state, action: PayloadAction<{ id: number }>) => {
+      const workspaceWithShownDropdown = state.workspace.findIndex(
+        (value) => value.workspaceId === action.payload.id
+      );
+
+      state.workspace[workspaceWithShownDropdown].workspaceLandingPageMenu =
+        !state.workspace[workspaceWithShownDropdown].workspaceLandingPageMenu;
+    },
   },
 });
 
-export const { addWorkspace } = workspaceSlice.actions;
+export const { addWorkspace, showWorkspaceDropdown } = workspaceSlice.actions;
 
 export default workspaceSlice.reducer;
