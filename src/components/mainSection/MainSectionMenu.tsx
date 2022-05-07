@@ -2,6 +2,7 @@ import "../../styles/mainSectionStyles/mainSectionMenu.css";
 import { RootState } from "../../redux/Store";
 import { useDispatch, useSelector } from "react-redux";
 import { showWorkspaceDropdown } from "../../redux/features/WorkspaceSlice";
+import { Link } from "react-router-dom";
 
 interface MainSectionProps {
   showCreateWorkspace: () => void;

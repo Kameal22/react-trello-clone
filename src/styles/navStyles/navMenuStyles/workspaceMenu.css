@@ -64,3 +64,8 @@
 .navWorkspaceItemHeading:hover{
     background-color: rgba(223, 223, 223, 0.541);
 }
+
+.workspaceMenuLink{
+    text-decoration: none;
+    color: black;
+}

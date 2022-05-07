@@ -1,17 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-interface Workspace {
-  workspaceName: string;
-  workspaceDescription: string;
-  workspaceDate: string;
-  workspaceMember: string;
-  workspaceId: number;
-  workspaceBoards: [{ boardName: string }] | undefined;
-  workspaceLandingPageMenu: boolean;
-}
+import { WorkspaceInterface } from "../../interfaces/WorkspaceInterface";
 
 interface WorkspaceState {
-  workspace: Workspace[];
+  workspace: WorkspaceInterface[];
 }
 
 const initialState: WorkspaceState = {
@@ -22,7 +13,7 @@ export const workspaceSlice = createSlice({
   name: "Workspace",
   initialState,
   reducers: {
-    addWorkspace: (state, action: PayloadAction<Workspace>) => {
+    addWorkspace: (state, action: PayloadAction<WorkspaceInterface>) => {
       state.workspace.push(action.payload);
     },
     showWorkspaceDropdown: (state, action: PayloadAction<{ id: number }>) => {

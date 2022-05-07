@@ -9,7 +9,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<LandingPage />} />
-          <Route path="/workspace/:params" element={<Workspace />} />
+          <Route path="/workspace/:workspaceName" element={<Workspace />} />
         </Routes>
       </BrowserRouter>
     </div>

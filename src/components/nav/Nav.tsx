@@ -9,6 +9,7 @@ import NavSearchBar from "./NavSearch";
 import Register from "./NavRegister";
 import { showDropdown } from "../../redux/features/navigationSlice";
 import NavUserMenu from "./navMenu/UserMenu";
+import { Link } from "react-router-dom";
 
 interface NavProps {
   showCreateWorkspace: () => void;
@@ -30,7 +31,9 @@ const Nav: React.FC<NavProps> = (props) => {
   return (
     <div className="navigationDiv">
       <div className="navigationLeftSide">
-        <h3 className="navigationLogo">Trello</h3>
+        <Link to="/" className="logoLink">
+          <h3 className="navigationLogo">Trello</h3>
+        </Link>
         <div
           onClick={
             dropdown === "workspaces"

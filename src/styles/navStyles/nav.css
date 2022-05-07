@@ -114,3 +114,8 @@
     font-size: .85em;
     cursor: pointer;
 }
+
+.logoLink{
+    text-decoration: none;
+    color: white;
+}

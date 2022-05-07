@@ -2,6 +2,7 @@ import "../../../styles/navStyles/navMenuStyles/workspaceMenu.css";
 import { showDropdown } from "../../../redux/features/navigationSlice";
 import { RootState } from "../../../redux/Store";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 interface WorkspaceProps {
   showCreateWorkspace: () => void;
@@ -40,7 +41,12 @@ const NavWorkspaces: React.FC<WorkspaceProps> = (props) => {
             return (
               <div className="navWorkspaceItems">
                 <p className="navWorkspaceItemHeading">
-                  {workspace.workspaceName}
+                  <Link
+                    className="workspaceMenuLink"
+                    to={`/workspace/${workspace.workspaceName}`}
+                  >
+                    {workspace.workspaceName}
+                  </Link>
                 </p>
               </div>
             );
