@@ -1,3 +1,28 @@
-.yourWorkspaceHeading{
+.yourWorkspaceHeadingDiv{
     background-color: rgba(224, 224, 224, 0.548);
+    height: 20vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.yourWorkspaceHeading{
+    margin-right: 200px;
+    margin-top: 4vh;
+    margin-bottom: 1vh;
+}
+
+.yourWorkspaceDescription{
+    font-size: .8em;
+    margin-right: 226px;
+}
+
+.editWorkspaceDiv{
+    margin-right: 190px;
+    margin-top: 1vh;
+    background-color: rgba(199, 199, 199, 0.76);
+    border-radius: 5px;
+    padding: 8px 8px;
+    display: flex;
+    font-size: .9em;
 }

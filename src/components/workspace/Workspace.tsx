@@ -7,22 +7,20 @@ import { useDispatch, useSelector } from "react-redux";
 import { WorkspaceInterface } from "../../interfaces/WorkspaceInterface";
 
 const Workspace: React.FC = () => {
+  const { workspaceName } = useParams();
+
   const [createWorkspacePopUp, setCreateWorkspacePopUp] =
     useState<boolean>(false);
-
   const [shownWorkspace, setShownWorkspace] = useState<
-    WorkspaceInterface[] | undefined
-  >([]);
-
-  const { workspaceName } = useParams();
+    WorkspaceInterface | undefined
+  >();
 
   useEffect(() => {
     const shownWorkspace = workspaces.find((workspace) => {
       return workspace.workspaceName === workspaceName;
     });
 
-    // setShownWorkspace(shownWorkspace);
-    console.log(shownWorkspace);
+    setShownWorkspace(shownWorkspace);
   }, []);
 
   const showWorkspaceCreation = () => {
@@ -33,14 +31,23 @@ const Workspace: React.FC = () => {
     (state: RootState) => state.workspace.workspace
   );
 
-  //Now I can acces specific workspace. In UseEffect - find this workspace by name and view it's data
-
   return (
     <div className="yourWorkspaceDiv">
       <Nav showCreateWorkspace={showWorkspaceCreation} />
-      <div className="yourWorkspaceHeading">
-        <h2>{workspaceName}</h2>
-        {}
+      <div className="yourWorkspaceHeadingDiv">
+        <h2 className="yourWorkspaceHeading">
+          {shownWorkspace?.workspaceName}
+        </h2>
+        <p className="yourWorkspaceDescription">
+          {shownWorkspace?.workspaceDescription}
+        </p>
+        <div className="editWorkspaceDiv">
+          <i
+            style={{ fontSize: ".8em", marginRight: "1em" }}
+            className="bi bi-pencil"
+          ></i>
+          <p>Edit workspace details</p>
+        </div>
       </div>
     </div>
   );
