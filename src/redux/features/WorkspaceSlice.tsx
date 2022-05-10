@@ -16,6 +16,25 @@ export const workspaceSlice = createSlice({
     addWorkspace: (state, action: PayloadAction<WorkspaceInterface>) => {
       state.workspace.push(action.payload);
     },
+    editWorkspace: (
+      state,
+      action: PayloadAction<{
+        id: number | undefined;
+        name?: string;
+        description?: string;
+      }>
+    ) => {
+      const workspaceToEdit = state.workspace.findIndex(
+        (value) => value.workspaceId === action.payload.id
+      );
+
+      if (action.payload.name) {
+        state.workspace[workspaceToEdit].workspaceName = action.payload.name;
+      } else if (action.payload.description) {
+        state.workspace[workspaceToEdit].workspaceDescription =
+          action.payload.description;
+      }
+    },
     showWorkspaceDropdown: (state, action: PayloadAction<{ id: number }>) => {
       const workspaceWithShownDropdown = state.workspace.findIndex(
         (value) => value.workspaceId === action.payload.id
@@ -27,6 +46,7 @@ export const workspaceSlice = createSlice({
   },
 });
 
-export const { addWorkspace, showWorkspaceDropdown } = workspaceSlice.actions;
+export const { addWorkspace, showWorkspaceDropdown, editWorkspace } =
+  workspaceSlice.actions;
 
 export default workspaceSlice.reducer;

@@ -1,14 +1,29 @@
 .editWorkspaceDetailsDiv{
     margin-top: 2vh;
+    width: 12%;
 }
 
 .editWorkspaceDetailsDiv input{
     border-radius: 5px;
+    border-color: ivory;
+    border-style: solid;
+}
+
+.editWorkspaceDetailsDiv input:focus{
+    outline: none;
+    border-radius: 5px;
+    border-color: #52b788;
+}
+
+.editWorkspaceButtons{
+    margin-bottom: 2vh;
+    margin-left: .2em;
 }
 
 .editWorkspaceButtons button{
     padding: 8px 8px;
     border: none;
+    cursor: pointer;
     border-radius: 5px;
 }
 
@@ -19,4 +34,8 @@
 .cancelButton{
     margin-left: .5em;
     background-color: rgb(221, 221, 221);
+}
+
+.inputEditDiv{
+    margin-bottom: 1vh;
 }

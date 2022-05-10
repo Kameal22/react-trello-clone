@@ -29,6 +29,10 @@ const Workspace: React.FC = () => {
     setCreateWorkspacePopUp(!createWorkspacePopUp);
   };
 
+  const setEditting = () => {
+    setWorkspaceEditing(!workspaceEditing);
+  };
+
   const workspaces = useSelector(
     (state: RootState) => state.workspace.workspace
   );
@@ -39,8 +43,10 @@ const Workspace: React.FC = () => {
       <div className="yourWorkspaceHeadingDiv">
         {workspaceEditing ? (
           <EditWorkspaceDetails
+            setEditting={setEditting}
             workspaceName={shownWorkspace?.workspaceName}
             workspaceDescription={shownWorkspace?.workspaceDescription}
+            workspaceId={shownWorkspace?.workspaceId}
           />
         ) : (
           <div className="yourWorkspaceHeadingDivComponents">
@@ -55,9 +61,7 @@ const Workspace: React.FC = () => {
                 style={{ fontSize: ".8em", marginRight: "1em" }}
                 className="bi bi-pencil"
               ></i>
-              <p onClick={() => setWorkspaceEditing(!workspaceEditing)}>
-                Edit workspace details
-              </p>
+              <p onClick={() => setEditting()}>Edit workspace details</p>
             </div>
           </div>
         )}

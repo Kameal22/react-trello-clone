@@ -91,6 +91,10 @@
     padding: 8px 8px;
 }
 
+.workspaceNameInput:focus{
+    border-color: #52b788;
+}
+
 .workspaceDescriptionInputDiv{
     margin-top: 6vh;
 }
@@ -116,6 +120,10 @@
     margin-bottom: .75vh;
     width: 80%;
     padding: 10px 10px;
+}
+
+.workspaceDescriptionInput:focus{
+    border-color: #52b788;
 }
 
 .submitBtn{
