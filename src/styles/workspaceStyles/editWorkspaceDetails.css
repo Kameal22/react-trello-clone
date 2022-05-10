@@ -1,0 +1,22 @@
+.editWorkspaceDetailsDiv{
+    margin-top: 2vh;
+}
+
+.editWorkspaceDetailsDiv input{
+    border-radius: 5px;
+}
+
+.editWorkspaceButtons button{
+    padding: 8px 8px;
+    border: none;
+    border-radius: 5px;
+}
+
+.saveButton{
+    background-color: #0079bf;
+}
+
+.cancelButton{
+    margin-left: .5em;
+    background-color: rgb(221, 221, 221);
+}

@@ -5,6 +5,7 @@ import Nav from "../nav/Nav";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { WorkspaceInterface } from "../../interfaces/WorkspaceInterface";
+import EditWorkspaceDetails from "./EditWorkspaceDetails";
 
 const Workspace: React.FC = () => {
   const { workspaceName } = useParams();
@@ -14,6 +15,7 @@ const Workspace: React.FC = () => {
   const [shownWorkspace, setShownWorkspace] = useState<
     WorkspaceInterface | undefined
   >();
+  const [workspaceEditing, setWorkspaceEditing] = useState<boolean>(false);
 
   useEffect(() => {
     const shownWorkspace = workspaces.find((workspace) => {
@@ -35,19 +37,30 @@ const Workspace: React.FC = () => {
     <div className="yourWorkspaceDiv">
       <Nav showCreateWorkspace={showWorkspaceCreation} />
       <div className="yourWorkspaceHeadingDiv">
-        <h2 className="yourWorkspaceHeading">
-          {shownWorkspace?.workspaceName}
-        </h2>
-        <p className="yourWorkspaceDescription">
-          {shownWorkspace?.workspaceDescription}
-        </p>
-        <div className="editWorkspaceDiv">
-          <i
-            style={{ fontSize: ".8em", marginRight: "1em" }}
-            className="bi bi-pencil"
-          ></i>
-          <p>Edit workspace details</p>
-        </div>
+        {workspaceEditing ? (
+          <EditWorkspaceDetails
+            workspaceName={shownWorkspace?.workspaceName}
+            workspaceDescription={shownWorkspace?.workspaceDescription}
+          />
+        ) : (
+          <div className="yourWorkspaceHeadingDivComponents">
+            <h2 className="yourWorkspaceHeading">
+              {shownWorkspace?.workspaceName}
+            </h2>
+            <p className="yourWorkspaceDescription">
+              {shownWorkspace?.workspaceDescription}
+            </p>
+            <div className="editWorkspaceDiv">
+              <i
+                style={{ fontSize: ".8em", marginRight: "1em" }}
+                className="bi bi-pencil"
+              ></i>
+              <p onClick={() => setWorkspaceEditing(!workspaceEditing)}>
+                Edit workspace details
+              </p>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
