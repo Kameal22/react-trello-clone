@@ -8,14 +8,14 @@ import { WorkspaceInterface } from "../../interfaces/WorkspaceInterface";
 import EditWorkspaceDetails from "./EditWorkspaceDetails";
 
 const Workspace: React.FC = () => {
-  const { workspaceName } = useParams();
-
   const [createWorkspacePopUp, setCreateWorkspacePopUp] =
     useState<boolean>(false);
   const [shownWorkspace, setShownWorkspace] = useState<
     WorkspaceInterface | undefined
   >();
   const [workspaceEditing, setWorkspaceEditing] = useState<boolean>(false);
+
+  const { workspaceName } = useParams();
 
   useEffect(() => {
     const shownWorkspace = workspaces.find((workspace) => {

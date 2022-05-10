@@ -11,13 +11,14 @@ interface EditWorkspaceProps {
 }
 
 const EditWorkspaceDetails: React.FC<EditWorkspaceProps> = (props) => {
-  const dispatch = useDispatch();
   const [workspaceName, setWorkspaceName] = useState<string | undefined>(
     props.workspaceName
   );
   const [workspaceDescription, setWorkspaceDescription] = useState<
     string | undefined
   >(props.workspaceDescription);
+
+  const dispatch = useDispatch();
 
   const editWorkspaceFunc = (
     id: number | undefined,

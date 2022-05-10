@@ -6,6 +6,7 @@ import { RootState } from "../redux/Store";
 import { date } from "../utils/GetDate";
 import { guestName } from "../utils/RandomizeGuestName";
 import { setPopUpMessage } from "../redux/features/popUpSlice";
+import { useNavigate } from "react-router-dom";
 
 interface WorkspacePopUpProps {
   showCreateWorkspace: () => void;
@@ -19,6 +20,7 @@ const CreateWorkspacePopUp: React.FC<WorkspacePopUpProps> = (props) => {
     useState<string>("");
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const user = useSelector((state: RootState) => state.users.user);
 
@@ -45,7 +47,6 @@ const CreateWorkspacePopUp: React.FC<WorkspacePopUpProps> = (props) => {
     } else if (!workspaceDescription) {
       setWorkspaceDescriptionError("Please provide a workspace description");
     } else {
-      // Create workspace here, and route to it.
       if (user.name) {
         dispatch(
           addWorkspace({
@@ -76,12 +77,9 @@ const CreateWorkspacePopUp: React.FC<WorkspacePopUpProps> = (props) => {
           })
         );
         props.showCreateWorkspace();
-        setMessage("Workspace created succesfully");
-        setTimeout(() => {
-          setMessage("");
-        }, 1500);
       }
     }
+    navigate(`/workspace/${workspaceName}`, { replace: true });
   };
 
   return (
