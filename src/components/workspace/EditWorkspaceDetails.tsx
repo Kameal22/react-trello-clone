@@ -3,8 +3,13 @@ import { useState } from "react";
 
 interface EditWorkspaceProps {
   workspaceName: string | undefined;
-  workspaceId: number | undefined;
-  editWorkspace: (id: number | undefined, name?: string) => void;
+  workspaceDescription: string | undefined;
+  workspaceId: string | undefined;
+  editWorkspace: (
+    id: string | undefined,
+    name?: string,
+    description?: string
+  ) => void;
   setEditting: () => void;
 }
 
@@ -12,16 +17,24 @@ const EditWorkspaceDetails: React.FC<EditWorkspaceProps> = (props) => {
   const [workspaceName, setWorkspaceName] = useState<string | undefined>(
     props.workspaceName
   );
+  const [workspaceDescription, setWorkspaceDesscription] = useState<
+    string | undefined
+  >(props.workspaceDescription);
 
   const handleWorkspaceNameChange = (
     e: React.FormEvent<HTMLInputElement>
   ): void => {
     setWorkspaceName(e.currentTarget.value);
   };
+  const handleWorkspaceDescriptionChange = (
+    e: React.FormEvent<HTMLInputElement>
+  ): void => {
+    setWorkspaceDesscription(e.currentTarget.value);
+  };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    props.editWorkspace(props.workspaceId, workspaceName);
+    props.editWorkspace(props.workspaceId, workspaceName, workspaceDescription);
     props.setEditting();
   };
 
@@ -32,9 +45,19 @@ const EditWorkspaceDetails: React.FC<EditWorkspaceProps> = (props) => {
           <p className="workspaceName">Workspace name</p>
           <input
             className="workspaceNameInput"
-            placeholder="Code together"
             value={workspaceName}
             onChange={handleWorkspaceNameChange}
+            type="text"
+            name="workspaceName"
+          />
+        </div>
+
+        <div className="inputEditDiv">
+          <p className="workspaceDescription">Workspace description</p>
+          <input
+            className="workspaceDescriptionInput"
+            value={workspaceDescription}
+            onChange={handleWorkspaceDescriptionChange}
             type="text"
             name="workspaceName"
           />

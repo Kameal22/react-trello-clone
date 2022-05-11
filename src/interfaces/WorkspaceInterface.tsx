@@ -3,7 +3,7 @@ export interface WorkspaceInterface {
   workspaceDescription: string;
   workspaceDate: string;
   workspaceMember: string;
-  workspaceId: number;
+  workspaceId: string;
   workspaceBoards: [{ boardName: string }] | undefined;
   workspaceLandingPageMenu: boolean;
 }

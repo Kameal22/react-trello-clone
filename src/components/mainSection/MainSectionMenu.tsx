@@ -15,7 +15,7 @@ const MainSectionMenu: React.FC<MainSectionProps> = (props) => {
     (state: RootState) => state.workspace.workspace
   );
 
-  const showDropdown = (id: number) => {
+  const showDropdown = (id: string) => {
     dispatch(showWorkspaceDropdown({ id }));
   };
 

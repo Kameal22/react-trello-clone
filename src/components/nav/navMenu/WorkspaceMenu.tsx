@@ -43,7 +43,7 @@ const NavWorkspaces: React.FC<WorkspaceProps> = (props) => {
                 <p className="navWorkspaceItemHeading">
                   <Link
                     className="workspaceMenuLink"
-                    to={`/workspace/${workspace.workspaceName}`}
+                    to={`/workspace/${workspace.workspaceId}`}
                   >
                     {workspace.workspaceName}
                   </Link>

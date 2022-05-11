@@ -12,7 +12,8 @@ const Workspace: React.FC = () => {
     useState<boolean>(false);
   const [workspaceEditing, setWorkspaceEditing] = useState<boolean>(false);
 
-  const { workspaceName } = useParams();
+  const { workspaceId } = useParams(); //This gives you ID of workspace
+
   const dispatch = useDispatch();
 
   const showWorkspaceCreation = () => {
@@ -23,8 +24,12 @@ const Workspace: React.FC = () => {
     setWorkspaceEditing(!workspaceEditing);
   };
 
-  const editWorkspaceFunc = (id: number | undefined, name?: string) => {
-    dispatch(editWorkspace({ id, name }));
+  const editWorkspaceFunc = (
+    id: string | undefined,
+    name?: string,
+    description?: string
+  ) => {
+    dispatch(editWorkspace({ id, name, description }));
   };
 
   const workspaces = useSelector(
@@ -32,7 +37,7 @@ const Workspace: React.FC = () => {
   );
 
   const shownWorkspace = workspaces.find((workspace) => {
-    return workspace.workspaceName === workspaceName;
+    return workspace.workspaceId === workspaceId;
   });
 
   return (
@@ -44,6 +49,7 @@ const Workspace: React.FC = () => {
             editWorkspace={editWorkspaceFunc}
             setEditting={setEditting}
             workspaceName={shownWorkspace?.workspaceName}
+            workspaceDescription={shownWorkspace?.workspaceDescription}
             workspaceId={shownWorkspace?.workspaceId}
           />
         ) : (

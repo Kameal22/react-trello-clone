@@ -7,6 +7,7 @@ import { date } from "../utils/GetDate";
 import { guestName } from "../utils/RandomizeGuestName";
 import { setPopUpMessage } from "../redux/features/popUpSlice";
 import { useNavigate } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
 
 interface WorkspacePopUpProps {
   showCreateWorkspace: () => void;
@@ -15,6 +16,7 @@ interface WorkspacePopUpProps {
 const CreateWorkspacePopUp: React.FC<WorkspacePopUpProps> = (props) => {
   const [workspaceName, setWorkspaceName] = useState<string>("");
   const [workspaceDescription, setWorkspaceDescription] = useState<string>("");
+  const [workspaceId, setWorkspaceId] = useState<string>(uuidv4());
   const [workspaceNameError, setWorkspaceNameError] = useState<string>("");
   const [workspaceDescriptionError, setWorkspaceDescriptionError] =
     useState<string>("");
@@ -56,7 +58,7 @@ const CreateWorkspacePopUp: React.FC<WorkspacePopUpProps> = (props) => {
             workspaceMember: user.name,
             workspaceBoards: undefined,
             workspaceLandingPageMenu: false,
-            workspaceId: Math.random(),
+            workspaceId,
           })
         );
         props.showCreateWorkspace();
@@ -73,13 +75,13 @@ const CreateWorkspacePopUp: React.FC<WorkspacePopUpProps> = (props) => {
             workspaceMember: guestName,
             workspaceBoards: undefined,
             workspaceLandingPageMenu: false,
-            workspaceId: Math.random(),
+            workspaceId,
           })
         );
         props.showCreateWorkspace();
       }
     }
-    navigate(`/workspace/${workspaceName}`, { replace: true });
+    navigate(`/workspace/${workspaceId}`, { replace: true });
   };
 
   return (
