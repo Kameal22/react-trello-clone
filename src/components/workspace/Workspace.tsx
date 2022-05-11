@@ -2,28 +2,18 @@ import "../../styles/workspaceStyles/workspace.css";
 import { useParams } from "react-router-dom";
 import { RootState } from "../../redux/Store";
 import Nav from "../nav/Nav";
-import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { WorkspaceInterface } from "../../interfaces/WorkspaceInterface";
+import { useState } from "react";
+import { editWorkspace } from "../../redux/features/WorkspaceSlice";
+import { useSelector, useDispatch } from "react-redux";
 import EditWorkspaceDetails from "./EditWorkspaceDetails";
 
 const Workspace: React.FC = () => {
   const [createWorkspacePopUp, setCreateWorkspacePopUp] =
     useState<boolean>(false);
-  const [shownWorkspace, setShownWorkspace] = useState<
-    WorkspaceInterface | undefined
-  >();
   const [workspaceEditing, setWorkspaceEditing] = useState<boolean>(false);
 
   const { workspaceName } = useParams();
-
-  useEffect(() => {
-    const shownWorkspace = workspaces.find((workspace) => {
-      return workspace.workspaceName === workspaceName;
-    });
-
-    setShownWorkspace(shownWorkspace);
-  }, []);
+  const dispatch = useDispatch();
 
   const showWorkspaceCreation = () => {
     setCreateWorkspacePopUp(!createWorkspacePopUp);
@@ -33,9 +23,17 @@ const Workspace: React.FC = () => {
     setWorkspaceEditing(!workspaceEditing);
   };
 
+  const editWorkspaceFunc = (id: number | undefined, name?: string) => {
+    dispatch(editWorkspace({ id, name }));
+  };
+
   const workspaces = useSelector(
     (state: RootState) => state.workspace.workspace
   );
+
+  const shownWorkspace = workspaces.find((workspace) => {
+    return workspace.workspaceName === workspaceName;
+  });
 
   return (
     <div className="yourWorkspaceDiv">
@@ -43,9 +41,9 @@ const Workspace: React.FC = () => {
       <div className="yourWorkspaceHeadingDiv">
         {workspaceEditing ? (
           <EditWorkspaceDetails
+            editWorkspace={editWorkspaceFunc}
             setEditting={setEditting}
             workspaceName={shownWorkspace?.workspaceName}
-            workspaceDescription={shownWorkspace?.workspaceDescription}
             workspaceId={shownWorkspace?.workspaceId}
           />
         ) : (

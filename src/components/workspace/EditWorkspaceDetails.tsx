@@ -1,12 +1,10 @@
 import "../../styles/workspaceStyles/editWorkspaceDetails.css";
 import { useState } from "react";
-import { editWorkspace } from "../../redux/features/WorkspaceSlice";
-import { useSelector, useDispatch } from "react-redux";
 
 interface EditWorkspaceProps {
   workspaceName: string | undefined;
-  workspaceDescription: string | undefined;
   workspaceId: number | undefined;
+  editWorkspace: (id: number | undefined, name?: string) => void;
   setEditting: () => void;
 }
 
@@ -14,34 +12,16 @@ const EditWorkspaceDetails: React.FC<EditWorkspaceProps> = (props) => {
   const [workspaceName, setWorkspaceName] = useState<string | undefined>(
     props.workspaceName
   );
-  const [workspaceDescription, setWorkspaceDescription] = useState<
-    string | undefined
-  >(props.workspaceDescription);
-
-  const dispatch = useDispatch();
-
-  const editWorkspaceFunc = (
-    id: number | undefined,
-    name?: string,
-    description?: string
-  ) => {
-    dispatch(editWorkspace({ id, name, description }));
-  };
 
   const handleWorkspaceNameChange = (
     e: React.FormEvent<HTMLInputElement>
   ): void => {
     setWorkspaceName(e.currentTarget.value);
   };
-  const handleWorkspaceDescriptionChange = (
-    e: React.FormEvent<HTMLInputElement>
-  ): void => {
-    setWorkspaceDescription(e.currentTarget.value);
-  };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    editWorkspaceFunc(props.workspaceId, workspaceName, workspaceDescription);
+    props.editWorkspace(props.workspaceId, workspaceName);
     props.setEditting();
   };
 
@@ -55,18 +35,6 @@ const EditWorkspaceDetails: React.FC<EditWorkspaceProps> = (props) => {
             placeholder="Code together"
             value={workspaceName}
             onChange={handleWorkspaceNameChange}
-            type="text"
-            name="workspaceName"
-          />
-        </div>
-
-        <div className="inputEditDiv">
-          <p className="workspaceDescription">Workspace description</p>
-          <input
-            placeholder="We organize everything here"
-            className="workspaceDescriptionInput"
-            value={workspaceDescription}
-            onChange={handleWorkspaceDescriptionChange}
             type="text"
             name="workspaceName"
           />

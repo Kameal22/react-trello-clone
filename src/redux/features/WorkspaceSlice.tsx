@@ -30,9 +30,6 @@ export const workspaceSlice = createSlice({
 
       if (action.payload.name) {
         state.workspace[workspaceToEdit].workspaceName = action.payload.name;
-      } else if (action.payload.description) {
-        state.workspace[workspaceToEdit].workspaceDescription =
-          action.payload.description;
       }
     },
     showWorkspaceDropdown: (state, action: PayloadAction<{ id: number }>) => {
