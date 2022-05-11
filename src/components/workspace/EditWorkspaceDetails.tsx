@@ -7,8 +7,8 @@ interface EditWorkspaceProps {
   workspaceId: string | undefined;
   editWorkspace: (
     id: string | undefined,
-    name?: string,
-    description?: string
+    name: string | undefined,
+    description: string | undefined
   ) => void;
   setEditting: () => void;
 }

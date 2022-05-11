@@ -26,8 +26,8 @@ const Workspace: React.FC = () => {
 
   const editWorkspaceFunc = (
     id: string | undefined,
-    name?: string,
-    description?: string
+    name: string | undefined,
+    description: string | undefined
   ) => {
     dispatch(editWorkspace({ id, name, description }));
   };
