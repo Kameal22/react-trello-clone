@@ -1,27 +1,47 @@
 .yourWorkspaceHeadingDiv{
     background-color: rgba(236, 234, 234, 0.548);
     min-height: 24vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .yourWorkspaceDescription{
     font-size: .8em;
+    margin-top: 0.5vh;
 }
 
 .editWorkspaceDiv{
-    max-width: 60%;
-    background-color: rgba(223, 223, 223, 0.76);
+    max-width: 40%;
+    margin-top: 2vh;
     border-radius: 5px;
     padding: 8px 8px;
     display: flex;
     font-size: .9em;
     cursor: pointer;
+    background-color: rgb(212, 212, 212);
 }
 
 .yourWorkspaceHeadingDivComponents{
-    border: 1px solid red;
+    width: 30%;
+    height: 24vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 }
 
 .workspaceOptions{
-    border: 2px solid teal;
     display: flex;
+}
+
+.workspaceOptions > div{
+    margin-left: 1em;
+    padding: 10px 10px;
+    cursor: pointer;
+    background-color: rgb(212, 212, 212);
+}
+
+.yourWorkspaceHeadingAndDescriptionDiv{
+    display: flex;
+    flex-direction: column;
 }

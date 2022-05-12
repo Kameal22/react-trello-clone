@@ -54,18 +54,22 @@ const Workspace: React.FC = () => {
           />
         ) : (
           <div className="yourWorkspaceHeadingDivComponents">
-            <h2 className="yourWorkspaceHeading">
-              {shownWorkspace?.workspaceName}
-            </h2>
-            <p className="yourWorkspaceDescription">
-              {shownWorkspace?.workspaceDescription}
-            </p>
-            <div className="editWorkspaceDiv">
-              <i
-                style={{ fontSize: ".8em", marginRight: "1em" }}
-                className="bi bi-pencil"
-              ></i>
-              <p onClick={() => setEditting()}>Edit workspace details</p>
+            <div className="yourWorkspaceUpperComponents">
+              <div className="yourWorkspaceHeadingAndDescriptionDiv">
+                <h2 className="yourWorkspaceHeading">
+                  {shownWorkspace?.workspaceName}
+                </h2>
+                <p className="yourWorkspaceDescription">
+                  {shownWorkspace?.workspaceDescription}
+                </p>
+              </div>
+              <div className="editWorkspaceDiv">
+                <i
+                  style={{ fontSize: ".8em", marginRight: "1em" }}
+                  className="bi bi-pencil"
+                ></i>
+                <p onClick={() => setEditting()}>Edit workspace details</p>
+              </div>
             </div>
 
             <div className="workspaceOptions">
