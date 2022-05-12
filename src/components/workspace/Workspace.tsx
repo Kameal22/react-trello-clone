@@ -67,6 +67,11 @@ const Workspace: React.FC = () => {
               ></i>
               <p onClick={() => setEditting()}>Edit workspace details</p>
             </div>
+
+            <div className="workspaceOptions">
+              <div className="boards">Boards</div>
+              <div className="settings">Settings</div>
+            </div>
           </div>
         )}
       </div>

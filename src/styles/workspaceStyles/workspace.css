@@ -1,29 +1,27 @@
 .yourWorkspaceHeadingDiv{
     background-color: rgba(236, 234, 234, 0.548);
-    min-height: 20vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.yourWorkspaceHeading{
-    margin-right: 200px;
-    margin-top: 4vh;
-    margin-bottom: 1vh;
+    min-height: 24vh;
 }
 
 .yourWorkspaceDescription{
     font-size: .8em;
-    margin-right: 226px;
 }
 
 .editWorkspaceDiv{
-    margin-right: 190px;
-    margin-top: 2vh;
+    max-width: 60%;
     background-color: rgba(223, 223, 223, 0.76);
     border-radius: 5px;
     padding: 8px 8px;
     display: flex;
     font-size: .9em;
     cursor: pointer;
+}
+
+.yourWorkspaceHeadingDivComponents{
+    border: 1px solid red;
+}
+
+.workspaceOptions{
+    border: 2px solid teal;
+    display: flex;
 }
