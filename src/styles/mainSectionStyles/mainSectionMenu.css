@@ -58,6 +58,7 @@
     color: rgb(131, 130, 130);
     font-size: .8em;
     margin-top: 4vh;
+    width: 90%;
 }
 
 .menuWorkspacesHeading i{
@@ -78,6 +79,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 10px 4px;
+    width: 90%;
 }
 
 .workspace:hover{

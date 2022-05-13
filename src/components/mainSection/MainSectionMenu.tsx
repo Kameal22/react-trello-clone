@@ -27,17 +27,13 @@ const MainSectionMenu: React.FC<MainSectionProps> = (props) => {
     <div className="mainSectionMenuDiv">
       <h3>Menu</h3>
 
-      <div className="menuBoards">
+      <div onClick={() => props.showBoards()} className="menuBoards">
         <i className="bi bi-calendar-check"></i>
-        <p onClick={() => props.showBoards()} className="menuBoardsDescription">
-          Boards
-        </p>
+        <p className="menuBoardsDescription">Boards</p>
       </div>
-      <div className="menuHome">
+      <div onClick={() => props.hideBoards()} className="menuHome">
         <i className="bi bi-house"></i>
-        <p onClick={() => props.hideBoards()} className="menuHomeDescription">
-          Home
-        </p>
+        <p className="menuHomeDescription">Home</p>
       </div>
 
       <div className="menuWorkspacesHeading">
