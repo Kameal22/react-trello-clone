@@ -1,0 +1,25 @@
+.mainSectionBoards{
+    width: 75%;
+}
+
+.mainSectionBoardsRecentlyViewedHeading{
+    display: flex;
+}
+
+.mainSectionBoardsRecentlyViewedHeading h4{
+    margin-left: 1em;
+}
+
+.mainSectionBoardsRecentlyViewedBoards{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 2vh;
+}
+
+.mainSectionBoardsFromWorkspaces{
+    margin-top: 8vh;
+}
+
+.boardFromWorkspace{
+    margin-top: 4vh;
+}

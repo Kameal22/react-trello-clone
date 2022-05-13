@@ -1,0 +1,45 @@
+.workspaceBoardsDiv{
+    width: 60%;
+    margin: 4vh auto;
+}
+
+.workspaceBoardsHeading{
+    display: flex;
+    justify-content: space-between;
+}
+
+.showingBoards{
+    margin-top: 5%;
+    font-size: .85em;
+    color: rgb(87, 87, 87);
+}
+
+.workspaceBoards{
+    display: flex;
+    width: 100%;
+    margin-top: 5%;
+}
+
+.workspaceCreateBoard{
+    background-color: rgba(207, 207, 207, 0.555);
+    border-radius: 5px;
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.workspaceCreateBoard p{
+    font-size: .85em;
+}
+
+.workspaceYourBoard{
+    margin-left: 4em;
+    padding: 30px 20px;
+    cursor: pointer;
+}
+
+.workspaceYourBoard p{
+    font-size: .85em;
+}

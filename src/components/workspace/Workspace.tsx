@@ -6,6 +6,8 @@ import { useState } from "react";
 import { editWorkspace } from "../../redux/features/WorkspaceSlice";
 import { useSelector, useDispatch } from "react-redux";
 import EditWorkspaceDetails from "./EditWorkspaceDetails";
+import WorkspaceBoards from "./WorkspaceBoards";
+import { showDropdown } from "../../redux/features/navigationSlice";
 
 const Workspace: React.FC = () => {
   const [createWorkspacePopUp, setCreateWorkspacePopUp] =
@@ -23,6 +25,14 @@ const Workspace: React.FC = () => {
   const setEditting = () => {
     setWorkspaceEditing(!workspaceEditing);
   };
+
+  const setDropdown = (dropdownItem: string) => {
+    dispatch(showDropdown({ dropdownItem }));
+  };
+
+  const dropdown = useSelector(
+    (state: RootState) => state.dropdown.navDropdown
+  );
 
   const editWorkspaceFunc = (
     id: string | undefined,
@@ -79,6 +89,7 @@ const Workspace: React.FC = () => {
           </div>
         )}
       </div>
+      <WorkspaceBoards />
     </div>
   );
 };

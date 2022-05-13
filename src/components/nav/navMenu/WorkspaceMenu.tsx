@@ -42,6 +42,7 @@ const NavWorkspaces: React.FC<WorkspaceProps> = (props) => {
               <div className="navWorkspaceItems">
                 <p className="navWorkspaceItemHeading">
                   <Link
+                    onClick={() => setDropdown("")}
                     className="workspaceMenuLink"
                     to={`/workspace/${workspace.workspaceId}`}
                   >

@@ -1,9 +1,10 @@
 import "../../styles/navStyles/navRegister.css";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
 import { registerUser } from "../../redux/features/registerSlice";
 import { showDropdown } from "../../redux/features/navigationSlice";
 import { setPopUpMessage } from "../../redux/features/popUpSlice";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../../redux/Store";
 
 const Register: React.FC = () => {
   const [name, setName] = useState<string>("");
@@ -43,6 +44,10 @@ const Register: React.FC = () => {
       }, 1500);
     }
   };
+
+  const dropdown = useSelector(
+    (state: RootState) => state.dropdown.navDropdown
+  );
 
   return (
     <div className="registerDiv">

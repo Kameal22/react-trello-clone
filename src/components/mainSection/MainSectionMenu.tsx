@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 
 interface MainSectionProps {
   showCreateWorkspace: () => void;
+  showBoards: () => void;
+  hideBoards: () => void;
 }
 
 const MainSectionMenu: React.FC<MainSectionProps> = (props) => {
@@ -27,11 +29,15 @@ const MainSectionMenu: React.FC<MainSectionProps> = (props) => {
 
       <div className="menuBoards">
         <i className="bi bi-calendar-check"></i>
-        <p className="menuBoardsDescription">Boards</p>
+        <p onClick={() => props.showBoards()} className="menuBoardsDescription">
+          Boards
+        </p>
       </div>
       <div className="menuHome">
         <i className="bi bi-house"></i>
-        <p className="menuHomeDescription">Home</p>
+        <p onClick={() => props.hideBoards()} className="menuHomeDescription">
+          Home
+        </p>
       </div>
 
       <div className="menuWorkspacesHeading">
