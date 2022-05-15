@@ -4,9 +4,9 @@
     margin-right: auto;
     position: absolute;
     left: 50%;
-    top: 42%;
+    top: 45%;
     transform: translate(-50%,-50%);
-    height: 65vh;
+    height: 70vh;
     background: white;
     border-radius: 10px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -41,7 +41,6 @@
 
 .createWorkspace h2{
     width: 80%;
-    margin-top: 1vh;
     margin-left: auto;
     margin-right: auto;
     text-align: left;
@@ -51,6 +50,7 @@
     width: 80%;
     color: rgb(92, 92, 92);
     text-align: left;
+    font-size: .9em;
     margin-top: 1vh;
     margin-left: auto;
     margin-right: auto;
