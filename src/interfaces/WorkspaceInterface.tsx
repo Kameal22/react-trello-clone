@@ -4,6 +4,6 @@ export interface WorkspaceInterface {
   workspaceDate: string;
   workspaceMember: string;
   workspaceId: string;
-  workspaceBoards: [{ boardName: string }] | undefined;
+  workspaceBoards: [{ boardName: string, boardId: string, boardWorkspace: string, boardBackground: string }] | undefined;
   workspaceLandingPageMenu: boolean;
 }

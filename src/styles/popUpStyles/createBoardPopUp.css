@@ -62,10 +62,6 @@
     cursor: pointer;
 }
 
-.colorChoiceDiv:first-child{
-    border: 2px solid black;
-}
-
 .boardTitleDiv{
     margin-top: 4vh;
     width: 90%;
@@ -112,6 +108,7 @@
     padding: 8px 0;
     border-radius: 5px;
     border: 2px solid #5e6c84;
+    cursor: pointer;
 }
 
 .submitDiv{
@@ -128,4 +125,5 @@
     background-color: #5e6c8448;
     border: none;
     border-radius: 5px;
+    cursor: pointer;
 }

@@ -1,11 +1,35 @@
 import "../styles/popUpStyles/createBoardPopUp.css";
 import { colorChoices } from "../utils/BoardBgColorChoices"
+import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 interface CreateBoardInterface {
     setBoardCreating: () => void
 }
 
 const CreateBoardPopUp: React.FC<CreateBoardInterface> = (props) => {
+    const [boardName, setBoardName] = useState<string>("");
+    const [boardId, setBoardId] = useState<string>(uuidv4());
+    const [boardBackground, setBoardBackground] = useState<string>("blue");
+    const [boardsWorkspace, setBoardsWorkspace] = useState<string>("");
+    const [formComplete, setFormComplete] = useState<boolean>(false);
+
+    const handleBoardNameChange = (
+        e: React.FormEvent<HTMLInputElement>
+    ): void => {
+        setBoardName(e.currentTarget.value);
+    };
+
+    const handleBoardWorkspaceChange = (
+        e: React.FormEvent<HTMLSelectElement>
+    ): void => {
+        setBoardsWorkspace(e.currentTarget.value);
+    };
+
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault()
+    };
+
     return (
         <div className="createBoardDiv">
             <p className="createBoardHeading">Create board</p>
@@ -20,7 +44,7 @@ const CreateBoardPopUp: React.FC<CreateBoardInterface> = (props) => {
 
                     {colorChoices.map((choice) => {
                         return (
-                            <div className="colorChoiceDiv" style={{ backgroundColor: choice }}></div>
+                            <div onClick={() => setBoardBackground(choice)} className="colorChoiceDiv" style={boardBackground === choice ? { border: "3px solid black", backgroundColor: choice } : { backgroundColor: choice }}></div>
                         )
                     })}
                 </div>
@@ -47,7 +71,7 @@ const CreateBoardPopUp: React.FC<CreateBoardInterface> = (props) => {
             </div>
 
             <div className="submitDiv">
-                <button className="submitBoardBtn">Create</button>
+                <button disabled={!formComplete} className="submitBoardBtn">Create</button>
             </div>
 
         </div>
