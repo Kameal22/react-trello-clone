@@ -16,8 +16,8 @@ const WorkspaceBoards: React.FC<WorkspaceBoardsInterface> = (props) => {
         <p className="showingBoards">Showing 1 of 1 boards</p>
 
         <div className="workspaceBoards">
-          <div className="workspaceCreateBoard">
-            <p onClick={() => props.setBoardCreating()}>Create new board</p>
+          <div onClick={() => props.setBoardCreating()} className="workspaceCreateBoard">
+            <p>Create new board</p>
           </div>
           <div className="workspaceYourBoard">
             <p>Callendar board</p>
