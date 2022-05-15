@@ -14,14 +14,6 @@ const LandingPage: React.FC = () => {
 
   const dispatch = useDispatch();
 
-  const dropdown = useSelector(
-    (state: RootState) => state.dropdown.navDropdown
-  );
-
-  const setDropdown = (dropdownItem: string) => {
-    dispatch(showDropdown({ dropdownItem }));
-  };
-
   const showWorkspaceCreation = () => {
     setCreateWorkspacePopUp(!createWorkspacePopUp);
   };

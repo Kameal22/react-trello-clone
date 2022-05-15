@@ -7,16 +7,21 @@ import { editWorkspace } from "../../redux/features/WorkspaceSlice";
 import { useSelector, useDispatch } from "react-redux";
 import EditWorkspaceDetails from "./EditWorkspaceDetails";
 import WorkspaceBoards from "./WorkspaceBoards";
-import { showDropdown } from "../../redux/features/navigationSlice";
+import CreateBoardPopUp from "../../utils/CreateBoardPopUp";
 
 const Workspace: React.FC = () => {
   const [createWorkspacePopUp, setCreateWorkspacePopUp] =
     useState<boolean>(false);
   const [workspaceEditing, setWorkspaceEditing] = useState<boolean>(false);
+  const [boardCreating, setBoardCreating] = useState<boolean>(false);
 
   const { workspaceId } = useParams(); //This gives you ID of workspace
 
   const dispatch = useDispatch();
+
+  const showBoardCreating = () => {
+    setBoardCreating(!boardCreating)
+  }
 
   const showWorkspaceCreation = () => {
     setCreateWorkspacePopUp(!createWorkspacePopUp);
@@ -25,14 +30,6 @@ const Workspace: React.FC = () => {
   const setEditting = () => {
     setWorkspaceEditing(!workspaceEditing);
   };
-
-  const setDropdown = (dropdownItem: string) => {
-    dispatch(showDropdown({ dropdownItem }));
-  };
-
-  const dropdown = useSelector(
-    (state: RootState) => state.dropdown.navDropdown
-  );
 
   const editWorkspaceFunc = (
     id: string | undefined,
@@ -53,6 +50,8 @@ const Workspace: React.FC = () => {
   return (
     <div className="yourWorkspaceDiv">
       <Nav showCreateWorkspace={showWorkspaceCreation} />
+      {boardCreating ? <CreateBoardPopUp setBoardCreating={showBoardCreating} /> : null}
+
       <div className="yourWorkspaceHeadingDiv">
         {workspaceEditing ? (
           <EditWorkspaceDetails
@@ -89,7 +88,7 @@ const Workspace: React.FC = () => {
           </div>
         )}
       </div>
-      <WorkspaceBoards />
+      <WorkspaceBoards setBoardCreating={showBoardCreating} />
     </div>
   );
 };

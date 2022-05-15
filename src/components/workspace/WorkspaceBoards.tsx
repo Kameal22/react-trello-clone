@@ -1,6 +1,10 @@
 import "../../styles/workspaceStyles/workspaceBoards.css";
 
-const WorkspaceBoards: React.FC = () => {
+interface WorkspaceBoardsInterface {
+  setBoardCreating: () => void
+}
+
+const WorkspaceBoards: React.FC<WorkspaceBoardsInterface> = (props) => {
   return (
     <div className="workspaceBoardsDiv">
       <div className="workspaceBoardsHeading">
@@ -13,7 +17,7 @@ const WorkspaceBoards: React.FC = () => {
 
         <div className="workspaceBoards">
           <div className="workspaceCreateBoard">
-            <p>Create new board</p>
+            <p onClick={() => props.setBoardCreating()}>Create new board</p>
           </div>
           <div className="workspaceYourBoard">
             <p>Callendar board</p>

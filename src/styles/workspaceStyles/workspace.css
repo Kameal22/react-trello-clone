@@ -4,10 +4,14 @@
 
 .yourWorkspaceHeadingDiv{
     background-color: rgba(236, 234, 234, 0.548);
-    min-height: 24vh;
+    min-height: 28vh;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.yourWorkspaceHeading{
+    font-size: 1.3em;
 }
 
 .yourWorkspaceDescription{
@@ -16,12 +20,13 @@
 }
 
 .editWorkspaceDiv{
-    max-width: 40%;
+    max-width: 50%;
     margin-top: 2vh;
     border-radius: 5px;
     padding: 8px 8px;
     display: flex;
-    font-size: .9em;
+    font-size: .8em;
+    color: rgb(36, 36, 36);
     cursor: pointer;
     background-color: rgba(212, 212, 212, 0.548);
 }
@@ -43,7 +48,8 @@
     padding: 10px 10px;
     cursor: pointer;
     background-color: rgb(212, 212, 212);   
-    font-size: .9em;
+    font-size: .85em;
+    color: rgb(36, 36, 36);
 }
 
 .yourWorkspaceHeadingAndDescriptionDiv{

@@ -1,0 +1,31 @@
+.createBoardDiv{
+    position: absolute;
+    border: 1px solid grey;
+    background-color: #fff;
+    width: 20%;
+    height: 80vh;
+    margin-left: 30%;
+    margin-top: .5vh;
+    border-radius: 5px;
+    z-index: 999;
+    box-shadow: 0 8px 16px -4px rgb(9 30 66 / 25%), 0 0 0 1px rgb(9 30 66 / 8%);
+}
+
+.createBoardDiv i{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+}
+
+.createBoardHeading{
+    text-align: center;
+    margin-top: 1vh;
+    color: #5e6c84;
+    font-size: .9em;
+    padding-bottom: 1vh;
+    border-bottom: 1px solid #5e6c846e;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
