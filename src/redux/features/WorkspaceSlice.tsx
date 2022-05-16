@@ -41,10 +41,27 @@ export const workspaceSlice = createSlice({
       state.workspace[workspaceWithShownDropdown].workspaceLandingPageMenu =
         !state.workspace[workspaceWithShownDropdown].workspaceLandingPageMenu;
     },
+    addBoard: (
+      state,
+      action: PayloadAction<{
+        boardName: string;
+        boardId: string;
+        boardWorkspace: string;
+        boardBackground: string;
+      }>
+    ) => {
+      const workspaceToAddBoardTo = state.workspace.findIndex(
+        (value) => value.workspaceName === action.payload.boardWorkspace
+      );
+
+      // state.workspace[workspaceToAddBoardTo].workspaceBoards.push(
+      //   action.payload
+      // );
+    },
   },
 });
 
-export const { addWorkspace, showWorkspaceDropdown, editWorkspace } =
+export const { addWorkspace, showWorkspaceDropdown, editWorkspace, addBoard } =
   workspaceSlice.actions;
 
 export default workspaceSlice.reducer;

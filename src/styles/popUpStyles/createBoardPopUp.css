@@ -3,7 +3,7 @@
     border: 1px solid grey;
     background-color: #fff;
     width: 20%;
-    height: 75vh;
+    height: 65vh;
     margin-left: 30%;
     margin-top: .5vh;
     border-radius: 5px;
@@ -119,10 +119,12 @@
 }
 
 .submitBoardBtn{
-    margin-top: 2vh;
-    width: 100%;
+    position: absolute;
+    bottom: 3vh;
+    right: 1.2em;
+    width: 90%;
     padding: 6px 0;
-    background-color: #5e6c8448;
+    background-color: #52b788;
     border: none;
     border-radius: 5px;
     cursor: pointer;

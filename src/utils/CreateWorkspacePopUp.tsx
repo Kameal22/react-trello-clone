@@ -62,7 +62,7 @@ const CreateWorkspacePopUp: React.FC<WorkspacePopUpProps> = (props) => {
           workspaceDescription,
           workspaceDate: date,
           workspaceMember: user.name,
-          workspaceBoards: undefined,
+          workspaceBoards: [],
           workspaceLandingPageMenu: false,
           workspaceId,
         })
@@ -79,7 +79,7 @@ const CreateWorkspacePopUp: React.FC<WorkspacePopUpProps> = (props) => {
           workspaceDescription,
           workspaceDate: date,
           workspaceMember: guestName,
-          workspaceBoards: undefined,
+          workspaceBoards: [],
           workspaceLandingPageMenu: false,
           workspaceId,
         })
