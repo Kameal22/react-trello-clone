@@ -101,6 +101,9 @@ const CreateBoardPopUp: React.FC<CreateBoardInterface> = (props) => {
             name="workspaces"
             id="workspaces"
           >
+            <option value="" disabled selected>
+              Select your option
+            </option>
             {workspaces.map((workspace) => {
               return (
                 <option

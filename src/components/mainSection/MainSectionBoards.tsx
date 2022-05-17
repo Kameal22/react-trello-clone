@@ -1,6 +1,6 @@
 import "../../styles/mainSectionStyles/mainSectionBoards.css";
 import { RootState } from "../../redux/Store";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 const MainSectionBoards: React.FC = () => {
   const workspaces = useSelector(
@@ -28,6 +28,9 @@ const MainSectionBoards: React.FC = () => {
           return (
             <div className="boardFromWorkspace">
               <h4>{workspace.workspaceName}</h4>
+              {workspace.workspaceBoards.map((board) => {
+                return <p>{board.boardName}</p>;
+              })}
             </div>
           );
         })}

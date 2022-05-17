@@ -22,6 +22,7 @@
 
 .workspaceCreateBoard{
     background-color: rgba(207, 207, 207, 0.555);
+    padding: 30px 20px;
     border-radius: 5px;
     width: 20%;
     display: flex;
@@ -35,9 +36,16 @@
 }
 
 .workspaceYourBoard{
+    width: 20%;
+    border-radius: 5px;
     margin-left: 4em;
     padding: 30px 20px;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 1.2em;
 }
 
 .workspaceYourBoard p{
