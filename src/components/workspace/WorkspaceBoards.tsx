@@ -1,5 +1,6 @@
 import "../../styles/workspaceStyles/workspaceBoards.css";
 import { WorkspaceInterface } from "../../interfaces/WorkspaceInterface";
+import { Link } from "react-router-dom";
 
 interface WorkspaceBoardsInterface {
   setBoardCreating: () => void;
@@ -31,15 +32,17 @@ const WorkspaceBoards: React.FC<WorkspaceBoardsInterface> = (props) => {
           </div>
           {props.shownWorkspace
             ? props.shownWorkspace.workspaceBoards.map((board) => {
-                return (
-                  <div
-                    style={{ backgroundColor: `${board.boardBackground}` }}
-                    className="workspaceYourBoard"
-                  >
+              return (
+                <div
+                  style={{ backgroundColor: `${board.boardBackground}` }}
+                  className="workspaceYourBoard"
+                >
+                  <Link className="workspaceMenuLink" to={`/board/${props.shownWorkspace?.workspaceId}/${board.boardId}`}>
                     <p>{board.boardName}</p>
-                  </div>
-                );
-              })
+                  </Link>
+                </div>
+              );
+            })
             : null}
         </div>
       </div>

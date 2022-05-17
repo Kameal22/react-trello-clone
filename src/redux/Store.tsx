@@ -3,6 +3,7 @@ import registeredUsersReducer from "./features/registerSlice";
 import navigationReducer from "./features/navigationSlice";
 import popUpReducer from "./features/popUpSlice";
 import workspaceReducer from "./features/WorkspaceSlice";
+import recentlyViewedReducer from "./features/recentlyViewedSlice";
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     dropdown: navigationReducer,
     message: popUpReducer,
     workspace: workspaceReducer,
+    recents: recentlyViewedReducer
   },
 });
 

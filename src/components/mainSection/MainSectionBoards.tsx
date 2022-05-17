@@ -23,13 +23,13 @@ const MainSectionBoards: React.FC = () => {
       </div>
 
       <div className="mainSectionBoardsFromWorkspaces">
-        <h4>Your workspaces</h4>
+        <h4 className="mainSectionYourWorkspacesHeading">Your workspaces</h4>
         {workspaces.map((workspace) => {
           return (
             <div className="boardFromWorkspace">
               <h4>{workspace.workspaceName}</h4>
               {workspace.workspaceBoards.map((board) => {
-                return <p>{board.boardName}</p>;
+                return <div className="mainSectionYourBoard" style={{ backgroundColor: `${board.boardBackground}` }}> <p>{board.boardName}</p> </div>
               })}
             </div>
           );

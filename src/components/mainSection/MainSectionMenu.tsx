@@ -59,41 +59,46 @@ const MainSectionMenu: React.FC<MainSectionProps> = (props) => {
 
       {isWorkspace
         ? workspaces.map((workspace) => {
-            return (
-              <div className="menuWorkspaces">
-                <div
-                  onClick={() => showDropdown(workspace.workspaceId)}
-                  className="workspace"
-                >
-                  <p>{workspace.workspaceName}</p>
-                  <i
-                    style={{ fontSize: "1.3em" }}
-                    className={
-                      workspace.workspaceLandingPageMenu
-                        ? "bi bi-arrow-up-short"
-                        : "bi bi-arrow-down-short"
-                    }
-                  ></i>
-                </div>
-                {workspace.workspaceLandingPageMenu ? (
-                  <div className="workspaceSettings">
-                    <div className="workspaceOption">
-                      <i className="bi bi-calendar-check"></i>
-                      <p className="menuBoardsDescription">Boards</p>
-                    </div>
-                    <div className="workspaceOption">
-                      <i className="bi bi-suit-heart"></i>
-                      <p className="menuBoardsDescription">Highlights</p>
-                    </div>
-                    <div className="workspaceOption">
-                      <i className="bi bi-gear"></i>
-                      <p className="menuBoardsDescription">Settings</p>
-                    </div>
-                  </div>
-                ) : null}
+          return (
+            <div className="menuWorkspaces">
+              <div
+                onClick={() => showDropdown(workspace.workspaceId)}
+                className="workspace"
+              >
+                <p>{workspace.workspaceName}</p>
+                <i
+                  style={{ fontSize: "1.3em" }}
+                  className={
+                    workspace.workspaceLandingPageMenu
+                      ? "bi bi-arrow-up-short"
+                      : "bi bi-arrow-down-short"
+                  }
+                ></i>
               </div>
-            );
-          })
+              {workspace.workspaceLandingPageMenu ? (
+                <div className="workspaceSettings">
+                  <div className="workspaceOption">
+                    <i className="bi bi-calendar-check"></i>
+                    <Link
+                      className="workspaceMenuLink"
+                      to={`/workspace/${workspace.workspaceId}`}
+                    >
+                      <p className="menuBoardsDescription">Boards</p>
+                    </Link>
+                  </div>
+                  <div className="workspaceOption">
+                    <i className="bi bi-suit-heart"></i>
+                    <p className="menuBoardsDescription">Highlights</p>
+                  </div>
+                  <div className="workspaceOption">
+                    <i className="bi bi-gear"></i>
+                    <p className="menuBoardsDescription">Settings</p>
+                  </div>
+                </div>
+              ) : null}
+            </div>
+          );
+        })
         : null}
     </div>
   );

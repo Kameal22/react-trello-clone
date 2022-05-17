@@ -20,6 +20,23 @@
     margin-top: 8vh;
 }
 
+.mainSectionYourWorkspacesHeading{
+    color: grey;
+}
+
 .boardFromWorkspace{
     margin-top: 4vh;
+}
+
+.mainSectionYourBoard{
+    font-size: .8em;
+    border-radius: 5px;
+    width: 20%;
+    padding: 20px 20px;
+    margin-top: 2vh;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
 }
