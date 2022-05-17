@@ -8,6 +8,8 @@ import { useSelector, useDispatch } from "react-redux";
 import EditWorkspaceDetails from "./EditWorkspaceDetails";
 import WorkspaceBoards from "./WorkspaceBoards";
 import CreateBoardPopUp from "../../utils/CreateBoardPopUp";
+import PopUp from "../../utils/PopUpMessage";
+import { setPopUpMessage } from "../../redux/features/popUpSlice";
 
 const Workspace: React.FC = () => {
   const [createWorkspacePopUp, setCreateWorkspacePopUp] =
@@ -15,13 +17,27 @@ const Workspace: React.FC = () => {
   const [workspaceEditing, setWorkspaceEditing] = useState<boolean>(false);
   const [boardCreating, setBoardCreating] = useState<boolean>(false);
 
-  const { workspaceId } = useParams(); //This gives you ID of workspace
+  const { workspaceId } = useParams(); //This gives you ID of workspace showing in the component
+
+  const workspaces = useSelector(
+    // These are all workspaces from redux store
+    (state: RootState) => state.workspace.workspace
+  );
+
+  const shownWorkspace = workspaces.find((workspace) => {
+    //And this is the specific workspace that is viewed in component found by this ID up above.
+    return workspace.workspaceId === workspaceId;
+  });
 
   const dispatch = useDispatch();
 
+  const setMessage = (message: string) => {
+    dispatch(setPopUpMessage({ message }));
+  };
+
   const showBoardCreating = () => {
-    setBoardCreating(!boardCreating)
-  }
+    setBoardCreating(!boardCreating);
+  };
 
   const showWorkspaceCreation = () => {
     setCreateWorkspacePopUp(!createWorkspacePopUp);
@@ -39,18 +55,15 @@ const Workspace: React.FC = () => {
     dispatch(editWorkspace({ id, name, description }));
   };
 
-  const workspaces = useSelector(
-    (state: RootState) => state.workspace.workspace
-  );
-
-  const shownWorkspace = workspaces.find((workspace) => {
-    return workspace.workspaceId === workspaceId;
-  });
-
   return (
     <div className="yourWorkspaceDiv">
       <Nav showCreateWorkspace={showWorkspaceCreation} />
-      {boardCreating ? <CreateBoardPopUp setBoardCreating={showBoardCreating} /> : null}
+      {boardCreating ? (
+        <CreateBoardPopUp
+          setPopUpMessage={setMessage}
+          setBoardCreating={showBoardCreating}
+        />
+      ) : null}
 
       <div className="yourWorkspaceHeadingDiv">
         {workspaceEditing ? (
@@ -88,7 +101,11 @@ const Workspace: React.FC = () => {
           </div>
         )}
       </div>
-      <WorkspaceBoards setBoardCreating={showBoardCreating} />
+      <WorkspaceBoards
+        shownWorkspace={shownWorkspace}
+        setBoardCreating={showBoardCreating}
+      />
+      <PopUp />
     </div>
   );
 };

@@ -1,7 +1,9 @@
 import "../../styles/workspaceStyles/workspaceBoards.css";
+import { WorkspaceInterface } from "../../interfaces/WorkspaceInterface";
 
 interface WorkspaceBoardsInterface {
-  setBoardCreating: () => void
+  setBoardCreating: () => void;
+  shownWorkspace: WorkspaceInterface | undefined;
 }
 
 const WorkspaceBoards: React.FC<WorkspaceBoardsInterface> = (props) => {
@@ -13,15 +15,29 @@ const WorkspaceBoards: React.FC<WorkspaceBoardsInterface> = (props) => {
       </div>
 
       <div className="workspaceBoardsBoards">
-        <p className="showingBoards">Showing 1 of 1 boards</p>
+        <p className="showingBoards">
+          Showing 1 of{" "}
+          {props.shownWorkspace
+            ? props.shownWorkspace.workspaceBoards.length
+            : null}
+        </p>
 
         <div className="workspaceBoards">
-          <div onClick={() => props.setBoardCreating()} className="workspaceCreateBoard">
+          <div
+            onClick={() => props.setBoardCreating()}
+            className="workspaceCreateBoard"
+          >
             <p>Create new board</p>
           </div>
-          <div className="workspaceYourBoard">
-            <p>Callendar board</p>
-          </div>
+          {props.shownWorkspace
+            ? props.shownWorkspace.workspaceBoards.map((board) => {
+                return (
+                  <div className="workspaceYourBoard">
+                    <p>{board.boardName}</p>
+                  </div>
+                );
+              })
+            : null}
         </div>
       </div>
     </div>

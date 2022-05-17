@@ -4,9 +4,7 @@ import PopUp from "../../utils/PopUpMessage";
 import MainSection from "../mainSection/MainSection";
 import CreateWorkspacePopUp from "../../utils/CreateWorkspacePopUp";
 import { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "../../redux/Store";
-import { showDropdown } from "../../redux/features/navigationSlice";
+import { useDispatch } from "react-redux";
 
 const LandingPage: React.FC = () => {
   const [createWorkspacePopUp, setCreateWorkspacePopUp] =

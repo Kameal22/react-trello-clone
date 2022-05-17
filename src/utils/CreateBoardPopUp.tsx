@@ -1,6 +1,6 @@
 import "../styles/popUpStyles/createBoardPopUp.css";
 import { colorChoices } from "../utils/BoardBgColorChoices";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../redux/Store";
@@ -8,6 +8,7 @@ import { addBoard } from "../redux/features/WorkspaceSlice";
 
 interface CreateBoardInterface {
   setBoardCreating: () => void;
+  setPopUpMessage: (message: string) => void;
 }
 
 const CreateBoardPopUp: React.FC<CreateBoardInterface> = (props) => {
@@ -37,6 +38,11 @@ const CreateBoardPopUp: React.FC<CreateBoardInterface> = (props) => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     dispatch(addBoard({ boardName, boardId, boardWorkspace, boardBackground }));
+    props.setBoardCreating();
+    props.setPopUpMessage("Board created succesfuly");
+    setTimeout(() => {
+      props.setPopUpMessage("");
+    }, 1500);
   };
 
   return (
@@ -109,7 +115,11 @@ const CreateBoardPopUp: React.FC<CreateBoardInterface> = (props) => {
         </div>
 
         <div className="submitDiv">
-          <button disabled={boardName === ""} className="submitBoardBtn">
+          <button
+            type="submit"
+            disabled={boardName === ""}
+            className="submitBoardBtn"
+          >
             Create
           </button>
         </div>
