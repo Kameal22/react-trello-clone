@@ -1,5 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { WorkspaceInterface } from "../../interfaces/WorkspaceInterface";
+import {
+  WorkspaceInterface,
+  BoardInterface,
+} from "../../interfaces/WorkspaceInterface";
 
 interface WorkspaceState {
   workspace: WorkspaceInterface[];
@@ -41,22 +44,14 @@ export const workspaceSlice = createSlice({
       state.workspace[workspaceWithShownDropdown].workspaceLandingPageMenu =
         !state.workspace[workspaceWithShownDropdown].workspaceLandingPageMenu;
     },
-    addBoard: (
-      state,
-      action: PayloadAction<{
-        boardName: string;
-        boardId: string;
-        boardWorkspace: string;
-        boardBackground: string;
-      }>
-    ) => {
+    addBoard: (state, action: PayloadAction<BoardInterface>) => {
       const workspaceToAddBoardTo = state.workspace.findIndex(
         (value) => value.workspaceName === action.payload.boardWorkspace
       );
 
-      // state.workspace[workspaceToAddBoardTo].workspaceBoards.push(
-      //   action.payload
-      // );
+      state.workspace[workspaceToAddBoardTo].workspaceBoards.push(
+        action.payload
+      );
     },
   },
 });

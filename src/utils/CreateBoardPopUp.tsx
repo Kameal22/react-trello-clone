@@ -15,21 +15,12 @@ const CreateBoardPopUp: React.FC<CreateBoardInterface> = (props) => {
   const [boardId, setBoardId] = useState<string>(uuidv4());
   const [boardBackground, setBoardBackground] = useState<string>("blue");
   const [boardWorkspace, setBoardWorkspace] = useState<string>("");
-  const [formComplete, setFormComplete] = useState<boolean>(false);
 
   const dispatch = useDispatch();
 
   const workspaces = useSelector(
     (state: RootState) => state.workspace.workspace
   );
-
-  useEffect(() => {
-    if (boardName) {
-      setFormComplete(true);
-    } else {
-      setFormComplete(false);
-    }
-  }, [boardName]);
 
   const handleBoardNameChange = (
     e: React.FormEvent<HTMLInputElement>
@@ -65,6 +56,7 @@ const CreateBoardPopUp: React.FC<CreateBoardInterface> = (props) => {
             return (
               <div
                 onClick={() => setBoardBackground(choice)}
+                key={choice}
                 className="colorChoiceDiv"
                 style={
                   boardBackground === choice
@@ -90,7 +82,9 @@ const CreateBoardPopUp: React.FC<CreateBoardInterface> = (props) => {
             type="text"
             name="boardName"
           />
-          <p className="boardTitleInfo">Board title is required!</p>
+          <p onClick={() => console.log(workspaces)} className="boardTitleInfo">
+            Board title is required!
+          </p>
         </div>
 
         <div className="chooseWorkspaceDiv">
@@ -103,7 +97,10 @@ const CreateBoardPopUp: React.FC<CreateBoardInterface> = (props) => {
           >
             {workspaces.map((workspace) => {
               return (
-                <option value={workspace.workspaceName}>
+                <option
+                  key={workspace.workspaceId}
+                  value={workspace.workspaceName}
+                >
                   {workspace.workspaceName}
                 </option>
               );
@@ -112,7 +109,7 @@ const CreateBoardPopUp: React.FC<CreateBoardInterface> = (props) => {
         </div>
 
         <div className="submitDiv">
-          <button disabled={!formComplete} className="submitBoardBtn">
+          <button disabled={boardName === ""} className="submitBoardBtn">
             Create
           </button>
         </div>
