@@ -1,0 +1,18 @@
+.boardDiv{
+    min-height: 100vh;
+}
+
+.boardHeading{
+    margin-top: 1vh;
+    display: flex;
+}
+
+.boardBoardName{
+    margin-left: 2em;
+    color: ivory;
+}
+
+.boardUserName{
+    margin-left: 2em;
+    color: ivory;
+}

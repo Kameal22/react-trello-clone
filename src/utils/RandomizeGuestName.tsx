@@ -1,4 +1,4 @@
-const name = "user";
+const name = "guestUser";
 const numbers = [153, 872, 435, 1054, 1948, 5821, 3123, 49599];
 const characters = ["!", "@", "#", "$", "%", "^", "&", "*"];
 

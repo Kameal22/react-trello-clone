@@ -1,6 +1,13 @@
 import "../../styles/mainSectionStyles/mainSectionRecent.css";
+import { RootState } from "../../redux/Store";
+import { useSelector, useDispatch } from "react-redux";
+import { addRecentlyViewed } from "../../redux/features/recentlyViewedSlice";
 
 const MainSectionRecent: React.FC = () => {
+  const recents = useSelector(
+    (state: RootState) => state.recents.recentlyViewed
+  );
+
   return (
     <div className="mainSectionRecentDiv">
       <h3>Recently viewed</h3>

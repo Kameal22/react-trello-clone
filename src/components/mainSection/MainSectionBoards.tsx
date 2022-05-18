@@ -7,6 +7,10 @@ const MainSectionBoards: React.FC = () => {
     (state: RootState) => state.workspace.workspace
   );
 
+  const recents = useSelector(
+    (state: RootState) => state.recents.recentlyViewed
+  );
+
   return (
     <div className="mainSectionBoards">
       <div className="mainSectionBoardsRecentlyViewed">
@@ -15,10 +19,17 @@ const MainSectionBoards: React.FC = () => {
           <h4>Recently viewed</h4>
         </div>
         <div className="mainSectionBoardsRecentlyViewedBoards">
-          <p>Some board name</p>
-          <p>Some board name</p>
-          <p>Some board name</p>
-          <p>Some board name</p>
+          {recents.map((recentBoard) => {
+            return (
+              <div
+                className="mainSectionYourBoard"
+                style={{ backgroundColor: `${recentBoard.boardBackground}` }}
+              >
+                {" "}
+                <p>{recentBoard.boardName}</p>{" "}
+              </div>
+            );
+          })}
         </div>
       </div>
 
@@ -29,7 +40,15 @@ const MainSectionBoards: React.FC = () => {
             <div className="boardFromWorkspace">
               <h4>{workspace.workspaceName}</h4>
               {workspace.workspaceBoards.map((board) => {
-                return <div className="mainSectionYourBoard" style={{ backgroundColor: `${board.boardBackground}` }}> <p>{board.boardName}</p> </div>
+                return (
+                  <div
+                    className="mainSectionYourBoard"
+                    style={{ backgroundColor: `${board.boardBackground}` }}
+                  >
+                    {" "}
+                    <p>{board.boardName}</p>{" "}
+                  </div>
+                );
               })}
             </div>
           );

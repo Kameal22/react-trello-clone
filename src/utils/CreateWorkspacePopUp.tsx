@@ -17,7 +17,7 @@ interface WorkspacePopUpProps {
 const CreateWorkspacePopUp: React.FC<WorkspacePopUpProps> = (props) => {
   const [workspaceName, setWorkspaceName] = useState<string>("");
   const [workspaceDescription, setWorkspaceDescription] = useState<string>("");
-  const [workspaceId, setWorkspaceId] = useState<string>(uuidv4());
+  const [workspaceId] = useState<string>(uuidv4());
   const [formComplete, setFormComplete] = useState<boolean>(false);
 
   const dispatch = useDispatch();

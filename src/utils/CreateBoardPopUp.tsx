@@ -37,7 +37,15 @@ const CreateBoardPopUp: React.FC<CreateBoardInterface> = (props) => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    dispatch(addBoard({ boardName, boardId, boardWorkspace, boardBackground }));
+    dispatch(
+      addBoard({
+        boardName,
+        boardId,
+        boardWorkspace,
+        boardBackground,
+        boardColumns: [],
+      })
+    );
     props.setBoardCreating();
     props.setPopUpMessage("Board created succesfuly");
     setTimeout(() => {

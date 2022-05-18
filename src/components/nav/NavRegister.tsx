@@ -45,10 +45,6 @@ const Register: React.FC = () => {
     }
   };
 
-  const dropdown = useSelector(
-    (state: RootState) => state.dropdown.navDropdown
-  );
-
   return (
     <div className="registerDiv">
       <p className="registerHeading">Create account</p>
