@@ -39,6 +39,8 @@ const Board: React.FC = () => {
 
   // if !boardsColumn - show AddColumnForm.
 
+  console.log(boardsColumn);
+
   return (
     <div
       style={{ backgroundColor: `${shownBoard?.boardBackground}` }}

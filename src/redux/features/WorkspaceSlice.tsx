@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {
   WorkspaceInterface,
   BoardInterface,
+  BoardColumnInterface,
 } from "../../interfaces/WorkspaceInterface";
 
 interface WorkspaceState {
@@ -53,10 +54,17 @@ export const workspaceSlice = createSlice({
         action.payload
       );
     },
+
+    addColumn: (state, action: PayloadAction<BoardColumnInterface>) => {},
   },
 });
 
-export const { addWorkspace, showWorkspaceDropdown, editWorkspace, addBoard } =
-  workspaceSlice.actions;
+export const {
+  addWorkspace,
+  showWorkspaceDropdown,
+  editWorkspace,
+  addBoard,
+  addColumn,
+} = workspaceSlice.actions;
 
 export default workspaceSlice.reducer;

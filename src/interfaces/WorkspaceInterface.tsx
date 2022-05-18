@@ -1,12 +1,14 @@
 export interface BoardTaskInterface {
   taskName: string;
   taskId: string;
+  tasksColumnId: string;
   taskIndicatorColor: string;
 }
 
 export interface BoardColumnInterface {
   columnName: string;
   columndId: string;
+  columnsBoardId: string;
   columnTasks: BoardTaskInterface[];
 }
 
