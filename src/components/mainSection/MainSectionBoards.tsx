@@ -1,6 +1,7 @@
 import "../../styles/mainSectionStyles/mainSectionBoards.css";
 import { RootState } from "../../redux/Store";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const MainSectionBoards: React.FC = () => {
   const workspaces = useSelector(
@@ -26,7 +27,12 @@ const MainSectionBoards: React.FC = () => {
                 style={{ backgroundColor: `${recentBoard.boardBackground}` }}
               >
                 {" "}
-                <p>{recentBoard.boardName}</p>{" "}
+                <Link
+                  className="workspaceMenuLink"
+                  to={`/board/${recentBoard.boardWorkspace}/${recentBoard.boardId}`}
+                >
+                  <p>{recentBoard.boardName}</p>{" "}
+                </Link>
               </div>
             );
           })}
@@ -46,7 +52,12 @@ const MainSectionBoards: React.FC = () => {
                     style={{ backgroundColor: `${board.boardBackground}` }}
                   >
                     {" "}
-                    <p>{board.boardName}</p>{" "}
+                    <Link
+                      className="workspaceMenuLink"
+                      to={`/board/${workspace.workspaceName}/${board.boardId}`}
+                    >
+                      <p>{board.boardName}</p>
+                    </Link>
                   </div>
                 );
               })}

@@ -32,17 +32,20 @@ const WorkspaceBoards: React.FC<WorkspaceBoardsInterface> = (props) => {
           </div>
           {props.shownWorkspace
             ? props.shownWorkspace.workspaceBoards.map((board) => {
-              return (
-                <div
-                  style={{ backgroundColor: `${board.boardBackground}` }}
-                  className="workspaceYourBoard"
-                >
-                  <Link className="workspaceMenuLink" to={`/board/${props.shownWorkspace?.workspaceId}/${board.boardId}`}>
-                    <p>{board.boardName}</p>
-                  </Link>
-                </div>
-              );
-            })
+                return (
+                  <div
+                    style={{ background: `${board.boardBackground}` }}
+                    className="workspaceYourBoard"
+                  >
+                    <Link
+                      className="workspaceMenuLink"
+                      to={`/board/${props.shownWorkspace?.workspaceName}/${board.boardId}`}
+                    >
+                      <p>{board.boardName}</p>
+                    </Link>
+                  </div>
+                );
+              })
             : null}
         </div>
       </div>

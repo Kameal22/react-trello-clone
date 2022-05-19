@@ -14,7 +14,9 @@ interface CreateBoardInterface {
 const CreateBoardPopUp: React.FC<CreateBoardInterface> = (props) => {
   const [boardName, setBoardName] = useState<string>("");
   const [boardId, setBoardId] = useState<string>(uuidv4());
-  const [boardBackground, setBoardBackground] = useState<string>("blue");
+  const [boardBackground, setBoardBackground] = useState<string>(
+    "linear-gradient(#e66465, #9198e5)"
+  );
   const [boardWorkspace, setBoardWorkspace] = useState<string>("");
 
   const dispatch = useDispatch();
@@ -74,8 +76,8 @@ const CreateBoardPopUp: React.FC<CreateBoardInterface> = (props) => {
                 className="colorChoiceDiv"
                 style={
                   boardBackground === choice
-                    ? { border: "3px solid black", backgroundColor: choice }
-                    : { backgroundColor: choice }
+                    ? { border: "3px solid black", background: choice }
+                    : { background: choice }
                 }
               ></div>
             );

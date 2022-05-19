@@ -12,7 +12,7 @@ const Board: React.FC = () => {
   const [createWorkspacePopUp, setCreateWorkspacePopUp] =
     useState<boolean>(false);
 
-  const { workspaceId, boardId } = useParams();
+  const { workspaceName, boardId } = useParams();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -26,7 +26,7 @@ const Board: React.FC = () => {
   const user = useSelector((state: RootState) => state.users.user);
 
   const shownWorkspace = workspaces.find((workspace) => {
-    return workspace.workspaceId === workspaceId;
+    return workspace.workspaceName === workspaceName;
   });
 
   const shownBoard = shownWorkspace?.workspaceBoards.find((board) => {
@@ -41,11 +41,9 @@ const Board: React.FC = () => {
 
   // if !boardsColumn - show AddColumnForm.
 
-  console.log(boardsColumn);
-
   return (
     <div
-      style={{ backgroundColor: `${shownBoard?.boardBackground}` }}
+      style={{ background: `${shownBoard?.boardBackground}` }}
       className="boardDiv"
     >
       <Nav showCreateWorkspace={showWorkspaceCreation} />

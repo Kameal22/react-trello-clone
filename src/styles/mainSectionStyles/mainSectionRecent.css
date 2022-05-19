@@ -9,6 +9,8 @@
 .recentsDiv{
     padding: 8px 8px;
     margin: 2vh auto;
+    display: flex;
+    align-items: center;
 }
 
 .recentsDiv:hover{
@@ -25,6 +27,18 @@
 .recentBoardDescription{
     font-size: .7em;
     color: grey;
-    margin-left: .5em;
     margin-top: .5vh;
+}
+
+.mainRecentSmallBlock{
+    width: 35px;
+    height: 35px;
+    border-radius: 5px;
+}
+
+
+.mainRecentTextDiv{
+    display: flex;
+    flex-direction: column;
+    margin-left: 1em;
 }

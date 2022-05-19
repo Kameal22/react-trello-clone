@@ -11,7 +11,7 @@ function App() {
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/workspace/:workspaceId" element={<Workspace />} />
-          <Route path="/board/:workspaceId/:boardId" element={<Board />} />
+          <Route path="/board/:workspaceName/:boardId" element={<Board />} />
         </Routes>
       </BrowserRouter>
     </div>
