@@ -55,7 +55,26 @@ export const workspaceSlice = createSlice({
       );
     },
 
-    addColumn: (state, action: PayloadAction<BoardColumnInterface>) => {},
+    addColumn: (
+      state,
+      action: PayloadAction<{
+        workspaceId: string;
+        boardId: string;
+        columnName: string;
+        columnId: string;
+        columnTasks: BoardInterface[];
+      }>
+    ) => {
+      const workspace = state.workspace.findIndex(
+        (value) => value.workspaceId === action.payload.workspaceId
+      );
+
+      const board = state.workspace[workspace].workspaceBoards.findIndex(
+        (value) => value.boardId === action.payload.boardId
+      );
+
+      state.workspace[workspace].workspaceBoards[board].boardColumns.push();
+    },
   },
 });
 

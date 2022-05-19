@@ -5,6 +5,8 @@ import { useParams } from "react-router-dom";
 import { RootState } from "../../redux/Store";
 import { useSelector, useDispatch } from "react-redux";
 import { addRecentlyViewed } from "../../redux/features/recentlyViewedSlice";
+import { addColumn } from "../../redux/features/WorkspaceSlice";
+import AddColumnForm from "./AddColumnForm";
 
 const Board: React.FC = () => {
   const [createWorkspacePopUp, setCreateWorkspacePopUp] =
@@ -50,10 +52,14 @@ const Board: React.FC = () => {
       <div className="boardHeading">
         <h3 className="boardBoardName">board: {shownBoard?.boardName}</h3>
         {user.name ? (
-          <h4 className="boardUserName">User: {user.name} </h4>
+          <h4 className="boardUserName">{user.name} </h4>
         ) : (
           <h4 className="boardUserName">{shownWorkspace?.workspaceMember}</h4>
         )}
+      </div>
+
+      <div className="boardColumnsDiv">
+        {boardsColumn ? <AddColumnForm /> : null}
       </div>
     </div>
   );

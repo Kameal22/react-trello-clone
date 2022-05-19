@@ -1,0 +1,61 @@
+.addColumnFormDiv{
+    background: rgba(255, 255, 255, 0.11);
+    border-radius: 5px;
+    width: 260px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    width: 15%;
+    margin-top: 2vh;
+    margin-left: 2em;
+    padding: 10px 10px;
+    cursor: pointer;
+}
+
+.addColumnFormDiv:hover{
+    background: rgba(255, 255, 255, 0.274);
+}
+
+.addColumnHeading{
+    display: flex;
+    align-items: baseline;
+    color: ivory;
+    font-size: .9em;
+}
+
+.addColumnHeading i{
+    margin-left: .5em;
+}
+
+.addColumnHeading p{
+    margin-left: 1em;
+}
+
+.columnNameInput{
+    border: 2px solid #0079bf;
+    width: 100%;
+    padding: 8px 0;
+    border-radius: 5px;
+    padding-left: 4px;
+}
+
+.addColumnButtonIcon{
+    margin-top: .5vh;
+    display: flex;
+    align-items: center;
+}
+
+.addColumnButtonIcon button{
+    padding: 8px 8px;
+    background: #0079bf;
+    border: none;
+    border-radius: 5px;
+    color: ivory;
+    cursor: pointer;
+}
+
+.addColumnButtonIcon i{
+    margin-left: .5em;
+    font-weight: bold;
+}
