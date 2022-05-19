@@ -24,7 +24,7 @@ const MainSectionBoards: React.FC = () => {
             return (
               <div
                 className="mainSectionYourBoard"
-                style={{ backgroundColor: `${recentBoard.boardBackground}` }}
+                style={{ background: `${recentBoard.boardBackground}` }}
               >
                 {" "}
                 <Link
@@ -49,7 +49,7 @@ const MainSectionBoards: React.FC = () => {
                 return (
                   <div
                     className="mainSectionYourBoard"
-                    style={{ backgroundColor: `${board.boardBackground}` }}
+                    style={{ background: `${board.boardBackground}` }}
                   >
                     {" "}
                     <Link
