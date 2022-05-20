@@ -5,6 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../redux/Store";
 import { addBoard } from "../redux/features/WorkspaceSlice";
+import { useNavigate } from "react-router-dom";
 
 interface CreateBoardInterface {
   setBoardCreating: () => void;
@@ -13,13 +14,14 @@ interface CreateBoardInterface {
 
 const CreateBoardPopUp: React.FC<CreateBoardInterface> = (props) => {
   const [boardName, setBoardName] = useState<string>("");
-  const [boardId, setBoardId] = useState<string>(uuidv4());
+  const [boardId] = useState<string>(uuidv4());
   const [boardBackground, setBoardBackground] = useState<string>(
     "linear-gradient(#e66465, #9198e5)"
   );
   const [boardWorkspace, setBoardWorkspace] = useState<string>("");
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const workspaces = useSelector(
     (state: RootState) => state.workspace.workspace
@@ -49,10 +51,7 @@ const CreateBoardPopUp: React.FC<CreateBoardInterface> = (props) => {
       })
     );
     props.setBoardCreating();
-    props.setPopUpMessage("Board created succesfuly");
-    setTimeout(() => {
-      props.setPopUpMessage("");
-    }, 1500);
+    navigate(`/board/${boardWorkspace}/${boardId}`, { replace: true });
   };
 
   return (

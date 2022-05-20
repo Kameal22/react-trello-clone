@@ -91,6 +91,9 @@
 .workspace p{
     font-weight: bold;
     font-size: .95em;
+    width: 100%;                
+    overflow: hidden;               
+    text-overflow: ellipsis;
 }
 
 .workspaceOption{
