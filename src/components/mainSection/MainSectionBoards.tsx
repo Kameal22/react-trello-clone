@@ -14,40 +14,42 @@ const MainSectionBoards: React.FC = () => {
 
   return (
     <div className="mainSectionBoards">
-      <div className="mainSectionBoardsRecentlyViewed">
-        <div className="mainSectionBoardsRecentlyViewedHeading">
-          <i className="bi bi-clock"></i>
-          <h4>Recently viewed</h4>
-        </div>
-        <div className="mainSectionBoardsRecentlyViewedBoards">
-          {recents.map((recentBoard) => {
-            return (
-              <div
-                className="mainSectionYourBoard"
-                style={{ background: `${recentBoard.boardBackground}` }}
-              >
-                {" "}
-                <Link
-                  className="workspaceMenuLink"
-                  to={`/board/${recentBoard.boardWorkspace}/${recentBoard.boardId}`}
-                >
-                  <p>{recentBoard.boardName}</p>{" "}
-                </Link>
-              </div>
-            );
-          })}
-        </div>
+      <div className="mainSectionBoardsRecentlyViewedHeadingDiv">
+        <i className="bi bi-clock"></i>
+        <h4>Recently viewed</h4>
       </div>
 
-      <div className="mainSectionBoardsFromWorkspaces">
-        <h4 className="mainSectionYourWorkspacesHeading">Your workspaces</h4>
-        {workspaces.map((workspace) => {
+      <div className="mainSectionBoardsDivs">
+        {recents.map((recentBoard) => {
           return (
-            <div className="boardFromWorkspace">
-              <h4>{workspace.workspaceName}</h4>
+            <div
+              key={recentBoard.boardId}
+              className="mainSectionYourBoard"
+              style={{ background: `${recentBoard.boardBackground}` }}
+            >
+              {" "}
+              <Link
+                className="workspaceMenuLink"
+                to={`/board/${recentBoard.boardWorkspace}/${recentBoard.boardId}`}
+              >
+                <p>{recentBoard.boardName}</p>{" "}
+              </Link>
+            </div>
+          );
+        })}
+      </div>
+
+      <h4 className="mainSectionYourWorkspacesHeading">Your workspaces</h4>
+
+      {workspaces.map((workspace) => {
+        return (
+          <div key={workspace.workspaceId} className="boardFromWorkspace">
+            <h4>{workspace.workspaceName}</h4>
+            <div className="mainSectionBoardsDivs">
               {workspace.workspaceBoards.map((board) => {
                 return (
                   <div
+                    key={board.boardId}
                     className="mainSectionYourBoard"
                     style={{ background: `${board.boardBackground}` }}
                   >
@@ -62,9 +64,9 @@ const MainSectionBoards: React.FC = () => {
                 );
               })}
             </div>
-          );
-        })}
-      </div>
+          </div>
+        );
+      })}
     </div>
   );
 };

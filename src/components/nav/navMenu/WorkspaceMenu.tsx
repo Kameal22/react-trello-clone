@@ -39,7 +39,7 @@ const NavWorkspaces: React.FC<WorkspaceProps> = (props) => {
 
           {workspaces.map((workspace) => {
             return (
-              <div className="navWorkspaceItems">
+              <div key={workspace.workspaceId} className="navWorkspaceItems">
                 <p className="navWorkspaceItemHeading">
                   <Link
                     onClick={() => setDropdown("")}

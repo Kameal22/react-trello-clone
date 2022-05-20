@@ -14,7 +14,18 @@ export const recentlyViewedSlice = createSlice({
   initialState,
   reducers: {
     addRecentlyViewed: (state, action: PayloadAction<BoardInterface>) => {
-      state.recentlyViewed.push(action.payload);
+      if (
+        !state.recentlyViewed.some(
+          (board) => board.boardId === action.payload.boardId
+        )
+      ) {
+        if (state.recentlyViewed.length <= 3) {
+          state.recentlyViewed.push(action.payload);
+        } else {
+          state.recentlyViewed.pop();
+          state.recentlyViewed.unshift(action.payload);
+        }
+      }
     },
   },
 });

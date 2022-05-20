@@ -2,11 +2,11 @@
     width: 75%;
 }
 
-.mainSectionBoardsRecentlyViewedHeading{
+.mainSectionBoardsRecentlyViewedHeadingDiv{
     display: flex;
 }
 
-.mainSectionBoardsRecentlyViewedHeading h4{
+.mainSectionBoardsRecentlyViewedHeadingDiv h4{
     margin-left: 1em;
 }
 
@@ -16,16 +16,13 @@
     margin-top: 2vh;
 }
 
-.mainSectionBoardsFromWorkspaces{
-    margin-top: 8vh;
-}
-
 .mainSectionYourWorkspacesHeading{
     color: grey;
+    margin-top: 6vh;
 }
 
 .boardFromWorkspace{
-    margin-top: 4vh;
+    margin-top: 2vh;
 }
 
 .mainSectionYourBoard{
@@ -39,4 +36,12 @@
     justify-content: center;
     align-items: center;
     font-weight: bold;
+}
+
+.mainSectionBoardsDivs{
+    display: flex;
+}
+
+.mainSectionBoardsDivs > div{
+    margin-left: 1em;
 }

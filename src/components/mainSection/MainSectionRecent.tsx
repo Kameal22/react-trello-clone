@@ -19,6 +19,7 @@ const MainSectionRecent: React.FC = () => {
       {recents.map((board) => {
         return (
           <Link
+            key={board.boardId}
             className="workspaceMenuLink"
             to={`/board/${board.boardWorkspace}/${board.boardId}`}
           >

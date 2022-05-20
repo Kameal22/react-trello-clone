@@ -34,6 +34,7 @@ const WorkspaceBoards: React.FC<WorkspaceBoardsInterface> = (props) => {
             ? props.shownWorkspace.workspaceBoards.map((board) => {
                 return (
                   <div
+                    key={board.boardId}
                     style={{ background: `${board.boardBackground}` }}
                     className="workspaceYourBoard"
                   >
