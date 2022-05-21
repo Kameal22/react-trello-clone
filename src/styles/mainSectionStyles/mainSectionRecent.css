@@ -4,11 +4,12 @@
 
 .mainSectionRecentDiv h3{
     text-align: right;
+    margin-bottom: 2vh;
 }
 
 .recentsDiv{
     padding: 8px 8px;
-    margin: 2vh auto;
+    margin: 0 auto;
     display: flex;
     align-items: center;
 }
