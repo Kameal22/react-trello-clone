@@ -24,6 +24,7 @@ export interface BoardInterface {
 export interface WorkspaceInterface {
   workspaceName: string;
   workspaceDescription: string;
+  workspaceLetterColor: string;
   workspaceDate: string;
   workspaceMember: string;
   workspaceId: string;

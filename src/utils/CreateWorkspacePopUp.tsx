@@ -9,6 +9,7 @@ import { setPopUpMessage } from "../redux/features/popUpSlice";
 import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import { showDropdown } from "../redux/features/navigationSlice";
+import { generateRandomColor } from "../utils/GenerateRandomColor";
 
 interface WorkspacePopUpProps {
   showCreateWorkspace: () => void;
@@ -62,6 +63,7 @@ const CreateWorkspacePopUp: React.FC<WorkspacePopUpProps> = (props) => {
           workspaceDescription,
           workspaceDate: date,
           workspaceMember: user.name,
+          workspaceLetterColor: generateRandomColor(),
           workspaceBoards: [],
           workspaceLandingPageMenu: false,
           workspaceId,
@@ -79,6 +81,7 @@ const CreateWorkspacePopUp: React.FC<WorkspacePopUpProps> = (props) => {
           workspaceDescription,
           workspaceDate: date,
           workspaceMember: guestName,
+          workspaceLetterColor: generateRandomColor(),
           workspaceBoards: [],
           workspaceLandingPageMenu: false,
           workspaceId,
