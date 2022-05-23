@@ -2,12 +2,21 @@ import "../../styles/boardStyles/addColumnForm.css";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { BoardTaskInterface } from "../../interfaces/WorkspaceInterface";
+import { addColumn } from "../../redux/features/WorkspaceSlice";
+import { useDispatch } from "react-redux";
 
-const AddColumnForm: React.FC = () => {
+interface AddingColumnFormInterface {
+  workspaceId: string | undefined;
+  boardId: string | undefined;
+}
+
+const AddColumnForm: React.FC<AddingColumnFormInterface> = (props) => {
   const [addingColumn, setAddingColumn] = useState(false);
   const [columnName, setColumnName] = useState<string>("");
-  const [columnId, setColumnId] = useState<string>(uuidv4());
-  const [columnTasks, setColumnTasks] = useState<BoardTaskInterface>();
+  const [columnId] = useState<string>(uuidv4());
+  const [columnTasks] = useState<BoardTaskInterface[]>([]);
+
+  const dispatch = useDispatch();
 
   const handleColumnNameChange = (
     e: React.FormEvent<HTMLInputElement>
@@ -17,6 +26,16 @@ const AddColumnForm: React.FC = () => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    dispatch(
+      addColumn({
+        columnName,
+        columnId,
+        boardId: props.boardId,
+        workspaceId: props.workspaceId,
+        columnTasks,
+      })
+    );
+    setAddingColumn(!addingColumn);
   };
 
   return (
@@ -36,7 +55,7 @@ const AddColumnForm: React.FC = () => {
               placeholder="Enter column title.."
             />
             <div className="addColumnButtonIcon">
-              <button>Add Column</button>
+              <button type="submit">Add Column</button>
               <i
                 onClick={() => setAddingColumn(!addingColumn)}
                 style={{ fontSize: "1.1em" }}

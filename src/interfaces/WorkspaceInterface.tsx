@@ -7,9 +7,9 @@ export interface BoardTaskInterface {
 
 export interface BoardColumnInterface {
   columnName: string;
-  columndId: string;
-  boardId: string;
-  workspaceId: string;
+  columnId: string | undefined;
+  boardId: string | undefined;
+  workspaceId: string | undefined;
   columnTasks: BoardTaskInterface[];
 }
 

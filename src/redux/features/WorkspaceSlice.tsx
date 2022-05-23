@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {
   WorkspaceInterface,
   BoardInterface,
-  BoardColumnInterface,
+  BoardTaskInterface,
 } from "../../interfaces/WorkspaceInterface";
 
 interface WorkspaceState {
@@ -58,11 +58,11 @@ export const workspaceSlice = createSlice({
     addColumn: (
       state,
       action: PayloadAction<{
-        workspaceId: string;
-        boardId: string;
+        workspaceId: string | undefined;
+        boardId: string | undefined;
         columnName: string;
         columnId: string;
-        columnTasks: BoardInterface[];
+        columnTasks: BoardTaskInterface[];
       }>
     ) => {
       const workspace = state.workspace.findIndex(
@@ -73,7 +73,9 @@ export const workspaceSlice = createSlice({
         (value) => value.boardId === action.payload.boardId
       );
 
-      state.workspace[workspace].workspaceBoards[board].boardColumns.push();
+      state.workspace[workspace].workspaceBoards[board].boardColumns.push(
+        action.payload
+      );
     },
   },
 });

@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { RootState } from "../../redux/Store";
 import { useSelector, useDispatch } from "react-redux";
 import { addRecentlyViewed } from "../../redux/features/recentlyViewedSlice";
-import { addColumn } from "../../redux/features/WorkspaceSlice";
+import BoardColumn from "./BoardColumn";
 import AddColumnForm from "./AddColumnForm";
 
 const Board: React.FC = () => {
@@ -39,8 +39,6 @@ const Board: React.FC = () => {
     setCreateWorkspacePopUp(!createWorkspacePopUp);
   };
 
-  // if !boardsColumn - show AddColumnForm.
-
   return (
     <div
       style={{ background: `${shownBoard?.boardBackground}` }}
@@ -57,7 +55,19 @@ const Board: React.FC = () => {
       </div>
 
       <div className="boardColumnsDiv">
-        {boardsColumn ? <AddColumnForm /> : null}
+        <AddColumnForm
+          workspaceId={shownWorkspace?.workspaceId}
+          boardId={shownBoard?.boardId}
+        />
+        {boardsColumn?.map((column) => {
+          return (
+            <BoardColumn
+              columnName={column.columnName}
+              columnId={column.columnId}
+              columnTasks={column.columnTasks}
+            />
+          );
+        })}
       </div>
     </div>
   );
