@@ -42,23 +42,21 @@ const Board: React.FC = () => {
   return (
     <div
       style={{ background: `${shownBoard?.boardBackground}` }}
-      className="boardDiv"
+      className="boardDivBOARD"
     >
       <Nav showCreateWorkspace={showWorkspaceCreation} />
-      <div className="boardHeading">
-        <h3 className="boardBoardName">board: {shownBoard?.boardName}</h3>
+      <div className="boardHeadingBOARD">
+        <h3 className="boardNameBOARD">board: {shownBoard?.boardName}</h3>
         {user.name ? (
-          <h4 className="boardUserName">{user.name} </h4>
+          <h4 className="boardUserNameBOARD">{user.name} </h4>
         ) : (
-          <h4 className="boardUserName">{shownWorkspace?.workspaceMember}</h4>
+          <h4 className="boardUserNameBOARD">
+            {shownWorkspace?.workspaceMember}
+          </h4>
         )}
       </div>
 
-      <div className="boardColumnsDiv">
-        <AddColumnForm
-          workspaceId={shownWorkspace?.workspaceId}
-          boardId={shownBoard?.boardId}
-        />
+      <div className="boardAllColumnsDivBOARD">
         {boardsColumn?.map((column) => {
           return (
             <BoardColumn
@@ -68,6 +66,11 @@ const Board: React.FC = () => {
             />
           );
         })}
+
+        <AddColumnForm
+          workspaceId={shownWorkspace?.workspaceId}
+          boardId={shownBoard?.boardId}
+        />
       </div>
     </div>
   );

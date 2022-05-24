@@ -1,6 +1,4 @@
 import "../../styles/boardStyles/boardColumn.css";
-import { RootState } from "../../redux/Store";
-import { useSelector, useDispatch } from "react-redux";
 import { BoardTaskInterface } from "../../interfaces/WorkspaceInterface";
 
 interface ColumnInterface {
@@ -11,8 +9,16 @@ interface ColumnInterface {
 
 const BoardColumn: React.FC<ColumnInterface> = (props) => {
   return (
-    <div className="boardColumnDIV">
-      <p>{props.columnName}</p>
+    <div className="boardCOLUMNdiv">
+      <div className="boardCOLUMNHeader">
+        <p>{props.columnName}</p>
+        <i className="bi bi-three-dots"></i>
+      </div>
+
+      <div className="boardCOLUMNAddTask">
+        <i style={{ fontSize: "1.3em" }} className="bi bi-plus"></i>
+        <p>Add a task</p>
+      </div>
     </div>
   );
 };

@@ -39,9 +39,9 @@ const AddColumnForm: React.FC<AddingColumnFormInterface> = (props) => {
   };
 
   return (
-    <div className="addColumnFormDiv">
+    <div className="addCOLUMNFORMDiv">
       {addingColumn ? (
-        <div className="addColumnForm">
+        <div className="addCOLUMNFORM">
           <form
             className="addColumnFormForm"
             autoComplete="off"

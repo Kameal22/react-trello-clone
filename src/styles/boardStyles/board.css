@@ -1,20 +1,29 @@
-.boardDiv{
+.boardDivBOARD{
     min-height: 100vh;
+    overflow: auto;
 }
 
-.boardHeading{
+.boardHeadingBOARD{
     margin-top: 1vh;
     display: flex;
 }
 
-.boardBoardName{
+.boardNameBOARD{
     margin-left: 2em;
     color: ivory;
     font-size: .95em;
 }
 
-.boardUserName{
+.boardUserNameBOARD{
     margin-left: 2em;
     color: ivory;
     font-size: .95em;
+}
+
+.boardAllColumnsDivBOARD{
+    display: flex;
+    align-items: flex-start;
+    margin-top: 2vh;
+    padding-left: 1em;
+    padding-right: 1em;
 }
