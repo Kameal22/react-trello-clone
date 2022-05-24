@@ -1,8 +1,3 @@
-.boardDivBOARD{
-    min-height: 100vh;
-    overflow: auto;
-}
-
 .boardHeadingBOARD{
     margin-top: 1vh;
     display: flex;
@@ -26,4 +21,6 @@
     margin-top: 2vh;
     padding-left: 1em;
     padding-right: 1em;
+    overflow: auto;
+    min-height: 89vh;
 }

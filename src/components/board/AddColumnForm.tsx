@@ -26,16 +26,18 @@ const AddColumnForm: React.FC<AddingColumnFormInterface> = (props) => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    dispatch(
-      addColumn({
-        columnName,
-        columnId,
-        boardId: props.boardId,
-        workspaceId: props.workspaceId,
-        columnTasks,
-      })
-    );
-    setAddingColumn(!addingColumn);
+    if (columnName) {
+      dispatch(
+        addColumn({
+          columnName,
+          columnId,
+          boardId: props.boardId,
+          workspaceId: props.workspaceId,
+          columnTasks,
+        })
+      );
+      setAddingColumn(!addingColumn);
+    }
   };
 
   return (

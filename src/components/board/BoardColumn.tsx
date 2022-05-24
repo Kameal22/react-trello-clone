@@ -1,5 +1,7 @@
 import "../../styles/boardStyles/boardColumn.css";
 import { BoardTaskInterface } from "../../interfaces/WorkspaceInterface";
+import EditColumnForm from "./EditColumnForm";
+import { useState } from "react";
 
 interface ColumnInterface {
   columnName: string;
@@ -8,6 +10,8 @@ interface ColumnInterface {
 }
 
 const BoardColumn: React.FC<ColumnInterface> = (props) => {
+  const [columnEditing, setColumnEditing] = useState<boolean>(false);
+
   return (
     <div className="boardCOLUMNdiv">
       <div className="boardCOLUMNHeader">
