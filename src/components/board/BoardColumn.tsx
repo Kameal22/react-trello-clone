@@ -12,12 +12,20 @@ interface ColumnInterface {
 const BoardColumn: React.FC<ColumnInterface> = (props) => {
   const [columnEditing, setColumnEditing] = useState<boolean>(false);
 
+  const closeEditingFunc = () => {
+    setColumnEditing(!columnEditing);
+  };
+
   return (
     <div className="boardCOLUMNdiv">
       <div className="boardCOLUMNHeader">
         <p>{props.columnName}</p>
-        <i className="bi bi-three-dots"></i>
+        <i onClick={() => closeEditingFunc()} className="bi bi-three-dots"></i>
       </div>
+
+      {columnEditing ? (
+        <EditColumnForm closeEditing={closeEditingFunc} />
+      ) : null}
 
       <div className="boardCOLUMNAddTask">
         <i style={{ fontSize: "1.3em" }} className="bi bi-plus"></i>

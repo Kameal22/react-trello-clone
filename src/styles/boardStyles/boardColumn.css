@@ -9,11 +9,16 @@
     display: flex;
     flex-direction: column;
     margin-left: 1em;
+    position: relative;
 }
 
 .boardCOLUMNHeader{
     display: flex;
     justify-content: space-between;
+}   
+
+.boardCOLUMNHeader i:hover{
+    background-color: rgba(179, 179, 179, 0.329);
 }
 
 .boardCOLUMNAddTask{
