@@ -105,6 +105,10 @@ export const workspaceSlice = createSlice({
         1
       );
     },
+
+    addTask: (state, action: PayloadAction<BoardTaskInterface>) => {
+
+    },
   },
 });
 
@@ -115,6 +119,7 @@ export const {
   addBoard,
   addColumn,
   deleteColumn,
+  addTask
 } = workspaceSlice.actions;
 
 export default workspaceSlice.reducer;

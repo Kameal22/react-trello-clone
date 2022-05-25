@@ -3,7 +3,7 @@
     background-color: #ebecf0;
     border: 1px solid rgba(255, 255, 255, 0.3);
     min-width: 18%;
-    padding: 10px 10px;
+    padding-top: 10px;
     cursor: pointer;
     font-size: .9em;
     display: flex;
@@ -15,7 +15,16 @@
 .boardCOLUMNHeader{
     display: flex;
     justify-content: space-between;
-}   
+}
+
+.boardCOLUMNHeader p{
+    margin-left: 1em;
+    font-weight: bold;
+}
+
+.boardCOLUMNHeader i{
+    margin-right: 1em;
+}
 
 .boardCOLUMNHeader i:hover{
     background-color: rgba(179, 179, 179, 0.329);
@@ -25,8 +34,12 @@
     display: flex;
     align-items: center;
     margin-top: 2vh;
+    margin-bottom: 1vh;
     padding: 8px 0;
     border-radius: 5px;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .boardCOLUMNAddTask i{

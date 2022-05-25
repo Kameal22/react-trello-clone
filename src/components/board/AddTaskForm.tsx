@@ -1,5 +1,7 @@
 import "../../styles/boardStyles/addTaskForm.css";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addTask } from "../../redux/features/WorkspaceSlice";
 
 interface AddTaskInterface {
     addTask: () => void
@@ -7,6 +9,8 @@ interface AddTaskInterface {
 
 const AddTaskForm: React.FC<AddTaskInterface> = (props) => {
     const [taskName, setTaskName] = useState<string>("");
+
+    const dispatch = useDispatch();
 
     const handleTaskNameChange = (
         e: React.FormEvent<HTMLInputElement>
@@ -35,7 +39,7 @@ const AddTaskForm: React.FC<AddTaskInterface> = (props) => {
                     />
                     <div className="addTaskButtonIcon">
                         <button type="submit">Add Task</button>
-                        <i style={{ fontSize: "1.4em" }} onClick={() => props.addTask()} className="bi bi-x-lg"></i>
+                        <i style={{ fontSize: "1.3em" }} onClick={() => props.addTask()} className="bi bi-x-lg"></i>
                     </div>
                 </form>
             </div>
