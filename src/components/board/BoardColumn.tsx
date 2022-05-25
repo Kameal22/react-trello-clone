@@ -24,7 +24,10 @@ const BoardColumn: React.FC<ColumnInterface> = (props) => {
       </div>
 
       {columnEditing ? (
-        <EditColumnForm closeEditing={closeEditingFunc} />
+        <EditColumnForm
+          closeEditing={closeEditingFunc}
+          columnId={props.columnId}
+        />
       ) : null}
 
       <div className="boardCOLUMNAddTask">

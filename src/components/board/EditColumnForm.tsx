@@ -1,10 +1,14 @@
 import "../../styles/boardStyles/editColumnForm.css";
+import { deleteColumn } from "../../redux/features/WorkspaceSlice";
+import { useDispatch } from "react-redux";
 
 interface EditColumnInterface {
   closeEditing: () => void;
 }
 
 const EditColumnForm: React.FC<EditColumnInterface> = (props) => {
+  const dispatch = useDispatch();
+
   return (
     <div className="editColumnFormDiv">
       <div className="edidColumnFormDivHeading">

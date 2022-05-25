@@ -77,6 +77,34 @@ export const workspaceSlice = createSlice({
         action.payload
       );
     },
+
+    deleteColumn: (
+      state,
+      action: PayloadAction<{
+        workspaceId: string | undefined;
+        boardId: string | undefined;
+        columnId: string;
+      }>
+    ) => {
+      const workspace = state.workspace.findIndex(
+        (value) => value.workspaceId === action.payload.workspaceId
+      );
+
+      const board = state.workspace[workspace].workspaceBoards.findIndex(
+        (value) => value.boardId === action.payload.boardId
+      );
+
+      const columnToDelete = state.workspace[workspace].workspaceBoards[
+        board
+      ].boardColumns.findIndex(
+        (column) => column.columnId === action.payload.columnId
+      );
+
+      state.workspace[workspace].workspaceBoards[board].boardColumns.splice(
+        columnToDelete,
+        1
+      );
+    },
   },
 });
 
@@ -86,6 +114,7 @@ export const {
   editWorkspace,
   addBoard,
   addColumn,
+  deleteColumn,
 } = workspaceSlice.actions;
 
 export default workspaceSlice.reducer;
