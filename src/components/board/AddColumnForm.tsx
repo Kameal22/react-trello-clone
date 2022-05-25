@@ -37,6 +37,7 @@ const AddColumnForm: React.FC<AddingColumnFormInterface> = (props) => {
         })
       );
       setAddingColumn(!addingColumn);
+      setColumnName("")
     }
   };
 

@@ -4,10 +4,19 @@ import { useDispatch } from "react-redux";
 
 interface EditColumnInterface {
   closeEditing: () => void;
+  columnId: string | undefined;
+  boardId: string | undefined;
+  workspaceId: string | undefined;
 }
 
 const EditColumnForm: React.FC<EditColumnInterface> = (props) => {
   const dispatch = useDispatch();
+
+  const deleteColumnFunc = () => {
+    dispatch(
+      deleteColumn({ workspaceId: props.workspaceId, boardId: props.boardId, columnId: props.workspaceId })
+    )
+  }
 
   return (
     <div className="editColumnFormDiv">
@@ -18,7 +27,7 @@ const EditColumnForm: React.FC<EditColumnInterface> = (props) => {
 
       <div className="editColumnFormActions">
         <p>Add task..</p>
-        <p>Delete column..</p>
+        <p onClick={() => deleteColumnFunc()}>Delete column..</p>
         <p>Copy column..</p>
       </div>
     </div>

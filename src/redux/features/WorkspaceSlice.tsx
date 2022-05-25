@@ -83,7 +83,7 @@ export const workspaceSlice = createSlice({
       action: PayloadAction<{
         workspaceId: string | undefined;
         boardId: string | undefined;
-        columnId: string;
+        columnId: string | undefined
       }>
     ) => {
       const workspace = state.workspace.findIndex(

@@ -62,6 +62,8 @@ const Board: React.FC = () => {
             <BoardColumn
               columnName={column.columnName}
               columnId={column.columnId}
+              boardId={shownBoard?.boardId}
+              workspaceId={shownWorkspace?.workspaceId}
               columnTasks={column.columnTasks}
             />
           );

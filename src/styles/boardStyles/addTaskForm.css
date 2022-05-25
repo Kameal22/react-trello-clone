@@ -1,0 +1,35 @@
+.addTaskFormDiv{
+    margin-top: 1vh;
+    padding: 10px 10px;
+}
+
+.addTaskButtonIcon{
+    display: flex;
+}
+
+.taskNameInput{
+    padding: 20px 20px;
+    border: none;
+    border-radius: 5px;
+    -webkit-box-shadow: -7px 8px 24px -17px rgba(66, 68, 90, 1);
+    -moz-box-shadow: -7px 8px 24px -17px rgba(66, 68, 90, 1);
+    box-shadow: -7px 8px 24px -17px rgba(66, 68, 90, 1);
+}
+
+.addTaskButtonIcon{
+    margin-top: 2vh;
+    display: flex;
+    align-items: center;
+}
+
+.addTaskButtonIcon button{
+    padding: 8px 8px;
+    border-radius: 5px;
+    border: none;
+    background-color: #0079bf;
+    color: ivory;
+}
+
+.addTaskButtonIcon i{
+    margin-left: .5em;
+}
