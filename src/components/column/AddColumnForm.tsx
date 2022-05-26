@@ -1,4 +1,4 @@
-import "../../styles/boardStyles/addColumnForm.css";
+import "../../styles/columnStyles/addColumnForm.css";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { BoardTaskInterface } from "../../interfaces/WorkspaceInterface";
@@ -37,7 +37,7 @@ const AddColumnForm: React.FC<AddingColumnFormInterface> = (props) => {
         })
       );
       setAddingColumn(!addingColumn);
-      setColumnName("")
+      setColumnName("");
     }
   };
 

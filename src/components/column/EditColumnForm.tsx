@@ -1,4 +1,4 @@
-import "../../styles/boardStyles/editColumnForm.css";
+import "../../styles/columnStyles/editColumnForm.css";
 import { deleteColumn } from "../../redux/features/WorkspaceSlice";
 import { useDispatch } from "react-redux";
 
@@ -14,9 +14,13 @@ const EditColumnForm: React.FC<EditColumnInterface> = (props) => {
 
   const deleteColumnFunc = () => {
     dispatch(
-      deleteColumn({ workspaceId: props.workspaceId, boardId: props.boardId, columnId: props.workspaceId })
-    )
-  }
+      deleteColumn({
+        workspaceId: props.workspaceId,
+        boardId: props.boardId,
+        columnId: props.workspaceId,
+      })
+    );
+  };
 
   return (
     <div className="editColumnFormDiv">

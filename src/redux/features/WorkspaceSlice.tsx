@@ -83,7 +83,7 @@ export const workspaceSlice = createSlice({
       action: PayloadAction<{
         workspaceId: string | undefined;
         boardId: string | undefined;
-        columnId: string | undefined
+        columnId: string | undefined;
       }>
     ) => {
       const workspace = state.workspace.findIndex(
@@ -106,8 +106,34 @@ export const workspaceSlice = createSlice({
       );
     },
 
-    addTask: (state, action: PayloadAction<BoardTaskInterface>) => {
+    addTask: (
+      state,
+      action: PayloadAction<{
+        workspaceId: string | undefined;
+        boardId: string | undefined;
+        columnId: string | undefined;
+        taskName: string;
+        taskId: string;
+        taskIndicatorColor: string;
+      }>
+    ) => {
+      const workspace = state.workspace.findIndex(
+        (value) => value.workspaceId === action.payload.workspaceId
+      );
 
+      const board = state.workspace[workspace].workspaceBoards.findIndex(
+        (value) => value.boardId === action.payload.boardId
+      );
+
+      const column = state.workspace[workspace].workspaceBoards[
+        board
+      ].boardColumns.findIndex(
+        (value) => value.columnId === action.payload.columnId
+      );
+
+      state.workspace[workspace].workspaceBoards[board].boardColumns[
+        column
+      ].columnTasks.push(action.payload);
     },
   },
 });
@@ -119,7 +145,7 @@ export const {
   addBoard,
   addColumn,
   deleteColumn,
-  addTask
+  addTask,
 } = workspaceSlice.actions;
 
 export default workspaceSlice.reducer;

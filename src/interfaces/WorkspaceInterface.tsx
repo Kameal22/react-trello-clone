@@ -1,8 +1,10 @@
 export interface BoardTaskInterface {
   taskName: string;
   taskId: string;
-  tasksColumnId: string;
   taskIndicatorColor: string;
+  workspaceId: string | undefined;
+  boardId: string | undefined;
+  columnId: string | undefined;
 }
 
 export interface BoardColumnInterface {

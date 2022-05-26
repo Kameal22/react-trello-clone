@@ -6,7 +6,7 @@ import { RootState } from "../../redux/Store";
 import { useSelector, useDispatch } from "react-redux";
 import { addRecentlyViewed } from "../../redux/features/recentlyViewedSlice";
 import BoardColumn from "./BoardColumn";
-import AddColumnForm from "./AddColumnForm";
+import AddColumnForm from "../column/AddColumnForm";
 
 const Board: React.FC = () => {
   const [createWorkspacePopUp, setCreateWorkspacePopUp] =
