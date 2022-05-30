@@ -102,7 +102,7 @@ export const workspaceSlice = createSlice({
       );
 
       if (columnToCopy) {
-        columnToCopy.columnId = uuidv4();
+        columnToCopy.columnId = uuidv4(); //This changes ID of the copying one as well. It causes problems
         console.log(columnToCopy.columnId)
 
         state.workspace[workspace].workspaceBoards[board].boardColumns.push(

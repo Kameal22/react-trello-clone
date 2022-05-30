@@ -46,7 +46,7 @@ const Board: React.FC = () => {
     >
       <Nav showCreateWorkspace={showWorkspaceCreation} />
       <div className="boardHeadingBOARD">
-        <h3 onClick={() => console.log(shownBoard)} className="boardNameBOARD">
+        <h3 className="boardNameBOARD">
           board: {shownBoard?.boardName}
         </h3>
         {user.name ? (
