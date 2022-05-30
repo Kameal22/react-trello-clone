@@ -4,6 +4,7 @@ import {
   BoardInterface,
   BoardTaskInterface,
 } from "../../interfaces/WorkspaceInterface";
+import { v4 as uuidv4 } from "uuid";
 
 interface WorkspaceState {
   workspace: WorkspaceInterface[];
@@ -101,6 +102,9 @@ export const workspaceSlice = createSlice({
       );
 
       if (columnToCopy) {
+        columnToCopy.columnId = uuidv4();
+        console.log(columnToCopy.columnId)
+
         state.workspace[workspace].workspaceBoards[board].boardColumns.push(
           columnToCopy
         );

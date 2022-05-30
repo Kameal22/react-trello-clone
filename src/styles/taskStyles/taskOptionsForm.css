@@ -1,7 +1,7 @@
 .taskOptionsFormDiv{
     background: white;
     position: absolute;
-    right: -195px;
+    left: 105%;
     top: 1px;
     z-index: 999;
     width: 70%;
