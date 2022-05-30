@@ -1,6 +1,7 @@
 import "../../styles/taskStyles/task.css";
 import { useState } from "react";
 import TaskOptionsForm from "../task/TaskOptionsForm";
+import TaskDetailsPopUp from "../../utils/TaskDetailsPopUp";
 
 interface TaskProps {
   taskName: string;
@@ -14,6 +15,7 @@ interface TaskProps {
 const Task: React.FC<TaskProps> = (props) => {
   const [iconVisibility, setIconVisibility] = useState({ display: "none" });
   const [taskOptions, showTaskOptions] = useState<boolean>(false);
+  const [taskDetails, showTaskDetails] = useState<boolean>(false);
 
   const showOptions = () => {
     showTaskOptions(!taskOptions);
@@ -29,7 +31,10 @@ const Task: React.FC<TaskProps> = (props) => {
       }}
       className="taskDiv"
     >
-      <div className="taskDivNameAndColor">
+      <div
+        onClick={() => showTaskDetails(!taskDetails)}
+        className="taskDivNameAndColor"
+      >
         <p>{props.taskName}</p>
       </div>
 
@@ -48,6 +53,8 @@ const Task: React.FC<TaskProps> = (props) => {
           showForm={showOptions}
         />
       ) : null}
+
+      {taskDetails ? <TaskDetailsPopUp /> : null}
     </div>
   );
 };
