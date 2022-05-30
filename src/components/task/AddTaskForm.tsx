@@ -14,7 +14,7 @@ interface AddTaskInterface {
 const AddTaskForm: React.FC<AddTaskInterface> = (props) => {
   const [taskName, setTaskName] = useState<string>("");
   const [taskId] = useState<string>(uuidv4());
-  const [taskColor, setTaskColor] = useState<string>("");
+  const [taskColor] = useState<string>("");
 
   const dispatch = useDispatch();
 

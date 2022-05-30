@@ -39,8 +39,6 @@ const Board: React.FC = () => {
     setCreateWorkspacePopUp(!createWorkspacePopUp);
   };
 
-  console.log(shownBoard);
-
   return (
     <div
       style={{ background: `${shownBoard?.boardBackground}` }}

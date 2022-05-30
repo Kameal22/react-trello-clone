@@ -6,6 +6,9 @@ interface TaskProps {
   taskName: string;
   taskId: string;
   taskIndicatorColor: string;
+  workspaceId: string | undefined;
+  boardId: string | undefined;
+  columnId: string | undefined;
 }
 
 const Task: React.FC<TaskProps> = (props) => {
@@ -36,7 +39,15 @@ const Task: React.FC<TaskProps> = (props) => {
         className="bi bi-pencil"
       ></i>
 
-      {taskOptions ? <TaskOptionsForm showForm={showOptions} /> : null}
+      {taskOptions ? (
+        <TaskOptionsForm
+          workspaceId={props.workspaceId}
+          boardId={props.boardId}
+          columnId={props.columnId}
+          taskId={props.taskId}
+          showForm={showOptions}
+        />
+      ) : null}
     </div>
   );
 };

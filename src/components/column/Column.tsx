@@ -68,6 +68,9 @@ const BoardColumn: React.FC<ColumnInterface> = (props) => {
             taskName={task.taskName}
             taskId={task.taskId}
             taskIndicatorColor={task.taskIndicatorColor}
+            workspaceId={props.workspaceId}
+            boardId={props.boardId}
+            columnId={props.columnId}
           />
         );
       })}
