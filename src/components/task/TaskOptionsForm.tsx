@@ -8,8 +8,11 @@ const TaskOptionsForm: React.FC<OptionsFormInterface> = (props) => {
   return (
     <div className="taskOptionsFormDiv">
       <p>Open task</p>
+
       <p>Edit labels</p>
+
       <p>Copy task</p>
+
       <p>Delete task</p>
     </div>
   );

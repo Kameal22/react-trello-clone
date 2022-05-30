@@ -24,6 +24,8 @@
 
 .boardCOLUMNHeader i{
     margin-right: 1em;
+    padding: 2px 5px;
+    border-radius: 5px;
 }
 
 .boardCOLUMNHeader i:hover{

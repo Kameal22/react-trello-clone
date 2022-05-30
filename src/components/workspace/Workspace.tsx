@@ -55,8 +55,6 @@ const Workspace: React.FC = () => {
     dispatch(editWorkspace({ id, name, description }));
   };
 
-  console.log(shownWorkspace)
-
   return (
     <div className="yourWorkspaceDiv">
       <Nav showCreateWorkspace={showWorkspaceCreation} />

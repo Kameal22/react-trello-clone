@@ -1,8 +1,25 @@
 .taskOptionsFormDiv{
-    border: 1px solid magenta;
+    background: white;
     position: absolute;
-    right: -92px;
+    right: -195px;
     top: 1px;
-    color: white;
     z-index: 999;
+    width: 70%;
+    padding: 10px 10px;
+    border-radius: 5px;
+    -webkit-box-shadow: -5px 6px 14px -6px rgba(66, 68, 90, 1);
+    -moz-box-shadow: -5px 6px 14px -6px rgba(66, 68, 90, 1);
+    box-shadow: -5px 6px 14px -6px rgba(66, 68, 90, 1);
 }
+
+.taskOptionsFormDiv > p{
+    color: black;
+    font-size: 1.02em;
+    padding: .8vh .8vh;
+    border-radius: 5px;
+}
+
+.taskOptionsFormDiv >p:hover{
+    background-color: rgba(179, 179, 179, 0.329);
+}
+

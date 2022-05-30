@@ -61,7 +61,7 @@ export const workspaceSlice = createSlice({
         workspaceId: string | undefined;
         boardId: string | undefined;
         columnName: string;
-        columnId: string;
+        columnId: string | undefined;
         columnTasks: BoardTaskInterface[];
       }>
     ) => {
@@ -76,6 +76,35 @@ export const workspaceSlice = createSlice({
       state.workspace[workspace].workspaceBoards[board].boardColumns.push(
         action.payload
       );
+    },
+
+    copyColumn: (
+      state,
+      action: PayloadAction<{
+        workspaceId: string | undefined;
+        boardId: string | undefined;
+        columnId: string | undefined;
+      }>
+    ) => {
+      const workspace = state.workspace.findIndex(
+        (value) => value.workspaceId === action.payload.workspaceId
+      );
+
+      const board = state.workspace[workspace].workspaceBoards.findIndex(
+        (value) => value.boardId === action.payload.boardId
+      );
+
+      const columnToCopy = state.workspace[workspace].workspaceBoards[
+        board
+      ].boardColumns.find(
+        (column) => column.columnId === action.payload.columnId
+      );
+
+      if (columnToCopy) {
+        state.workspace[workspace].workspaceBoards[board].boardColumns.push(
+          columnToCopy
+        );
+      }
     },
 
     deleteColumn: (
@@ -144,6 +173,7 @@ export const {
   editWorkspace,
   addBoard,
   addColumn,
+  copyColumn,
   deleteColumn,
   addTask,
 } = workspaceSlice.actions;

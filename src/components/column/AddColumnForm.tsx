@@ -13,7 +13,6 @@ interface AddingColumnFormInterface {
 const AddColumnForm: React.FC<AddingColumnFormInterface> = (props) => {
   const [addingColumn, setAddingColumn] = useState(false);
   const [columnName, setColumnName] = useState<string>("");
-  const [columnId] = useState<string>(uuidv4());
   const [columnTasks] = useState<BoardTaskInterface[]>([]);
 
   const dispatch = useDispatch();
@@ -30,7 +29,7 @@ const AddColumnForm: React.FC<AddingColumnFormInterface> = (props) => {
       dispatch(
         addColumn({
           columnName,
-          columnId,
+          columnId: uuidv4(),
           boardId: props.boardId,
           workspaceId: props.workspaceId,
           columnTasks,

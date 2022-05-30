@@ -34,6 +34,7 @@ const AddTaskForm: React.FC<AddTaskInterface> = (props) => {
         taskIndicatorColor: taskColor,
       })
     );
+    props.addTask();
   };
 
   return (

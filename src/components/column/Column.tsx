@@ -1,6 +1,6 @@
 import "../../styles/columnStyles/boardColumn.css";
 import { BoardTaskInterface } from "../../interfaces/WorkspaceInterface";
-import EditColumnForm from "../column/EditColumnForm";
+import EditColumnForm from "./EditColumnForm";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/Store";
@@ -54,7 +54,8 @@ const BoardColumn: React.FC<ColumnInterface> = (props) => {
 
       {columnEditing ? (
         <EditColumnForm
-          closeEditing={editAColumn}
+          addTask={addATask}
+          setEditing={editAColumn}
           columnId={props.columnId}
           boardId={props.boardId}
           workspaceId={props.workspaceId}
