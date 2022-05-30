@@ -165,6 +165,42 @@ export const workspaceSlice = createSlice({
       ].columnTasks.push(action.payload);
     },
 
+    copyTask: (
+      state,
+      action: PayloadAction<{
+        workspaceId: string | undefined;
+        boardId: string | undefined;
+        columnId: string | undefined;
+        taskId: string | undefined;
+      }>
+    ) => {
+      const workspace = state.workspace.findIndex(
+        (value) => value.workspaceId === action.payload.workspaceId
+      );
+
+      const board = state.workspace[workspace].workspaceBoards.findIndex(
+        (value) => value.boardId === action.payload.boardId
+      );
+
+      const column = state.workspace[workspace].workspaceBoards[
+        board
+      ].boardColumns.findIndex(
+        (value) => value.columnId === action.payload.columnId
+      );
+
+      const taskToCopy = state.workspace[workspace].workspaceBoards[
+        board
+      ].boardColumns[column].columnTasks.find(
+        (task) => task.taskId === action.payload.taskId
+      );
+
+      if (taskToCopy) {
+        state.workspace[workspace].workspaceBoards[board].boardColumns[
+          column
+        ].columnTasks.push(taskToCopy);
+      }
+    },
+
     deleteTask: (
       state,
       action: PayloadAction<{
@@ -211,6 +247,7 @@ export const {
   deleteColumn,
   addTask,
   deleteTask,
+  copyTask,
 } = workspaceSlice.actions;
 
 export default workspaceSlice.reducer;

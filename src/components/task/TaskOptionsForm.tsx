@@ -1,5 +1,5 @@
 import "../../styles/taskStyles/taskOptionsForm.css";
-import { deleteTask } from "../../redux/features/WorkspaceSlice";
+import { deleteTask, copyTask } from "../../redux/features/WorkspaceSlice";
 import { useDispatch } from "react-redux";
 
 interface OptionsFormInterface {
@@ -24,13 +24,26 @@ const TaskOptionsForm: React.FC<OptionsFormInterface> = (props) => {
     );
     props.showForm();
   };
+
+  const copyTaskFunc = () => {
+    dispatch(
+      copyTask({
+        workspaceId: props.workspaceId,
+        boardId: props.boardId,
+        columnId: props.columnId,
+        taskId: props.taskId,
+      })
+    );
+    props.showForm();
+  };
+
   return (
     <div className="taskOptionsFormDiv">
       <p>Open task</p>
 
       <p>Edit labels</p>
 
-      <p>Copy task</p>
+      <p onClick={() => copyTaskFunc()}>Copy task</p>
 
       <p onClick={() => deleteTaskFunc()}>Delete task</p>
     </div>
