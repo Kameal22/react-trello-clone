@@ -3,11 +3,14 @@ import { useState } from "react";
 import TaskOptionsForm from "../task/TaskOptionsForm";
 import TaskDetailsPopUp from "../popups/TaskDetailsPopUp";
 import TaskLabelsPopUp from "../popups/TaskLabelsPopUp";
+import { TaskCommentsInterface } from "../../interfaces/WorkspaceInterface";
 
 interface TaskProps {
   taskName: string;
   taskId: string;
   taskIndicatorColor: string;
+  taskDescription: string;
+  taskComments: TaskCommentsInterface[];
   workspaceId: string | undefined;
   boardId: string | undefined;
   columnId: string | undefined;

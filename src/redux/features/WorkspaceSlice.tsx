@@ -3,6 +3,7 @@ import {
   WorkspaceInterface,
   BoardInterface,
   BoardTaskInterface,
+  TaskCommentsInterface,
 } from "../../interfaces/WorkspaceInterface";
 import { v4 as uuidv4 } from "uuid";
 
@@ -149,6 +150,8 @@ export const workspaceSlice = createSlice({
         taskName: string;
         taskId: string;
         taskIndicatorColor: string;
+        taskDescription: string;
+        taskComments: TaskCommentsInterface[];
       }>
     ) => {
       const workspace = state.workspace.findIndex(

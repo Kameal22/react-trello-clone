@@ -1,7 +1,15 @@
+export interface TaskCommentsInterface {
+  commentAuthor: string;
+  commentDate: string;
+  comment: string;
+}
+
 export interface BoardTaskInterface {
   taskName: string;
   taskId: string;
   taskIndicatorColor: string;
+  taskDescription: string;
+  taskComments: TaskCommentsInterface[];
   workspaceId: string | undefined;
   boardId: string | undefined;
   columnId: string | undefined;

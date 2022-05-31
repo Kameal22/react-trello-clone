@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import { addTask } from "../../redux/features/WorkspaceSlice";
+import { TaskCommentsInterface } from "../../interfaces/WorkspaceInterface";
 
 interface AddTaskInterface {
   addTask: () => void;
@@ -14,6 +15,8 @@ interface AddTaskInterface {
 const AddTaskForm: React.FC<AddTaskInterface> = (props) => {
   const [taskName, setTaskName] = useState<string>("");
   const [taskId] = useState<string>(uuidv4());
+  const [taskDescription] = useState<string>("");
+  const [taskComments] = useState<TaskCommentsInterface[]>([]);
   const [taskColor] = useState<string>("");
 
   const dispatch = useDispatch();
@@ -32,6 +35,8 @@ const AddTaskForm: React.FC<AddTaskInterface> = (props) => {
         taskName,
         taskId,
         taskIndicatorColor: taskColor,
+        taskComments,
+        taskDescription,
       })
     );
     props.addTask();
