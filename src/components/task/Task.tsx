@@ -49,7 +49,16 @@ const Task: React.FC<TaskProps> = (props) => {
       ) : null}
 
       <div onClick={() => showDetails()} className="taskDivName">
-        <p className="taskName">{props.taskName}</p>
+        <p
+          style={
+            props.taskIndicatorColor
+              ? { marginTop: ".5vh" }
+              : { marginTop: "0" }
+          }
+          className="taskName"
+        >
+          {props.taskName}
+        </p>
       </div>
 
       <i
@@ -77,6 +86,7 @@ const Task: React.FC<TaskProps> = (props) => {
           columnId={props.columnId}
           taskId={props.taskId}
           editLabels={showLabels}
+          chosenIndicator={props.taskIndicatorColor}
         />
       ) : null}
       {taskDetails ? <TaskDetailsPopUp /> : null}

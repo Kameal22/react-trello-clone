@@ -10,6 +10,7 @@ interface TaskLabelsInterface {
   boardId: string | undefined;
   columnId: string | undefined;
   taskId: string;
+  chosenIndicator: string;
 }
 
 const TaskLabelsPopUp: React.FC<TaskLabelsInterface> = (props) => {
@@ -44,7 +45,16 @@ const TaskLabelsPopUp: React.FC<TaskLabelsInterface> = (props) => {
               onClick={() => test(choice)}
               className="colorLabelDiv"
               style={{ background: choice }}
-            ></div>
+            >
+              <i
+                style={
+                  props.chosenIndicator === choice
+                    ? { display: "block" }
+                    : { display: "none" }
+                }
+                className="bi bi-check-lg"
+              ></i>
+            </div>
           );
         })}
       </div>

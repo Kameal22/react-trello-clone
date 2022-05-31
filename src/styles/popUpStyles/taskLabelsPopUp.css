@@ -43,6 +43,12 @@
     margin-top: 1vh;
 }
 
+.colorLabelDiv i{
+    position: inherit;
+    font-size: 1.8em;
+    color: ivory;
+}
+
 .createLabelBtn{
     display: block;
     border-radius: 5px;
