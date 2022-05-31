@@ -41,8 +41,15 @@ const Task: React.FC<TaskProps> = (props) => {
       }}
       className="taskDiv"
     >
-      <div onClick={() => showDetails()} className="taskDivNameAndColor">
-        <p>{props.taskName}</p>
+      {props.taskIndicatorColor ? (
+        <div
+          style={{ background: props.taskIndicatorColor }}
+          className="taskDivIndicator"
+        ></div>
+      ) : null}
+
+      <div onClick={() => showDetails()} className="taskDivName">
+        <p className="taskName">{props.taskName}</p>
       </div>
 
       <i
@@ -63,7 +70,15 @@ const Task: React.FC<TaskProps> = (props) => {
         />
       ) : null}
 
-      {taskLabels ? <TaskLabelsPopUp /> : null}
+      {taskLabels ? (
+        <TaskLabelsPopUp
+          workspaceId={props.workspaceId}
+          boardId={props.boardId}
+          columnId={props.columnId}
+          taskId={props.taskId}
+          editLabels={showLabels}
+        />
+      ) : null}
       {taskDetails ? <TaskDetailsPopUp /> : null}
     </div>
   );
