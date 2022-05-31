@@ -1,4 +1,64 @@
 .taskDetailsDiv{
-    position: absolute;
+    position:fixed;
+    top:50%; 
+    left:50%; 
+    transform:translate(-50%, -50%);
+    border-radius: 5px;
     z-index: 999;
+    background: white;
+    width: 500px;
+    height: 650px;
+}
+
+.taskDetailsName{
+    width: 90%;
+    margin: 0 auto;
+    padding: 10px;
+    font-size: 1.2em;
+}
+
+.taskDetailsListName{
+    width: 90%;
+    margin: .1vh auto;
+    font-size: .9em;
+    color: #5e6c84;
+}
+
+.taskDetailsLabel{
+    width: 90%;
+    margin: 4vh auto;
+}
+
+.taskDetailsLabelDivWithColor{
+    width: 40px;
+    height: 30px;
+    border-radius: 5px;
+    background-color: green;
+    margin-top: 1vh;
+}
+
+.taskDetailsDescriptionDiv{
+    width: 90%;
+    margin: 8vh auto;
+}
+
+.taskDetailsDescriptionHeading{
+    font-weight: bold;
+}
+
+.taskDetailsDescription{
+    margin-top: 1vh;
+}
+
+.taskDetailsActivityDiv{
+    width: 90%;
+    margin: 8vh auto;
+}
+
+.taskDetailsActivityHeading{
+    font-weight: bold;
+}
+
+.taskDetailsActivityComment{
+    margin-top: 1vh;
 }
