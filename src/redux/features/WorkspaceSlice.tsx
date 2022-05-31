@@ -193,17 +193,19 @@ export const workspaceSlice = createSlice({
         (value) => value.columnId === action.payload.columnId
       );
 
-      const taskToCopy = state.workspace[workspace].workspaceBoards[
+      const taskToCopyOriginal = state.workspace[workspace].workspaceBoards[
         board
       ].boardColumns[column].columnTasks.find(
         (task) => task.taskId === action.payload.taskId
       );
 
-      if (taskToCopy) {
-        state.workspace[workspace].workspaceBoards[board].boardColumns[
-          column
-        ].columnTasks.push(taskToCopy);
-      }
+      const taskToCopyClone = JSON.parse(JSON.stringify(taskToCopyOriginal));
+
+      taskToCopyClone.columnId = uuidv4();
+
+      state.workspace[workspace].workspaceBoards[board].boardColumns[
+        column
+      ].columnTasks.push(taskToCopyClone);
     },
 
     deleteTask: (

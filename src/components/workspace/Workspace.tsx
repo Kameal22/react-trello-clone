@@ -7,8 +7,8 @@ import { editWorkspace } from "../../redux/features/WorkspaceSlice";
 import { useSelector, useDispatch } from "react-redux";
 import EditWorkspaceDetails from "./EditWorkspaceDetails";
 import WorkspaceBoards from "./WorkspaceBoards";
-import CreateBoardPopUp from "../../utils/CreateBoardPopUp";
-import PopUp from "../../utils/PopUpMessage";
+import CreateBoardPopUp from "../popups/CreateBoardPopUp";
+import PopUp from "../popups/PopUpMessage";
 import { setPopUpMessage } from "../../redux/features/popUpSlice";
 
 const Workspace: React.FC = () => {

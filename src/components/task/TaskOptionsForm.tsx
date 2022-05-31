@@ -4,6 +4,8 @@ import { useDispatch } from "react-redux";
 
 interface OptionsFormInterface {
   showForm: () => void;
+  editLabels: () => void;
+  showDetails: () => void;
   workspaceId: string | undefined;
   boardId: string | undefined;
   columnId: string | undefined;
@@ -37,11 +39,21 @@ const TaskOptionsForm: React.FC<OptionsFormInterface> = (props) => {
     props.showForm();
   };
 
+  const showDetailsFunc = () => {
+    props.showDetails();
+    props.showForm();
+  };
+
+  const editLabelsFunc = () => {
+    props.editLabels();
+    props.showForm();
+  };
+
   return (
     <div className="taskOptionsFormDiv">
-      <p>Open task</p>
+      <p onClick={() => showDetailsFunc()}>Open task</p>
 
-      <p>Edit labels</p>
+      <p onClick={() => editLabelsFunc()}>Edit labels</p>
 
       <p onClick={() => copyTaskFunc()}>Copy task</p>
 

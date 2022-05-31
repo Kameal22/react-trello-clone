@@ -1,10 +1,10 @@
-import "../styles/popUpStyles/createBoardPopUp.css";
-import { colorChoices } from "../utils/BoardBgColorChoices";
+import "../../styles/popUpStyles/createBoardPopUp.css";
+import { colorChoices } from "../../utils/BoardBgColorChoices";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "../redux/Store";
-import { addBoard } from "../redux/features/WorkspaceSlice";
+import { RootState } from "../../redux/Store";
+import { addBoard } from "../../redux/features/WorkspaceSlice";
 import { useNavigate } from "react-router-dom";
 
 interface CreateBoardInterface {

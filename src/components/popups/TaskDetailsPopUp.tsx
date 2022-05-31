@@ -1,4 +1,4 @@
-import "../styles/popUpStyles/taskDetailsPopUp.css";
+import "../../styles/popUpStyles/taskDetailsPopUp.css";
 
 const TaskDetailsPopUp: React.FC = () => {
   return (

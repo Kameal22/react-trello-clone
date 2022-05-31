@@ -1,15 +1,15 @@
-import "../styles/popUpStyles/createWorkspacePopUp.css";
+import "../../styles/popUpStyles/createWorkspacePopUp.css";
 import { useEffect, useState } from "react";
-import { addWorkspace } from "../redux/features/WorkspaceSlice";
+import { addWorkspace } from "../../redux/features/WorkspaceSlice";
 import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "../redux/Store";
-import { date } from "../utils/GetDate";
-import { guestName } from "../utils/RandomizeGuestName";
-import { setPopUpMessage } from "../redux/features/popUpSlice";
+import { RootState } from "../../redux/Store";
+import { date } from "../../utils/GetDate";
+import { guestName } from "../../utils/RandomizeGuestName";
+import { setPopUpMessage } from "../../redux/features/popUpSlice";
 import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
-import { showDropdown } from "../redux/features/navigationSlice";
-import { generateRandomColor } from "../utils/GenerateRandomColor";
+import { showDropdown } from "../../redux/features/navigationSlice";
+import { generateRandomColor } from "../../utils/GenerateRandomColor";
 
 interface WorkspacePopUpProps {
   showCreateWorkspace: () => void;

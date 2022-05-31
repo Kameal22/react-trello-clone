@@ -1,8 +1,8 @@
 import "../../styles/landingPageStyles/landingPage.css";
 import Nav from "../nav/Nav";
-import PopUp from "../../utils/PopUpMessage";
+import PopUpMessage from "../popups/PopUpMessage";
 import MainSection from "../mainSection/MainSection";
-import CreateWorkspacePopUp from "../../utils/CreateWorkspacePopUp";
+import CreateWorkspacePopUp from "../popups/CreateWorkspacePopUp";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 
@@ -25,7 +25,7 @@ const LandingPage: React.FC = () => {
           <CreateWorkspacePopUp showCreateWorkspace={showWorkspaceCreation} />
         </div>
       ) : null}
-      <PopUp />
+      <PopUpMessage />
     </div>
   );
 };
