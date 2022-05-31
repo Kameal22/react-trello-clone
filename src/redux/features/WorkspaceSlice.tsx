@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction, current } from "@reduxjs/toolkit";
 import {
   WorkspaceInterface,
   BoardInterface,
@@ -95,20 +95,21 @@ export const workspaceSlice = createSlice({
         (value) => value.boardId === action.payload.boardId
       );
 
-      const columnToCopy = state.workspace[workspace].workspaceBoards[
+      const columnToCopyOriginal = state.workspace[workspace].workspaceBoards[
         board
       ].boardColumns.find(
         (column) => column.columnId === action.payload.columnId
       );
 
-      if (columnToCopy) {
-        columnToCopy.columnId = uuidv4(); //This changes ID of the copying one as well. It causes problems
-        console.log(columnToCopy.columnId)
+      const columnToCopyClone = JSON.parse(
+        JSON.stringify(columnToCopyOriginal)
+      );
 
-        state.workspace[workspace].workspaceBoards[board].boardColumns.push(
-          columnToCopy
-        );
-      }
+      columnToCopyClone.columnId = uuidv4();
+
+      state.workspace[workspace].workspaceBoards[board].boardColumns.push(
+        columnToCopyClone
+      );
     },
 
     deleteColumn: (
