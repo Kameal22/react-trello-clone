@@ -15,6 +15,13 @@ interface TaskDetailsInterface {
 }
 
 const TaskDetailsPopUp: React.FC<TaskDetailsInterface> = (props) => {
+  const [taskDescriptionForm, setTaskDescriptionForm] =
+    useState<boolean>(false);
+
+  const showDescriptionForm = () => {
+    setTaskDescriptionForm(!taskDescriptionForm);
+  };
+
   return (
     <div className="taskDetailsDiv">
       <div className="taskDetailsName">
@@ -36,14 +43,22 @@ const TaskDetailsPopUp: React.FC<TaskDetailsInterface> = (props) => {
 
       <div className="taskDetailsDescriptionDiv">
         <p className="taskDetailsDescriptionHeading">Description</p>
-        {props.taskDescription ? (
-          <p className="taskDetailsDescription">{props.taskDescription}</p>
+        {taskDescriptionForm ? (
+          <div>
+            <p
+              onClick={() => showDescriptionForm()}
+              className="taskDetailsDescription"
+            >
+              {props.taskDescription}
+            </p>
+          </div>
         ) : (
           <TaskDescriptionForm
             workspaceId={props.workspaceId}
             boardId={props.boardId}
             columnId={props.columnId}
             taskId={props.taskId}
+            showForm={showDescriptionForm}
           />
         )}
       </div>

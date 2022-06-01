@@ -4,6 +4,7 @@ import { addTaskDescription } from "../../redux/features/WorkspaceSlice";
 import { useDispatch } from "react-redux";
 
 interface TaskDescriptionFormInterface {
+  showForm: () => void;
   workspaceId: string | undefined;
   boardId: string | undefined;
   columnId: string | undefined;
@@ -31,6 +32,8 @@ const TaskDescriptionForm: React.FC<TaskDescriptionFormInterface> = (props) => {
         taskDescription,
       })
     );
+
+    props.showForm();
   };
 
   const dispatch = useDispatch();
@@ -44,6 +47,7 @@ const TaskDescriptionForm: React.FC<TaskDescriptionFormInterface> = (props) => {
       >
         <input
           className="taskDescriptionInput"
+          value={taskDescription}
           onChange={handleDescriptionChange}
           type="text"
           name="description"
