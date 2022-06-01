@@ -14,6 +14,7 @@ interface TaskProps {
   workspaceId: string | undefined;
   boardId: string | undefined;
   columnId: string | undefined;
+  columnName: string;
 }
 
 const Task: React.FC<TaskProps> = (props) => {
@@ -51,15 +52,8 @@ const Task: React.FC<TaskProps> = (props) => {
         ></div>
       ) : null}
 
-      <div onClick={() => showDetails()} className="taskDivName">
-        <p
-          style={
-            props.taskIndicatorColor
-              ? { marginTop: ".5vh" }
-              : { marginTop: "0" }
-          }
-          className="taskName"
-        >
+      <div className="taskDivName">
+        <p onClick={() => showDetails()} className="taskName">
           {props.taskName}
         </p>
       </div>
@@ -92,7 +86,15 @@ const Task: React.FC<TaskProps> = (props) => {
           chosenIndicator={props.taskIndicatorColor}
         />
       ) : null}
-      {taskDetails ? <TaskDetailsPopUp /> : null}
+      {taskDetails ? (
+        <TaskDetailsPopUp
+          taskName={props.taskName}
+          taskIndicator={props.taskIndicatorColor}
+          columnName={props.columnName}
+          showTaskDetails={showDetails}
+          taskDescription={props.taskDescription}
+        />
+      ) : null}
     </div>
   );
 };

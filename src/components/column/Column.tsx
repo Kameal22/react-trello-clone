@@ -73,6 +73,7 @@ const BoardColumn: React.FC<ColumnInterface> = (props) => {
             workspaceId={props.workspaceId}
             boardId={props.boardId}
             columnId={props.columnId}
+            columnName={props.columnName}
           />
         );
       })}
