@@ -8,6 +8,10 @@ interface TaskDetailsInterface {
   taskIndicator: string;
   taskDescription: string;
   columnName: string;
+  workspaceId: string | undefined;
+  boardId: string | undefined;
+  columnId: string | undefined;
+  taskId: string | undefined;
 }
 
 const TaskDetailsPopUp: React.FC<TaskDetailsInterface> = (props) => {
@@ -33,12 +37,14 @@ const TaskDetailsPopUp: React.FC<TaskDetailsInterface> = (props) => {
       <div className="taskDetailsDescriptionDiv">
         <p className="taskDetailsDescriptionHeading">Description</p>
         {props.taskDescription ? (
-          <p className="taskDetailsDescription">
-            Description goes here look its very cool OR FORM to enter a
-            description.
-          </p>
+          <p className="taskDetailsDescription">{props.taskDescription}</p>
         ) : (
-          <TaskDescriptionForm />
+          <TaskDescriptionForm
+            workspaceId={props.workspaceId}
+            boardId={props.boardId}
+            columnId={props.columnId}
+            taskId={props.taskId}
+          />
         )}
       </div>
 

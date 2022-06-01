@@ -88,6 +88,10 @@ const Task: React.FC<TaskProps> = (props) => {
       ) : null}
       {taskDetails ? (
         <TaskDetailsPopUp
+          workspaceId={props.workspaceId}
+          boardId={props.boardId}
+          columnId={props.columnId}
+          taskId={props.taskId}
           taskName={props.taskName}
           taskIndicator={props.taskIndicatorColor}
           columnName={props.columnName}

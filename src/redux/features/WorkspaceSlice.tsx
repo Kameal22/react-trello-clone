@@ -279,6 +279,41 @@ export const workspaceSlice = createSlice({
         column
       ].columnTasks[task].taskIndicatorColor = action.payload.taskIndicator;
     },
+
+    addTaskDescription: (
+      state,
+      action: PayloadAction<{
+        workspaceId: string | undefined;
+        boardId: string | undefined;
+        columnId: string | undefined;
+        taskId: string | undefined;
+        taskDescription: string;
+      }>
+    ) => {
+      const workspace = state.workspace.findIndex(
+        (value) => value.workspaceId === action.payload.workspaceId
+      );
+
+      const board = state.workspace[workspace].workspaceBoards.findIndex(
+        (value) => value.boardId === action.payload.boardId
+      );
+
+      const column = state.workspace[workspace].workspaceBoards[
+        board
+      ].boardColumns.findIndex(
+        (value) => value.columnId === action.payload.columnId
+      );
+
+      const task = state.workspace[workspace].workspaceBoards[
+        board
+      ].boardColumns[column].columnTasks.findIndex(
+        (task) => task.taskId === action.payload.taskId
+      );
+
+      state.workspace[workspace].workspaceBoards[board].boardColumns[
+        column
+      ].columnTasks[task].taskDescription = action.payload.taskDescription;
+    },
   },
 });
 
@@ -294,6 +329,7 @@ export const {
   deleteTask,
   copyTask,
   selectTaskLabel,
+  addTaskDescription,
 } = workspaceSlice.actions;
 
 export default workspaceSlice.reducer;
