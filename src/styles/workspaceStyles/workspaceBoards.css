@@ -8,6 +8,10 @@
     justify-content: space-between;
 }
 
+.workspaceBoardsHeading h4{
+    font-size: 1.2em
+}
+
 .showingBoards{
     margin-top: 5%;
     font-size: .85em;

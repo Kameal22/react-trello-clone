@@ -64,6 +64,8 @@
 .menuWorkspacesHeading i{
     margin-right: .4em;
     cursor: pointer;
+    padding: 2px 2px;
+    border-radius: 5px;
 }
 
 .menuWorkspacesHeading i:hover{

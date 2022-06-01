@@ -19,24 +19,12 @@
     margin-top: 0.5vh;
 }
 
-.editWorkspaceDiv{
-    max-width: 50%;
-    margin-top: 2vh;
-    border-radius: 5px;
-    padding: 8px 8px;
-    display: flex;
-    font-size: .8em;
-    color: rgb(36, 36, 36);
-    cursor: pointer;
-    background-color: rgba(212, 212, 212, 0.548);
-}
-
 .yourWorkspaceHeadingDivComponents{
     width: 30%;
     height: 24vh;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-evenly;
 }
 
 .workspaceOptions{
@@ -55,4 +43,20 @@
 .yourWorkspaceHeadingAndDescriptionDiv{
     display: flex;
     flex-direction: column;
+}
+
+.editWorkspaceDiv{
+    max-width: 50%;
+    margin-top: 2vh;
+    border-radius: 5px;
+    padding: 12px 12px;
+    display: flex;
+    font-size: .8em;
+    color: rgb(36, 36, 36);
+    cursor: pointer;
+    background-color: rgba(212, 212, 212, 0.548);
+}
+
+.editWorkspaceDiv:hover{
+    background-color: rgba(167, 167, 167, 0.548);
 }
