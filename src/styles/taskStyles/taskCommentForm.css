@@ -6,10 +6,10 @@
     border: 1px solid rgba(128, 128, 128, 0.295);
     background: #c5c5c50a;
     width: 100%;
-    padding-top: 5px;
-    padding-bottom: 20px;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 .taskCommentInput:hover{

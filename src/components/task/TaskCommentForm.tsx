@@ -37,6 +37,8 @@ const TaskCommentForm: React.FC<TaskCommentFormInterface> = (props) => {
         taskDate: date,
       })
     );
+
+    setTaskComment("");
   };
 
   return (

@@ -8,6 +8,7 @@
     background: white;
     width: 600px;
     height: 850px;
+    overflow-y: auto;
 }
 
 .taskDetailsName{
@@ -87,11 +88,20 @@
 }
 
 .taskDetailsWholeCommentDiv{
-    border: 1px solid red;
+    margin-top: 1vh;
 }
 
 .taskDetailsCommentAuthorAndDate{
-    border: 1px solid red;
+    display: flex;
+}
+
+.commentAuthor{
+    font-size: .9em;
+}
+
+.commentDate{
+    margin-left: 1em;
+    font-size: .8em;
 }
 
 .commentAuthor{
@@ -100,4 +110,24 @@
 
 .commentDate{
     color: grey;
+}
+
+.taskDetailsActivityCommentDiv{
+    padding-left: 5px;
+}
+
+.taskDetailsActivityCommentEditDelete{
+    display: flex;
+    font-weight: bold;
+    font-size: .8em;
+    margin-top: .5vh;
+    color: grey;
+}
+
+.commentDelete{
+    margin-left: 1em;
+}
+
+.taskDetailsActivityCommentEditDelete > p:hover{
+    color: black;
 }

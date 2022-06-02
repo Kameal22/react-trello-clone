@@ -103,6 +103,11 @@ const TaskDetailsPopUp: React.FC<TaskDetailsInterface> = (props) => {
                   {comment.taskComment}
                 </p>
               </div>
+
+              <div className="taskDetailsActivityCommentEditDelete">
+                <p className="commentEdit">Edit</p>
+                <p className="commentDelete">Delete</p>
+              </div>
             </div>
           );
         })}
