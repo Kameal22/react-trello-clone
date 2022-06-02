@@ -1,12 +1,15 @@
 import { useState } from "react";
 import "../../styles/popUpStyles/taskDetailsPopUp.css";
+import TaskCommentForm from "../task/TaskCommentForm";
 import TaskDescriptionForm from "../task/TaskDescriptionForm";
+import { TaskCommentsInterface } from "../../interfaces/WorkspaceInterface";
 
 interface TaskDetailsInterface {
   showTaskDetails: () => void;
   taskName: string;
   taskIndicator: string;
   taskDescription: string;
+  taskComments: TaskCommentsInterface[];
   columnName: string;
   workspaceId: string | undefined;
   boardId: string | undefined;
@@ -65,10 +68,26 @@ const TaskDetailsPopUp: React.FC<TaskDetailsInterface> = (props) => {
 
       <div className="taskDetailsActivityDiv">
         <p className="taskDetailsActivityHeading">Activity</p>
-        <p className="taskDetailsActivityComment">
-          Here is a comment on this task OR input to enter one. Each comment
-          should be a separate component with some logic like deleting etc.
-        </p>
+
+        <TaskCommentForm
+          workspaceId={props.workspaceId}
+          boardId={props.boardId}
+          columnId={props.columnId}
+          taskId={props.taskId}
+        />
+        {props.taskComments.map((comment) => {
+          return (
+            <div className="taskDetailsWholeCommentDiv">
+              <p>{comment.taskAuthor}</p>
+              <p>{comment.taskDate}</p>
+              <div className="taskDetailsActivityCommentDiv">
+                <p className="taskDetailsActivityComment">
+                  {comment.taskComment}
+                </p>
+              </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

@@ -14,6 +14,8 @@ interface TaskDescriptionFormInterface {
 const TaskDescriptionForm: React.FC<TaskDescriptionFormInterface> = (props) => {
   const [taskDescription, setTaskDescription] = useState<string>("");
 
+  const dispatch = useDispatch();
+
   const handleDescriptionChange = (
     e: React.FormEvent<HTMLInputElement>
   ): void => {
@@ -35,8 +37,6 @@ const TaskDescriptionForm: React.FC<TaskDescriptionFormInterface> = (props) => {
 
     props.showForm();
   };
-
-  const dispatch = useDispatch();
 
   return (
     <div className="taskDescriptionFormDiv">

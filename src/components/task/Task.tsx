@@ -94,6 +94,7 @@ const Task: React.FC<TaskProps> = (props) => {
           taskId={props.taskId}
           taskName={props.taskName}
           taskIndicator={props.taskIndicatorColor}
+          taskComments={props.taskComments}
           columnName={props.columnName}
           showTaskDetails={showDetails}
           taskDescription={props.taskDescription}

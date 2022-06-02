@@ -4,10 +4,10 @@
     left:50%; 
     transform:translate(-50%, -50%);
     border-radius: 5px;
-    z-index: 999;
+    z-index: 9999;
     background: white;
-    width: 500px;
-    height: 650px;
+    width: 600px;
+    height: 850px;
 }
 
 .taskDetailsName{
@@ -44,7 +44,9 @@
 
 .taskDetailsDescriptionDiv{
     width: 90%;
-    margin: 8vh auto;
+    margin-top: 6vh;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .taskDetailsDescriptionHeading{
@@ -64,7 +66,9 @@
 
 .taskDetailsActivityDiv{
     width: 90%;
-    margin: 8vh auto;
+    margin-top: 4vh;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .taskDetailsActivityHeading{
@@ -73,4 +77,11 @@
 
 .taskDetailsActivityComment{
     margin-top: 1vh;
+}
+
+.taskDetailsActivityCommentDiv{
+    border: 1px solid rgba(128, 128, 128, 0.295);
+    background: #c5c5c50a;
+    margin-top: 1vh;
+    padding-bottom: 10px;
 }
