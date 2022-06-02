@@ -85,3 +85,19 @@
     margin-top: 1vh;
     padding-bottom: 10px;
 }
+
+.taskDetailsWholeCommentDiv{
+    border: 1px solid red;
+}
+
+.taskDetailsCommentAuthorAndDate{
+    border: 1px solid red;
+}
+
+.commentAuthor{
+    font-weight: bold;
+}
+
+.commentDate{
+    color: grey;
+}

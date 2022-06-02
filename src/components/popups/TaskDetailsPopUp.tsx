@@ -3,6 +3,8 @@ import "../../styles/popUpStyles/taskDetailsPopUp.css";
 import TaskCommentForm from "../task/TaskCommentForm";
 import TaskDescriptionForm from "../task/TaskDescriptionForm";
 import { TaskCommentsInterface } from "../../interfaces/WorkspaceInterface";
+import { RootState } from "../../redux/Store";
+import { useSelector, useDispatch } from "react-redux";
 
 interface TaskDetailsInterface {
   showTaskDetails: () => void;
@@ -24,6 +26,14 @@ const TaskDetailsPopUp: React.FC<TaskDetailsInterface> = (props) => {
   const showDescriptionForm = () => {
     setTaskDescriptionForm(!taskDescriptionForm);
   };
+
+  const workspaces = useSelector(
+    (state: RootState) => state.workspace.workspace
+  );
+
+  const shownWorkspace = workspaces.find((workspace) => {
+    return workspace.workspaceId === props.workspaceId;
+  });
 
   return (
     <div className="taskDetailsDiv">
@@ -78,8 +88,16 @@ const TaskDetailsPopUp: React.FC<TaskDetailsInterface> = (props) => {
         {props.taskComments.map((comment) => {
           return (
             <div className="taskDetailsWholeCommentDiv">
-              <p>{comment.taskAuthor}</p>
-              <p>{comment.taskDate}</p>
+              <div className="taskDetailsCommentAuthorAndDate">
+                {comment.taskAuthor ? (
+                  <p className="commentAuthor">{comment.taskAuthor}</p>
+                ) : (
+                  <p className="commentAuthor">
+                    {shownWorkspace?.workspaceMember}
+                  </p>
+                )}
+                <p className="commentDate">{comment.taskDate}</p>
+              </div>
               <div className="taskDetailsActivityCommentDiv">
                 <p className="taskDetailsActivityComment">
                   {comment.taskComment}
