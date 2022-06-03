@@ -35,6 +35,9 @@ const TaskDetailsPopUp: React.FC<TaskDetailsInterface> = (props) => {
     return workspace.workspaceId === props.workspaceId;
   });
 
+  console.log(taskDescriptionForm);
+  console.log(props.taskDescription);
+
   return (
     <div className="taskDetailsDiv">
       <div className="taskDetailsName">
@@ -56,7 +59,7 @@ const TaskDetailsPopUp: React.FC<TaskDetailsInterface> = (props) => {
 
       <div className="taskDetailsDescriptionDiv">
         <p className="taskDetailsDescriptionHeading">Description</p>
-        {taskDescriptionForm ? (
+        {!taskDescriptionForm ? (
           <div>
             <p
               onClick={() => showDescriptionForm()}
