@@ -1,13 +1,16 @@
 import "../../styles/mainSectionStyles/mainSectionHighlights.css";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/Store";
+import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 interface TaskToShowInterface {
   message: string;
   label: string;
   board: string;
+  boardId: string;
   user: string;
+  workspace: string;
 }
 
 const MainSectionHighlights: React.FC = () => {
@@ -44,20 +47,34 @@ const MainSectionHighlights: React.FC = () => {
     const message = highlightedTask.taskName;
     const board = highlightedBoard.boardName;
     const user = highlightedWorkspace.workspaceMember;
+    const boardId = highlightedBoard.boardId;
+    const workspace = highlightedWorkspace.workspaceName;
 
-    const wholeTask = { label, message, board, user };
+    const wholeTask = { label, message, board, user, boardId, workspace };
 
     setTaskToShow(wholeTask);
   }, [highlightedWorkspace]);
+
+  console.log(taskToShow?.board);
+  console.log(taskToShow?.boardId);
 
   return (
     <div className="mainSectionHighlightsDiv">
       <h3>Highlights</h3>
 
       <div className="highlightsInfo">
-        <p className="highlightsInfoDescription">
-          Stay up to date with activity from your Workspaces and boards.
-        </p>
+        {highlightedWorkspace ? (
+          <p className="highlightsInfoDescription">
+            Stay up to date with activity from your Workspaces and boards.
+          </p>
+        ) : (
+          <p
+            style={{ fontWeight: "bold", textAlign: "center" }}
+            className="highlightsInfoDescription"
+          >
+            There are no highlights to show
+          </p>
+        )}
       </div>
 
       {highlightedWorkspace ? (
@@ -74,9 +91,14 @@ const MainSectionHighlights: React.FC = () => {
             className="highlightLabel"
           ></div>
           <p className="highlightMessage">{taskToShow?.message}</p>
-          <p className="highlightBoardInfo">
-            <span>from</span>: {taskToShow?.board}
-          </p>
+          <Link
+            className="workspaceMenuLink"
+            to={`/board/${taskToShow?.workspace}/${taskToShow?.boardId}`}
+          >
+            <p className="highlightBoardInfo">
+              <span>from</span>: {taskToShow?.board} <span>board</span>
+            </p>
+          </Link>
         </div>
       ) : null}
     </div>

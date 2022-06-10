@@ -21,6 +21,8 @@ const MainSectionBoards: React.FC = () => {
 
       <div className="mainSectionBoardsDivs">
         {recents.map((recentBoard) => {
+          console.log(recentBoard.boardWorkspace);
+          console.log(recentBoard.boardId);
           return (
             <div
               key={recentBoard.boardId}
