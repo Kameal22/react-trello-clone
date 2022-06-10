@@ -41,6 +41,8 @@
 .highlightBoardInfo{
     margin-top: 3vh;
     font-size: .8em;
+    cursor: pointer;
+    width: 30%;
 }
 
 .highlightBoardInfo span{
