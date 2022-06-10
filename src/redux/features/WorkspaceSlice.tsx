@@ -351,6 +351,47 @@ export const workspaceSlice = createSlice({
         column
       ].columnTasks[task].taskComments.push(action.payload);
     },
+
+    deleteTaskComment: (
+      state,
+      action: PayloadAction<{
+        workspaceId: string | undefined;
+        boardId: string | undefined;
+        columnId: string | undefined;
+        taskId: string | undefined;
+        taskComment: string;
+      }>
+    ) => {
+      const workspace = state.workspace.findIndex(
+        (value) => value.workspaceId === action.payload.workspaceId
+      );
+
+      const board = state.workspace[workspace].workspaceBoards.findIndex(
+        (value) => value.boardId === action.payload.boardId
+      );
+
+      const column = state.workspace[workspace].workspaceBoards[
+        board
+      ].boardColumns.findIndex(
+        (value) => value.columnId === action.payload.columnId
+      );
+
+      const task = state.workspace[workspace].workspaceBoards[
+        board
+      ].boardColumns[column].columnTasks.findIndex(
+        (task) => task.taskId === action.payload.taskId
+      );
+
+      const taskComment = state.workspace[workspace].workspaceBoards[
+        board
+      ].boardColumns[column].columnTasks[task].taskComments.findIndex(
+        (value) => value.taskComment === action.payload.taskComment
+      );
+
+      state.workspace[workspace].workspaceBoards[board].boardColumns[
+        column
+      ].columnTasks[task].taskComments.splice(taskComment, 1);
+    },
   },
 });
 
@@ -368,6 +409,7 @@ export const {
   selectTaskLabel,
   addTaskDescription,
   addTaskComment,
+  deleteTaskComment,
 } = workspaceSlice.actions;
 
 export default workspaceSlice.reducer;

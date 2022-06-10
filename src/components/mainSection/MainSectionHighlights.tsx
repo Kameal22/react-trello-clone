@@ -55,9 +55,6 @@ const MainSectionHighlights: React.FC = () => {
     setTaskToShow(wholeTask);
   }, [highlightedWorkspace]);
 
-  console.log(taskToShow?.board);
-  console.log(taskToShow?.boardId);
-
   return (
     <div className="mainSectionHighlightsDiv">
       <h3>Highlights</h3>

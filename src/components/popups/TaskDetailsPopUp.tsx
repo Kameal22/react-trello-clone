@@ -5,6 +5,7 @@ import TaskDescriptionForm from "../task/TaskDescriptionForm";
 import { TaskCommentsInterface } from "../../interfaces/WorkspaceInterface";
 import { RootState } from "../../redux/Store";
 import { useSelector, useDispatch } from "react-redux";
+import { deleteTaskComment } from "../../redux/features/WorkspaceSlice";
 
 interface TaskDetailsInterface {
   showTaskDetails: () => void;
@@ -20,11 +21,24 @@ interface TaskDetailsInterface {
 }
 
 const TaskDetailsPopUp: React.FC<TaskDetailsInterface> = (props) => {
-  const [taskDescriptionForm, setTaskDescriptionForm] =
-    useState<boolean>(false);
+  const [taskDescriptionForm, setTaskDescriptionForm] = useState<boolean>(true);
+
+  const dispatch = useDispatch();
 
   const showDescriptionForm = () => {
     setTaskDescriptionForm(!taskDescriptionForm);
+  };
+
+  const deleteComment = (taskComment: string) => {
+    dispatch(
+      deleteTaskComment({
+        workspaceId: props.workspaceId,
+        boardId: props.boardId,
+        columnId: props.columnId,
+        taskId: props.taskId,
+        taskComment,
+      })
+    );
   };
 
   const workspaces = useSelector(
@@ -34,9 +48,6 @@ const TaskDetailsPopUp: React.FC<TaskDetailsInterface> = (props) => {
   const shownWorkspace = workspaces.find((workspace) => {
     return workspace.workspaceId === props.workspaceId;
   });
-
-  console.log(taskDescriptionForm);
-  console.log(props.taskDescription);
 
   return (
     <div className="taskDetailsDiv">
@@ -59,7 +70,7 @@ const TaskDetailsPopUp: React.FC<TaskDetailsInterface> = (props) => {
 
       <div className="taskDetailsDescriptionDiv">
         <p className="taskDetailsDescriptionHeading">Description</p>
-        {!taskDescriptionForm ? (
+        {props.taskDescription.length > 0 ? (
           <div>
             <p
               onClick={() => showDescriptionForm()}
@@ -109,7 +120,12 @@ const TaskDetailsPopUp: React.FC<TaskDetailsInterface> = (props) => {
 
               <div className="taskDetailsActivityCommentEditDelete">
                 <p className="commentEdit">Edit</p>
-                <p className="commentDelete">Delete</p>
+                <p
+                  onClick={() => deleteComment(comment.taskComment)}
+                  className="commentDelete"
+                >
+                  Delete
+                </p>
               </div>
             </div>
           );
