@@ -392,6 +392,49 @@ export const workspaceSlice = createSlice({
         column
       ].columnTasks[task].taskComments.splice(taskComment, 1);
     },
+
+    editTaskComment: (
+      state,
+      action: PayloadAction<{
+        workspaceId: string | undefined;
+        boardId: string | undefined;
+        columnId: string | undefined;
+        taskId: string | undefined;
+        taskComment: string;
+        newComment: string;
+      }>
+    ) => {
+      const workspace = state.workspace.findIndex(
+        (value) => value.workspaceId === action.payload.workspaceId
+      );
+
+      const board = state.workspace[workspace].workspaceBoards.findIndex(
+        (value) => value.boardId === action.payload.boardId
+      );
+
+      const column = state.workspace[workspace].workspaceBoards[
+        board
+      ].boardColumns.findIndex(
+        (value) => value.columnId === action.payload.columnId
+      );
+
+      const task = state.workspace[workspace].workspaceBoards[
+        board
+      ].boardColumns[column].columnTasks.findIndex(
+        (task) => task.taskId === action.payload.taskId
+      );
+
+      const taskComment = state.workspace[workspace].workspaceBoards[
+        board
+      ].boardColumns[column].columnTasks[task].taskComments.findIndex(
+        (value) => value.taskComment === action.payload.taskComment
+      );
+
+      state.workspace[workspace].workspaceBoards[board].boardColumns[
+        column
+      ].columnTasks[task].taskComments[taskComment].taskComment =
+        action.payload.newComment;
+    },
   },
 });
 
@@ -410,6 +453,7 @@ export const {
   addTaskDescription,
   addTaskComment,
   deleteTaskComment,
+  editTaskComment,
 } = workspaceSlice.actions;
 
 export default workspaceSlice.reducer;

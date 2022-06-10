@@ -6,6 +6,7 @@ import { TaskCommentsInterface } from "../../interfaces/WorkspaceInterface";
 import { RootState } from "../../redux/Store";
 import { useSelector, useDispatch } from "react-redux";
 import { deleteTaskComment } from "../../redux/features/WorkspaceSlice";
+import EditTaskCommentForm from "../task/EditTaskCommentForm";
 
 interface TaskDetailsInterface {
   showTaskDetails: () => void;
@@ -21,13 +22,8 @@ interface TaskDetailsInterface {
 }
 
 const TaskDetailsPopUp: React.FC<TaskDetailsInterface> = (props) => {
-  const [taskDescriptionForm, setTaskDescriptionForm] = useState<boolean>(true);
-
+  const [commentEditting, setCommentEdditing] = useState<boolean>(false);
   const dispatch = useDispatch();
-
-  const showDescriptionForm = () => {
-    setTaskDescriptionForm(!taskDescriptionForm);
-  };
 
   const deleteComment = (taskComment: string) => {
     dispatch(
@@ -72,12 +68,7 @@ const TaskDetailsPopUp: React.FC<TaskDetailsInterface> = (props) => {
         <p className="taskDetailsDescriptionHeading">Description</p>
         {props.taskDescription.length > 0 ? (
           <div>
-            <p
-              onClick={() => showDescriptionForm()}
-              className="taskDetailsDescription"
-            >
-              {props.taskDescription}
-            </p>
+            <p className="taskDetailsDescription">{props.taskDescription}</p>
           </div>
         ) : (
           <TaskDescriptionForm
@@ -85,7 +76,6 @@ const TaskDetailsPopUp: React.FC<TaskDetailsInterface> = (props) => {
             boardId={props.boardId}
             columnId={props.columnId}
             taskId={props.taskId}
-            showForm={showDescriptionForm}
           />
         )}
       </div>
@@ -99,6 +89,7 @@ const TaskDetailsPopUp: React.FC<TaskDetailsInterface> = (props) => {
           columnId={props.columnId}
           taskId={props.taskId}
         />
+
         {props.taskComments.map((comment) => {
           return (
             <div className="taskDetailsWholeCommentDiv">
@@ -112,14 +103,29 @@ const TaskDetailsPopUp: React.FC<TaskDetailsInterface> = (props) => {
                 )}
                 <p className="commentDate">{comment.taskDate}</p>
               </div>
-              <div className="taskDetailsActivityCommentDiv">
-                <p className="taskDetailsActivityComment">
-                  {comment.taskComment}
-                </p>
-              </div>
+              {commentEditting ? (
+                <EditTaskCommentForm
+                  workspaceId={props.workspaceId}
+                  boardId={props.boardId}
+                  columnId={props.columnId}
+                  taskId={props.taskId}
+                  taskComment={comment.taskComment}
+                />
+              ) : (
+                <div className="taskDetailsActivityCommentDiv">
+                  <p className="taskDetailsActivityComment">
+                    {comment.taskComment}
+                  </p>
+                </div>
+              )}
 
               <div className="taskDetailsActivityCommentEditDelete">
-                <p className="commentEdit">Edit</p>
+                <p
+                  onClick={() => setCommentEdditing(true)}
+                  className="commentEdit"
+                >
+                  Edit
+                </p>
                 <p
                   onClick={() => deleteComment(comment.taskComment)}
                   className="commentDelete"
