@@ -29,31 +29,33 @@ const MainSectionHighlights: React.FC = () => {
     }
 
     const highlightedBoard =
-      highlightedWorkspace.workspaceBoards[
-        Math.floor(Math.random() * highlightedWorkspace.workspaceBoards.length)
+      highlightedWorkspace?.workspaceBoards[
+      Math.floor(Math.random() * highlightedWorkspace.workspaceBoards.length)
       ];
 
     const highlightedColumn =
-      highlightedBoard.boardColumns[
-        Math.floor(Math.random() * highlightedBoard.boardColumns.length)
+      highlightedBoard?.boardColumns[
+      Math.floor(Math.random() * highlightedBoard.boardColumns.length)
       ];
 
     const highlightedTask =
-      highlightedColumn.columnTasks[
-        Math.floor(Math.random() * highlightedColumn.columnTasks.length)
+      highlightedColumn?.columnTasks[
+      Math.floor(Math.random() * highlightedColumn.columnTasks.length)
       ];
 
-    const label = highlightedTask.taskIndicatorColor;
-    const message = highlightedTask.taskName;
-    const board = highlightedBoard.boardName;
-    const user = highlightedWorkspace.workspaceMember;
-    const boardId = highlightedBoard.boardId;
-    const workspace = highlightedWorkspace.workspaceName;
+    const label = highlightedTask?.taskIndicatorColor;
+    const message = highlightedTask?.taskName;
+    const board = highlightedBoard?.boardName;
+    const user = highlightedWorkspace?.workspaceMember;
+    const boardId = highlightedBoard?.boardId;
+    const workspace = highlightedWorkspace?.workspaceName;
 
     const wholeTask = { label, message, board, user, boardId, workspace };
 
     setTaskToShow(wholeTask);
   }, [highlightedWorkspace]);
+
+  console.log(taskToShow)
 
   return (
     <div className="mainSectionHighlightsDiv">
@@ -74,7 +76,7 @@ const MainSectionHighlights: React.FC = () => {
         )}
       </div>
 
-      {highlightedWorkspace ? (
+      {taskToShow?.message ? (
         <div className="highlight">
           <p className="highlightUser">{taskToShow?.user}</p>
           <div

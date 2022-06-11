@@ -22,7 +22,7 @@ interface TaskDetailsInterface {
 }
 
 const TaskDetailsPopUp: React.FC<TaskDetailsInterface> = (props) => {
-  const [commentEditting, setCommentEdditing] = useState<boolean>(false);
+  const [commentToEdit, setCommentToEdit] = useState<string>("");
   const dispatch = useDispatch();
 
   const deleteComment = (taskComment: string) => {
@@ -92,7 +92,7 @@ const TaskDetailsPopUp: React.FC<TaskDetailsInterface> = (props) => {
 
         {props.taskComments.map((comment) => {
           return (
-            <div className="taskDetailsWholeCommentDiv">
+            <div key={comment.columnId} className="taskDetailsWholeCommentDiv">
               <div className="taskDetailsCommentAuthorAndDate">
                 {comment.taskAuthor ? (
                   <p className="commentAuthor">{comment.taskAuthor}</p>
@@ -103,13 +103,14 @@ const TaskDetailsPopUp: React.FC<TaskDetailsInterface> = (props) => {
                 )}
                 <p className="commentDate">{comment.taskDate}</p>
               </div>
-              {commentEditting ? (
+              {commentToEdit === comment.taskComment ? (
                 <EditTaskCommentForm
                   workspaceId={props.workspaceId}
                   boardId={props.boardId}
                   columnId={props.columnId}
                   taskId={props.taskId}
                   taskComment={comment.taskComment}
+                  setEditing={() => setCommentToEdit("")}
                 />
               ) : (
                 <div className="taskDetailsActivityCommentDiv">
@@ -121,7 +122,7 @@ const TaskDetailsPopUp: React.FC<TaskDetailsInterface> = (props) => {
 
               <div className="taskDetailsActivityCommentEditDelete">
                 <p
-                  onClick={() => setCommentEdditing(true)}
+                  onClick={() => setCommentToEdit(comment.taskComment)}
                   className="commentEdit"
                 >
                   Edit

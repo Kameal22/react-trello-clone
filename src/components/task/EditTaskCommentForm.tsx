@@ -9,6 +9,7 @@ interface EditTaskCommentInterface {
   columnId: string | undefined;
   taskId: string | undefined;
   taskComment: string;
+  setEditing: (comment: string) => void;
 }
 
 const EditTaskCommentForm: React.FC<EditTaskCommentInterface> = (props) => {
@@ -24,7 +25,18 @@ const EditTaskCommentForm: React.FC<EditTaskCommentInterface> = (props) => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-  };
+
+    dispatch(editTaskComment({
+      workspaceId: props.workspaceId,
+      boardId: props.boardId,
+      columnId: props.columnId,
+      taskId: props.taskId,
+      taskComment: props.taskComment,
+      newComment: taskComment
+    }))
+
+    props.setEditing("")
+  }
 
   return (
     <div className="taskCommentFormDiv">
