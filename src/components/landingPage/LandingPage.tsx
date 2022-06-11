@@ -3,8 +3,10 @@ import Nav from "../nav/Nav";
 import PopUpMessage from "../popups/PopUpMessage";
 import MainSection from "../mainSection/MainSection";
 import CreateWorkspacePopUp from "../popups/CreateWorkspacePopUp";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../../redux/Store";
+import { showDropdown } from "../../redux/features/navigationSlice";
 
 const LandingPage: React.FC = () => {
   const [createWorkspacePopUp, setCreateWorkspacePopUp] =
@@ -15,6 +17,10 @@ const LandingPage: React.FC = () => {
   const showWorkspaceCreation = () => {
     setCreateWorkspacePopUp(!createWorkspacePopUp);
   };
+
+  const dropdown = useSelector(
+    (state: RootState) => state.dropdown.navDropdown
+  );
 
   return (
     <div className="landingPageDiv">
