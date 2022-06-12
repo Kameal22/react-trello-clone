@@ -28,12 +28,15 @@ export const recentlyViewedSlice = createSlice({
       }
     },
 
-    deleteRecentlyViewed: (state) => {
-      state.recentlyViewed = [];
+    removeRecentlyViewedThatWasDeleted: (state, action: PayloadAction<{ boardsWorkspaceName: string }>) => {
+
+      const filtered = state.recentlyViewed.filter(board => board.boardWorkspace !== action.payload.boardsWorkspaceName);
+
+      state.recentlyViewed = filtered
     },
   },
 });
 
-export const { addRecentlyViewed, deleteRecentlyViewed } = recentlyViewedSlice.actions;
+export const { addRecentlyViewed, removeRecentlyViewedThatWasDeleted } = recentlyViewedSlice.actions;
 
 export default recentlyViewedSlice.reducer;

@@ -4,15 +4,16 @@ import NavWorkspaces from "./navMenu/WorkspaceMenu";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../redux/Store";
 import NavRecent from "./navMenu/RecentMenu";
-import NavStarred from "./navMenu/StarredMenu";
 import NavSearchBar from "./NavSearch";
 import Register from "./NavRegister";
 import { showDropdown, changeColor } from "../../redux/features/navigationSlice";
 import NavUserMenu from "./navMenu/UserMenu";
 import { Link } from "react-router-dom";
+import CreateMenu from "./navMenu/CreateMenu";
 
 interface NavProps {
   showCreateWorkspace: () => void;
+  showCreateBoard: () => void;
 }
 
 const Nav: React.FC<NavProps> = (props) => {
@@ -64,16 +65,16 @@ const Nav: React.FC<NavProps> = (props) => {
         {dropdown === "recent" ? <NavRecent /> : null}
         <div
           onClick={
-            dropdown === "starred"
+            dropdown === "create"
               ? () => setDropdown("")
-              : () => setDropdown("starred")
+              : () => setDropdown("create")
           }
           className="navigationStarred"
         >
-          <h5>Starred</h5>
+          <h5>Create</h5>
           <i className="bi bi-chevron-down"></i>
         </div>
-        {dropdown === "starred" ? <NavStarred /> : null}
+        {dropdown === "create" ? <CreateMenu showCreateBoard={props.showCreateBoard} showCreateWorkspace={props.showCreateWorkspace} /> : null}
       </div>
 
       <div className="navigationRightSide">

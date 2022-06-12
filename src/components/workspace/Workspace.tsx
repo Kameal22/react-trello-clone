@@ -9,7 +9,6 @@ import EditWorkspaceDetails from "./EditWorkspaceDetails";
 import WorkspaceBoards from "./WorkspaceBoards";
 import CreateBoardPopUp from "../popups/CreateBoardPopUp";
 import PopUp from "../popups/PopUpMessage";
-import { setPopUpMessage } from "../../redux/features/popUpSlice";
 import { useNavigate } from "react-router-dom";
 
 const Workspace: React.FC = () => {
@@ -39,10 +38,6 @@ const Workspace: React.FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const setMessage = (message: string) => {
-    dispatch(setPopUpMessage({ message }));
-  };
-
   const showBoardCreating = () => {
     setBoardCreating(!boardCreating);
   };
@@ -65,10 +60,9 @@ const Workspace: React.FC = () => {
 
   return (
     <div className="yourWorkspaceDiv">
-      <Nav showCreateWorkspace={showWorkspaceCreation} />
+      <Nav showCreateBoard={showBoardCreating} showCreateWorkspace={showWorkspaceCreation} />
       {boardCreating ? (
         <CreateBoardPopUp
-          setPopUpMessage={setMessage}
           setBoardCreating={showBoardCreating}
         />
       ) : null}

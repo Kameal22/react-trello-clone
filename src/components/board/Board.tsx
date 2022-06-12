@@ -12,6 +12,7 @@ import { changeColor } from "../../redux/features/navigationSlice";
 const Board: React.FC = () => {
   const [createWorkspacePopUp, setCreateWorkspacePopUp] =
     useState<boolean>(false);
+  const [boardCreating, setBoardCreating] = useState<boolean>(false);
 
   const { workspaceName, boardId } = useParams();
 
@@ -52,12 +53,16 @@ const Board: React.FC = () => {
     setCreateWorkspacePopUp(!createWorkspacePopUp);
   };
 
+  const showBoardCreation = () => {
+    setBoardCreating(!boardCreating)
+  }
+
   return (
     <div
       style={{ background: `${shownBoard?.boardBackground}` }}
       className="boardDivBOARD"
     >
-      <Nav showCreateWorkspace={showWorkspaceCreation} />
+      <Nav showCreateBoard={showBoardCreation} showCreateWorkspace={showWorkspaceCreation} />
       <div className="boardHeadingBOARD">
         <h3 className="boardNameBOARD">
           board: {shownBoard?.boardName}

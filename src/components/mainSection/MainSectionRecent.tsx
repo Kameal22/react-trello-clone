@@ -3,7 +3,6 @@ import { RootState } from "../../redux/Store";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
-import { deleteRecentlyViewed } from "../../redux/features/recentlyViewedSlice";
 
 const MainSectionRecent: React.FC = () => {
   const dispatch = useDispatch()
@@ -15,10 +14,6 @@ const MainSectionRecent: React.FC = () => {
   const recents = useSelector(
     (state: RootState) => state.recents.recentlyViewed
   );
-
-  useEffect(() => {
-    dispatch(deleteRecentlyViewed())
-  }, [workspaces])
 
   return (
     <div className="mainSectionRecentDiv">

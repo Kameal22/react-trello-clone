@@ -9,7 +9,6 @@ import { useNavigate } from "react-router-dom";
 
 interface CreateBoardInterface {
   setBoardCreating: () => void;
-  setPopUpMessage: (message: string) => void;
 }
 
 const CreateBoardPopUp: React.FC<CreateBoardInterface> = (props) => {

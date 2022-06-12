@@ -6,10 +6,12 @@ import CreateWorkspacePopUp from "../popups/CreateWorkspacePopUp";
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { changeColor } from "../../redux/features/navigationSlice";
+import CreateBoardPopUp from "../popups/CreateBoardPopUp";
 
 const LandingPage: React.FC = () => {
   const [createWorkspacePopUp, setCreateWorkspacePopUp] =
     useState<boolean>(false);
+  const [boardCreating, setBoardCreating] = useState<boolean>(false);
 
   useEffect(() => {
     dispatch(
@@ -17,9 +19,13 @@ const LandingPage: React.FC = () => {
         color: "#3cc384"
       })
     )
-  }, [])
+  }, []) // Change color to original after leaving a board.
 
   const dispatch = useDispatch();
+
+  const showBoardCreating = () => {
+    setBoardCreating(!boardCreating);
+  };
 
   const showWorkspaceCreation = () => {
     setCreateWorkspacePopUp(!createWorkspacePopUp);
@@ -27,13 +33,14 @@ const LandingPage: React.FC = () => {
 
   return (
     <div className="landingPageDiv">
-      <Nav showCreateWorkspace={showWorkspaceCreation} />
+      <Nav showCreateBoard={showBoardCreating} showCreateWorkspace={showWorkspaceCreation} />
       <MainSection showCreateWorkspace={showWorkspaceCreation} />
       {createWorkspacePopUp ? (
         <div>
           <CreateWorkspacePopUp showCreateWorkspace={showWorkspaceCreation} />
         </div>
       ) : null}
+      {boardCreating ? <CreateBoardPopUp setBoardCreating={showBoardCreating} /> : null}
       <PopUpMessage />
     </div>
   );

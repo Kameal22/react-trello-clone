@@ -1,4 +1,4 @@
-.navStarredDiv{
+.navCreateDiv{
     display: flex;
     flex-direction: column;
     position: absolute;
@@ -15,7 +15,7 @@
     z-index: 999;
 }
 
-.navStarredHeading{
+.navCreateHeading{
     border-bottom: 1px solid rgba(221, 224, 251, 0.664);
     width: 85%;
     display: flex;
@@ -26,19 +26,19 @@
     font-size: .9em;
 }
 
-.navStarredChoices{
+.navCreateChoices{
     display: flex;
     flex-direction: column;
     width: 85%;
 }
 
-.navStarredItems{
+.navCreateItems{
     display: flex;
     flex-direction: column;
     width: 100%;
 }
 
-.navStarredItemHeading{
+.navCreateItemHeading{
     margin-top: 1vh;
     font-size: .95em;
     width: 100%;
@@ -49,6 +49,6 @@
     font-weight: bold;
 }
 
-.navStarredItemHeading:hover{
+.navCreateItemHeading:hover{
     background-color: rgba(223, 223, 223, 0.541);
 }
