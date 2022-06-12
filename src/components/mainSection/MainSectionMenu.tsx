@@ -1,7 +1,7 @@
 import "../../styles/mainSectionStyles/mainSectionMenu.css";
 import { RootState } from "../../redux/Store";
 import { useDispatch, useSelector } from "react-redux";
-import { showWorkspaceDropdown } from "../../redux/features/WorkspaceSlice";
+import { showWorkspaceDropdown, deleteWorkspace } from "../../redux/features/WorkspaceSlice";
 import { Link } from "react-router-dom";
 
 interface MainSectionProps {
@@ -22,6 +22,14 @@ const MainSectionMenu: React.FC<MainSectionProps> = (props) => {
   };
 
   const isWorkspace = workspaces[0];
+
+  const deleteWorkspaceFunc = (workspaceId: string) => {
+    dispatch(
+      deleteWorkspace({
+        workspaceId: workspaceId
+      })
+    )
+  }
 
   return (
     <div className="mainSectionMenuDiv">
@@ -87,12 +95,12 @@ const MainSectionMenu: React.FC<MainSectionProps> = (props) => {
                     </Link>
                   </div>
                   <div className="workspaceOption">
-                    <i className="bi bi-suit-heart"></i>
-                    <p className="menuBoardsDescription">Highlights</p>
-                  </div>
-                  <div className="workspaceOption">
                     <i className="bi bi-gear"></i>
                     <p className="menuBoardsDescription">Settings</p>
+                  </div>
+                  <div className="workspaceOption">
+                    <i className="bi bi-trash"></i>
+                    <p onClick={() => deleteWorkspaceFunc((workspace.workspaceId))} className="menuBoardsDescription">Delete</p>
                   </div>
                 </div>
               ) : null}

@@ -7,17 +7,30 @@ import { useSelector, useDispatch } from "react-redux";
 import { addRecentlyViewed } from "../../redux/features/recentlyViewedSlice";
 import BoardColumn from "../column/Column";
 import AddColumnForm from "../column/AddColumnForm";
+import { changeColor } from "../../redux/features/navigationSlice";
 
 const Board: React.FC = () => {
   const [createWorkspacePopUp, setCreateWorkspacePopUp] =
     useState<boolean>(false);
 
   const { workspaceName, boardId } = useParams();
+
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (shownBoard) dispatch(addRecentlyViewed(shownBoard));
+    if (shownBoard) {
+      dispatch(addRecentlyViewed(shownBoard))
+      changeColorFunc(shownBoard.boardBackground)
+    }
   }, []);
+
+  const changeColorFunc = (color: string) => {
+    dispatch(
+      changeColor({
+        color: color
+      })
+    )
+  }
 
   const workspaces = useSelector(
     (state: RootState) => state.workspace.workspace

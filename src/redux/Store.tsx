@@ -10,7 +10,7 @@ import thunk from 'redux-thunk';
 
 const reducers = combineReducers({
   users: registeredUsersReducer,
-  dropdown: navigationReducer,
+  nav: navigationReducer,
   message: popUpReducer,
   workspace: workspaceReducer,
   recents: recentlyViewedReducer

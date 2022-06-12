@@ -39,6 +39,18 @@ export const workspaceSlice = createSlice({
           action.payload.description;
       }
     },
+    deleteWorkspace: (
+      state,
+      action: PayloadAction<{
+        workspaceId: string | undefined;
+      }>
+    ) => {
+      const workspace = state.workspace.findIndex(
+        (value) => value.workspaceId === action.payload.workspaceId
+      );
+
+      state.workspace.splice(workspace, 1)
+    },
     showWorkspaceDropdown: (state, action: PayloadAction<{ id: string }>) => {
       const workspaceWithShownDropdown = state.workspace.findIndex(
         (value) => value.workspaceId === action.payload.id
@@ -440,6 +452,7 @@ export const workspaceSlice = createSlice({
 
 export const {
   addWorkspace,
+  deleteWorkspace,
   showWorkspaceDropdown,
   editWorkspace,
   addBoard,

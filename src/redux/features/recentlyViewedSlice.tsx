@@ -27,9 +27,13 @@ export const recentlyViewedSlice = createSlice({
         }
       }
     },
+
+    deleteRecentlyViewed: (state) => {
+      state.recentlyViewed = [];
+    },
   },
 });
 
-export const { addRecentlyViewed } = recentlyViewedSlice.actions;
+export const { addRecentlyViewed, deleteRecentlyViewed } = recentlyViewedSlice.actions;
 
 export default recentlyViewedSlice.reducer;

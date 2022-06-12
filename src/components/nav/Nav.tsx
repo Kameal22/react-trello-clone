@@ -7,7 +7,7 @@ import NavRecent from "./navMenu/RecentMenu";
 import NavStarred from "./navMenu/StarredMenu";
 import NavSearchBar from "./NavSearch";
 import Register from "./NavRegister";
-import { showDropdown } from "../../redux/features/navigationSlice";
+import { showDropdown, changeColor } from "../../redux/features/navigationSlice";
 import NavUserMenu from "./navMenu/UserMenu";
 import { Link } from "react-router-dom";
 
@@ -21,15 +21,17 @@ const Nav: React.FC<NavProps> = (props) => {
   const user = useSelector((state: RootState) => state.users.user);
 
   const dropdown = useSelector(
-    (state: RootState) => state.dropdown.navDropdown
+    (state: RootState) => state.nav.navDropdown
   );
+
+  const navColor = useSelector((state: RootState) => state.nav.navColor);
 
   const setDropdown = (dropdownItem: string) => {
     dispatch(showDropdown({ dropdownItem }));
   };
 
   return (
-    <div className="navigationDiv">
+    <div style={{ background: navColor }} className="navigationDiv">
       <div className="navigationLeftSide">
         <Link to="/" className="logoLink">
           <h3 className="navigationLogo">Trello</h3>
