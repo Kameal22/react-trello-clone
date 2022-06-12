@@ -2,7 +2,7 @@ import "../../styles/workspaceStyles/workspace.css";
 import { useParams } from "react-router-dom";
 import { RootState } from "../../redux/Store";
 import Nav from "../nav/Nav";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { editWorkspace } from "../../redux/features/WorkspaceSlice";
 import { useSelector, useDispatch } from "react-redux";
 import EditWorkspaceDetails from "./EditWorkspaceDetails";
@@ -10,6 +10,7 @@ import WorkspaceBoards from "./WorkspaceBoards";
 import CreateBoardPopUp from "../popups/CreateBoardPopUp";
 import PopUp from "../popups/PopUpMessage";
 import { setPopUpMessage } from "../../redux/features/popUpSlice";
+import { useNavigate } from "react-router-dom";
 
 const Workspace: React.FC = () => {
   const [createWorkspacePopUp, setCreateWorkspacePopUp] =
@@ -17,12 +18,18 @@ const Workspace: React.FC = () => {
   const [workspaceEditing, setWorkspaceEditing] = useState<boolean>(false);
   const [boardCreating, setBoardCreating] = useState<boolean>(false);
 
-  const { workspaceId } = useParams(); //This gives you ID of workspace showing in the component
-
   const workspaces = useSelector(
     // These are all workspaces from redux store
     (state: RootState) => state.workspace.workspace
   );
+
+  useEffect(() => {
+    if (workspaces.length < 1) {
+      navigate('/', { replace: true });
+    }
+  }, [workspaces])
+
+  const { workspaceId } = useParams(); //This gives you ID of workspace showing in the component
 
   const shownWorkspace = workspaces.find((workspace) => {
     //And this is the specific workspace that is viewed in component found by this ID up above.
@@ -30,6 +37,7 @@ const Workspace: React.FC = () => {
   });
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const setMessage = (message: string) => {
     dispatch(setPopUpMessage({ message }));

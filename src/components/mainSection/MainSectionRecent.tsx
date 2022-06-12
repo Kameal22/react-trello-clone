@@ -31,7 +31,7 @@ const MainSectionRecent: React.FC = () => {
 
               <div className="mainRecentTextDiv">
                 <p className="recentBoardName">{board.boardName}</p>
-                <p className="recentBoardDescription">Trello-clone</p>
+                <p className="recentBoardDescription">{board.boardWorkspace}</p>
               </div>
             </div>
           </Link>
