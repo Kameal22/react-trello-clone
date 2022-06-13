@@ -38,6 +38,7 @@
 .taskDetailsLabel{
     width: 90%;
     margin: 4vh auto;
+    position: relative;
 }
 
 .taskDetailsLabelDivWithColor{
@@ -45,6 +46,30 @@
     height: 30px;
     border-radius: 5px;
     margin-top: 1vh;
+}
+
+.taskDetailsLabelDivs{
+    display: flex;
+    justify-content: space-around;
+    width: 16%;
+}
+
+.taskDetailAddLabelDiv{
+    width: 40px;
+    height: 30px;
+    border-radius: 5px;
+    margin-top: 1vh;
+    background-color: #040c1b2a;
+    position: relative;
+}
+
+#addLabelPlus{
+    position: absolute;
+    left: 46%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    color: black;
+    font-size: 1.2em;
 }
 
 .taskDetailsDescriptionDiv{

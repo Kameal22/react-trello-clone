@@ -7,6 +7,7 @@ import { RootState } from "../../redux/Store";
 import { useSelector, useDispatch } from "react-redux";
 import { deleteTaskComment } from "../../redux/features/WorkspaceSlice";
 import EditTaskCommentForm from "../task/EditTaskCommentForm";
+import CreateLabelPopUp from "./CreateLabelPopUp";
 
 interface TaskDetailsInterface {
   showTaskDetails: () => void;
@@ -23,6 +24,8 @@ interface TaskDetailsInterface {
 
 const TaskDetailsPopUp: React.FC<TaskDetailsInterface> = (props) => {
   const [commentToEdit, setCommentToEdit] = useState<string>("");
+  const [labelCreating, setLabelCreating] = useState<boolean>(false);
+
   const dispatch = useDispatch();
 
   const deleteComment = (taskComment: string) => {
@@ -58,10 +61,20 @@ const TaskDetailsPopUp: React.FC<TaskDetailsInterface> = (props) => {
 
       <div className="taskDetailsLabel">
         <p>Label</p>
-        <div
-          style={{ background: props.taskIndicator }}
-          className="taskDetailsLabelDivWithColor"
-        ></div>
+        <div className="taskDetailsLabelDivs">
+          <div
+            style={{ background: props.taskIndicator }}
+            className="taskDetailsLabelDivWithColor"
+          ></div>
+          <div
+            onClick={() => setLabelCreating(!labelCreating)}
+            className="taskDetailAddLabelDiv"
+          >
+            <i id="addLabelPlus" className="bi bi-plus-lg"></i>
+          </div>
+        </div>
+
+        {labelCreating ? <CreateLabelPopUp /> : null}
       </div>
 
       <div className="taskDetailsDescriptionDiv">

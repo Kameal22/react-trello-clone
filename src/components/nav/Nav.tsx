@@ -6,10 +6,7 @@ import { RootState } from "../../redux/Store";
 import NavRecent from "./navMenu/RecentMenu";
 import NavSearchBar from "./NavSearch";
 import Register from "./NavRegister";
-import {
-  showDropdown,
-  changeColor,
-} from "../../redux/features/navigationSlice";
+import { showDropdown } from "../../redux/features/navigationSlice";
 import NavUserMenu from "./navMenu/UserMenu";
 import { Link } from "react-router-dom";
 import CreateMenu from "./navMenu/CreateMenu";
