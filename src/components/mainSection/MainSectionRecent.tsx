@@ -4,12 +4,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
 const MainSectionRecent: React.FC = () => {
-  const dispatch = useDispatch();
-
-  const workspaces = useSelector(
-    (state: RootState) => state.workspace.workspace
-  );
-
   const recents = useSelector(
     (state: RootState) => state.recents.recentlyViewed
   );

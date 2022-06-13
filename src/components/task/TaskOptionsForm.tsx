@@ -25,6 +25,7 @@ const TaskOptionsForm: React.FC<OptionsFormInterface> = (props) => {
       })
     );
     props.showForm();
+    window.location.reload();
   };
 
   const copyTaskFunc = () => {

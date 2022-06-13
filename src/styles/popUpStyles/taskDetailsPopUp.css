@@ -7,16 +7,20 @@
     z-index: 9999;
     background: white;
     width: 600px;
+    max-width: 600px;
     height: 690px;
     overflow-y: auto;
 }
 
 .taskDetailsName{
-    width: 90%;
     margin: 1vh auto;
     padding-top: 10px;
     padding-bottom: 10px;
     font-size: 1.2em;
+    white-space: nowrap;
+    width: 85%;                
+    overflow: hidden;           
+    text-overflow: ellipsis;
 }
 
 .taskDetailsListName{

@@ -2,7 +2,8 @@
     border-radius: 5px;
     background-color: #ebecf0;
     border: 1px solid rgba(255, 255, 255, 0.3);
-    min-width: 272px;
+    width: 272px;
+    max-width: 300px;
     padding-top: 10px;
     cursor: pointer;
     font-size: .9em;

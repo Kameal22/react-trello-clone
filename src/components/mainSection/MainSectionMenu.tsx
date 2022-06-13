@@ -49,6 +49,7 @@ const MainSectionMenu: React.FC<MainSectionProps> = (props) => {
   ) => {
     deleteWorkspaceFunc(workspaceId);
     removeFromLastWatched(workspaceName);
+    window.location.reload();
   };
 
   return (
