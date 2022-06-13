@@ -52,3 +52,8 @@
 .navWorkspaceItemHeading:hover{
     background-color: rgba(223, 223, 223, 0.541);
 }
+
+.recentDisclaimer{
+    font-weight: bold;
+    padding: 10px;
+}

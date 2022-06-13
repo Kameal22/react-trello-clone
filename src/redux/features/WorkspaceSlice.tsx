@@ -26,15 +26,13 @@ export const workspaceSlice = createSlice({
       state,
       action: PayloadAction<{
         id: string | undefined;
-        name?: string;
         description?: string;
       }>
     ) => {
       const workspaceToEdit = state.workspace.findIndex(
         (value) => value.workspaceId === action.payload.id
       );
-      if (action.payload.name && action.payload.description) {
-        state.workspace[workspaceToEdit].workspaceName = action.payload.name;
+      if (action.payload.description) {
         state.workspace[workspaceToEdit].workspaceDescription =
           action.payload.description;
       }
@@ -49,7 +47,7 @@ export const workspaceSlice = createSlice({
         (value) => value.workspaceId === action.payload.workspaceId
       );
 
-      state.workspace.splice(workspace, 1)
+      state.workspace.splice(workspace, 1);
     },
     showWorkspaceDropdown: (state, action: PayloadAction<{ id: string }>) => {
       const workspaceWithShownDropdown = state.workspace.findIndex(

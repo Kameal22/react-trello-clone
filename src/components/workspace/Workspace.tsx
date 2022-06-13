@@ -24,9 +24,9 @@ const Workspace: React.FC = () => {
 
   useEffect(() => {
     if (workspaces.length < 1) {
-      navigate('/', { replace: true });
+      navigate("/", { replace: true });
     }
-  }, [workspaces])
+  }, [workspaces]);
 
   const { workspaceId } = useParams(); //This gives you ID of workspace showing in the component
 
@@ -52,19 +52,19 @@ const Workspace: React.FC = () => {
 
   const editWorkspaceFunc = (
     id: string | undefined,
-    name: string | undefined,
     description: string | undefined
   ) => {
-    dispatch(editWorkspace({ id, name, description }));
+    dispatch(editWorkspace({ id, description }));
   };
 
   return (
     <div className="yourWorkspaceDiv">
-      <Nav showCreateBoard={showBoardCreating} showCreateWorkspace={showWorkspaceCreation} />
+      <Nav
+        showCreateBoard={showBoardCreating}
+        showCreateWorkspace={showWorkspaceCreation}
+      />
       {boardCreating ? (
-        <CreateBoardPopUp
-          setBoardCreating={showBoardCreating}
-        />
+        <CreateBoardPopUp setBoardCreating={showBoardCreating} />
       ) : null}
 
       <div className="yourWorkspaceHeadingDiv">

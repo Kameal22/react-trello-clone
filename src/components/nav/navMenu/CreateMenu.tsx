@@ -1,8 +1,7 @@
 import "../../../styles/navStyles/navMenuStyles/createMenu.css";
 import { showDropdown } from "../../../redux/features/navigationSlice";
-import { useDispatch } from "react-redux";
-import { useState } from "react";
-import CreateBoardPopUp from "../../popups/CreateBoardPopUp";
+import { RootState } from "../../../redux/Store";
+import { useDispatch, useSelector } from "react-redux";
 
 interface NavCreateInterface {
   showCreateWorkspace: () => void;
@@ -10,17 +9,25 @@ interface NavCreateInterface {
 }
 
 const CreateMenu: React.FC<NavCreateInterface> = (props) => {
-
   const dispatch = useDispatch();
 
   const setDropdown = (dropdownItem: string) => {
     dispatch(showDropdown({ dropdownItem }));
   };
 
+  const workspaces = useSelector(
+    (state: RootState) => state.workspace.workspace
+  );
+
   const showCreateWorkspaceFunc = () => {
-    props.showCreateWorkspace()
-    setDropdown("")
-  }
+    props.showCreateWorkspace();
+    setDropdown("");
+  };
+
+  const showCreateBoardFunc = () => {
+    props.showCreateBoard();
+    setDropdown("");
+  };
 
   return (
     <div className="navCreateDiv">
@@ -31,8 +38,20 @@ const CreateMenu: React.FC<NavCreateInterface> = (props) => {
 
       <div className="navCreateChoices">
         <div className="navCreateItems">
-          <p onClick={() => showCreateWorkspaceFunc()} className="navCreateItemHeading">Create workspace</p>
-          <p onClick={() => props.showCreateBoard()} className="navCreateItemHeading">Create board</p>
+          <p
+            onClick={() => showCreateWorkspaceFunc()}
+            className="navCreateItemHeading"
+          >
+            Create workspace
+          </p>
+          {workspaces.length > 0 ? (
+            <p
+              onClick={() => showCreateBoardFunc()}
+              className="navCreateItemHeading"
+            >
+              Create board
+            </p>
+          ) : null}
         </div>
       </div>
     </div>

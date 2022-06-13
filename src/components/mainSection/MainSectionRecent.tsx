@@ -2,10 +2,9 @@ import "../../styles/mainSectionStyles/mainSectionRecent.css";
 import { RootState } from "../../redux/Store";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
 
 const MainSectionRecent: React.FC = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const workspaces = useSelector(
     (state: RootState) => state.workspace.workspace

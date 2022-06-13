@@ -19,20 +19,12 @@ const CreateWorkspacePopUp: React.FC<WorkspacePopUpProps> = (props) => {
   const [workspaceName, setWorkspaceName] = useState<string>("");
   const [workspaceDescription, setWorkspaceDescription] = useState<string>("");
   const [workspaceId] = useState<string>(uuidv4());
-  const [formComplete, setFormComplete] = useState<boolean>(false);
+  const [error, setError] = useState<string>("");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const user = useSelector((state: RootState) => state.users.user);
-
-  useEffect(() => {
-    if (workspaceName && workspaceDescription) {
-      setFormComplete(true);
-    } else {
-      setFormComplete(false);
-    }
-  }, [workspaceName, workspaceDescription]);
 
   const setDropdown = (dropdownItem: string) => {
     dispatch(showDropdown({ dropdownItem }));
@@ -45,6 +37,11 @@ const CreateWorkspacePopUp: React.FC<WorkspacePopUpProps> = (props) => {
   const handleWorkspaceNameChange = (
     e: React.FormEvent<HTMLInputElement>
   ): void => {
+    if (workspaceName.length > 14) {
+      setError("Workspace name cannot excide 14");
+    } else {
+      setError("");
+    }
     setWorkspaceName(e.currentTarget.value);
   };
 
@@ -56,41 +53,43 @@ const CreateWorkspacePopUp: React.FC<WorkspacePopUpProps> = (props) => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (user.name) {
-      dispatch(
-        addWorkspace({
-          workspaceName,
-          workspaceDescription,
-          workspaceDate: date,
-          workspaceMember: user.name,
-          workspaceLetterColor: generateRandomColor(),
-          workspaceBoards: [],
-          workspaceLandingPageMenu: false,
-          workspaceId,
-        })
-      );
-      props.showCreateWorkspace();
-      setMessage("Workspace created succesfully");
-      setTimeout(() => {
-        setMessage("");
-      }, 1500);
-    } else {
-      dispatch(
-        addWorkspace({
-          workspaceName,
-          workspaceDescription,
-          workspaceDate: date,
-          workspaceMember: guestName,
-          workspaceLetterColor: generateRandomColor(),
-          workspaceBoards: [],
-          workspaceLandingPageMenu: false,
-          workspaceId,
-        })
-      );
-      props.showCreateWorkspace();
+    if (!error) {
+      if (user.name) {
+        dispatch(
+          addWorkspace({
+            workspaceName,
+            workspaceDescription,
+            workspaceDate: date,
+            workspaceMember: user.name,
+            workspaceLetterColor: generateRandomColor(),
+            workspaceBoards: [],
+            workspaceLandingPageMenu: false,
+            workspaceId,
+          })
+        );
+        props.showCreateWorkspace();
+        setMessage("Workspace created succesfully");
+        setTimeout(() => {
+          setMessage("");
+        }, 1500);
+      } else {
+        dispatch(
+          addWorkspace({
+            workspaceName,
+            workspaceDescription,
+            workspaceDate: date,
+            workspaceMember: guestName,
+            workspaceLetterColor: generateRandomColor(),
+            workspaceBoards: [],
+            workspaceLandingPageMenu: false,
+            workspaceId,
+          })
+        );
+        props.showCreateWorkspace();
+      }
+      setDropdown("");
+      navigate(`/workspace/${workspaceId}`, { replace: true });
     }
-    setDropdown("");
-    navigate(`/workspace/${workspaceId}`, { replace: true });
   };
 
   return (
@@ -124,6 +123,7 @@ const CreateWorkspacePopUp: React.FC<WorkspacePopUpProps> = (props) => {
                 name="workspaceName"
               />
             </div>
+            {error ? <p className="workspaceNameError">{error}</p> : null}
             <div className="workspaceDescriptionInputDiv">
               <p className="workspaceDescription">Workspace description</p>
               <input
@@ -135,11 +135,7 @@ const CreateWorkspacePopUp: React.FC<WorkspacePopUpProps> = (props) => {
                 name="workspaceName"
               />
             </div>
-            <button
-              disabled={!formComplete}
-              className="submitBtn"
-              type="submit"
-            >
+            <button disabled={error !== ""} className="submitBtn" type="submit">
               Submit
             </button>
           </form>

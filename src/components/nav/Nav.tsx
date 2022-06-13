@@ -6,7 +6,10 @@ import { RootState } from "../../redux/Store";
 import NavRecent from "./navMenu/RecentMenu";
 import NavSearchBar from "./NavSearch";
 import Register from "./NavRegister";
-import { showDropdown, changeColor } from "../../redux/features/navigationSlice";
+import {
+  showDropdown,
+  changeColor,
+} from "../../redux/features/navigationSlice";
 import NavUserMenu from "./navMenu/UserMenu";
 import { Link } from "react-router-dom";
 import CreateMenu from "./navMenu/CreateMenu";
@@ -21,9 +24,7 @@ const Nav: React.FC<NavProps> = (props) => {
 
   const user = useSelector((state: RootState) => state.users.user);
 
-  const dropdown = useSelector(
-    (state: RootState) => state.nav.navDropdown
-  );
+  const dropdown = useSelector((state: RootState) => state.nav.navDropdown);
 
   const navColor = useSelector((state: RootState) => state.nav.navColor);
 
@@ -74,7 +75,12 @@ const Nav: React.FC<NavProps> = (props) => {
           <h5>Create</h5>
           <i className="bi bi-chevron-down"></i>
         </div>
-        {dropdown === "create" ? <CreateMenu showCreateBoard={props.showCreateBoard} showCreateWorkspace={props.showCreateWorkspace} /> : null}
+        {dropdown === "create" ? (
+          <CreateMenu
+            showCreateBoard={props.showCreateBoard}
+            showCreateWorkspace={props.showCreateWorkspace}
+          />
+        ) : null}
       </div>
 
       <div className="navigationRightSide">
@@ -84,6 +90,7 @@ const Nav: React.FC<NavProps> = (props) => {
         <div className="navigationRegister">
           {user.name ? (
             <h5
+              className="navUserName"
               onClick={
                 dropdown === "userChoices"
                   ? () => setDropdown("")

@@ -1,6 +1,8 @@
 import "../../../styles/navStyles/navMenuStyles/recentMenu.css";
 import { showDropdown } from "../../../redux/features/navigationSlice";
-import { useDispatch } from "react-redux";
+import { RootState } from "../../../redux/Store";
+import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 
 const NavRecent: React.FC = () => {
   const dispatch = useDispatch();
@@ -9,6 +11,10 @@ const NavRecent: React.FC = () => {
     dispatch(showDropdown({ dropdownItem }));
   };
 
+  const recents = useSelector(
+    (state: RootState) => state.recents.recentlyViewed
+  );
+
   return (
     <div className="navRecentDiv">
       <div className="navRecentHeading">
@@ -16,12 +22,35 @@ const NavRecent: React.FC = () => {
         <i onClick={() => setDropdown("")} className="bi bi-x"></i>
       </div>
 
-      <div className="navRecentChoices">
-        <div className="navRecentItems">
-          <p className="navRecentItemHeading">First board</p>
-          <p className="navRecentItemHeading">Another board</p>
+      {recents.length > 0 ? (
+        <div className="navRecentChoices">
+          {recents.map((board) => {
+            return (
+              <Link
+                key={board.boardId}
+                className="workspaceMenuLink"
+                to={`/board/${board.boardWorkspace}/${board.boardId}`}
+              >
+                <div className="recentsDiv">
+                  <div
+                    style={{
+                      background: `${board.boardBackground}`,
+                      width: "22px",
+                      height: "22px",
+                    }}
+                  ></div>
+
+                  <div className="mainRecentTextDiv">
+                    <p className="recentBoardName">{board.boardName}</p>
+                  </div>
+                </div>
+              </Link>
+            );
+          })}
         </div>
-      </div>
+      ) : (
+        <p className="recentDisclaimer">No recent boards to show.</p>
+      )}
     </div>
   );
 };

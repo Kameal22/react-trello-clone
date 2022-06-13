@@ -118,3 +118,10 @@
     text-decoration: none;
     color: white;
 }
+
+.navUserName{
+    white-space: nowrap;
+    width: 80%;                
+    overflow: hidden;           
+    text-overflow: ellipsis;
+}
