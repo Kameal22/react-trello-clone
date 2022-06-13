@@ -51,7 +51,7 @@ const WorkspaceBoards: React.FC<WorkspaceBoardsInterface> = (props) => {
 
       <div className="workspaceBoardsBoards">
         <p className="showingBoards">
-          Showing {props.shownWorkspace?.workspaceBoards.length} of{" "}
+          Showing {shownBoards?.length} of{" "}
           {props.shownWorkspace
             ? props.shownWorkspace.workspaceBoards.length
             : null}

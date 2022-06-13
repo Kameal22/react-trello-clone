@@ -22,16 +22,17 @@ const SearchForBoards: React.FC<SearchForBoardsInterface> = (props) => {
 
   return (
     <div className="searchBoardsDiv">
-      <form autoComplete="off">
-        <input
-          onChange={handleSearchValueChange}
-          className="searchBoardsInput"
-          placeholder="Search for boards.."
-          type="text"
-          name="search"
-        ></input>
-        <i id="navSearchIcon" className="bi bi-search"></i>
-      </form>
+      {props.initialBoards?.length ? (
+        <form autoComplete="off">
+          <input
+            onChange={handleSearchValueChange}
+            className="searchBoardsInput"
+            placeholder="Search for boards.."
+            type="text"
+            name="search"
+          ></input>
+        </form>
+      ) : null}
     </div>
   );
 };

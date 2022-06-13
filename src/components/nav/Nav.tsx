@@ -35,7 +35,7 @@ const Nav: React.FC<NavProps> = (props) => {
   return (
     <div style={{ background: navColor }} className="navigationDiv">
       <div className="navigationLeftSide">
-        <Link to="/" className="logoLink">
+        <Link to="/" onClick={() => setDropdown("")} className="logoLink">
           <h3 className="navigationLogo">Trello</h3>
         </Link>
         <div

@@ -125,10 +125,6 @@ const MainSectionMenu: React.FC<MainSectionProps> = (props) => {
                         <p className="menuBoardsDescription">Boards</p>
                       </Link>
                     </div>
-                    <div className="workspaceOption">
-                      <i className="bi bi-gear"></i>
-                      <p className="menuBoardsDescription">Settings</p>
-                    </div>
                     <div
                       onClick={() =>
                         handleWorkspaceRemove(

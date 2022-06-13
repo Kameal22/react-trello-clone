@@ -27,6 +27,7 @@ const NavRecent: React.FC = () => {
           {recents.map((board) => {
             return (
               <Link
+                onClick={() => setDropdown("")}
                 key={board.boardId}
                 className="workspaceMenuLink"
                 to={`/board/${board.boardWorkspace}/${board.boardId}`}

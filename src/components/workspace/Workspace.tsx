@@ -9,6 +9,7 @@ import EditWorkspaceDetails from "./EditWorkspaceDetails";
 import WorkspaceBoards from "./WorkspaceBoards";
 import CreateBoardPopUp from "../popups/CreateBoardPopUp";
 import PopUp from "../popups/PopUpMessage";
+import { changeColor } from "../../redux/features/navigationSlice";
 import { useNavigate } from "react-router-dom";
 
 const Workspace: React.FC = () => {
@@ -27,6 +28,14 @@ const Workspace: React.FC = () => {
       navigate("/", { replace: true });
     }
   }, [workspaces]);
+
+  useEffect(() => {
+    dispatch(
+      changeColor({
+        color: "#3cc384",
+      })
+    );
+  }, []); // Change color to original after leaving a board.
 
   const { workspaceId } = useParams(); //This gives you ID of workspace showing in the component
 

@@ -9,6 +9,7 @@
     -webkit-box-shadow: -4px 8px 15px -11px rgba(66, 68, 90, 1);
     -moz-box-shadow: -4px 8px 15px -11px rgba(66, 68, 90, 1);
     box-shadow: -4px 8px 15px -11px rgba(66, 68, 90, 1);
+    padding: 2px 2px;
 }
 
 .taskDiv:hover{
@@ -24,7 +25,7 @@
 
 .taskDivIndicator{
     position: absolute;
-    top: 4px;
+    top: 6px;
     left: 4px;
     width: 40px;
     border-radius: 5px;
