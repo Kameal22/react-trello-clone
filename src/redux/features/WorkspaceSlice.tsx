@@ -69,7 +69,7 @@ export const workspaceSlice = createSlice({
 
     deleteBoard: (
       state,
-      action: PayloadAction<{ workspaceName: string; boardId: string }>
+      action: PayloadAction<{ workspaceName: string | undefined; boardId: string }>
     ) => {
       const workspace = state.workspace.findIndex(
         (value) => value.workspaceName === action.payload.workspaceName

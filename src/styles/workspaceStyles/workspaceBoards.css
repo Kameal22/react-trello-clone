@@ -1,5 +1,5 @@
 .workspaceBoardsDiv{
-    width: 60%;
+    width: 80%;
     margin: 4vh auto;
 }
 
@@ -19,17 +19,20 @@
 }
 
 .workspaceBoards{
+    margin-top: 4vh;
     display: flex;
     flex-wrap: wrap;
-    width: 100%;
-    margin-top: 5%;
+}
+
+.workspaceBoards > div{
+    margin-left: 1em;
+    margin-top: 1vh;
 }
 
 .workspaceCreateBoard{
     background-color: rgba(207, 207, 207, 0.555);
     padding: 30px 20px;
     border-radius: 5px;
-    margin-top: 2vh;
     width: 20%;
     display: flex;
     justify-content: center;
@@ -42,19 +45,29 @@
 }
 
 .workspaceYourBoard{
-    margin-top: 1%;
-    width: 160px;
+    width: 20%;
     border-radius: 5px;
-    margin-left: 4em;
     padding: 30px 20px;
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
     font-weight: bold;
-    font-size: 1.2em;
+    position: relative;
 }
 
-.workspaceYourBoard p{
-    font-size: .85em;
+.workspaceYourBoard:hover{
+    filter: brightness(90%);
+}
+
+.workspaceYourBoard i {
+    color: black;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+
+.workspaceYourBoard i:hover{
+    font-size: 1.2em;
+    color: red;
 }

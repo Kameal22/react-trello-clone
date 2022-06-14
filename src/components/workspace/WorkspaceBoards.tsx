@@ -24,13 +24,14 @@ const WorkspaceBoards: React.FC<WorkspaceBoardsInterface> = (props) => {
 
   const dispatch = useDispatch();
 
-  const deleteBoardFunc = (workspaceName: string, boardId: string) => {
+  const deleteBoardFunc = (workspaceName: string | undefined, boardId: string) => {
     dispatch(
       deleteBoard({
         workspaceName: workspaceName,
         boardId: boardId,
       })
     );
+    window.location.reload()
   };
 
   const showSearchedBoards = (searchingValue: string) => {
@@ -74,32 +75,32 @@ const WorkspaceBoards: React.FC<WorkspaceBoardsInterface> = (props) => {
             : null}
         </p>
 
-        <div
-          onClick={() => props.setBoardCreating()}
-          className="workspaceCreateBoard"
-        >
-          <p>Create new board</p>
-        </div>
-
         <div className="workspaceBoards">
+          <div
+            onClick={() => props.setBoardCreating()}
+            className="workspaceCreateBoard"
+          >
+            <p>Create new board</p>
+          </div>
+
           {props.shownWorkspace
             ? shownBoards?.map((board) => {
-                return (
-                  <div
-                    key={board.boardId}
-                    style={{ background: `${board.boardBackground}` }}
-                    className="workspaceYourBoard"
+              return (
+                <div
+                  key={board.boardId}
+                  style={{ background: `${board.boardBackground}` }}
+                  className="workspaceYourBoard"
+                >
+                  <Link
+                    className="workspaceMenuLink"
+                    to={`/board/${props.shownWorkspace?.workspaceName}/${board.boardId}`}
                   >
-                    <Link
-                      className="workspaceMenuLink"
-                      to={`/board/${props.shownWorkspace?.workspaceName}/${board.boardId}`}
-                    >
-                      <p>{board.boardName}</p>
-                    </Link>
-                    <i className="bi bi-trash3"></i>
-                  </div>
-                );
-              })
+                    <p>{board.boardName}</p>
+                  </Link>
+                  <i onClick={() => deleteBoardFunc(props.shownWorkspace?.workspaceName, board.boardId)} className="bi bi-trash3"></i>
+                </div>
+              );
+            })
             : null}
         </div>
       </div>
