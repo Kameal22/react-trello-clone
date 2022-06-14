@@ -35,8 +35,5 @@
 .taskName{
     padding: 12px 8px;
     margin-top: .5vh;
-    white-space: nowrap;
-    width: 100%;                
-    overflow: hidden;           
-    text-overflow: ellipsis;
+    width: 90%;
 }

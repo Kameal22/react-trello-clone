@@ -2,7 +2,7 @@ import { createSlice, PayloadAction, current } from "@reduxjs/toolkit";
 import {
   WorkspaceInterface,
   BoardInterface,
-  BoardTaskInterface,
+  TaskInterface,
   TaskCommentsInterface,
 } from "../../interfaces/WorkspaceInterface";
 import { v4 as uuidv4 } from "uuid";
@@ -67,6 +67,15 @@ export const workspaceSlice = createSlice({
       );
     },
 
+    deleteBoard: (
+      state,
+      action: PayloadAction<{ workspaceName: string; boardId: string }>
+    ) => {
+      const workspaceToDeleteBoardFrom = state.workspace.findIndex(
+        (value) => value.workspaceName === action.payload.workspaceName
+      );
+    },
+
     addColumn: (
       state,
       action: PayloadAction<{
@@ -74,7 +83,7 @@ export const workspaceSlice = createSlice({
         boardId: string | undefined;
         columnName: string;
         columnId: string | undefined;
-        columnTasks: BoardTaskInterface[];
+        columnTasks: TaskInterface[];
       }>
     ) => {
       const workspace = state.workspace.findIndex(

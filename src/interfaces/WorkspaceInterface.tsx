@@ -8,7 +8,7 @@ export interface TaskCommentsInterface {
   taskDate: string;
 }
 
-export interface BoardTaskInterface {
+export interface TaskInterface {
   taskName: string;
   taskId: string;
   taskIndicatorColor: string;
@@ -19,12 +19,12 @@ export interface BoardTaskInterface {
   columnId: string | undefined;
 }
 
-export interface BoardColumnInterface {
+export interface ColumnInterface {
   columnName: string;
   columnId: string | undefined;
   boardId: string | undefined;
   workspaceId: string | undefined;
-  columnTasks: BoardTaskInterface[];
+  columnTasks: TaskInterface[];
 }
 
 export interface BoardInterface {
@@ -32,7 +32,7 @@ export interface BoardInterface {
   boardId: string;
   boardWorkspace: string;
   boardBackground: string;
-  boardColumns: BoardColumnInterface[];
+  boardColumns: ColumnInterface[];
 }
 
 export interface WorkspaceInterface {

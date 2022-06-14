@@ -1,7 +1,7 @@
 import "../../styles/columnStyles/addColumnForm.css";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import { BoardTaskInterface } from "../../interfaces/WorkspaceInterface";
+import { TaskInterface } from "../../interfaces/WorkspaceInterface";
 import { addColumn } from "../../redux/features/WorkspaceSlice";
 import { useDispatch } from "react-redux";
 
@@ -13,7 +13,7 @@ interface AddingColumnFormInterface {
 const AddColumnForm: React.FC<AddingColumnFormInterface> = (props) => {
   const [addingColumn, setAddingColumn] = useState(false);
   const [columnName, setColumnName] = useState<string>("");
-  const [columnTasks] = useState<BoardTaskInterface[]>([]);
+  const [columnTasks] = useState<TaskInterface[]>([]);
 
   const dispatch = useDispatch();
 

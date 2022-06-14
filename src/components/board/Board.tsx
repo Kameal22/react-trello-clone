@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { RootState } from "../../redux/Store";
 import { useSelector, useDispatch } from "react-redux";
 import { addRecentlyViewed } from "../../redux/features/recentlyViewedSlice";
-import BoardColumn from "../column/Column";
+import Column from "../column/Column";
 import AddColumnForm from "../column/AddColumnForm";
 import { changeColor } from "../../redux/features/navigationSlice";
 import CreateWorkspacePopUp from "../popups/CreateWorkspacePopUp";
@@ -94,7 +94,8 @@ const Board: React.FC = () => {
       <div className="boardAllColumnsDivBOARD">
         {boardsColumn?.map((column) => {
           return (
-            <BoardColumn
+            <Column
+              key={column.columnId}
               columnName={column.columnName}
               columnId={column.columnId}
               boardId={shownBoard?.boardId}

@@ -19,12 +19,16 @@ interface TaskProps {
 
 const Task: React.FC<TaskProps> = (props) => {
   const [iconVisibility, setIconVisibility] = useState({ display: "none" });
-  const [taskOptions, showTaskOptions] = useState<boolean>(false);
+  const [taskOptions, showTaskOptions] = useState<string>("");
   const [taskDetails, showTaskDetails] = useState<boolean>(false);
   const [taskLabels, showTaskLabels] = useState<boolean>(false);
 
   const showOptions = () => {
-    showTaskOptions(!taskOptions);
+    if (taskOptions !== "") {
+      showTaskOptions("");
+    } else {
+      showTaskOptions(props.taskId);
+    }
   };
 
   const showLabels = () => {
@@ -34,6 +38,8 @@ const Task: React.FC<TaskProps> = (props) => {
   const showDetails = () => {
     showTaskDetails(!taskDetails);
   };
+
+  console.log(taskOptions);
 
   return (
     <div
@@ -64,7 +70,7 @@ const Task: React.FC<TaskProps> = (props) => {
         className="bi bi-pencil"
       ></i>
 
-      {taskOptions ? (
+      {taskOptions === props.taskId ? (
         <TaskOptionsForm
           workspaceId={props.workspaceId}
           boardId={props.boardId}

@@ -1,5 +1,5 @@
-import "../../styles/columnStyles/boardColumn.css";
-import { BoardTaskInterface } from "../../interfaces/WorkspaceInterface";
+import "../../styles/columnStyles/column.css";
+import { TaskInterface } from "../../interfaces/WorkspaceInterface";
 import EditColumnForm from "./EditColumnForm";
 import { useState } from "react";
 import { useSelector } from "react-redux";
@@ -12,10 +12,10 @@ interface ColumnInterface {
   columnId: string | undefined;
   boardId: string | undefined;
   workspaceId: string | undefined;
-  columnTasks: BoardTaskInterface[];
+  columnTasks: TaskInterface[];
 }
 
-const BoardColumn: React.FC<ColumnInterface> = (props) => {
+const Column: React.FC<ColumnInterface> = (props) => {
   const [columnEditing, setColumnEditing] = useState<boolean>(false);
   const [taskAdding, setTaskAdding] = useState<boolean>(false);
 
@@ -65,6 +65,7 @@ const BoardColumn: React.FC<ColumnInterface> = (props) => {
       {columnTasks?.map((task) => {
         return (
           <Task
+            key={task.taskId}
             taskName={task.taskName}
             taskId={task.taskId}
             taskIndicatorColor={task.taskIndicatorColor}
@@ -80,6 +81,7 @@ const BoardColumn: React.FC<ColumnInterface> = (props) => {
 
       {taskAdding ? (
         <AddTaskForm
+          key={props.columnId}
           addTask={addATask}
           workspaceId={props.workspaceId}
           boardId={props.boardId}
@@ -95,4 +97,4 @@ const BoardColumn: React.FC<ColumnInterface> = (props) => {
   );
 };
 
-export default BoardColumn;
+export default Column;

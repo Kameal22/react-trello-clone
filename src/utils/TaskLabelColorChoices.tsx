@@ -13,7 +13,7 @@ export const fancyColorChoices = [
   "#a8dadc",
   "#457b9d",
   "#1d3557",
-  "#606c38",
+  "teal",
   "#bde0fe",
   "#5e548e",
   "#2ec4b6",
