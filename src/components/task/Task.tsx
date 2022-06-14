@@ -1,5 +1,5 @@
 import "../../styles/taskStyles/task.css";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import TaskOptionsForm from "../task/TaskOptionsForm";
 import TaskDetailsPopUp from "../popups/TaskDetailsPopUp";
 import TaskLabelsPopUp from "../popups/TaskLabelsPopUp";
@@ -19,16 +19,14 @@ interface TaskProps {
 
 const Task: React.FC<TaskProps> = (props) => {
   const [iconVisibility, setIconVisibility] = useState({ display: "none" });
-  const [taskOptions, showTaskOptions] = useState<string>("");
+  const [taskOptions, showTaskOptions] = useState<boolean>(false);
   const [taskDetails, showTaskDetails] = useState<boolean>(false);
   const [taskLabels, showTaskLabels] = useState<boolean>(false);
 
+  const optionsRef = useRef<HTMLDivElement>(null);
+
   const showOptions = () => {
-    if (taskOptions !== "") {
-      showTaskOptions("");
-    } else {
-      showTaskOptions(props.taskId);
-    }
+    showTaskOptions(!taskOptions)
   };
 
   const showLabels = () => {
@@ -39,7 +37,15 @@ const Task: React.FC<TaskProps> = (props) => {
     showTaskDetails(!taskDetails);
   };
 
-  console.log(taskOptions);
+  useEffect(() => {
+    document.addEventListener("mousedown", (event) => {
+      if (!optionsRef.current?.contains(event.target as Node)) {
+        showTaskOptions(false)
+      }
+    })
+  })
+
+  console.log(optionsRef)
 
   return (
     <div
@@ -70,8 +76,9 @@ const Task: React.FC<TaskProps> = (props) => {
         className="bi bi-pencil"
       ></i>
 
-      {taskOptions === props.taskId ? (
+      {taskOptions ? (
         <TaskOptionsForm
+          forwardRef={optionsRef}
           workspaceId={props.workspaceId}
           boardId={props.boardId}
           columnId={props.columnId}

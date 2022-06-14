@@ -9,7 +9,7 @@
 
 input:focus{
   outline: none;
-  border-color: blue;
+  border-color: #52b788;
   border-radius: 8px;
 }
 

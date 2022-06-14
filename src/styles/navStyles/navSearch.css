@@ -48,6 +48,11 @@
     padding: 8px 8px;
 }
 
+.searchHint span{
+    color: grey;
+    margin-left: 2em;
+}
+
 .searchingLink{
     text-decoration: none;
     color: black;

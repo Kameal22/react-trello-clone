@@ -10,6 +10,7 @@ interface OptionsFormInterface {
   boardId: string | undefined;
   columnId: string | undefined;
   taskId: string;
+  forwardRef: React.RefObject<HTMLDivElement>
 }
 
 const TaskOptionsForm: React.FC<OptionsFormInterface> = (props) => {
@@ -51,7 +52,7 @@ const TaskOptionsForm: React.FC<OptionsFormInterface> = (props) => {
   };
 
   return (
-    <div className="taskOptionsFormDiv">
+    <div ref={props.forwardRef} className="taskOptionsFormDiv">
       <p onClick={() => showDetailsFunc()}>Open task</p>
 
       <p onClick={() => editLabelsFunc()}>Edit labels</p>

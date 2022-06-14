@@ -57,8 +57,6 @@ const TaskLabelsPopUp: React.FC<TaskLabelsInterface> = (props) => {
           );
         })}
       </div>
-
-      <button className="createLabelBtn">Create label</button>
     </div>
   );
 };

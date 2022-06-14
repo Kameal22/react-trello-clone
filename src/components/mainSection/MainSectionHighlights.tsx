@@ -23,25 +23,25 @@ const MainSectionHighlights: React.FC = () => {
   const highlightedWorkspace =
     workspaces[Math.floor(Math.random() * workspaces.length)];
 
+  const highlightedBoard =
+    highlightedWorkspace?.workspaceBoards[
+    Math.floor(Math.random() * highlightedWorkspace.workspaceBoards.length)
+    ];
+
+  const highlightedColumn =
+    highlightedBoard?.boardColumns[
+    Math.floor(Math.random() * highlightedBoard.boardColumns.length)
+    ];
+
+  const highlightedTask =
+    highlightedColumn?.columnTasks[
+    Math.floor(Math.random() * highlightedColumn.columnTasks.length)
+    ];
+
   useEffect(() => {
-    if (!highlightedWorkspace) {
+    if (!highlightedTask) {
       return;
     }
-
-    const highlightedBoard =
-      highlightedWorkspace?.workspaceBoards[
-      Math.floor(Math.random() * highlightedWorkspace.workspaceBoards.length)
-      ];
-
-    const highlightedColumn =
-      highlightedBoard?.boardColumns[
-      Math.floor(Math.random() * highlightedBoard.boardColumns.length)
-      ];
-
-    const highlightedTask =
-      highlightedColumn?.columnTasks[
-      Math.floor(Math.random() * highlightedColumn.columnTasks.length)
-      ];
 
     const label = highlightedTask?.taskIndicatorColor;
     const message = highlightedTask?.taskName;

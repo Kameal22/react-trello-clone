@@ -61,7 +61,7 @@ const NavSearchBar: React.FC = () => {
         <input
           onChange={handleSearchValueChange}
           className="navSearchInput"
-          placeholder="Search"
+          placeholder="Search.."
           type="text"
           name="search"
         ></input>
@@ -85,7 +85,7 @@ const NavSearchBar: React.FC = () => {
                       className="searchHintColorDiv"
                       style={{ background: `${data.background}` }}
                     ></div>
-                    <p className="searchHint">{data.name}</p>
+                    <p className="searchHint">{data.name} <span>board</span></p>
                   </div>
                 </Link>
               );
