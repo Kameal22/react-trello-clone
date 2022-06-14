@@ -96,9 +96,7 @@ const CreateBoardPopUp: React.FC<CreateBoardInterface> = (props) => {
             type="text"
             name="boardName"
           />
-          <p onClick={() => console.log(workspaces)} className="boardTitleInfo">
-            Board title is required!
-          </p>
+          <p className="boardTitleInfo">Board title is required!</p>
         </div>
 
         <div className="chooseWorkspaceDiv">

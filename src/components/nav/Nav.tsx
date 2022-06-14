@@ -14,6 +14,7 @@ import CreateMenu from "./navMenu/CreateMenu";
 interface NavProps {
   showCreateWorkspace: () => void;
   showCreateBoard: () => void;
+  hideBoards?: () => void;
 }
 
 const Nav: React.FC<NavProps> = (props) => {
@@ -29,11 +30,19 @@ const Nav: React.FC<NavProps> = (props) => {
     dispatch(showDropdown({ dropdownItem }));
   };
 
+  const hideBoards = () => {
+    if (props.hideBoards) {
+      props.hideBoards();
+    }
+  };
+
   return (
     <div style={{ background: navColor }} className="navigationDiv">
       <div className="navigationLeftSide">
         <Link to="/" onClick={() => setDropdown("")} className="logoLink">
-          <h3 className="navigationLogo">Trello</h3>
+          <h3 onClick={() => hideBoards()} className="navigationLogo">
+            Trello
+          </h3>
         </Link>
         <div
           onClick={

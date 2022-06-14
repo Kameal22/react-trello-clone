@@ -1,12 +1,18 @@
 import "../../../styles/navStyles/navMenuStyles/userMenu.css";
 import { useDispatch } from "react-redux";
 import { logoutUser } from "../../../redux/features/registerSlice";
+import { showDropdown } from "../../../redux/features/navigationSlice";
 
 const NavUserMenu: React.FC = () => {
   const dispatch = useDispatch();
 
+  const setDropdown = (dropdownItem: string) => {
+    dispatch(showDropdown({ dropdownItem }));
+  };
+
   const logout = () => {
     dispatch(logoutUser());
+    setDropdown("");
   };
 
   return (

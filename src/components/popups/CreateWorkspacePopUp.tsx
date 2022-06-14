@@ -1,11 +1,10 @@
 import "../../styles/popUpStyles/createWorkspacePopUp.css";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { addWorkspace } from "../../redux/features/WorkspaceSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../redux/Store";
 import { date } from "../../utils/GetDate";
 import { guestName } from "../../utils/RandomizeGuestName";
-import { setPopUpMessage } from "../../redux/features/popUpSlice";
 import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import { showDropdown } from "../../redux/features/navigationSlice";
@@ -28,10 +27,6 @@ const CreateWorkspacePopUp: React.FC<WorkspacePopUpProps> = (props) => {
 
   const setDropdown = (dropdownItem: string) => {
     dispatch(showDropdown({ dropdownItem }));
-  };
-
-  const setMessage = (message: string) => {
-    dispatch(setPopUpMessage({ message }));
   };
 
   const handleWorkspaceNameChange = (
@@ -68,10 +63,6 @@ const CreateWorkspacePopUp: React.FC<WorkspacePopUpProps> = (props) => {
           })
         );
         props.showCreateWorkspace();
-        setMessage("Workspace created succesfully");
-        setTimeout(() => {
-          setMessage("");
-        }, 1500);
       } else {
         dispatch(
           addWorkspace({

@@ -12,14 +12,23 @@ const LandingPage: React.FC = () => {
   const [createWorkspacePopUp, setCreateWorkspacePopUp] =
     useState<boolean>(false);
   const [boardCreating, setBoardCreating] = useState<boolean>(false);
+  const [showingBoards, setShowingBoards] = useState<boolean>(false); //When this is true - Main Section will show Menu + Boards. If not - stays with highlights and recent.
+
+  const showBoardsFunc = () => {
+    setShowingBoards(true);
+  };
+
+  const hideBoardsFunc = () => {
+    setShowingBoards(false);
+  };
 
   useEffect(() => {
     dispatch(
       changeColor({
-        color: "#3cc384"
+        color: "#3cc384",
       })
-    )
-  }, []) // Change color to original after leaving a board.
+    );
+  }, []); // Change color to original after leaving a board.
 
   const dispatch = useDispatch();
 
@@ -33,14 +42,25 @@ const LandingPage: React.FC = () => {
 
   return (
     <div className="landingPageDiv">
-      <Nav showCreateBoard={showBoardCreating} showCreateWorkspace={showWorkspaceCreation} />
-      <MainSection showCreateWorkspace={showWorkspaceCreation} />
+      <Nav
+        hideBoards={hideBoardsFunc}
+        showCreateBoard={showBoardCreating}
+        showCreateWorkspace={showWorkspaceCreation}
+      />
+      <MainSection
+        showBoards={showBoardsFunc}
+        hideBoards={hideBoardsFunc}
+        showingBoards={showingBoards}
+        showCreateWorkspace={showWorkspaceCreation}
+      />
       {createWorkspacePopUp ? (
         <div>
           <CreateWorkspacePopUp showCreateWorkspace={showWorkspaceCreation} />
         </div>
       ) : null}
-      {boardCreating ? <CreateBoardPopUp setBoardCreating={showBoardCreating} /> : null}
+      {boardCreating ? (
+        <CreateBoardPopUp setBoardCreating={showBoardCreating} />
+      ) : null}
       <PopUpMessage />
     </div>
   );

@@ -6,3 +6,16 @@ export const colorChoices = [
   "orange",
   "violet",
 ];
+
+export const fancyColorChoices = [
+  "#e63946",
+  "#606c38",
+  "#a8dadc",
+  "#457b9d",
+  "#1d3557",
+  "#606c38",
+  "#bde0fe",
+  "#5e548e",
+  "#2ec4b6",
+  "#242423",
+];

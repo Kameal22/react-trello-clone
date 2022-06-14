@@ -8,6 +8,8 @@ import { addRecentlyViewed } from "../../redux/features/recentlyViewedSlice";
 import BoardColumn from "../column/Column";
 import AddColumnForm from "../column/AddColumnForm";
 import { changeColor } from "../../redux/features/navigationSlice";
+import CreateWorkspacePopUp from "../popups/CreateWorkspacePopUp";
+import CreateBoardPopUp from "../popups/CreateBoardPopUp";
 
 const Board: React.FC = () => {
   const [createWorkspacePopUp, setCreateWorkspacePopUp] =
@@ -17,21 +19,6 @@ const Board: React.FC = () => {
   const { workspaceName, boardId } = useParams();
 
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (shownBoard) {
-      dispatch(addRecentlyViewed(shownBoard))
-      changeColorFunc(shownBoard.boardBackground)
-    }
-  }, []);
-
-  const changeColorFunc = (color: string) => {
-    dispatch(
-      changeColor({
-        color: color
-      })
-    )
-  }
 
   const workspaces = useSelector(
     (state: RootState) => state.workspace.workspace
@@ -54,19 +41,47 @@ const Board: React.FC = () => {
   };
 
   const showBoardCreation = () => {
-    setBoardCreating(!boardCreating)
-  }
+    setBoardCreating(!boardCreating);
+  };
+
+  useEffect(() => {
+    if (shownBoard) {
+      dispatch(addRecentlyViewed(shownBoard));
+      changeColorFunc(shownBoard.boardBackground);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (shownBoard) {
+      changeColorFunc(shownBoard.boardBackground);
+    }
+  }, [shownBoard?.boardId]); // To change navbar color when going from one board to another directly.
+
+  const changeColorFunc = (color: string) => {
+    dispatch(
+      changeColor({
+        color: color,
+      })
+    );
+  };
 
   return (
     <div
       style={{ background: `${shownBoard?.boardBackground}` }}
       className="boardDivBOARD"
     >
-      <Nav showCreateBoard={showBoardCreation} showCreateWorkspace={showWorkspaceCreation} />
+      <Nav
+        showCreateBoard={showBoardCreation}
+        showCreateWorkspace={showWorkspaceCreation}
+      />
+      {createWorkspacePopUp ? (
+        <CreateWorkspacePopUp showCreateWorkspace={showWorkspaceCreation} />
+      ) : null}
+      {boardCreating ? (
+        <CreateBoardPopUp setBoardCreating={showBoardCreation} />
+      ) : null}
       <div className="boardHeadingBOARD">
-        <h3 className="boardNameBOARD">
-          board: {shownBoard?.boardName}
-        </h3>
+        <h3 className="boardNameBOARD">board: {shownBoard?.boardName}</h3>
         {user.name ? (
           <h4 className="boardUserNameBOARD">{user.name} </h4>
         ) : (

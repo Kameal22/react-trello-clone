@@ -20,6 +20,7 @@
 
 .workspaceBoards{
     display: flex;
+    flex-wrap: wrap;
     width: 100%;
     margin-top: 5%;
 }
@@ -28,6 +29,7 @@
     background-color: rgba(207, 207, 207, 0.555);
     padding: 30px 20px;
     border-radius: 5px;
+    margin-top: 2vh;
     width: 20%;
     display: flex;
     justify-content: center;
@@ -40,7 +42,8 @@
 }
 
 .workspaceYourBoard{
-    width: 20%;
+    margin-top: 1%;
+    width: 160px;
     border-radius: 5px;
     margin-left: 4em;
     padding: 30px 20px;

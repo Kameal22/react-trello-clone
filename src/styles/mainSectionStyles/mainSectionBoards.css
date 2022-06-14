@@ -40,6 +40,7 @@
 
 .mainSectionBoardsDivs{
     display: flex;
+    flex-wrap: wrap;
 }
 
 .mainSectionBoardsDivs > div{

@@ -46,7 +46,16 @@ const NavWorkspaces: React.FC<WorkspaceProps> = (props) => {
                     className="workspaceMenuLink"
                     to={`/workspace/${workspace.workspaceId}`}
                   >
-                    <span style={{ color: workspace.workspaceLetterColor, fontSize: "1.4em", marginRight: ".1em" }}>{workspace.workspaceName[0]}</span>{workspace.workspaceName.substring(1)}
+                    <span
+                      style={{
+                        color: workspace.workspaceLetterColor,
+                        fontSize: "1.4em",
+                        marginRight: ".1em",
+                      }}
+                    >
+                      {workspace.workspaceName[0]}
+                    </span>
+                    {workspace.workspaceName.substring(1)}
                   </Link>
                 </p>
               </div>

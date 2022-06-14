@@ -2,7 +2,6 @@ import "../../styles/popUpStyles/taskLabelsPopUp.css";
 import { colorChoices } from "../../utils/TaskLabelColorChoices";
 import { selectTaskLabel } from "../../redux/features/WorkspaceSlice";
 import { useDispatch } from "react-redux";
-import { useState } from "react";
 
 interface TaskLabelsInterface {
   editLabels: () => void;
@@ -16,7 +15,7 @@ interface TaskLabelsInterface {
 const TaskLabelsPopUp: React.FC<TaskLabelsInterface> = (props) => {
   const dispatch = useDispatch();
 
-  const test = (indicator: string) => {
+  const setLabel = (indicator: string) => {
     dispatch(
       selectTaskLabel({
         workspaceId: props.workspaceId,
@@ -42,7 +41,7 @@ const TaskLabelsPopUp: React.FC<TaskLabelsInterface> = (props) => {
         {colorChoices.map((choice) => {
           return (
             <div
-              onClick={() => test(choice)}
+              onClick={() => setLabel(choice)}
               className="colorLabelDiv"
               style={{ background: choice }}
             >

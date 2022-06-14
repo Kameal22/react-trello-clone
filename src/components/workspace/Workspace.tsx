@@ -8,6 +8,7 @@ import { useSelector, useDispatch } from "react-redux";
 import EditWorkspaceDetails from "./EditWorkspaceDetails";
 import WorkspaceBoards from "./WorkspaceBoards";
 import CreateBoardPopUp from "../popups/CreateBoardPopUp";
+import CreateWorkspacePopUp from "../popups/CreateWorkspacePopUp";
 import PopUp from "../popups/PopUpMessage";
 import { changeColor } from "../../redux/features/navigationSlice";
 import { useNavigate } from "react-router-dom";
@@ -23,6 +24,13 @@ const Workspace: React.FC = () => {
     (state: RootState) => state.workspace.workspace
   );
 
+  const { workspaceId } = useParams(); //This gives you ID of workspace showing in the component
+
+  const shownWorkspace = workspaces.find((workspace) => {
+    //And this is the specific workspace that is viewed in component found by this ID up above.
+    return workspace.workspaceId === workspaceId;
+  });
+
   useEffect(() => {
     if (workspaces.length < 1) {
       navigate("/", { replace: true });
@@ -36,13 +44,6 @@ const Workspace: React.FC = () => {
       })
     );
   }, []); // Change color to original after leaving a board.
-
-  const { workspaceId } = useParams(); //This gives you ID of workspace showing in the component
-
-  const shownWorkspace = workspaces.find((workspace) => {
-    //And this is the specific workspace that is viewed in component found by this ID up above.
-    return workspace.workspaceId === workspaceId;
-  });
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -74,6 +75,10 @@ const Workspace: React.FC = () => {
       />
       {boardCreating ? (
         <CreateBoardPopUp setBoardCreating={showBoardCreating} />
+      ) : null}
+
+      {createWorkspacePopUp ? (
+        <CreateWorkspacePopUp showCreateWorkspace={showWorkspaceCreation} />
       ) : null}
 
       <div className="yourWorkspaceHeadingDiv">

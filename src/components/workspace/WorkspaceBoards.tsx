@@ -5,7 +5,7 @@ import {
 } from "../../interfaces/WorkspaceInterface";
 import { Link } from "react-router-dom";
 import SearchForBoards from "./SearchForBoards";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface WorkspaceBoardsInterface {
   setBoardCreating: () => void;
@@ -38,6 +38,10 @@ const WorkspaceBoards: React.FC<WorkspaceBoardsInterface> = (props) => {
     setShownBoards(initialBoards);
   };
 
+  useEffect(() => {
+    setBoardsBackToInitial(props.shownWorkspace?.workspaceBoards);
+  }, [props.shownWorkspace?.workspaceId]); // Do this to update shown boards in workspace that user routed to.
+
   return (
     <div className="workspaceBoardsDiv">
       <div className="workspaceBoardsHeading">
@@ -57,13 +61,14 @@ const WorkspaceBoards: React.FC<WorkspaceBoardsInterface> = (props) => {
             : null}
         </p>
 
+        <div
+          onClick={() => props.setBoardCreating()}
+          className="workspaceCreateBoard"
+        >
+          <p>Create new board</p>
+        </div>
+
         <div className="workspaceBoards">
-          <div
-            onClick={() => props.setBoardCreating()}
-            className="workspaceCreateBoard"
-          >
-            <p>Create new board</p>
-          </div>
           {props.shownWorkspace
             ? shownBoards?.map((board) => {
                 return (

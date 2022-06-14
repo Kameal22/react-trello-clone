@@ -5,7 +5,7 @@
     transform:translate(-50%, -50%);
     border-radius: 5px;
     z-index: 9999;
-    background: white;
+    background: rgb(236, 236, 236);
     width: 600px;
     max-width: 600px;
     height: 690px;
