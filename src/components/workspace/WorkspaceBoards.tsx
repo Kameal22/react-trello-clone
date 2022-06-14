@@ -4,8 +4,10 @@ import {
   BoardInterface,
 } from "../../interfaces/WorkspaceInterface";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import SearchForBoards from "./SearchForBoards";
 import { useEffect, useState } from "react";
+import { deleteBoard } from "../../redux/features/WorkspaceSlice";
 
 interface WorkspaceBoardsInterface {
   setBoardCreating: () => void;
@@ -19,6 +21,17 @@ const WorkspaceBoards: React.FC<WorkspaceBoardsInterface> = (props) => {
   const [shownBoards, setShownBoards] = useState<BoardInterface[] | undefined>(
     props.shownWorkspace?.workspaceBoards
   );
+
+  const dispatch = useDispatch();
+
+  const deleteBoardFunc = (workspaceName: string, boardId: string) => {
+    dispatch(
+      deleteBoard({
+        workspaceName: workspaceName,
+        boardId: boardId,
+      })
+    );
+  };
 
   const showSearchedBoards = (searchingValue: string) => {
     if (searchingValue) {
@@ -83,6 +96,7 @@ const WorkspaceBoards: React.FC<WorkspaceBoardsInterface> = (props) => {
                     >
                       <p>{board.boardName}</p>
                     </Link>
+                    <i className="bi bi-trash3"></i>
                   </div>
                 );
               })

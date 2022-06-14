@@ -71,9 +71,17 @@ export const workspaceSlice = createSlice({
       state,
       action: PayloadAction<{ workspaceName: string; boardId: string }>
     ) => {
-      const workspaceToDeleteBoardFrom = state.workspace.findIndex(
+      const workspace = state.workspace.findIndex(
         (value) => value.workspaceName === action.payload.workspaceName
       );
+
+      const boardToDelete = state.workspace[
+        workspace
+      ].workspaceBoards.findIndex(
+        (board) => board.boardId === action.payload.boardId
+      );
+
+      state.workspace[workspace].workspaceBoards.splice(boardToDelete, 1);
     },
 
     addColumn: (
@@ -463,6 +471,7 @@ export const {
   showWorkspaceDropdown,
   editWorkspace,
   addBoard,
+  deleteBoard,
   addColumn,
   copyColumn,
   deleteColumn,
