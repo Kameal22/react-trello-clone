@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 
 interface CreateBoardInterface {
   setBoardCreating: () => void;
+  forwardRef: React.RefObject<HTMLDivElement>;
 }
 
 const CreateBoardPopUp: React.FC<CreateBoardInterface> = (props) => {
@@ -54,7 +55,7 @@ const CreateBoardPopUp: React.FC<CreateBoardInterface> = (props) => {
   };
 
   return (
-    <div className="createBoardDiv">
+    <div ref={props.forwardRef} className="createBoardDiv">
       <p className="createBoardHeading">Create board</p>
       <i onClick={() => props.setBoardCreating()} className="bi bi-x"></i>
 

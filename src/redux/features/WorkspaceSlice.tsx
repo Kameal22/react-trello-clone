@@ -238,6 +238,44 @@ export const workspaceSlice = createSlice({
       ].columnTasks.push(taskToCopyClone);
     },
 
+    editTask: (
+      state,
+      action: PayloadAction<{
+        workspaceId: string | undefined;
+        boardId: string | undefined;
+        columnId: string | undefined;
+        taskId: string;
+        newTask: string;
+      }>
+    ) => {
+      const workspace = state.workspace.findIndex(
+        (value) => value.workspaceId === action.payload.workspaceId
+      );
+
+      const board = state.workspace[workspace].workspaceBoards.findIndex(
+        (value) => value.boardId === action.payload.boardId
+      );
+
+      const column = state.workspace[workspace].workspaceBoards[
+        board
+      ].boardColumns.findIndex(
+        (value) => value.columnId === action.payload.columnId
+      );
+
+      const updatedTask = state.workspace[workspace].workspaceBoards[board].boardColumns[
+        column
+      ].columnTasks.map((task) => {
+        if (task.taskId === action.payload.taskId) {
+          return { ...task, taskName: action.payload.newTask }
+        }
+        return task
+      })
+
+      state.workspace[workspace].workspaceBoards[board].boardColumns[
+        column
+      ].columnTasks = updatedTask
+    },
+
     deleteTask: (
       state,
       action: PayloadAction<{
@@ -478,6 +516,7 @@ export const {
   addTask,
   deleteTask,
   copyTask,
+  editTask,
   selectTaskLabel,
   addTaskDescription,
   addTaskComment,

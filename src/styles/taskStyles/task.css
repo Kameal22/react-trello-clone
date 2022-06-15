@@ -14,6 +14,7 @@
 
 .taskDiv:hover{
     background-color: rgba(179, 179, 179, 0.329);
+    cursor: pointer;
 }
 
 .taskDivIndicator{

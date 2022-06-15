@@ -18,6 +18,8 @@ const Board: React.FC = () => {
 
   const createWorkspaceRef = useRef<HTMLDivElement>(null);
 
+  const createBoardRef = useRef<HTMLDivElement>(null);
+
   const { workspaceName, boardId } = useParams();
 
   const dispatch = useDispatch();
@@ -75,6 +77,14 @@ const Board: React.FC = () => {
     });
   });
 
+  useEffect(() => {
+    document.addEventListener("mousedown", (event) => {
+      if (!createBoardRef.current?.contains(event.target as Node)) {
+        setBoardCreating(false);
+      }
+    });
+  });
+
   return (
     <div
       style={{ background: `${shownBoard?.boardBackground}` }}
@@ -88,7 +98,7 @@ const Board: React.FC = () => {
         <CreateWorkspacePopUp forwardRef={createWorkspaceRef} showCreateWorkspace={showWorkspaceCreation} />
       ) : null}
       {boardCreating ? (
-        <CreateBoardPopUp setBoardCreating={showBoardCreation} />
+        <CreateBoardPopUp forwardRef={createBoardRef} setBoardCreating={showBoardCreation} />
       ) : null}
       <div className="boardHeadingBOARD">
         <h3 className="boardNameBOARD">board: {shownBoard?.boardName}</h3>

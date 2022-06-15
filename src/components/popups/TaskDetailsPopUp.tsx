@@ -5,7 +5,7 @@ import TaskDescriptionForm from "../task/TaskDescriptionForm";
 import { TaskCommentsInterface } from "../../interfaces/WorkspaceInterface";
 import { RootState } from "../../redux/Store";
 import { useSelector, useDispatch } from "react-redux";
-import { deleteTaskComment } from "../../redux/features/WorkspaceSlice";
+import { deleteTaskComment, editTask } from "../../redux/features/WorkspaceSlice";
 import EditTaskCommentForm from "../task/EditTaskCommentForm";
 import CreateLabelPopUp from "./SpecialLabelPopUp";
 
@@ -26,8 +26,32 @@ const TaskDetailsPopUp: React.FC<TaskDetailsInterface> = (props) => {
   const [commentToEdit, setCommentToEdit] = useState<string>("");
   const [labelCreating, setLabelCreating] = useState<boolean>(false);
   const [description, setDescription] = useState<boolean>(false);
+  const [editingTaskName, setEditingTaskName] = useState<boolean>(false);
+  const [taskName, setTaskName] = useState<string>(props.taskName);
 
   const dispatch = useDispatch();
+
+  const handleTaskNameChange = (
+    e: React.FormEvent<HTMLInputElement>
+  ): void => {
+    setTaskName(e.currentTarget.value);
+  };
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    dispatch(
+      editTask({
+        workspaceId: props.workspaceId,
+        boardId: props.boardId,
+        columnId: props.columnId,
+        taskId: props.taskId,
+        newTask: taskName
+      })
+    )
+
+    setEditingTaskName(!editingTaskName)
+  };
 
   const setCreating = () => {
     setLabelCreating(!labelCreating);
@@ -60,7 +84,18 @@ const TaskDetailsPopUp: React.FC<TaskDetailsInterface> = (props) => {
   return (
     <div className="taskDetailsDiv">
       <div className="taskDetailsName">
-        <p>{props.taskName}</p>
+        {editingTaskName ? <form
+          className="editTaskNameForm"
+          autoComplete="off"
+          onSubmit={handleSubmit}
+        >          <input
+            value={taskName}
+            className="taskNameInput"
+            onChange={handleTaskNameChange}
+            type="text"
+            name="taskName"
+          /></form> : <p onClick={() => setEditingTaskName(!editingTaskName)}>{props.taskName}</p>}
+
         <i
           id="cornerIcon"
           onClick={() => props.showTaskDetails()}

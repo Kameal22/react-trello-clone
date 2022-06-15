@@ -16,6 +16,8 @@ const LandingPage: React.FC = () => {
 
   const createWorkspaceRef = useRef<HTMLDivElement>(null);
 
+  const createBoardRef = useRef<HTMLDivElement>(null);
+
   const showBoardsFunc = () => {
     setShowingBoards(true);
   };
@@ -50,6 +52,14 @@ const LandingPage: React.FC = () => {
     });
   });
 
+  useEffect(() => {
+    document.addEventListener("mousedown", (event) => {
+      if (!createBoardRef.current?.contains(event.target as Node)) {
+        setBoardCreating(false);
+      }
+    });
+  });
+
   return (
     <div className="landingPageDiv">
       <Nav
@@ -72,7 +82,7 @@ const LandingPage: React.FC = () => {
         </div>
       ) : null}
       {boardCreating ? (
-        <CreateBoardPopUp setBoardCreating={showBoardCreating} />
+        <CreateBoardPopUp forwardRef={createBoardRef} setBoardCreating={showBoardCreating} />
       ) : null}
       <PopUpMessage />
     </div>

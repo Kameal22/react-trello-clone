@@ -21,6 +21,8 @@ const Workspace: React.FC = () => {
 
   const createWorkspaceRef = useRef<HTMLDivElement>(null);
 
+  const createBoardRef = useRef<HTMLDivElement>(null);
+
   const workspaces = useSelector(
     // These are all workspaces from redux store
     (state: RootState) => state.workspace.workspace
@@ -77,6 +79,13 @@ const Workspace: React.FC = () => {
     });
   });
 
+  useEffect(() => {
+    document.addEventListener("mousedown", (event) => {
+      if (!createBoardRef.current?.contains(event.target as Node)) {
+        setBoardCreating(false);
+      }
+    });
+  });
 
   return (
     <div className="yourWorkspaceDiv">
@@ -85,7 +94,7 @@ const Workspace: React.FC = () => {
         showCreateWorkspace={showWorkspaceCreation}
       />
       {boardCreating ? (
-        <CreateBoardPopUp setBoardCreating={showBoardCreating} />
+        <CreateBoardPopUp forwardRef={createBoardRef} setBoardCreating={showBoardCreating} />
       ) : null}
 
       {createWorkspacePopUp ? (

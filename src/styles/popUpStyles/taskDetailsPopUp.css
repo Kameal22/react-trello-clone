@@ -1,5 +1,5 @@
 .taskDetailsDiv{
-    position:fixed;
+    position: fixed;
     top:50%; 
     left:50%; 
     transform:translate(-50%, -50%);
@@ -12,6 +12,10 @@
     overflow-y: auto;
 }
 
+.taskDetailsDiv:hover{
+    cursor: default;
+}
+
 .taskDetailsName{
     margin: 1vh auto;
     padding-top: 10px;
@@ -21,6 +25,17 @@
     width: 85%;                
     overflow: hidden;           
     text-overflow: ellipsis;
+}
+
+.taskNameInput{
+    height: 40px;
+    font-size: 1.2em;
+    padding: 5px;
+    border: 2px solid blue;
+}
+
+.taskDetailsName:hover{
+    cursor: pointer;
 }
 
 .taskDetailsListName{
@@ -61,6 +76,10 @@
     margin-top: 1vh;
     background-color: #040c1b2a;
     position: relative;
+}
+
+.taskDetailAddLabelDiv{
+    cursor: pointer;
 }
 
 #addLabelPlus{

@@ -33,6 +33,7 @@
 
 .labelOption:hover{
     opacity: 0.8;
+    cursor: pointer;
 }
 
 .createLabelButton{
@@ -51,4 +52,5 @@
     z-index: 999;
     top: 8px;
     right: 8px;
+    cursor: pointer;
 }
