@@ -29,13 +29,14 @@ export const workspaceSlice = createSlice({
         description?: string;
       }>
     ) => {
-      const workspaceToEdit = state.workspace.findIndex(
-        (value) => value.workspaceId === action.payload.id
-      );
-      if (action.payload.description) {
-        state.workspace[workspaceToEdit].workspaceDescription =
-          action.payload.description;
-      }
+      const editedWorkspace = state.workspace.map((workspace) => {
+        if (workspace.workspaceId === action.payload.id) {
+          return { ...workspace, workspaceDescription: action.payload.description }
+        }
+        return workspace
+      })
+
+      state.workspace = editedWorkspace;
     },
     deleteWorkspace: (
       state,
@@ -334,15 +335,18 @@ export const workspaceSlice = createSlice({
         (value) => value.columnId === action.payload.columnId
       );
 
-      const task = state.workspace[workspace].workspaceBoards[
-        board
-      ].boardColumns[column].columnTasks.findIndex(
-        (task) => task.taskId === action.payload.taskId
-      );
+      const selectedLabel = state.workspace[workspace].workspaceBoards[board].boardColumns[
+        column
+      ].columnTasks.map((task) => {
+        if (task.taskId === action.payload.taskId) {
+          return { ...task, taskIndicatorColor: action.payload.taskIndicator }
+        }
+        return task
+      })
 
       state.workspace[workspace].workspaceBoards[board].boardColumns[
         column
-      ].columnTasks[task].taskIndicatorColor = action.payload.taskIndicator;
+      ].columnTasks = selectedLabel;
     },
 
     addTaskDescription: (

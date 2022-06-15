@@ -90,7 +90,7 @@ const TaskDetailsPopUp: React.FC<TaskDetailsInterface> = (props) => {
           onSubmit={handleSubmit}
         >          <input
             value={taskName}
-            className="taskNameInput"
+            className="editTaskNameInput"
             onChange={handleTaskNameChange}
             type="text"
             name="taskName"

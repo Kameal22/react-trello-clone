@@ -27,7 +27,7 @@
     text-overflow: ellipsis;
 }
 
-.taskNameInput{
+.editTaskNameInput{
     height: 40px;
     font-size: 1.2em;
     padding: 5px;
