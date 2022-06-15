@@ -32,6 +32,7 @@
     font-size: 1.2em;
     padding: 5px;
     border: 2px solid blue;
+    width: 100%;
 }
 
 .taskDetailsName:hover{

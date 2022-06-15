@@ -74,7 +74,7 @@ const MainSectionHighlights: React.FC = () => {
         )}
       </div>
 
-      {taskToShow?.message ? (
+      {taskToShow?.message !== undefined ? (
         <div className="highlight">
           <p className="highlightUser">{taskToShow?.user}</p>
           <div
