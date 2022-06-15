@@ -45,3 +45,10 @@
     margin-bottom: 1vh;
     margin-left: 1em;
 }
+
+#cornerIcon{
+    position: absolute;
+    z-index: 999;
+    top: 8px;
+    right: 8px;
+}

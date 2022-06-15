@@ -25,6 +25,7 @@ interface TaskDetailsInterface {
 const TaskDetailsPopUp: React.FC<TaskDetailsInterface> = (props) => {
   const [commentToEdit, setCommentToEdit] = useState<string>("");
   const [labelCreating, setLabelCreating] = useState<boolean>(false);
+  const [description, setDescription] = useState<boolean>(false);
 
   const dispatch = useDispatch();
 
@@ -52,11 +53,19 @@ const TaskDetailsPopUp: React.FC<TaskDetailsInterface> = (props) => {
     return workspace.workspaceId === props.workspaceId;
   });
 
+  const showDescriptionForm = () => {
+    setDescription(!description);
+  };
+
   return (
     <div className="taskDetailsDiv">
       <div className="taskDetailsName">
         <p>{props.taskName}</p>
-        <i onClick={() => props.showTaskDetails()} className="bi bi-x"></i>
+        <i
+          id="cornerIcon"
+          onClick={() => props.showTaskDetails()}
+          className="bi bi-x"
+        ></i>
       </div>
 
       <p className="taskDetailsListName">
@@ -91,12 +100,18 @@ const TaskDetailsPopUp: React.FC<TaskDetailsInterface> = (props) => {
 
       <div className="taskDetailsDescriptionDiv">
         <p className="taskDetailsDescriptionHeading">Description</p>
-        {props.taskDescription.length > 0 ? (
+        {description ? (
           <div>
-            <p className="taskDetailsDescription">{props.taskDescription}</p>
+            <p
+              onClick={() => showDescriptionForm()}
+              className="taskDetailsDescription"
+            >
+              {props.taskDescription}
+            </p>
           </div>
         ) : (
           <TaskDescriptionForm
+            showForm={showDescriptionForm}
             workspaceId={props.workspaceId}
             boardId={props.boardId}
             columnId={props.columnId}

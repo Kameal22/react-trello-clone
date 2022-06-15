@@ -1,4 +1,4 @@
-import "../../styles/popUpStyles/createLabelPopUp.css";
+import "../../styles/popUpStyles/specialLabelPopUp.css";
 import { fancyColorChoices } from "../../utils/TaskLabelColorChoices";
 import { selectTaskLabel } from "../../redux/features/WorkspaceSlice";
 import { useDispatch } from "react-redux";
@@ -30,7 +30,11 @@ const CreateLabelPopUp: React.FC<CreateLabelInterface> = (props) => {
   return (
     <div className="createLabel">
       <p className="createBoardHeading">Select special label</p>
-      <i onClick={() => props.setCreating()} className="bi bi-x"></i>
+      <i
+        id="cornerIcon"
+        onClick={() => props.setCreating()}
+        className="bi bi-x"
+      ></i>
 
       <div className="createLabelOptions">
         {fancyColorChoices.map((choice) => {

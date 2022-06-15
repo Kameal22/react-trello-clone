@@ -16,15 +16,8 @@
     background-color: rgba(179, 179, 179, 0.329);
 }
 
-.taskDiv i{
-    position: absolute;
-    z-index: 999;
-    top: 8px;
-    right: 8px;
-}
-
 .taskDivIndicator{
-    position: absolute;
+    position: relative;
     top: 6px;
     left: 4px;
     width: 40px;
@@ -33,7 +26,18 @@
 }
 
 .taskName{
-    padding: 12px 8px;
+    padding: 6px 6px;
     margin-top: .5vh;
     width: 90%;
+}
+
+.taskIcons{
+    width: 20%;
+    margin-left: .5em;
+    margin-bottom: .5vh;
+}
+
+.taskIcons i{
+    margin-left: .5em;
+    font-size: .9em;
 }

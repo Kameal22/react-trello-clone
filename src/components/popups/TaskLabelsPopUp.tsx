@@ -32,7 +32,11 @@ const TaskLabelsPopUp: React.FC<TaskLabelsInterface> = (props) => {
     <div className="editTaskLabelsDiv">
       <div className="edidTaskDivHeading">
         <p className="editTaskHeading">Labels</p>
-        <i onClick={() => props.editLabels()} className="bi bi-x"></i>
+        <i
+          id="cornerIcon"
+          onClick={() => props.editLabels()}
+          className="bi bi-x"
+        ></i>
       </div>
 
       <p className="labelsInfo">Labels</p>

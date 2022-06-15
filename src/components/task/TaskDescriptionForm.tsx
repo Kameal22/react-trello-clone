@@ -8,6 +8,7 @@ interface TaskDescriptionFormInterface {
   boardId: string | undefined;
   columnId: string | undefined;
   taskId: string | undefined;
+  showForm: () => void;
 }
 
 const TaskDescriptionForm: React.FC<TaskDescriptionFormInterface> = (props) => {
@@ -33,6 +34,7 @@ const TaskDescriptionForm: React.FC<TaskDescriptionFormInterface> = (props) => {
         taskDescription,
       })
     );
+    props.showForm();
   };
 
   return (

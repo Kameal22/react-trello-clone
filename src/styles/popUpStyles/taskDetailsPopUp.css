@@ -159,3 +159,10 @@
 .taskDetailsActivityCommentEditDelete > p:hover{
     color: black;
 }
+
+#cornerIcon{
+    position: absolute;
+    z-index: 999;
+    top: 8px;
+    right: 8px;
+}

@@ -26,7 +26,7 @@ const Task: React.FC<TaskProps> = (props) => {
   const optionsRef = useRef<HTMLDivElement>(null);
 
   const showOptions = () => {
-    showTaskOptions(!taskOptions)
+    showTaskOptions(!taskOptions);
   };
 
   const showLabels = () => {
@@ -40,12 +40,12 @@ const Task: React.FC<TaskProps> = (props) => {
   useEffect(() => {
     document.addEventListener("mousedown", (event) => {
       if (!optionsRef.current?.contains(event.target as Node)) {
-        showTaskOptions(false)
+        showTaskOptions(false);
       }
-    })
-  })
+    });
+  });
 
-  console.log(optionsRef)
+  console.log(props.taskComments[0]);
 
   return (
     <div
@@ -74,7 +74,13 @@ const Task: React.FC<TaskProps> = (props) => {
         onClick={() => showOptions()}
         style={iconVisibility}
         className="bi bi-pencil"
+        id="cornerIcon"
       ></i>
+
+      <div className="taskIcons">
+        {props.taskComments[0] ? <i className="bi bi-chat"></i> : null}
+        {props.taskDescription ? <i className="bi bi-justify-left"></i> : null}
+      </div>
 
       {taskOptions ? (
         <TaskOptionsForm
