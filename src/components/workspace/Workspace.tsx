@@ -2,7 +2,7 @@ import "../../styles/workspaceStyles/workspace.css";
 import { useParams } from "react-router-dom";
 import { RootState } from "../../redux/Store";
 import Nav from "../nav/Nav";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { editWorkspace } from "../../redux/features/WorkspaceSlice";
 import { useSelector, useDispatch } from "react-redux";
 import EditWorkspaceDetails from "./EditWorkspaceDetails";
@@ -18,6 +18,8 @@ const Workspace: React.FC = () => {
     useState<boolean>(false);
   const [workspaceEditing, setWorkspaceEditing] = useState<boolean>(false);
   const [boardCreating, setBoardCreating] = useState<boolean>(false);
+
+  const createWorkspaceRef = useRef<HTMLDivElement>(null);
 
   const workspaces = useSelector(
     // These are all workspaces from redux store
@@ -67,6 +69,15 @@ const Workspace: React.FC = () => {
     dispatch(editWorkspace({ id, description }));
   };
 
+  useEffect(() => {
+    document.addEventListener("mousedown", (event) => {
+      if (!createWorkspaceRef.current?.contains(event.target as Node)) {
+        setCreateWorkspacePopUp(false);
+      }
+    });
+  });
+
+
   return (
     <div className="yourWorkspaceDiv">
       <Nav
@@ -78,7 +89,7 @@ const Workspace: React.FC = () => {
       ) : null}
 
       {createWorkspacePopUp ? (
-        <CreateWorkspacePopUp showCreateWorkspace={showWorkspaceCreation} />
+        <CreateWorkspacePopUp forwardRef={createWorkspaceRef} showCreateWorkspace={showWorkspaceCreation} />
       ) : null}
 
       <div className="yourWorkspaceHeadingDiv">

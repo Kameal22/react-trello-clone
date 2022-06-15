@@ -1,6 +1,6 @@
 import "../../styles/boardStyles/board.css";
 import Nav from "../nav/Nav";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { RootState } from "../../redux/Store";
 import { useSelector, useDispatch } from "react-redux";
@@ -15,6 +15,8 @@ const Board: React.FC = () => {
   const [createWorkspacePopUp, setCreateWorkspacePopUp] =
     useState<boolean>(false);
   const [boardCreating, setBoardCreating] = useState<boolean>(false);
+
+  const createWorkspaceRef = useRef<HTMLDivElement>(null);
 
   const { workspaceName, boardId } = useParams();
 
@@ -65,6 +67,14 @@ const Board: React.FC = () => {
     );
   };
 
+  useEffect(() => {
+    document.addEventListener("mousedown", (event) => {
+      if (!createWorkspaceRef.current?.contains(event.target as Node)) {
+        setCreateWorkspacePopUp(false);
+      }
+    });
+  });
+
   return (
     <div
       style={{ background: `${shownBoard?.boardBackground}` }}
@@ -75,7 +85,7 @@ const Board: React.FC = () => {
         showCreateWorkspace={showWorkspaceCreation}
       />
       {createWorkspacePopUp ? (
-        <CreateWorkspacePopUp showCreateWorkspace={showWorkspaceCreation} />
+        <CreateWorkspacePopUp forwardRef={createWorkspaceRef} showCreateWorkspace={showWorkspaceCreation} />
       ) : null}
       {boardCreating ? (
         <CreateBoardPopUp setBoardCreating={showBoardCreation} />

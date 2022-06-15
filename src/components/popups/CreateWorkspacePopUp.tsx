@@ -12,7 +12,7 @@ import { generateRandomColor } from "../../utils/GenerateRandomColor";
 
 interface WorkspacePopUpProps {
   showCreateWorkspace: () => void;
-  forwardRef?: React.RefObject<HTMLDivElement>;
+  forwardRef: React.RefObject<HTMLDivElement>;
 }
 
 const CreateWorkspacePopUp: React.FC<WorkspacePopUpProps> = (props) => {
@@ -127,7 +127,7 @@ const CreateWorkspacePopUp: React.FC<WorkspacePopUpProps> = (props) => {
                 name="workspaceName"
               />
             </div>
-            <button disabled={error !== ""} className="submitBtn" type="submit">
+            <button disabled={error !== "" || workspaceName.length < 5} className="submitBtn" type="submit">
               Submit
             </button>
           </form>
