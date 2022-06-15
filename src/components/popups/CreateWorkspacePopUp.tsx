@@ -12,6 +12,7 @@ import { generateRandomColor } from "../../utils/GenerateRandomColor";
 
 interface WorkspacePopUpProps {
   showCreateWorkspace: () => void;
+  forwardRef?: React.RefObject<HTMLDivElement>;
 }
 
 const CreateWorkspacePopUp: React.FC<WorkspacePopUpProps> = (props) => {
@@ -84,7 +85,7 @@ const CreateWorkspacePopUp: React.FC<WorkspacePopUpProps> = (props) => {
   };
 
   return (
-    <div className="createWorkspacePopUp">
+    <div ref={props.forwardRef} className="createWorkspacePopUp">
       <i onClick={() => props.showCreateWorkspace()} className="bi bi-x-lg"></i>
       <div className="createWorkspace">
         <div className="createWorkspaceInfo">

@@ -3,7 +3,7 @@ import Nav from "../nav/Nav";
 import PopUpMessage from "../popups/PopUpMessage";
 import MainSection from "../mainSection/MainSection";
 import CreateWorkspacePopUp from "../popups/CreateWorkspacePopUp";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { changeColor } from "../../redux/features/navigationSlice";
 import CreateBoardPopUp from "../popups/CreateBoardPopUp";
@@ -13,6 +13,8 @@ const LandingPage: React.FC = () => {
     useState<boolean>(false);
   const [boardCreating, setBoardCreating] = useState<boolean>(false);
   const [showingBoards, setShowingBoards] = useState<boolean>(false); //When this is true - Main Section will show Menu + Boards. If not - stays with highlights and recent.
+
+  const createWorkspaceRef = useRef<HTMLDivElement>(null);
 
   const showBoardsFunc = () => {
     setShowingBoards(true);
@@ -40,6 +42,14 @@ const LandingPage: React.FC = () => {
     setCreateWorkspacePopUp(!createWorkspacePopUp);
   };
 
+  useEffect(() => {
+    document.addEventListener("mousedown", (event) => {
+      if (!createWorkspaceRef.current?.contains(event.target as Node)) {
+        setCreateWorkspacePopUp(false);
+      }
+    });
+  });
+
   return (
     <div className="landingPageDiv">
       <Nav
@@ -55,7 +65,10 @@ const LandingPage: React.FC = () => {
       />
       {createWorkspacePopUp ? (
         <div>
-          <CreateWorkspacePopUp showCreateWorkspace={showWorkspaceCreation} />
+          <CreateWorkspacePopUp
+            forwardRef={createWorkspaceRef}
+            showCreateWorkspace={showWorkspaceCreation}
+          />
         </div>
       ) : null}
       {boardCreating ? (
