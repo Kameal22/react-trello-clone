@@ -45,8 +45,6 @@ const Task: React.FC<TaskProps> = (props) => {
     });
   });
 
-  console.log(props.taskComments[0]);
-
   return (
     <div
       onMouseEnter={(e) => {
