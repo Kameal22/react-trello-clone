@@ -16,10 +16,17 @@ const EditWorkspaceDetails: React.FC<EditWorkspaceProps> = (props) => {
   const [workspaceDescription, setWorkspaceDesscription] = useState<
     string | undefined
   >(props.workspaceDescription);
+  const [descriptionError, setDescriptionError] = useState<string>("");
 
   const handleWorkspaceDescriptionChange = (
     e: React.FormEvent<HTMLInputElement>
   ): void => {
+    if (workspaceDescription)
+      if (workspaceDescription?.length > 14) {
+        setDescriptionError("Description cannot excide 14 characters")
+      } else {
+        setDescriptionError("")
+      }
     setWorkspaceDesscription(e.currentTarget.value);
   };
 
@@ -42,9 +49,10 @@ const EditWorkspaceDetails: React.FC<EditWorkspaceProps> = (props) => {
             name="workspaceName"
           />
         </div>
+        {descriptionError ? <p className="editWorkspaceDescriptionError">{descriptionError}</p> : null}
 
         <div className="editWorkspaceButtons">
-          <button type="submit" className="saveButton">
+          <button disabled={descriptionError !== ""} type="submit" className="saveButton">
             Save
           </button>
           <button onClick={() => props.setEditting()} className="cancelButton">

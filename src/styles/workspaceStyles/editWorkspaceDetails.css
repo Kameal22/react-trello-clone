@@ -16,6 +16,7 @@
 }
 
 .editWorkspaceButtons{
+    margin-top: 1vh;
     margin-bottom: 2vh;
     margin-left: .2em;
 }
@@ -36,6 +37,7 @@
     background-color: rgb(221, 221, 221);
 }
 
-.inputEditDiv{
-    margin-bottom: 1vh;
+.editWorkspaceDescriptionError{
+color: red;
+font-size: .7em;
 }

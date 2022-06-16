@@ -19,7 +19,8 @@ const CreateWorkspacePopUp: React.FC<WorkspacePopUpProps> = (props) => {
   const [workspaceName, setWorkspaceName] = useState<string>("");
   const [workspaceDescription, setWorkspaceDescription] = useState<string>("");
   const [workspaceId] = useState<string>(uuidv4());
-  const [error, setError] = useState<string>("");
+  const [nameError, setNameError] = useState<string>("");
+  const [descriptionError, setDescriptionError] = useState<string>("");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -34,9 +35,9 @@ const CreateWorkspacePopUp: React.FC<WorkspacePopUpProps> = (props) => {
     e: React.FormEvent<HTMLInputElement>
   ): void => {
     if (workspaceName.length > 14) {
-      setError("Workspace name cannot excide 14");
+      setNameError("Workspace name cannot excide 14 characters");
     } else {
-      setError("");
+      setNameError("");
     }
     setWorkspaceName(e.currentTarget.value);
   };
@@ -44,12 +45,17 @@ const CreateWorkspacePopUp: React.FC<WorkspacePopUpProps> = (props) => {
   const handleWorkspaceDescriptionChange = (
     e: React.FormEvent<HTMLInputElement>
   ): void => {
+    if (workspaceDescription.length > 14) {
+      setDescriptionError("Workspace description cannot excide 14 characters")
+    } else {
+      setDescriptionError("")
+    }
     setWorkspaceDescription(e.currentTarget.value);
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (!error) {
+    if (!nameError) {
       if (user.name) {
         dispatch(
           addWorkspace({
@@ -115,7 +121,7 @@ const CreateWorkspacePopUp: React.FC<WorkspacePopUpProps> = (props) => {
                 name="workspaceName"
               />
             </div>
-            {error ? <p className="workspaceNameError">{error}</p> : null}
+            {nameError ? <p className="workspaceNameError">{nameError}</p> : null}
             <div className="workspaceDescriptionInputDiv">
               <p className="workspaceDescription">Workspace description</p>
               <input
@@ -127,7 +133,8 @@ const CreateWorkspacePopUp: React.FC<WorkspacePopUpProps> = (props) => {
                 name="workspaceName"
               />
             </div>
-            <button disabled={error !== "" || workspaceName.length < 5} className="submitBtn" type="submit">
+            {descriptionError ? <p className="workspaceNameError">{descriptionError}</p> : null}
+            <button disabled={nameError !== "" || workspaceName.length < 5 || descriptionError !== ""} className="submitBtn" type="submit">
               Submit
             </button>
           </form>

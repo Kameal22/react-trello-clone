@@ -40,6 +40,10 @@
     cursor: pointer;
 }
 
+.workspaceCreateBoard:hover{
+    background-color: rgba(167, 167, 167, 0.548);
+}
+
 .workspaceCreateBoard p{
     font-size: .85em;
 }
