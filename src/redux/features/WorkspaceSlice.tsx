@@ -4,6 +4,7 @@ import {
   BoardInterface,
   TaskInterface,
   TaskCommentsInterface,
+  ColumnInterface
 } from "../../interfaces/WorkspaceInterface";
 import { v4 as uuidv4 } from "uuid";
 
@@ -83,6 +84,25 @@ export const workspaceSlice = createSlice({
       );
 
       state.workspace[workspace].workspaceBoards.splice(boardToDelete, 1);
+    },
+
+    reArangeBoard: (
+      state,
+      action: PayloadAction<{ workspaceName: string | undefined; boardId: string | undefined, columns: ColumnInterface[] | undefined }>
+    ) => {
+      const workspace = state.workspace.findIndex(
+        (value) => value.workspaceName === action.payload.workspaceName
+      );
+
+      const board = state.workspace[
+        workspace
+      ].workspaceBoards.findIndex(
+        (board) => board.boardId === action.payload.boardId
+      );
+
+      if (action.payload.columns) {
+        state.workspace[workspace].workspaceBoards[board].boardColumns = action.payload.columns
+      }
     },
 
     addColumn: (
@@ -514,6 +534,7 @@ export const {
   editWorkspace,
   addBoard,
   deleteBoard,
+  reArangeBoard,
   addColumn,
   copyColumn,
   deleteColumn,
