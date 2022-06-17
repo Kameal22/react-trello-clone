@@ -107,6 +107,19 @@
     margin-top: 1vh;
     padding: 15px 15px;
     border-radius: 5px;
+    cursor: pointer;
+}
+
+.taskDetailsDescriptionEnter{
+    color: grey;
+    font-size: .9em;
+    margin-top: 1vh;
+    padding: 18px;
+    cursor: pointer;
+}
+
+.taskDetailsDescriptionEnter:hover{
+    background-color: rgba(179, 179, 179, 0.329);
 }
 
 .taskDetailsDescription:hover{

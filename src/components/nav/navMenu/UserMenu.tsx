@@ -3,7 +3,11 @@ import { useDispatch } from "react-redux";
 import { logoutUser } from "../../../redux/features/registerSlice";
 import { showDropdown } from "../../../redux/features/navigationSlice";
 
-const NavUserMenu: React.FC = () => {
+interface NavUserMenuInterface {
+  showBoards?: () => void;
+}
+
+const NavUserMenu: React.FC<NavUserMenuInterface> = (props) => {
   const dispatch = useDispatch();
 
   const setDropdown = (dropdownItem: string) => {
@@ -13,6 +17,13 @@ const NavUserMenu: React.FC = () => {
   const logout = () => {
     dispatch(logoutUser());
     setDropdown("");
+  };
+
+  const showBoards = () => {
+    if (props.showBoards) {
+      props.showBoards();
+    }
+    setDropdown("")
   };
 
   return (
@@ -25,12 +36,7 @@ const NavUserMenu: React.FC = () => {
       </div>
 
       <div className="userChoiceDiv">
-        <p className="userChoice">Your workspaces</p>
-        <i className="bi bi-person-workspace"></i>
-      </div>
-
-      <div className="userChoiceDiv">
-        <p className="userChoice">Your boards</p>
+        <p onClick={() => showBoards()} className="userChoice">Your boards</p>
         <i className="bi bi-clipboard"></i>
       </div>
     </div>

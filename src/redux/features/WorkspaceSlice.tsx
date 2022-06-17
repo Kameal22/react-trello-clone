@@ -232,7 +232,7 @@ export const workspaceSlice = createSlice({
 
       const taskToCopyClone = JSON.parse(JSON.stringify(taskToCopyOriginal));
 
-      taskToCopyClone.columnId = uuidv4();
+      taskToCopyClone.taskId = uuidv4();
 
       state.workspace[workspace].workspaceBoards[board].boardColumns[
         column

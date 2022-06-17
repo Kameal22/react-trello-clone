@@ -47,6 +47,7 @@ const Task: React.FC<TaskProps> = (props) => {
 
   return (
     <div
+      onClick={() => console.log(props.taskId)}
       onMouseEnter={(e) => {
         setIconVisibility({ display: "block" });
       }}

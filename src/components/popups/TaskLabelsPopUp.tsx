@@ -45,6 +45,7 @@ const TaskLabelsPopUp: React.FC<TaskLabelsInterface> = (props) => {
         {colorChoices.map((choice) => {
           return (
             <div
+              key={choice}
               onClick={() => setLabel(choice)}
               className="colorLabelDiv"
               style={{ background: choice }}

@@ -9,6 +9,7 @@ interface TaskDescriptionFormInterface {
   columnId: string | undefined;
   taskId: string | undefined;
   showForm: () => void;
+  forwardRef: React.RefObject<HTMLDivElement>;
 }
 
 const TaskDescriptionForm: React.FC<TaskDescriptionFormInterface> = (props) => {
@@ -38,7 +39,7 @@ const TaskDescriptionForm: React.FC<TaskDescriptionFormInterface> = (props) => {
   };
 
   return (
-    <div className="taskDescriptionFormDiv">
+    <div ref={props.forwardRef} className="taskDescriptionFormDiv">
       <form
         className="taskDescriptionForm"
         autoComplete="off"

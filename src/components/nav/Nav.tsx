@@ -15,6 +15,7 @@ interface NavProps {
   showCreateWorkspace: () => void;
   showCreateBoard: () => void;
   hideBoards?: () => void;
+  showBoards?: () => void;
 }
 
 const Nav: React.FC<NavProps> = (props) => {
@@ -118,7 +119,7 @@ const Nav: React.FC<NavProps> = (props) => {
           )}
           {dropdown === "registering" ? <Register /> : null}
 
-          {dropdown === "userChoices" ? <NavUserMenu /> : null}
+          {dropdown === "userChoices" ? <NavUserMenu showBoards={props.showBoards} /> : null}
         </div>
       </div>
     </div>

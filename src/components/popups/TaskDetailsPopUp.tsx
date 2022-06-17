@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import "../../styles/popUpStyles/taskDetailsPopUp.css";
 import TaskCommentForm from "../task/TaskCommentForm";
 import TaskDescriptionForm from "../task/TaskDescriptionForm";
@@ -30,6 +30,8 @@ const TaskDetailsPopUp: React.FC<TaskDetailsInterface> = (props) => {
   const [taskName, setTaskName] = useState<string>(props.taskName);
 
   const dispatch = useDispatch();
+
+  const taskDescriptionRef = useRef<HTMLDivElement>(null);
 
   const handleTaskNameChange = (
     e: React.FormEvent<HTMLInputElement>
@@ -80,6 +82,14 @@ const TaskDetailsPopUp: React.FC<TaskDetailsInterface> = (props) => {
   const showDescriptionForm = () => {
     setDescription(!description);
   };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", (event) => {
+      if (!taskDescriptionRef.current?.contains(event.target as Node)) {
+        setDescription(false);
+      }
+    });
+  });
 
   return (
     <div className="taskDetailsDiv">
@@ -136,22 +146,29 @@ const TaskDetailsPopUp: React.FC<TaskDetailsInterface> = (props) => {
       <div className="taskDetailsDescriptionDiv">
         <p className="taskDetailsDescriptionHeading">Description</p>
         {description ? (
-          <div>
-            <p
-              onClick={() => showDescriptionForm()}
-              className="taskDetailsDescription"
-            >
-              {props.taskDescription}
-            </p>
-          </div>
-        ) : (
           <TaskDescriptionForm
             showForm={showDescriptionForm}
             workspaceId={props.workspaceId}
             boardId={props.boardId}
             columnId={props.columnId}
             taskId={props.taskId}
+            forwardRef={taskDescriptionRef}
           />
+        ) : (
+          <div>
+            {props.taskDescription !== "" ? <p
+              onClick={() => showDescriptionForm()}
+              className="taskDetailsDescription"
+            >
+              {props.taskDescription}
+            </p> : <p
+              onClick={() => showDescriptionForm()}
+              className="taskDetailsDescriptionEnter"
+            >
+              Enter task description
+            </p>}
+
+          </div>
         )}
       </div>
 

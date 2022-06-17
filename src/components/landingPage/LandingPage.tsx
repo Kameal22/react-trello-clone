@@ -63,6 +63,7 @@ const LandingPage: React.FC = () => {
   return (
     <div className="landingPageDiv">
       <Nav
+        showBoards={showBoardsFunc}
         hideBoards={hideBoardsFunc}
         showCreateBoard={showBoardCreating}
         showCreateWorkspace={showWorkspaceCreation}
