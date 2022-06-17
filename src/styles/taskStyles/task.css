@@ -10,6 +10,7 @@
     -moz-box-shadow: -4px 8px 15px -11px rgba(66, 68, 90, 1);
     box-shadow: -4px 8px 15px -11px rgba(66, 68, 90, 1);
     padding: 2px 2px;
+    word-wrap: break-word;
 }
 
 .taskDiv:hover{
@@ -30,6 +31,7 @@
     padding: 6px 6px;
     margin-top: .5vh;
     width: 90%;
+    word-wrap: break-word;
 }
 
 .taskIcons{

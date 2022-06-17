@@ -3,7 +3,7 @@
     position: absolute;
     left: 250px;
     top: 1px;
-    z-index: 999;
+    z-index: 99999999;
     width: 70%;
     padding: 10px 10px;
     border-radius: 5px;

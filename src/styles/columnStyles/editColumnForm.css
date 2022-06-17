@@ -5,7 +5,7 @@
     width: 90%;
     left: 200px;
     top: 40px;
-    z-index: 999;
+    z-index: 999999999;
 }
 
 .editColumnFormDiv i{
@@ -45,4 +45,5 @@
 
 .editColumnFormActions p:hover{
     background-color: rgba(211, 211, 211, 0.329);
+    cursor: pointer;
 }
