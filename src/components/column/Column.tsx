@@ -54,36 +54,6 @@ const Column: React.FC<ColumnInterface> = (props) => {
     setTaskAdding(!taskAdding);
   };
 
-  const columnReArange = (tasks: TaskInterface[] | undefined) => {
-    dispatch(
-      reArangeColumn({
-        workspaceId: props.workspaceId,
-        boardId: props.boardId,
-        columnId: props.columnId,
-        tasks: tasks,
-      })
-    );
-  };
-
-  const onDragEnd = (result: DropResult) => {
-    const { source, destination } = result;
-    if (!destination) {
-      return;
-    }
-
-    const items = columnTasks;
-
-    if (items) {
-      const [newOrder] = items.splice(source.index, 1);
-
-      items.splice(destination.index, 0, newOrder);
-    }
-
-    columnReArange(items);
-  };
-
-
-
   return (
     <div className="boardCOLUMNdiv">
       <div className="boardCOLUMNHeader">

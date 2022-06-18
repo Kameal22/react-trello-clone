@@ -92,6 +92,32 @@ export const workspaceSlice = createSlice({
       state.workspace[workspace].workspaceBoards.splice(boardToDelete, 1);
     },
 
+    reArangeColumn: (
+      state,
+      action: PayloadAction<{
+        columnName: string;
+        boardId: string | undefined;
+        workspaceId: string | undefined;
+        newColumn: ColumnInterface;
+      }>
+    ) => {
+      const workspace = state.workspace.findIndex(
+        (value) => value.workspaceId === action.payload.workspaceId
+      );
+
+      const board = state.workspace[
+        workspace
+      ].workspaceBoards.findIndex(
+        (board) => board.boardId === action.payload.boardId
+      );
+
+      const columnToRearange = state.workspace[workspace].workspaceBoards[board].boardColumns.findIndex(column => column.columnName === action.payload.columnName)
+
+      state.workspace[workspace].workspaceBoards[board].boardColumns[columnToRearange] = action.payload.newColumn;
+    },
+
+
+
     addColumn: (
       state,
       action: PayloadAction<{
@@ -174,33 +200,6 @@ export const workspaceSlice = createSlice({
         columnToDelete,
         1
       );
-    },
-
-    reArangeColumn: (
-      state,
-      action: PayloadAction<{
-        workspaceId: string | undefined;
-        boardId: string | undefined;
-        columnId: string | undefined;
-        tasks: TaskInterface[] | undefined;
-      }>
-    ) => {
-      const workspace = state.workspace.findIndex(
-        (value) => value.workspaceId === action.payload.workspaceId
-      );
-
-      const board = state.workspace[workspace].workspaceBoards.findIndex(
-        (board) => board.boardId === action.payload.boardId
-      );
-
-      const column = state.workspace[workspace].workspaceBoards[
-        board
-      ].boardColumns.findIndex(
-        (column) => column.columnId === action.payload.columnId
-      );
-
-      if (action.payload.tasks) {
-      }
     },
 
     addTask: (

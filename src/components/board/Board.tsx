@@ -10,11 +10,13 @@ import AddColumnForm from "../column/AddColumnForm";
 import { changeColor } from "../../redux/features/navigationSlice";
 import CreateWorkspacePopUp from "../popups/CreateWorkspacePopUp";
 import CreateBoardPopUp from "../popups/CreateBoardPopUp";
+import { reArangeColumn } from "../../redux/features/WorkspaceSlice";
 
 import {
   DragDropContext,
   DropResult,
 } from "react-beautiful-dnd";
+import { ColumnInterface } from "../../interfaces/WorkspaceInterface";
 const Board: React.FC = () => {
   const [createWorkspacePopUp, setCreateWorkspacePopUp] =
     useState<boolean>(false);
@@ -89,6 +91,17 @@ const Board: React.FC = () => {
     });
   });
 
+  const reArangeColumnFunc = (newColumn: ColumnInterface, columnName: string) => {
+    dispatch(
+      reArangeColumn({
+        workspaceId: shownWorkspace?.workspaceId,
+        boardId: shownBoard?.boardId,
+        columnName,
+        newColumn
+      })
+    )
+  }
+
   const onDragEnd = (result: DropResult) => {
     const { destination, source, draggableId } = result;
 
@@ -100,7 +113,26 @@ const Board: React.FC = () => {
       return
     }
 
+    const column = boardsColumns?.find(column => column.columnName === source.droppableId)
 
+    if (column) {
+      const newTaskIds = Array.from(column?.columnTasks)
+
+      const itemToReArange = newTaskIds.find(item => item.taskId === draggableId);
+
+      newTaskIds.splice(source.index, 1);
+
+      if (itemToReArange) {
+        newTaskIds.splice(destination.index, 0, itemToReArange)
+      }
+
+      const newColumn = {
+        ...column,
+        columnTasks: newTaskIds
+      }
+
+      reArangeColumnFunc(newColumn, source.droppableId)
+    }
   };
 
   return (
@@ -138,7 +170,7 @@ const Board: React.FC = () => {
       <div className="boardAllColumnsDivBOARD">
         {boardsColumns?.map((column) => {
           return (
-            <DragDropContext onDragEnd={onDragEnd}>
+            <DragDropContext key={column.columnId} onDragEnd={onDragEnd}>
               <Column
                 key={column.columnId}
                 columnName={column.columnName}
