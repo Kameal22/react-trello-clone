@@ -11,6 +11,10 @@ import { changeColor } from "../../redux/features/navigationSlice";
 import CreateWorkspacePopUp from "../popups/CreateWorkspacePopUp";
 import CreateBoardPopUp from "../popups/CreateBoardPopUp";
 
+import {
+  DragDropContext,
+  DropResult,
+} from "react-beautiful-dnd";
 const Board: React.FC = () => {
   const [createWorkspacePopUp, setCreateWorkspacePopUp] =
     useState<boolean>(false);
@@ -85,6 +89,20 @@ const Board: React.FC = () => {
     });
   });
 
+  const onDragEnd = (result: DropResult) => {
+    const { destination, source, draggableId } = result;
+
+    if (!destination) {
+      return
+    }
+
+    if (destination.droppableId === source.droppableId && destination.index === source.index) {
+      return
+    }
+
+
+  };
+
   return (
     <div
       style={{ background: `${shownBoard?.boardBackground}` }}
@@ -120,14 +138,16 @@ const Board: React.FC = () => {
       <div className="boardAllColumnsDivBOARD">
         {boardsColumns?.map((column) => {
           return (
-            <Column
-              key={column.columnId}
-              columnName={column.columnName}
-              columnId={column.columnId}
-              boardId={shownBoard?.boardId}
-              workspaceId={shownWorkspace?.workspaceId}
-              columnTasks={column.columnTasks}
-            />
+            <DragDropContext onDragEnd={onDragEnd}>
+              <Column
+                key={column.columnId}
+                columnName={column.columnName}
+                columnId={column.columnId}
+                boardId={shownBoard?.boardId}
+                workspaceId={shownWorkspace?.workspaceId}
+                columnTasks={column.columnTasks}
+              />
+            </DragDropContext>
           );
         })}
 

@@ -82,6 +82,8 @@ const Column: React.FC<ColumnInterface> = (props) => {
     columnReArange(items);
   };
 
+
+
   return (
     <div className="boardCOLUMNdiv">
       <div className="boardCOLUMNHeader">
@@ -99,48 +101,36 @@ const Column: React.FC<ColumnInterface> = (props) => {
         />
       ) : null}
 
-      <DragDropContext onDragEnd={onDragEnd}>
-        <Droppable droppableId="task">
-          {(provided) => (
-            <div
-              className="droppableTasks"
-              {...provided.droppableProps}
-              ref={provided.innerRef}
-            >
-              {columnTasks?.map((task, index) => {
-                return (
-                  <Draggable
-                    key={task.taskId}
-                    draggableId={task.taskId}
-                    index={index}
-                  >
-                    {(provided) => (
-                      <li
-                        ref={provided.innerRef}
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                      >
-                        <Task
-                          key={task.taskId}
-                          taskName={task.taskName}
-                          taskId={task.taskId}
-                          taskIndicatorColor={task.taskIndicatorColor}
-                          taskDescription={task.taskDescription}
-                          taskComments={task.taskComments}
-                          workspaceId={props.workspaceId}
-                          boardId={props.boardId}
-                          columnId={props.columnId}
-                          columnName={props.columnName}
-                        />
-                      </li>
-                    )}
-                  </Draggable>
-                );
-              })}
-            </div>
-          )}
-        </Droppable>
-      </DragDropContext>
+      {/* REFACTOR COLUMN NAME TO COLUMN ID */}
+
+      <Droppable droppableId={props.columnName}>
+        {(provided) => (
+          <div
+            className="droppableTasks"
+            {...provided.droppableProps}
+            ref={provided.innerRef}
+          >
+            {columnTasks?.map((task, index) => {
+              return (
+                <Task
+                  key={task.taskId}
+                  taskName={task.taskName}
+                  taskId={task.taskId}
+                  taskIndicatorColor={task.taskIndicatorColor}
+                  taskDescription={task.taskDescription}
+                  taskComments={task.taskComments}
+                  workspaceId={props.workspaceId}
+                  boardId={props.boardId}
+                  columnId={props.columnId}
+                  columnName={props.columnName}
+                  index={index}
+                />
+              );
+            })}
+            {provided.placeholder}
+          </div>
+        )}
+      </Droppable>
 
       {taskAdding ? (
         <AddTaskForm
