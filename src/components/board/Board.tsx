@@ -5,24 +5,11 @@ import { useParams } from "react-router-dom";
 import { RootState } from "../../redux/Store";
 import { useSelector, useDispatch } from "react-redux";
 import { addRecentlyViewed } from "../../redux/features/recentlyViewedSlice";
-import { reArangeBoard } from "../../redux/features/WorkspaceSlice";
 import Column from "../column/Column";
 import AddColumnForm from "../column/AddColumnForm";
 import { changeColor } from "../../redux/features/navigationSlice";
 import CreateWorkspacePopUp from "../popups/CreateWorkspacePopUp";
 import CreateBoardPopUp from "../popups/CreateBoardPopUp";
-import { DropResult } from "react-beautiful-dnd";
-import { ColumnInterface } from "../../interfaces/WorkspaceInterface";
-
-const getItemStyle = (isDragging: boolean, draggableStyle: any) => ({
-  padding: 10,
-  margin: `0 50px 15px 50px`,
-  background: isDragging ? "#4a2975" : "white",
-  color: isDragging ? "white" : "black",
-  border: `1px solid black`,
-
-  ...draggableStyle
-})
 
 const Board: React.FC = () => {
   const [createWorkspacePopUp, setCreateWorkspacePopUp] =
@@ -60,32 +47,6 @@ const Board: React.FC = () => {
   const showBoardCreation = () => {
     setBoardCreating(!boardCreating);
   };
-
-  const boardsReArange = (columns: ColumnInterface[] | undefined) => {
-    dispatch(
-      reArangeBoard({
-        workspaceName: workspaceName,
-        boardId: boardId,
-        columns: columns
-      })
-    )
-  }
-
-  const onDragEnd = (result: DropResult) => {
-    const { source, destination } = result;
-    if (!destination) {
-      return
-    }
-
-    const items = boardsColumns
-
-    if (items) {
-      const [newOrder] = items.splice(source.index, 1)
-
-      items.splice(destination.index, 0, newOrder)
-    }
-    boardsReArange(items)
-  }
 
   useEffect(() => {
     if (shownBoard) {
@@ -134,10 +95,16 @@ const Board: React.FC = () => {
         showCreateWorkspace={showWorkspaceCreation}
       />
       {createWorkspacePopUp ? (
-        <CreateWorkspacePopUp forwardRef={createWorkspaceRef} showCreateWorkspace={showWorkspaceCreation} />
+        <CreateWorkspacePopUp
+          forwardRef={createWorkspaceRef}
+          showCreateWorkspace={showWorkspaceCreation}
+        />
       ) : null}
       {boardCreating ? (
-        <CreateBoardPopUp forwardRef={createBoardRef} setBoardCreating={showBoardCreation} />
+        <CreateBoardPopUp
+          forwardRef={createBoardRef}
+          setBoardCreating={showBoardCreation}
+        />
       ) : null}
       <div className="boardHeadingBOARD">
         <h3 className="boardNameBOARD">board: {shownBoard?.boardName}</h3>

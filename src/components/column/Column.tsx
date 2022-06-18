@@ -2,10 +2,17 @@ import "../../styles/columnStyles/column.css";
 import { TaskInterface } from "../../interfaces/WorkspaceInterface";
 import EditColumnForm from "./EditColumnForm";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../redux/Store";
 import AddTaskForm from "../task/AddTaskForm";
 import Task from "../task/Task";
+import {
+  DragDropContext,
+  Draggable,
+  Droppable,
+  DropResult,
+} from "react-beautiful-dnd";
+import { reArangeColumn } from "../../redux/features/WorkspaceSlice";
 
 interface ColumnInterface {
   columnName: string;
@@ -18,6 +25,8 @@ interface ColumnInterface {
 const Column: React.FC<ColumnInterface> = (props) => {
   const [columnEditing, setColumnEditing] = useState<boolean>(false);
   const [taskAdding, setTaskAdding] = useState<boolean>(false);
+
+  const dispatch = useDispatch();
 
   const workspaces = useSelector(
     (state: RootState) => state.workspace.workspace
@@ -45,6 +54,34 @@ const Column: React.FC<ColumnInterface> = (props) => {
     setTaskAdding(!taskAdding);
   };
 
+  const columnReArange = (tasks: TaskInterface[] | undefined) => {
+    dispatch(
+      reArangeColumn({
+        workspaceId: props.workspaceId,
+        boardId: props.boardId,
+        columnId: props.columnId,
+        tasks: tasks,
+      })
+    );
+  };
+
+  const onDragEnd = (result: DropResult) => {
+    const { source, destination } = result;
+    if (!destination) {
+      return;
+    }
+
+    const items = columnTasks;
+
+    if (items) {
+      const [newOrder] = items.splice(source.index, 1);
+
+      items.splice(destination.index, 0, newOrder);
+    }
+
+    columnReArange(items);
+  };
+
   return (
     <div className="boardCOLUMNdiv">
       <div className="boardCOLUMNHeader">
@@ -62,22 +99,48 @@ const Column: React.FC<ColumnInterface> = (props) => {
         />
       ) : null}
 
-      {columnTasks?.map((task) => {
-        return (
-          <Task
-            key={task.taskId}
-            taskName={task.taskName}
-            taskId={task.taskId}
-            taskIndicatorColor={task.taskIndicatorColor}
-            taskDescription={task.taskDescription}
-            taskComments={task.taskComments}
-            workspaceId={props.workspaceId}
-            boardId={props.boardId}
-            columnId={props.columnId}
-            columnName={props.columnName}
-          />
-        );
-      })}
+      <DragDropContext onDragEnd={onDragEnd}>
+        <Droppable droppableId="task">
+          {(provided) => (
+            <div
+              className="droppableTasks"
+              {...provided.droppableProps}
+              ref={provided.innerRef}
+            >
+              {columnTasks?.map((task, index) => {
+                return (
+                  <Draggable
+                    key={task.taskId}
+                    draggableId={task.taskId}
+                    index={index}
+                  >
+                    {(provided) => (
+                      <li
+                        ref={provided.innerRef}
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                      >
+                        <Task
+                          key={task.taskId}
+                          taskName={task.taskName}
+                          taskId={task.taskId}
+                          taskIndicatorColor={task.taskIndicatorColor}
+                          taskDescription={task.taskDescription}
+                          taskComments={task.taskComments}
+                          workspaceId={props.workspaceId}
+                          boardId={props.boardId}
+                          columnId={props.columnId}
+                          columnName={props.columnName}
+                        />
+                      </li>
+                    )}
+                  </Draggable>
+                );
+              })}
+            </div>
+          )}
+        </Droppable>
+      </DragDropContext>
 
       {taskAdding ? (
         <AddTaskForm

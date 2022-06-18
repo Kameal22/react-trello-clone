@@ -4,7 +4,7 @@ import {
   BoardInterface,
   TaskInterface,
   TaskCommentsInterface,
-  ColumnInterface
+  ColumnInterface,
 } from "../../interfaces/WorkspaceInterface";
 import { v4 as uuidv4 } from "uuid";
 
@@ -32,10 +32,13 @@ export const workspaceSlice = createSlice({
     ) => {
       const editedWorkspace = state.workspace.map((workspace) => {
         if (workspace.workspaceId === action.payload.id) {
-          return { ...workspace, workspaceDescription: action.payload.description }
+          return {
+            ...workspace,
+            workspaceDescription: action.payload.description,
+          };
         }
-        return workspace
-      })
+        return workspace;
+      });
 
       state.workspace = editedWorkspace;
     },
@@ -71,7 +74,10 @@ export const workspaceSlice = createSlice({
 
     deleteBoard: (
       state,
-      action: PayloadAction<{ workspaceName: string | undefined; boardId: string }>
+      action: PayloadAction<{
+        workspaceName: string | undefined;
+        boardId: string;
+      }>
     ) => {
       const workspace = state.workspace.findIndex(
         (value) => value.workspaceName === action.payload.workspaceName
@@ -84,25 +90,6 @@ export const workspaceSlice = createSlice({
       );
 
       state.workspace[workspace].workspaceBoards.splice(boardToDelete, 1);
-    },
-
-    reArangeBoard: (
-      state,
-      action: PayloadAction<{ workspaceName: string | undefined; boardId: string | undefined, columns: ColumnInterface[] | undefined }>
-    ) => {
-      const workspace = state.workspace.findIndex(
-        (value) => value.workspaceName === action.payload.workspaceName
-      );
-
-      const board = state.workspace[
-        workspace
-      ].workspaceBoards.findIndex(
-        (board) => board.boardId === action.payload.boardId
-      );
-
-      if (action.payload.columns) {
-        state.workspace[workspace].workspaceBoards[board].boardColumns = action.payload.columns
-      }
     },
 
     addColumn: (
@@ -187,6 +174,33 @@ export const workspaceSlice = createSlice({
         columnToDelete,
         1
       );
+    },
+
+    reArangeColumn: (
+      state,
+      action: PayloadAction<{
+        workspaceId: string | undefined;
+        boardId: string | undefined;
+        columnId: string | undefined;
+        tasks: TaskInterface[] | undefined;
+      }>
+    ) => {
+      const workspace = state.workspace.findIndex(
+        (value) => value.workspaceId === action.payload.workspaceId
+      );
+
+      const board = state.workspace[workspace].workspaceBoards.findIndex(
+        (board) => board.boardId === action.payload.boardId
+      );
+
+      const column = state.workspace[workspace].workspaceBoards[
+        board
+      ].boardColumns.findIndex(
+        (column) => column.columnId === action.payload.columnId
+      );
+
+      if (action.payload.tasks) {
+      }
     },
 
     addTask: (
@@ -283,18 +297,18 @@ export const workspaceSlice = createSlice({
         (value) => value.columnId === action.payload.columnId
       );
 
-      const updatedTask = state.workspace[workspace].workspaceBoards[board].boardColumns[
-        column
-      ].columnTasks.map((task) => {
+      const updatedTask = state.workspace[workspace].workspaceBoards[
+        board
+      ].boardColumns[column].columnTasks.map((task) => {
         if (task.taskId === action.payload.taskId) {
-          return { ...task, taskName: action.payload.newTask }
+          return { ...task, taskName: action.payload.newTask };
         }
-        return task
-      })
+        return task;
+      });
 
       state.workspace[workspace].workspaceBoards[board].boardColumns[
         column
-      ].columnTasks = updatedTask
+      ].columnTasks = updatedTask;
     },
 
     deleteTask: (
@@ -355,14 +369,14 @@ export const workspaceSlice = createSlice({
         (value) => value.columnId === action.payload.columnId
       );
 
-      const selectedLabel = state.workspace[workspace].workspaceBoards[board].boardColumns[
-        column
-      ].columnTasks.map((task) => {
+      const selectedLabel = state.workspace[workspace].workspaceBoards[
+        board
+      ].boardColumns[column].columnTasks.map((task) => {
         if (task.taskId === action.payload.taskId) {
-          return { ...task, taskIndicatorColor: action.payload.taskIndicator }
+          return { ...task, taskIndicatorColor: action.payload.taskIndicator };
         }
-        return task
-      })
+        return task;
+      });
 
       state.workspace[workspace].workspaceBoards[board].boardColumns[
         column
@@ -534,10 +548,10 @@ export const {
   editWorkspace,
   addBoard,
   deleteBoard,
-  reArangeBoard,
   addColumn,
   copyColumn,
   deleteColumn,
+  reArangeColumn,
   addTask,
   deleteTask,
   copyTask,
