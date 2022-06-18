@@ -24,6 +24,7 @@ const Task: React.FC<TaskProps> = (props) => {
   const [taskLabels, showTaskLabels] = useState<boolean>(false);
 
   const optionsRef = useRef<HTMLDivElement>(null);
+  const taskDetailsRef = useRef<HTMLDivElement>(null);
 
   const showOptions = () => {
     showTaskOptions(!taskOptions);
@@ -41,6 +42,14 @@ const Task: React.FC<TaskProps> = (props) => {
     document.addEventListener("mousedown", (event) => {
       if (!optionsRef.current?.contains(event.target as Node)) {
         showTaskOptions(false);
+      }
+    });
+  });
+
+  useEffect(() => {
+    document.addEventListener("mousedown", (event) => {
+      if (!taskDetailsRef.current?.contains(event.target as Node)) {
+        showTaskDetails(false);
       }
     });
   });
@@ -116,6 +125,7 @@ const Task: React.FC<TaskProps> = (props) => {
           columnName={props.columnName}
           showTaskDetails={showDetails}
           taskDescription={props.taskDescription}
+          forwardRef={taskDetailsRef}
         />
       ) : null}
     </div>

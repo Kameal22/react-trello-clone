@@ -5,7 +5,10 @@ import TaskDescriptionForm from "../task/TaskDescriptionForm";
 import { TaskCommentsInterface } from "../../interfaces/WorkspaceInterface";
 import { RootState } from "../../redux/Store";
 import { useSelector, useDispatch } from "react-redux";
-import { deleteTaskComment, editTask } from "../../redux/features/WorkspaceSlice";
+import {
+  deleteTaskComment,
+  editTask,
+} from "../../redux/features/WorkspaceSlice";
 import EditTaskCommentForm from "../task/EditTaskCommentForm";
 import CreateLabelPopUp from "./SpecialLabelPopUp";
 
@@ -20,6 +23,7 @@ interface TaskDetailsInterface {
   boardId: string | undefined;
   columnId: string | undefined;
   taskId: string;
+  forwardRef: React.RefObject<HTMLDivElement>;
 }
 
 const TaskDetailsPopUp: React.FC<TaskDetailsInterface> = (props) => {
@@ -33,9 +37,7 @@ const TaskDetailsPopUp: React.FC<TaskDetailsInterface> = (props) => {
 
   const taskDescriptionRef = useRef<HTMLDivElement>(null);
 
-  const handleTaskNameChange = (
-    e: React.FormEvent<HTMLInputElement>
-  ): void => {
+  const handleTaskNameChange = (e: React.FormEvent<HTMLInputElement>): void => {
     setTaskName(e.currentTarget.value);
   };
 
@@ -48,11 +50,11 @@ const TaskDetailsPopUp: React.FC<TaskDetailsInterface> = (props) => {
         boardId: props.boardId,
         columnId: props.columnId,
         taskId: props.taskId,
-        newTask: taskName
+        newTask: taskName,
       })
-    )
+    );
 
-    setEditingTaskName(!editingTaskName)
+    setEditingTaskName(!editingTaskName);
   };
 
   const setCreating = () => {
@@ -92,19 +94,28 @@ const TaskDetailsPopUp: React.FC<TaskDetailsInterface> = (props) => {
   });
 
   return (
-    <div className="taskDetailsDiv">
+    <div ref={props.forwardRef} className="taskDetailsDiv">
       <div className="taskDetailsName">
-        {editingTaskName ? <form
-          className="editTaskNameForm"
-          autoComplete="off"
-          onSubmit={handleSubmit}
-        >          <input
-            value={taskName}
-            className="editTaskNameInput"
-            onChange={handleTaskNameChange}
-            type="text"
-            name="taskName"
-          /></form> : <p onClick={() => setEditingTaskName(!editingTaskName)}>{props.taskName}</p>}
+        {editingTaskName ? (
+          <form
+            className="editTaskNameForm"
+            autoComplete="off"
+            onSubmit={handleSubmit}
+          >
+            {" "}
+            <input
+              value={taskName}
+              className="editTaskNameInput"
+              onChange={handleTaskNameChange}
+              type="text"
+              name="taskName"
+            />
+          </form>
+        ) : (
+          <p onClick={() => setEditingTaskName(!editingTaskName)}>
+            {props.taskName}
+          </p>
+        )}
 
         <i
           id="cornerIcon"
@@ -156,18 +167,21 @@ const TaskDetailsPopUp: React.FC<TaskDetailsInterface> = (props) => {
           />
         ) : (
           <div>
-            {props.taskDescription !== "" ? <p
-              onClick={() => showDescriptionForm()}
-              className="taskDetailsDescription"
-            >
-              {props.taskDescription}
-            </p> : <p
-              onClick={() => showDescriptionForm()}
-              className="taskDetailsDescriptionEnter"
-            >
-              Enter task description
-            </p>}
-
+            {props.taskDescription !== "" ? (
+              <p
+                onClick={() => showDescriptionForm()}
+                className="taskDetailsDescription"
+              >
+                {props.taskDescription}
+              </p>
+            ) : (
+              <p
+                onClick={() => showDescriptionForm()}
+                className="taskDetailsDescriptionEnter"
+              >
+                Enter task description
+              </p>
+            )}
           </div>
         )}
       </div>
