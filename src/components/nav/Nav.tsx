@@ -10,6 +10,7 @@ import { showDropdown } from "../../redux/features/navigationSlice";
 import NavUserMenu from "./navMenu/UserMenu";
 import { Link } from "react-router-dom";
 import CreateMenu from "./navMenu/CreateMenu";
+import { useState } from "react";
 
 interface NavProps {
   showCreateWorkspace: () => void;
@@ -19,6 +20,8 @@ interface NavProps {
 }
 
 const Nav: React.FC<NavProps> = (props) => {
+  const [navDropdownShowing, setNavDropdownShowing] = useState<boolean>(false);
+
   const dispatch = useDispatch();
 
   const user = useSelector((state: RootState) => state.users.user);
@@ -29,6 +32,7 @@ const Nav: React.FC<NavProps> = (props) => {
 
   const setDropdown = (dropdownItem: string) => {
     dispatch(showDropdown({ dropdownItem }));
+    setNavDropdownShowing(!navDropdownShowing);
   };
 
   const hideBoards = () => {
@@ -47,7 +51,7 @@ const Nav: React.FC<NavProps> = (props) => {
         </Link>
         <div
           onClick={
-            dropdown === "workspaces"
+            dropdown === "workspaces" && navDropdownShowing
               ? () => setDropdown("")
               : () => setDropdown("workspaces")
           }

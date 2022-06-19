@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import SearchForBoards from "./SearchForBoards";
 import { useEffect, useState } from "react";
 import { deleteBoard } from "../../redux/features/WorkspaceSlice";
+import { removeRecentlyViewedThatWasDeleted } from "../../redux/features/recentlyViewedSlice";
 
 interface WorkspaceBoardsInterface {
   setBoardCreating: () => void;
@@ -31,7 +32,23 @@ const WorkspaceBoards: React.FC<WorkspaceBoardsInterface> = (props) => {
         boardId: boardId,
       })
     );
-    window.location.reload()
+  };
+
+  const removeFromLastWatched = (workspaceName: string) => {
+    dispatch(
+      removeRecentlyViewedThatWasDeleted({
+        boardsWorkspaceName: workspaceName,
+      })
+    );
+  };
+
+  const handleWorkspaceRemove = (
+    workspaceName: string,
+    workspaceId: string
+  ) => {
+    deleteBoardFunc(workspaceName, workspaceId);
+    removeFromLastWatched(workspaceName);
+    window.location.reload();
   };
 
   const showSearchedBoards = (searchingValue: string) => {
@@ -97,7 +114,7 @@ const WorkspaceBoards: React.FC<WorkspaceBoardsInterface> = (props) => {
                   >
                     <p>{board.boardName}</p>
                   </Link>
-                  <i onClick={() => deleteBoardFunc(props.shownWorkspace?.workspaceName, board.boardId)} className="bi bi-trash3"></i>
+                  <i onClick={() => handleWorkspaceRemove(board.boardWorkspace, board.boardId)} className="bi bi-trash3"></i>
                 </div>
               );
             })

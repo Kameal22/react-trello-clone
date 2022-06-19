@@ -1,7 +1,7 @@
 import "../../styles/columnStyles/column.css";
 import { TaskInterface } from "../../interfaces/WorkspaceInterface";
 import EditColumnForm from "./EditColumnForm";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../redux/Store";
 import AddTaskForm from "../task/AddTaskForm";
@@ -28,6 +28,8 @@ const Column: React.FC<ColumnInterface> = (props) => {
 
   const dispatch = useDispatch();
 
+  const addTaskRef = useRef<HTMLDivElement>(null);
+
   const workspaces = useSelector(
     (state: RootState) => state.workspace.workspace
   );
@@ -53,6 +55,14 @@ const Column: React.FC<ColumnInterface> = (props) => {
   const addATask = () => {
     setTaskAdding(!taskAdding);
   };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", (event) => {
+      if (!addTaskRef.current?.contains(event.target as Node)) {
+        setTaskAdding(false);
+      }
+    });
+  });
 
   return (
     <div className="boardCOLUMNdiv">
@@ -109,6 +119,7 @@ const Column: React.FC<ColumnInterface> = (props) => {
           workspaceId={props.workspaceId}
           boardId={props.boardId}
           columnId={props.columnId}
+          forwardRef={addTaskRef}
         />
       ) : (
         <div onClick={() => addATask()} className="boardCOLUMNAddTask">

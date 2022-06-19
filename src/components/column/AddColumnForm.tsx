@@ -1,5 +1,5 @@
 import "../../styles/columnStyles/addColumnForm.css";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { TaskInterface } from "../../interfaces/WorkspaceInterface";
 import { addColumn } from "../../redux/features/WorkspaceSlice";
@@ -17,6 +17,8 @@ const AddColumnForm: React.FC<AddingColumnFormInterface> = (props) => {
   const [error, setError] = useState<string>("");
 
   const dispatch = useDispatch();
+
+  const createColumnRef = useRef<HTMLDivElement>(null);
 
   const handleColumnNameChange = (
     e: React.FormEvent<HTMLInputElement>
@@ -46,9 +48,17 @@ const AddColumnForm: React.FC<AddingColumnFormInterface> = (props) => {
     }
   };
 
+  useEffect(() => {
+    document.addEventListener("mousedown", (event) => {
+      if (!createColumnRef.current?.contains(event.target as Node)) {
+        setAddingColumn(false);
+      }
+    });
+  });
+
   if (addingColumn) {
     return (
-      <div className="addColumnFormDiv">
+      <div ref={createColumnRef} className="addColumnFormDiv">
         <form
           className="addColumnFormForm"
           autoComplete="off"

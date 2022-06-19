@@ -10,6 +10,7 @@ interface AddTaskInterface {
   workspaceId: string | undefined;
   boardId: string | undefined;
   columnId: string | undefined;
+  forwardRef: React.RefObject<HTMLDivElement>;
 }
 
 const AddTaskForm: React.FC<AddTaskInterface> = (props) => {
@@ -43,7 +44,7 @@ const AddTaskForm: React.FC<AddTaskInterface> = (props) => {
   };
 
   return (
-    <div className="addTaskFormDiv">
+    <div ref={props.forwardRef} className="addTaskFormDiv">
       <div className="addTaskDiv">
         <form
           className="addTaskForm"
