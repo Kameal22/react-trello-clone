@@ -113,6 +113,8 @@ const Board: React.FC = () => {
       return
     }
 
+    // VERY IMPORTANT = REFACTOR TO COLUMN ID INSTEAD OF NAME. THERE COULD BE MANY COLUMNS WITH THE SAME NAME!
+
     const column = boardsColumns?.find(column => column.columnName === source.droppableId)
 
     if (column) {

@@ -9,7 +9,6 @@
     margin-left: 1em;
     margin-right: 1em;
     padding: 10px 10px;
-    cursor: pointer;
 }
 
 .addCOLUMNFORMDiv:hover{
@@ -57,4 +56,5 @@
 .addColumnButtonIcon i{
     margin-left: .5em;
     font-weight: bold;
+    cursor: pointer;
 }

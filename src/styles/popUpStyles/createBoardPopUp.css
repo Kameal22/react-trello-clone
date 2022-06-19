@@ -3,7 +3,7 @@
     border: 1px solid grey;
     background-color: #fff;
     width: 20%;
-    height: 70vh;
+    height: 75vh;
     top:50%; 
     left:50%; 
     transform:translate(-50%, -50%); 
@@ -114,7 +114,6 @@
 }
 
 .submitDiv{
-    margin-top: 6vh;
     width: 90%;
     margin-left: auto;
     margin-right: auto;
@@ -130,4 +129,5 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    margin-top: 20vh;
 }

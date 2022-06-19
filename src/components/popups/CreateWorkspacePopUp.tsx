@@ -34,7 +34,7 @@ const CreateWorkspacePopUp: React.FC<WorkspacePopUpProps> = (props) => {
   const handleWorkspaceNameChange = (
     e: React.FormEvent<HTMLInputElement>
   ): void => {
-    if (workspaceName.length > 14) {
+    if (e.currentTarget.value.length > 14) {
       setNameError("Workspace name cannot excide 14 characters");
     } else {
       setNameError("");
@@ -45,7 +45,7 @@ const CreateWorkspacePopUp: React.FC<WorkspacePopUpProps> = (props) => {
   const handleWorkspaceDescriptionChange = (
     e: React.FormEvent<HTMLInputElement>
   ): void => {
-    if (workspaceDescription.length > 14) {
+    if (e.currentTarget.value.length > 14) {
       setDescriptionError("Workspace description cannot excide 14 characters")
     } else {
       setDescriptionError("")
@@ -134,7 +134,7 @@ const CreateWorkspacePopUp: React.FC<WorkspacePopUpProps> = (props) => {
               />
             </div>
             {descriptionError ? <p className="workspaceNameError">{descriptionError}</p> : null}
-            <button disabled={nameError !== "" || workspaceName.length < 5 || descriptionError !== ""} className="submitBtn" type="submit">
+            <button disabled={nameError !== "" || workspaceName.length < 1 || descriptionError !== ""} className="submitBtn" type="submit">
               Submit
             </button>
           </form>

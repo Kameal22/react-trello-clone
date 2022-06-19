@@ -35,11 +35,11 @@ const Workspace: React.FC = () => {
     return workspace.workspaceId === workspaceId;
   });
 
-  useEffect(() => {
-    if (workspaces.length < 1) {
-      navigate("/", { replace: true });
-    }
-  }, [workspaces]);
+  // useEffect(() => {
+  //   if (workspaces.length < 1) {
+  //     navigate("/", { replace: true });
+  //   }
+  // }, [workspaces]);
 
   useEffect(() => {
     dispatch(

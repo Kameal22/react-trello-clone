@@ -36,7 +36,7 @@ const WorkspaceBoards: React.FC<WorkspaceBoardsInterface> = (props) => {
 
   const showSearchedBoards = (searchingValue: string) => {
     if (searchingValue) {
-      const filtered = shownBoards?.filter((board) => {
+      const filtered = props.shownWorkspace?.workspaceBoards.filter((board) => {
         return board.boardName
           .toLowerCase()
           .includes(searchingValue.toLowerCase());

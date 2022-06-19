@@ -14,13 +14,19 @@ const AddColumnForm: React.FC<AddingColumnFormInterface> = (props) => {
   const [addingColumn, setAddingColumn] = useState(false);
   const [columnName, setColumnName] = useState<string>("");
   const [columnTasks] = useState<TaskInterface[]>([]);
+  const [error, setError] = useState<string>("");
 
   const dispatch = useDispatch();
 
   const handleColumnNameChange = (
     e: React.FormEvent<HTMLInputElement>
   ): void => {
-    setColumnName(e.currentTarget.value);
+    if (e.currentTarget.value.length > 50) {
+      setError("Column name must be maximum of 30 characters")
+    } else {
+      setError("")
+    }
+    setColumnName(e.currentTarget.value)
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -56,8 +62,9 @@ const AddColumnForm: React.FC<AddingColumnFormInterface> = (props) => {
               name="columnName"
               placeholder="Enter column title.."
             />
+            {error ? <p className="error">{error}</p> : null}
             <div className="addColumnButtonIcon">
-              <button type="submit">Add Column</button>
+              <button disabled={error !== ""} type="submit">Add Column</button>
               <i
                 onClick={() => setAddingColumn(!addingColumn)}
                 style={{ fontSize: "1.1em" }}

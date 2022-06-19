@@ -8,6 +8,7 @@ interface SearchForBoardsInterface {
 }
 
 const SearchForBoards: React.FC<SearchForBoardsInterface> = (props) => {
+
   const handleSearchValueChange = (
     e: React.FormEvent<HTMLInputElement>
   ): void => {

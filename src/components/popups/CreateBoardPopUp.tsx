@@ -122,12 +122,13 @@ const CreateBoardPopUp: React.FC<CreateBoardInterface> = (props) => {
               );
             })}
           </select>
+          <p className="boardTitleInfo">Workspace is required!</p>
         </div>
 
         <div className="submitDiv">
           <button
             type="submit"
-            disabled={boardName === ""}
+            disabled={boardName === "" || !boardWorkspace}
             className="submitBoardBtn"
           >
             Create
