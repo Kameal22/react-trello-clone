@@ -52,6 +52,7 @@ const TaskDescriptionForm: React.FC<TaskDescriptionFormInterface> = (props) => {
           type="text"
           name="description"
           placeholder="Enter description"
+          autoFocus
         />
       </form>
     </div>

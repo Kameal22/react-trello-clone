@@ -46,44 +46,45 @@ const AddColumnForm: React.FC<AddingColumnFormInterface> = (props) => {
     }
   };
 
-  return (
-    <div className="addCOLUMNFORMDiv">
-      {addingColumn ? (
-        <div className="addCOLUMNFORM">
-          <form
-            className="addColumnFormForm"
-            autoComplete="off"
-            onSubmit={handleSubmit}
-          >
-            <input
-              className="columnNameInput"
-              onChange={handleColumnNameChange}
-              type="text"
-              name="columnName"
-              placeholder="Enter column title.."
-            />
-            {error ? <p className="error">{error}</p> : null}
-            <div className="addColumnButtonIcon">
-              <button disabled={error !== ""} type="submit">Add Column</button>
-              <i
-                onClick={() => setAddingColumn(!addingColumn)}
-                style={{ fontSize: "1.1em" }}
-                className="bi bi-x-lg"
-              ></i>
-            </div>
-          </form>
-        </div>
-      ) : (
-        <div
-          onClick={() => setAddingColumn(!addingColumn)}
-          className="addColumnHeading"
+  if (addingColumn) {
+    return (
+      <div className="addColumnFormDiv">
+        <form
+          className="addColumnFormForm"
+          autoComplete="off"
+          onSubmit={handleSubmit}
         >
-          <i className="bi bi-plus-lg"></i>
-          <p> Add a column</p>
-        </div>
-      )}
-    </div>
-  );
+          <input
+            className="columnNameInput"
+            onChange={handleColumnNameChange}
+            type="text"
+            name="columnName"
+            placeholder="Enter column title.."
+            autoFocus
+          />
+          {error ? <p className="error">{error}</p> : null}
+          <div className="addColumnButtonIcon">
+            <button disabled={error !== ""} type="submit">Add Column</button>
+            <i
+              onClick={() => setAddingColumn(!addingColumn)}
+              style={{ fontSize: "1.1em" }}
+              className="bi bi-x-lg"
+            ></i>
+          </div>
+        </form>
+      </div>
+    );
+  } else {
+    return (
+      <div
+        onClick={() => setAddingColumn(!addingColumn)}
+        className="addColumnInitialDiv"
+      >
+        <i className="bi bi-plus-lg"></i>
+        <p> Add a column</p>
+      </div>
+    );
+  }
 };
 
 export default AddColumnForm;

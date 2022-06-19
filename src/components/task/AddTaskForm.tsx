@@ -56,6 +56,7 @@ const AddTaskForm: React.FC<AddTaskInterface> = (props) => {
             type="text"
             name="taskName"
             placeholder="Enter a title for this task.."
+            autoFocus
           />
           <div className="addTaskButtonIcon">
             <button type="submit">Add Task</button>

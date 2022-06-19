@@ -52,6 +52,7 @@ const EditTaskCommentForm: React.FC<EditTaskCommentInterface> = (props) => {
           type="text"
           name="comment"
           placeholder="Enter new comment"
+          autoFocus
         />
       </form>
     </div>
