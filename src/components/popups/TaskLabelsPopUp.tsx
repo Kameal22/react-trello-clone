@@ -2,6 +2,7 @@ import "../../styles/popUpStyles/taskLabelsPopUp.css";
 import { colorChoices } from "../../utils/TaskLabelColorChoices";
 import { selectTaskLabel } from "../../redux/features/WorkspaceSlice";
 import { useDispatch } from "react-redux";
+import { useRef, useEffect } from "react";
 
 interface TaskLabelsInterface {
   editLabels: () => void;
@@ -10,6 +11,7 @@ interface TaskLabelsInterface {
   columnId: string | undefined;
   taskId: string;
   chosenIndicator: string;
+  forwardRef: React.RefObject<HTMLDivElement>;
 }
 
 const TaskLabelsPopUp: React.FC<TaskLabelsInterface> = (props) => {
@@ -29,7 +31,7 @@ const TaskLabelsPopUp: React.FC<TaskLabelsInterface> = (props) => {
   };
 
   return (
-    <div className="editTaskLabelsDiv">
+    <div ref={props.forwardRef} className="editTaskLabelsDiv">
       <div className="edidTaskDivHeading">
         <p className="editTaskHeading">Labels</p>
         <i

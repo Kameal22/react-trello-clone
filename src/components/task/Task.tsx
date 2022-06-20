@@ -4,9 +4,7 @@ import TaskOptionsForm from "../task/TaskOptionsForm";
 import TaskDetailsPopUp from "../popups/TaskDetailsPopUp";
 import TaskLabelsPopUp from "../popups/TaskLabelsPopUp";
 import { TaskCommentsInterface } from "../../interfaces/WorkspaceInterface";
-import {
-  Draggable,
-} from "react-beautiful-dnd";
+import { Draggable } from "react-beautiful-dnd";
 
 interface TaskProps {
   taskName: string;
@@ -28,6 +26,7 @@ const Task: React.FC<TaskProps> = (props) => {
   const [taskLabels, showTaskLabels] = useState<boolean>(false);
 
   const optionsRef = useRef<HTMLDivElement>(null);
+  const taskLabelsRef = useRef<HTMLDivElement>(null);
   const taskDetailsRef = useRef<HTMLDivElement>(null);
 
   const showOptions = () => {
@@ -58,14 +57,22 @@ const Task: React.FC<TaskProps> = (props) => {
     });
   });
 
+  useEffect(() => {
+    document.addEventListener("mousedown", (event) => {
+      if (!taskLabelsRef.current?.contains(event.target as Node)) {
+        showTaskLabels(false);
+      }
+    });
+  });
+
   return (
     <Draggable draggableId={props.taskId} index={props.index}>
       {(provided) => (
         <div
+          onClick={() => showDetails()}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           ref={provided.innerRef}
-
           onMouseEnter={(e) => {
             setIconVisibility({ display: "block" });
           }}
@@ -82,9 +89,7 @@ const Task: React.FC<TaskProps> = (props) => {
           ) : null}
 
           <div className="taskDivName">
-            <p onClick={() => showDetails()} className="taskName">
-              {props.taskName}
-            </p>
+            <p className="taskName">{props.taskName}</p>
           </div>
 
           <i
@@ -96,7 +101,9 @@ const Task: React.FC<TaskProps> = (props) => {
 
           <div className="taskIcons">
             {props.taskComments[0] ? <i className="bi bi-chat"></i> : null}
-            {props.taskDescription ? <i className="bi bi-justify-left"></i> : null}
+            {props.taskDescription ? (
+              <i className="bi bi-justify-left"></i>
+            ) : null}
           </div>
 
           {taskOptions ? (
@@ -114,6 +121,7 @@ const Task: React.FC<TaskProps> = (props) => {
 
           {taskLabels ? (
             <TaskLabelsPopUp
+              forwardRef={taskLabelsRef}
               workspaceId={props.workspaceId}
               boardId={props.boardId}
               columnId={props.columnId}
