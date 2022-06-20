@@ -4,7 +4,11 @@ import { RootState } from "../../../redux/Store";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
-const NavRecent: React.FC = () => {
+interface RecentProps {
+  forwardRef: React.RefObject<HTMLDivElement>;
+}
+
+const NavRecent: React.FC<RecentProps> = (props) => {
   const dispatch = useDispatch();
 
   const setDropdown = (dropdownItem: string) => {
@@ -16,7 +20,7 @@ const NavRecent: React.FC = () => {
   );
 
   return (
-    <div className="navRecentDiv">
+    <div ref={props.forwardRef} className="navRecentDiv">
       <div className="navRecentHeading">
         <p>Recent boards</p>
         <i onClick={() => setDropdown("")} className="bi bi-x"></i>

@@ -10,7 +10,7 @@ import { showDropdown } from "../../redux/features/navigationSlice";
 import NavUserMenu from "./navMenu/UserMenu";
 import { Link } from "react-router-dom";
 import CreateMenu from "./navMenu/CreateMenu";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 
 interface NavProps {
   showCreateWorkspace: () => void;
@@ -20,7 +20,7 @@ interface NavProps {
 }
 
 const Nav: React.FC<NavProps> = (props) => {
-  const [navDropdownShowing, setNavDropdownShowing] = useState<boolean>(false);
+  const navDropdownRef = useRef<HTMLDivElement>(null);
 
   const dispatch = useDispatch();
 
@@ -32,7 +32,6 @@ const Nav: React.FC<NavProps> = (props) => {
 
   const setDropdown = (dropdownItem: string) => {
     dispatch(showDropdown({ dropdownItem }));
-    setNavDropdownShowing(!navDropdownShowing);
   };
 
   const hideBoards = () => {
@@ -40,6 +39,14 @@ const Nav: React.FC<NavProps> = (props) => {
       props.hideBoards();
     }
   };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", (event) => {
+      if (!navDropdownRef.current?.contains(event.target as Node)) {
+        setDropdown("");
+      }
+    });
+  });
 
   return (
     <div style={{ background: navColor }} className="navigationDiv">
@@ -51,7 +58,7 @@ const Nav: React.FC<NavProps> = (props) => {
         </Link>
         <div
           onClick={
-            dropdown === "workspaces" && navDropdownShowing
+            dropdown === "workspaces"
               ? () => setDropdown("")
               : () => setDropdown("workspaces")
           }
@@ -61,7 +68,10 @@ const Nav: React.FC<NavProps> = (props) => {
           <i className="bi bi-chevron-down"></i>
         </div>
         {dropdown === "workspaces" ? (
-          <NavWorkspaces showCreateWorkspace={props.showCreateWorkspace} />
+          <NavWorkspaces
+            forwardRef={navDropdownRef}
+            showCreateWorkspace={props.showCreateWorkspace}
+          />
         ) : null}
         <div
           onClick={
@@ -74,7 +84,9 @@ const Nav: React.FC<NavProps> = (props) => {
           <h5>Recent</h5>
           <i className="bi bi-chevron-down"></i>
         </div>
-        {dropdown === "recent" ? <NavRecent /> : null}
+        {dropdown === "recent" ? (
+          <NavRecent forwardRef={navDropdownRef} />
+        ) : null}
         <div
           onClick={
             dropdown === "create"
@@ -88,6 +100,7 @@ const Nav: React.FC<NavProps> = (props) => {
         </div>
         {dropdown === "create" ? (
           <CreateMenu
+            forwardRef={navDropdownRef}
             showCreateBoard={props.showCreateBoard}
             showCreateWorkspace={props.showCreateWorkspace}
           />
@@ -123,7 +136,12 @@ const Nav: React.FC<NavProps> = (props) => {
           )}
           {dropdown === "registering" ? <Register /> : null}
 
-          {dropdown === "userChoices" ? <NavUserMenu showBoards={props.showBoards} /> : null}
+          {dropdown === "userChoices" ? (
+            <NavUserMenu
+              forwardRef={navDropdownRef}
+              showBoards={props.showBoards}
+            />
+          ) : null}
         </div>
       </div>
     </div>

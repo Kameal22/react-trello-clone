@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 interface NavCreateInterface {
   showCreateWorkspace: () => void;
   showCreateBoard: () => void;
+  forwardRef: React.RefObject<HTMLDivElement>;
 }
 
 const CreateMenu: React.FC<NavCreateInterface> = (props) => {
@@ -30,7 +31,7 @@ const CreateMenu: React.FC<NavCreateInterface> = (props) => {
   };
 
   return (
-    <div className="navCreateDiv">
+    <div ref={props.forwardRef} className="navCreateDiv">
       <div className="navCreateHeading">
         <p>Create..</p>
         <i onClick={() => setDropdown("")} className="bi bi-x"></i>

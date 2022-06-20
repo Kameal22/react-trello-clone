@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 
 interface WorkspaceProps {
   showCreateWorkspace: () => void;
+  forwardRef: React.RefObject<HTMLDivElement>;
 }
 
 const NavWorkspaces: React.FC<WorkspaceProps> = (props) => {
@@ -27,7 +28,7 @@ const NavWorkspaces: React.FC<WorkspaceProps> = (props) => {
   };
 
   return (
-    <div className="navWorkspacesDiv">
+    <div ref={props.forwardRef} className="navWorkspacesDiv">
       <div className="navWorkspacesHeading">
         <p>Workspaces</p>
         <i onClick={() => setDropdown("")} className="bi bi-x"></i>

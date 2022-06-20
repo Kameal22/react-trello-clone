@@ -3,8 +3,7 @@ import { useState } from "react";
 import { registerUser } from "../../redux/features/registerSlice";
 import { showDropdown } from "../../redux/features/navigationSlice";
 import { setPopUpMessage } from "../../redux/features/popUpSlice";
-import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "../../redux/Store";
+import { useDispatch } from "react-redux";
 
 const Register: React.FC = () => {
   const [name, setName] = useState<string>("");

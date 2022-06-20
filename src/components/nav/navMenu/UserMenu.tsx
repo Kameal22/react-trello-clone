@@ -5,6 +5,7 @@ import { showDropdown } from "../../../redux/features/navigationSlice";
 
 interface NavUserMenuInterface {
   showBoards?: () => void;
+  forwardRef: React.RefObject<HTMLDivElement>;
 }
 
 const NavUserMenu: React.FC<NavUserMenuInterface> = (props) => {
@@ -23,11 +24,11 @@ const NavUserMenu: React.FC<NavUserMenuInterface> = (props) => {
     if (props.showBoards) {
       props.showBoards();
     }
-    setDropdown("")
+    setDropdown("");
   };
 
   return (
-    <div className="userChoicesDiv">
+    <div ref={props.forwardRef} className="userChoicesDiv">
       <div className="userChoiceDiv">
         <p onClick={() => logout()} className="userChoice">
           Logout
@@ -36,7 +37,9 @@ const NavUserMenu: React.FC<NavUserMenuInterface> = (props) => {
       </div>
 
       <div className="userChoiceDiv">
-        <p onClick={() => showBoards()} className="userChoice">Your boards</p>
+        <p onClick={() => showBoards()} className="userChoice">
+          Your boards
+        </p>
         <i className="bi bi-clipboard"></i>
       </div>
     </div>
