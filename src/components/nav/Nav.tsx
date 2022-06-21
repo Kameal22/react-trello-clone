@@ -19,7 +19,7 @@ interface NavProps {
   showBoards?: () => void;
 }
 
-const Nav: React.FC<NavProps> = (props) => {
+const Nav: React.FC<NavProps> = ({ showCreateWorkspace, showCreateBoard, hideBoards, showBoards }) => {
   const navDropdownRef = useRef<HTMLDivElement>(null);
 
   const dispatch = useDispatch();
@@ -34,9 +34,9 @@ const Nav: React.FC<NavProps> = (props) => {
     dispatch(showDropdown({ dropdownItem }));
   };
 
-  const hideBoards = () => {
-    if (props.hideBoards) {
-      props.hideBoards();
+  const hideBoardsFunc = () => {
+    if (hideBoards) {
+      hideBoards();
     }
   };
 
@@ -52,7 +52,7 @@ const Nav: React.FC<NavProps> = (props) => {
     <div style={{ background: navColor }} className="navigationDiv">
       <div className="navigationLeftSide">
         <Link to="/" onClick={() => setDropdown("")} className="logoLink">
-          <h3 onClick={() => hideBoards()} className="navigationLogo">
+          <h3 onClick={() => hideBoardsFunc()} className="navigationLogo">
             Trello
           </h3>
         </Link>
@@ -70,7 +70,7 @@ const Nav: React.FC<NavProps> = (props) => {
         {dropdown === "workspaces" ? (
           <NavWorkspaces
             forwardRef={navDropdownRef}
-            showCreateWorkspace={props.showCreateWorkspace}
+            showCreateWorkspace={showCreateWorkspace}
           />
         ) : null}
         <div
@@ -101,8 +101,8 @@ const Nav: React.FC<NavProps> = (props) => {
         {dropdown === "create" ? (
           <CreateMenu
             forwardRef={navDropdownRef}
-            showCreateBoard={props.showCreateBoard}
-            showCreateWorkspace={props.showCreateWorkspace}
+            showCreateBoard={showCreateBoard}
+            showCreateWorkspace={showCreateWorkspace}
           />
         ) : null}
       </div>
@@ -139,7 +139,7 @@ const Nav: React.FC<NavProps> = (props) => {
           {dropdown === "userChoices" ? (
             <NavUserMenu
               forwardRef={navDropdownRef}
-              showBoards={props.showBoards}
+              showBoards={showBoards}
             />
           ) : null}
         </div>

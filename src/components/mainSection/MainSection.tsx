@@ -2,24 +2,21 @@ import "../../styles/mainSectionStyles/mainSection.css";
 import MainSectionMenu from "./MainSectionMenu";
 import MainSectionHighlights from "./MainSectionHighlights";
 import MainSectionRecent from "./MainSectionRecent";
-import { useState } from "react";
 import MainSectionBoards from "./MainSectionBoards";
 
 interface MainSectionProps {
   showCreateWorkspace: () => void;
-  showBoards: () => void;
-  hideBoards: () => void;
-  showingBoards: boolean;
+  homeView: string;
+  toggleMainView: (view: string) => void;
 }
 
-const MainSection: React.FC<MainSectionProps> = (props) => {
-  if (!props.showingBoards) {
+const MainSection: React.FC<MainSectionProps> = ({ showCreateWorkspace, homeView, toggleMainView }) => {
+  if (homeView === "landingView") {
     return (
       <div className="mainSectionDiv">
         <MainSectionMenu
-          hideBoards={props.hideBoards}
-          showCreateWorkspace={props.showCreateWorkspace}
-          showBoards={props.showBoards}
+          toggleMainView={toggleMainView}
+          showCreateWorkspace={showCreateWorkspace}
         />
         <MainSectionHighlights />
         <MainSectionRecent />
@@ -29,9 +26,8 @@ const MainSection: React.FC<MainSectionProps> = (props) => {
     return (
       <div className="mainSectionDiv">
         <MainSectionMenu
-          hideBoards={props.hideBoards}
-          showCreateWorkspace={props.showCreateWorkspace}
-          showBoards={props.showBoards}
+          toggleMainView={toggleMainView}
+          showCreateWorkspace={showCreateWorkspace}
         />
         <MainSectionBoards />
       </div>

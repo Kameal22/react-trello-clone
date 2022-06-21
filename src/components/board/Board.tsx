@@ -17,6 +17,7 @@ import {
   DropResult,
 } from "react-beautiful-dnd";
 import { ColumnInterface } from "../../interfaces/WorkspaceInterface";
+
 const Board: React.FC = () => {
   const [createWorkspacePopUp, setCreateWorkspacePopUp] =
     useState<boolean>(false);

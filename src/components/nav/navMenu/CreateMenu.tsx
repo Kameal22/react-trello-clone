@@ -9,7 +9,7 @@ interface NavCreateInterface {
   forwardRef: React.RefObject<HTMLDivElement>;
 }
 
-const CreateMenu: React.FC<NavCreateInterface> = (props) => {
+const CreateMenu: React.FC<NavCreateInterface> = ({ showCreateWorkspace, showCreateBoard, forwardRef }) => {
   const dispatch = useDispatch();
 
   const setDropdown = (dropdownItem: string) => {
@@ -21,17 +21,17 @@ const CreateMenu: React.FC<NavCreateInterface> = (props) => {
   );
 
   const showCreateWorkspaceFunc = () => {
-    props.showCreateWorkspace();
+    showCreateWorkspace();
     setDropdown("");
   };
 
   const showCreateBoardFunc = () => {
-    props.showCreateBoard();
+    showCreateBoard();
     setDropdown("");
   };
 
   return (
-    <div ref={props.forwardRef} className="navCreateDiv">
+    <div ref={forwardRef} className="navCreateDiv">
       <div className="navCreateHeading">
         <p>Create..</p>
         <i onClick={() => setDropdown("")} className="bi bi-x"></i>

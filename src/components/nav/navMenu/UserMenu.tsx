@@ -8,7 +8,7 @@ interface NavUserMenuInterface {
   forwardRef: React.RefObject<HTMLDivElement>;
 }
 
-const NavUserMenu: React.FC<NavUserMenuInterface> = (props) => {
+const NavUserMenu: React.FC<NavUserMenuInterface> = ({ showBoards, forwardRef }) => {
   const dispatch = useDispatch();
 
   const setDropdown = (dropdownItem: string) => {
@@ -20,15 +20,15 @@ const NavUserMenu: React.FC<NavUserMenuInterface> = (props) => {
     setDropdown("");
   };
 
-  const showBoards = () => {
-    if (props.showBoards) {
-      props.showBoards();
+  const showBoardsFunc = () => {
+    if (showBoards) {
+      showBoards();
     }
     setDropdown("");
   };
 
   return (
-    <div ref={props.forwardRef} className="userChoicesDiv">
+    <div ref={forwardRef} className="userChoicesDiv">
       <div className="userChoiceDiv">
         <p onClick={() => logout()} className="userChoice">
           Logout
@@ -37,7 +37,7 @@ const NavUserMenu: React.FC<NavUserMenuInterface> = (props) => {
       </div>
 
       <div className="userChoiceDiv">
-        <p onClick={() => showBoards()} className="userChoice">
+        <p onClick={() => showBoardsFunc()} className="userChoice">
           Your boards
         </p>
         <i className="bi bi-clipboard"></i>

@@ -9,21 +9,27 @@ import { changeColor } from "../../redux/features/navigationSlice";
 import CreateBoardPopUp from "../popups/CreateBoardPopUp";
 
 const LandingPage: React.FC = () => {
-  const [createWorkspacePopUp, setCreateWorkspacePopUp] =
+  const [workspaceCreating, setWorkspaceCreating] =
     useState<boolean>(false);
   const [boardCreating, setBoardCreating] = useState<boolean>(false);
-  const [showingBoards, setShowingBoards] = useState<boolean>(false); //When this is true - Main Section will show Menu + Boards. If not - stays with highlights and recent.
+  const [homeView, toggleHomeView] = useState<string>("landingView");
+
+  const dispatch = useDispatch();
 
   const createWorkspaceRef = useRef<HTMLDivElement>(null);
 
   const createBoardRef = useRef<HTMLDivElement>(null);
 
-  const showBoardsFunc = () => {
-    setShowingBoards(true);
+  const toggleMainView = (view: string) => {
+    toggleHomeView(view)
+  }
+
+  const showBoardCreating = () => {
+    setBoardCreating(!boardCreating);
   };
 
-  const hideBoardsFunc = () => {
-    setShowingBoards(false);
+  const showWorkspaceCreation = () => {
+    setWorkspaceCreating(!workspaceCreating)
   };
 
   useEffect(() => {
@@ -34,20 +40,11 @@ const LandingPage: React.FC = () => {
     );
   }, []); // Change color to original after leaving a board.
 
-  const dispatch = useDispatch();
-
-  const showBoardCreating = () => {
-    setBoardCreating(!boardCreating);
-  };
-
-  const showWorkspaceCreation = () => {
-    setCreateWorkspacePopUp(!createWorkspacePopUp);
-  };
 
   useEffect(() => {
     document.addEventListener("mousedown", (event) => {
       if (!createWorkspaceRef.current?.contains(event.target as Node)) {
-        setCreateWorkspacePopUp(false);
+        setWorkspaceCreating(false);
       }
     });
   });
@@ -63,18 +60,15 @@ const LandingPage: React.FC = () => {
   return (
     <div className="landingPageDiv">
       <Nav
-        showBoards={showBoardsFunc}
-        hideBoards={hideBoardsFunc}
         showCreateBoard={showBoardCreating}
         showCreateWorkspace={showWorkspaceCreation}
       />
       <MainSection
-        showBoards={showBoardsFunc}
-        hideBoards={hideBoardsFunc}
-        showingBoards={showingBoards}
+        homeView={homeView}
+        toggleMainView={toggleMainView}
         showCreateWorkspace={showWorkspaceCreation}
       />
-      {createWorkspacePopUp ? (
+      {workspaceCreating ? (
         <div>
           <CreateWorkspacePopUp
             forwardRef={createWorkspaceRef}

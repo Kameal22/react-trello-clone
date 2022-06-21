@@ -9,7 +9,7 @@ interface WorkspaceProps {
   forwardRef: React.RefObject<HTMLDivElement>;
 }
 
-const NavWorkspaces: React.FC<WorkspaceProps> = (props) => {
+const NavWorkspaces: React.FC<WorkspaceProps> = ({ showCreateWorkspace, forwardRef }) => {
   const dispatch = useDispatch();
 
   const setDropdown = (dropdownItem: string) => {
@@ -23,12 +23,12 @@ const NavWorkspaces: React.FC<WorkspaceProps> = (props) => {
   const isWorkspace = workspaces[0];
 
   const showCreateWorkspacePopUp = () => {
-    props.showCreateWorkspace();
+    showCreateWorkspace();
     dispatch(setDropdown(""));
   };
 
   return (
-    <div ref={props.forwardRef} className="navWorkspacesDiv">
+    <div ref={forwardRef} className="navWorkspacesDiv">
       <div className="navWorkspacesHeading">
         <p>Workspaces</p>
         <i onClick={() => setDropdown("")} className="bi bi-x"></i>

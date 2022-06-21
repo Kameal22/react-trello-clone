@@ -8,7 +8,7 @@ interface RecentProps {
   forwardRef: React.RefObject<HTMLDivElement>;
 }
 
-const NavRecent: React.FC<RecentProps> = (props) => {
+const NavRecent: React.FC<RecentProps> = ({ forwardRef }) => {
   const dispatch = useDispatch();
 
   const setDropdown = (dropdownItem: string) => {
@@ -20,7 +20,7 @@ const NavRecent: React.FC<RecentProps> = (props) => {
   );
 
   return (
-    <div ref={props.forwardRef} className="navRecentDiv">
+    <div ref={forwardRef} className="navRecentDiv">
       <div className="navRecentHeading">
         <p>Recent boards</p>
         <i onClick={() => setDropdown("")} className="bi bi-x"></i>
