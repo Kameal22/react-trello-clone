@@ -1,7 +1,7 @@
 import "../../styles/popUpStyles/popUpMessage.css";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../redux/Store";
-import { setPopUpMessage } from "../../redux/features/popUpSlice";
+import { setPopUpMessage } from "../../redux/features/popUpMessagSlice";
 
 const PopUp: React.FC = () => {
   const dispatch = useDispatch();

@@ -143,18 +143,6 @@ const Board: React.FC = () => {
       style={{ background: `${shownBoard?.boardBackground}` }}
       className="boardDivBOARD"
     >
-      {createWorkspacePopUp ? (
-        <CreateWorkspacePopUp
-          forwardRef={createWorkspaceRef}
-          showCreateWorkspace={showWorkspaceCreation}
-        />
-      ) : null}
-      {boardCreating ? (
-        <CreateBoardPopUp
-          forwardRef={createBoardRef}
-          setBoardCreating={showBoardCreation}
-        />
-      ) : null}
       <div className="boardHeadingBOARD">
         <h3 className="boardNameBOARD">board: {shownBoard?.boardName}</h3>
         {user.name ? (

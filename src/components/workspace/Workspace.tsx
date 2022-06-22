@@ -89,14 +89,6 @@ const Workspace: React.FC = () => {
 
   return (
     <div className="yourWorkspaceDiv">
-      {boardCreating ? (
-        <CreateBoardPopUp forwardRef={createBoardRef} setBoardCreating={showBoardCreating} />
-      ) : null}
-
-      {createWorkspacePopUp ? (
-        <CreateWorkspacePopUp forwardRef={createWorkspaceRef} showCreateWorkspace={showWorkspaceCreation} />
-      ) : null}
-
       <div className="yourWorkspaceHeadingDiv">
         {workspaceEditing ? (
           <EditWorkspaceDetails

@@ -8,14 +8,10 @@ import { guestName } from "../../utils/RandomizeGuestName";
 import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import { showDropdown } from "../../redux/features/navigationSlice";
+import { setCreateWorkspace } from "../../redux/features/popUpCreateComponentSlice";
 import { generateRandomColor } from "../../utils/GenerateRandomColor";
 
-interface WorkspacePopUpProps {
-  showCreateWorkspace: () => void;
-  forwardRef: React.RefObject<HTMLDivElement>;
-}
-
-const CreateWorkspacePopUp: React.FC<WorkspacePopUpProps> = (props) => {
+const CreateWorkspacePopUp: React.FC = () => {
   const [workspaceName, setWorkspaceName] = useState<string>("");
   const [workspaceDescription, setWorkspaceDescription] = useState<string>("");
   const [workspaceId] = useState<string>(uuidv4());
@@ -30,6 +26,12 @@ const CreateWorkspacePopUp: React.FC<WorkspacePopUpProps> = (props) => {
   const setDropdown = (dropdownItem: string) => {
     dispatch(showDropdown({ dropdownItem }));
   };
+
+  const showWorkspaceCreating = () => {
+    dispatch(
+      setCreateWorkspace()
+    )
+  }
 
   const handleWorkspaceNameChange = (
     e: React.FormEvent<HTMLInputElement>
@@ -69,7 +71,7 @@ const CreateWorkspacePopUp: React.FC<WorkspacePopUpProps> = (props) => {
             workspaceId,
           })
         );
-        props.showCreateWorkspace();
+        showWorkspaceCreating();
       } else {
         dispatch(
           addWorkspace({
@@ -83,7 +85,7 @@ const CreateWorkspacePopUp: React.FC<WorkspacePopUpProps> = (props) => {
             workspaceId,
           })
         );
-        props.showCreateWorkspace();
+        showWorkspaceCreating()
       }
       setDropdown("");
       navigate(`/workspace/${workspaceId}`, { replace: true });
@@ -91,8 +93,8 @@ const CreateWorkspacePopUp: React.FC<WorkspacePopUpProps> = (props) => {
   };
 
   return (
-    <div ref={props.forwardRef} className="createWorkspacePopUp">
-      <i onClick={() => props.showCreateWorkspace()} className="bi bi-x-lg"></i>
+    <div className="createWorkspacePopUp">
+      <i onClick={() => showWorkspaceCreating()} className="bi bi-x-lg"></i>
       <div className="createWorkspace">
         <div className="createWorkspaceInfo">
           <h2>

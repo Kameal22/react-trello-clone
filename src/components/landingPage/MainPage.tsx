@@ -3,29 +3,19 @@ import Nav from "../nav/Nav";
 import PopUpMessage from "../popups/PopUpMessage";
 import CreateWorkspacePopUp from "../popups/CreateWorkspacePopUp";
 import React, { useState, useEffect, useRef } from "react";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../../redux/Store";
 import { changeColor } from "../../redux/features/navigationSlice";
 import CreateBoardPopUp from "../popups/CreateBoardPopUp";
 import MainOverview from "./overview/MainOverview";
 
 const MainPage: React.FC = () => {
-  const [workspaceCreating, setWorkspaceCreating] =
-    useState<boolean>(false);
-  const [boardCreating, setBoardCreating] = useState<boolean>(false);
 
   const dispatch = useDispatch();
 
   const createWorkspaceRef = useRef<HTMLDivElement>(null);
 
   const createBoardRef = useRef<HTMLDivElement>(null);
-
-  const showBoardCreating = () => {
-    setBoardCreating(!boardCreating);
-  };
-
-  const showWorkspaceCreation = () => {
-    setWorkspaceCreating(!workspaceCreating)
-  };
 
   useEffect(() => {
     dispatch(
@@ -39,7 +29,7 @@ const MainPage: React.FC = () => {
   useEffect(() => {
     document.addEventListener("mousedown", (event) => {
       if (!createWorkspaceRef.current?.contains(event.target as Node)) {
-        setWorkspaceCreating(false);
+        // setWorkspaceCreating(false);
       }
     });
   });
@@ -47,7 +37,7 @@ const MainPage: React.FC = () => {
   useEffect(() => {
     document.addEventListener("mousedown", (event) => {
       if (!createBoardRef.current?.contains(event.target as Node)) {
-        setBoardCreating(false);
+        // setBoardCreating(false);
       }
     });
   });
@@ -55,17 +45,6 @@ const MainPage: React.FC = () => {
   return (
     <div className="mainPageDiv">
       <MainOverview />
-      {workspaceCreating ? (
-        <div>
-          <CreateWorkspacePopUp
-            forwardRef={createWorkspaceRef}
-            showCreateWorkspace={showWorkspaceCreation}
-          />
-        </div>
-      ) : null}
-      {boardCreating ? (
-        <CreateBoardPopUp forwardRef={createBoardRef} setBoardCreating={showBoardCreating} />
-      ) : null}
       <PopUpMessage />
     </div>
   );

@@ -1,9 +1,10 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import registeredUsersReducer from "./features/registerSlice";
 import navigationReducer from "./features/navigationSlice";
-import popUpReducer from "./features/popUpSlice";
+import popUpReducer from "./features/popUpMessagSlice";
 import workspaceReducer from "./features/WorkspaceSlice";
 import recentlyViewedReducer from "./features/recentlyViewedSlice";
+import createComponentReducer from "./features/popUpCreateComponentSlice";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import thunk from 'redux-thunk';
@@ -13,7 +14,8 @@ const reducers = combineReducers({
   nav: navigationReducer,
   message: popUpReducer,
   workspace: workspaceReducer,
-  recents: recentlyViewedReducer
+  recents: recentlyViewedReducer,
+  create: createComponentReducer
 })
 
 const persistConfig = {

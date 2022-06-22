@@ -2,7 +2,7 @@ import "../../styles/navStyles/navRegister.css";
 import { useState } from "react";
 import { registerUser } from "../../redux/features/registerSlice";
 import { showDropdown } from "../../redux/features/navigationSlice";
-import { setPopUpMessage } from "../../redux/features/popUpSlice";
+import { setPopUpMessage } from "../../redux/features/popUpMessagSlice";
 import { useDispatch } from "react-redux";
 
 const Register: React.FC = () => {

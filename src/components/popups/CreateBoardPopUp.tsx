@@ -6,13 +6,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../redux/Store";
 import { addBoard } from "../../redux/features/WorkspaceSlice";
 import { useNavigate } from "react-router-dom";
+import { setCreateBoard } from "../../redux/features/popUpCreateComponentSlice";
 
-interface CreateBoardInterface {
-  setBoardCreating: () => void;
-  forwardRef: React.RefObject<HTMLDivElement>;
-}
-
-const CreateBoardPopUp: React.FC<CreateBoardInterface> = (props) => {
+const CreateBoardPopUp: React.FC = () => {
   const [boardName, setBoardName] = useState<string>("");
   const [boardId] = useState<string>(uuidv4());
   const [boardBackground, setBoardBackground] = useState<string>(
@@ -26,6 +22,12 @@ const CreateBoardPopUp: React.FC<CreateBoardInterface> = (props) => {
   const workspaces = useSelector(
     (state: RootState) => state.workspace.workspace
   );
+
+  const showWorkspaceCreating = () => {
+    dispatch(
+      setCreateBoard()
+    )
+  }
 
   const handleBoardNameChange = (
     e: React.FormEvent<HTMLInputElement>
@@ -50,14 +52,14 @@ const CreateBoardPopUp: React.FC<CreateBoardInterface> = (props) => {
         boardColumns: [],
       })
     );
-    props.setBoardCreating();
+    setCreateBoard();
     navigate(`/board/${boardWorkspace}/${boardId}`, { replace: true });
   };
 
   return (
-    <div ref={props.forwardRef} className="createBoardDiv">
+    <div className="createBoardDiv">
       <p className="createBoardHeading">Create board</p>
-      <i onClick={() => props.setBoardCreating()} className="bi bi-x"></i>
+      <i onClick={() => setCreateBoard()} className="bi bi-x"></i>
 
       <div className="createBoardImg">
         <img src="https://a.trellocdn.com/prgb/dist/images/board-preview-skeleton.14cda5dc635d1f13bc48.svg" />

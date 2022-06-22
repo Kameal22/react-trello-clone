@@ -7,6 +7,7 @@ import {
 } from "../../../redux/features/WorkspaceSlice";
 import { removeRecentlyViewedThatWasDeleted } from "../../../redux/features/recentlyViewedSlice";
 import { Link } from "react-router-dom";
+import { setCreateWorkspace } from "../../../redux/features/popUpCreateComponentSlice";
 
 const MainMenu: React.FC = () => {
   const dispatch = useDispatch();
@@ -18,6 +19,12 @@ const MainMenu: React.FC = () => {
   const showDropdown = (id: string) => {
     dispatch(showWorkspaceDropdown({ id }));
   };
+
+  const showWorkspaceCreating = () => {
+    dispatch(
+      setCreateWorkspace()
+    )
+  }
 
   const isWorkspace = workspaces[0];
 
@@ -74,7 +81,7 @@ const MainMenu: React.FC = () => {
         >
           Workspaces
         </p>
-        <i
+        <i onClick={() => showWorkspaceCreating()}
           style={
             isWorkspace
               ? { fontSize: "1.2em" }
