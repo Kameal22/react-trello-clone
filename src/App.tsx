@@ -31,8 +31,8 @@ function App() {
           <Route path="/board/:workspaceName/:boardId" element={<Board />} />
           <Route path='*' element={<NotFoundPage />} />
         </Routes>
-        {createWorkspace ? <CreateWorkspacePopUp /> : null}
-        {createBoard ? <CreateBoardPopUp /> : null}
+        {createWorkspace && <CreateWorkspacePopUp />}
+        {createBoard && <CreateBoardPopUp />}
       </BrowserRouter>
     </div>
   );

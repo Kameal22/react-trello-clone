@@ -7,17 +7,12 @@ import { editWorkspace } from "../../redux/features/WorkspaceSlice";
 import { useSelector, useDispatch } from "react-redux";
 import EditWorkspaceDetails from "./EditWorkspaceDetails";
 import WorkspaceBoards from "./WorkspaceBoards";
-import CreateBoardPopUp from "../popups/CreateBoardPopUp";
-import CreateWorkspacePopUp from "../popups/CreateWorkspacePopUp";
 import PopUp from "../popups/PopUpMessage";
 import { changeColor } from "../../redux/features/navigationSlice";
 import { useNavigate } from "react-router-dom";
 
 const Workspace: React.FC = () => {
-  const [createWorkspacePopUp, setCreateWorkspacePopUp] =
-    useState<boolean>(false);
   const [workspaceEditing, setWorkspaceEditing] = useState<boolean>(false);
-  const [boardCreating, setBoardCreating] = useState<boolean>(false);
 
   const createWorkspaceRef = useRef<HTMLDivElement>(null);
 
@@ -52,14 +47,6 @@ const Workspace: React.FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const showBoardCreating = () => {
-    setBoardCreating(!boardCreating);
-  };
-
-  const showWorkspaceCreation = () => {
-    setCreateWorkspacePopUp(!createWorkspacePopUp);
-  };
-
   const setEditting = () => {
     setWorkspaceEditing(!workspaceEditing);
   };
@@ -71,21 +58,21 @@ const Workspace: React.FC = () => {
     dispatch(editWorkspace({ id, description }));
   };
 
-  useEffect(() => {
-    document.addEventListener("mousedown", (event) => {
-      if (!createWorkspaceRef.current?.contains(event.target as Node)) {
-        setCreateWorkspacePopUp(false);
-      }
-    });
-  });
+  // useEffect(() => {
+  //   document.addEventListener("mousedown", (event) => {
+  //     if (!createWorkspaceRef.current?.contains(event.target as Node)) {
+  //       setCreateWorkspacePopUp(false);
+  //     }
+  //   });
+  // });
 
-  useEffect(() => {
-    document.addEventListener("mousedown", (event) => {
-      if (!createBoardRef.current?.contains(event.target as Node)) {
-        setBoardCreating(false);
-      }
-    });
-  });
+  // useEffect(() => {
+  //   document.addEventListener("mousedown", (event) => {
+  //     if (!createBoardRef.current?.contains(event.target as Node)) {
+  //       setBoardCreating(false);
+  //     }
+  //   });
+  // });
 
   return (
     <div className="yourWorkspaceDiv">
@@ -129,7 +116,6 @@ const Workspace: React.FC = () => {
       </div>
       <WorkspaceBoards
         shownWorkspace={shownWorkspace}
-        setBoardCreating={showBoardCreating}
       />
       <PopUp />
     </div>

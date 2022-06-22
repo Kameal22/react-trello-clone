@@ -9,9 +9,9 @@ import SearchForBoards from "./SearchForBoards";
 import { useEffect, useState } from "react";
 import { deleteBoard } from "../../redux/features/WorkspaceSlice";
 import { removeRecentlyViewedThatWasDeleted } from "../../redux/features/recentlyViewedSlice";
+import { setCreateBoard } from "../../redux/features/popUpCreateComponentSlice";
 
 interface WorkspaceBoardsInterface {
-  setBoardCreating: () => void;
   shownWorkspace: WorkspaceInterface | undefined;
 }
 
@@ -24,6 +24,12 @@ const WorkspaceBoards: React.FC<WorkspaceBoardsInterface> = (props) => {
   );
 
   const dispatch = useDispatch();
+
+  const showBoardCreating = () => {
+    dispatch(
+      setCreateBoard()
+    )
+  }
 
   const deleteBoardFunc = (workspaceName: string | undefined, boardId: string) => {
     dispatch(
@@ -94,7 +100,7 @@ const WorkspaceBoards: React.FC<WorkspaceBoardsInterface> = (props) => {
 
         <div className="workspaceBoards">
           <div
-            onClick={() => props.setBoardCreating()}
+            onClick={() => showBoardCreating()}
             className="workspaceCreateBoard"
           >
             <p>Create new board</p>

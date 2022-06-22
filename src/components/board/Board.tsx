@@ -8,8 +8,6 @@ import { addRecentlyViewed } from "../../redux/features/recentlyViewedSlice";
 import Column from "../column/Column";
 import AddColumnForm from "../column/AddColumnForm";
 import { changeColor } from "../../redux/features/navigationSlice";
-import CreateWorkspacePopUp from "../popups/CreateWorkspacePopUp";
-import CreateBoardPopUp from "../popups/CreateBoardPopUp";
 import { reArangeColumn } from "../../redux/features/WorkspaceSlice";
 
 import {
@@ -19,14 +17,6 @@ import {
 import { ColumnInterface } from "../../interfaces/WorkspaceInterface";
 
 const Board: React.FC = () => {
-  const [createWorkspacePopUp, setCreateWorkspacePopUp] =
-    useState<boolean>(false);
-  const [boardCreating, setBoardCreating] = useState<boolean>(false);
-
-  const createWorkspaceRef = useRef<HTMLDivElement>(null);
-
-  const createBoardRef = useRef<HTMLDivElement>(null);
-
   const { workspaceName, boardId } = useParams();
 
   const dispatch = useDispatch();
@@ -46,14 +36,6 @@ const Board: React.FC = () => {
   });
 
   const boardsColumns = shownBoard?.boardColumns;
-
-  const showWorkspaceCreation = () => {
-    setCreateWorkspacePopUp(!createWorkspacePopUp);
-  };
-
-  const showBoardCreation = () => {
-    setBoardCreating(!boardCreating);
-  };
 
   useEffect(() => {
     if (shownBoard) {
@@ -76,21 +58,21 @@ const Board: React.FC = () => {
     );
   };
 
-  useEffect(() => {
-    document.addEventListener("mousedown", (event) => {
-      if (!createWorkspaceRef.current?.contains(event.target as Node)) {
-        setCreateWorkspacePopUp(false);
-      }
-    });
-  });
+  // useEffect(() => {
+  //   document.addEventListener("mousedown", (event) => {
+  //     if (!createWorkspaceRef.current?.contains(event.target as Node)) {
+  //       setCreateWorkspacePopUp(false);
+  //     }
+  //   });
+  // });
 
-  useEffect(() => {
-    document.addEventListener("mousedown", (event) => {
-      if (!createBoardRef.current?.contains(event.target as Node)) {
-        setBoardCreating(false);
-      }
-    });
-  });
+  // useEffect(() => {
+  //   document.addEventListener("mousedown", (event) => {
+  //     if (!createBoardRef.current?.contains(event.target as Node)) {
+  //       setBoardCreating(false);
+  //     }
+  //   });
+  // });
 
   const reArangeColumnFunc = (newColumn: ColumnInterface, columnName: string) => {
     dispatch(

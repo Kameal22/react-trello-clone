@@ -23,7 +23,7 @@ const CreateBoardPopUp: React.FC = () => {
     (state: RootState) => state.workspace.workspace
   );
 
-  const showWorkspaceCreating = () => {
+  const showBoardCreating = () => {
     dispatch(
       setCreateBoard()
     )
@@ -52,14 +52,14 @@ const CreateBoardPopUp: React.FC = () => {
         boardColumns: [],
       })
     );
-    setCreateBoard();
+    showBoardCreating();
     navigate(`/board/${boardWorkspace}/${boardId}`, { replace: true });
   };
 
   return (
     <div className="createBoardDiv">
       <p className="createBoardHeading">Create board</p>
-      <i onClick={() => setCreateBoard()} className="bi bi-x"></i>
+      <i onClick={() => showBoardCreating()} className="bi bi-x"></i>
 
       <div className="createBoardImg">
         <img src="https://a.trellocdn.com/prgb/dist/images/board-preview-skeleton.14cda5dc635d1f13bc48.svg" />
