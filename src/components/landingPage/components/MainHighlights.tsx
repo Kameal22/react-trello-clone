@@ -1,6 +1,6 @@
-import "../../styles/mainSectionStyles/mainSectionHighlights.css";
+import "../../../styles/mainSectionStyles/mainHighlights.css";
 import { useSelector } from "react-redux";
-import { RootState } from "../../redux/Store";
+import { RootState } from "../../../redux/Store";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 
@@ -13,7 +13,7 @@ interface TaskToShowInterface {
   workspace: string;
 }
 
-const MainSectionHighlights: React.FC = () => {
+const MainHighlights: React.FC = () => {
   const [taskToShow, setTaskToShow] = useState<TaskToShowInterface>();
 
   const workspaces = useSelector(
@@ -102,4 +102,4 @@ const MainSectionHighlights: React.FC = () => {
   );
 };
 
-export default MainSectionHighlights;
+export default MainHighlights;

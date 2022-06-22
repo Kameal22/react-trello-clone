@@ -1,19 +1,14 @@
-import "../../styles/mainSectionStyles/mainSectionMenu.css";
-import { RootState } from "../../redux/Store";
+import "../../../styles/mainSectionStyles/mainMenu.css";
+import { RootState } from "../../../redux/Store";
 import { useDispatch, useSelector } from "react-redux";
 import {
   showWorkspaceDropdown,
   deleteWorkspace,
-} from "../../redux/features/WorkspaceSlice";
-import { removeRecentlyViewedThatWasDeleted } from "../../redux/features/recentlyViewedSlice";
+} from "../../../redux/features/WorkspaceSlice";
+import { removeRecentlyViewedThatWasDeleted } from "../../../redux/features/recentlyViewedSlice";
 import { Link } from "react-router-dom";
 
-interface MainSectionProps {
-  showCreateWorkspace: () => void;
-  toggleMainView: (view: string) => void;
-}
-
-const MainSectionMenu: React.FC<MainSectionProps> = ({ showCreateWorkspace, toggleMainView }) => {
+const MainMenu: React.FC = () => {
   const dispatch = useDispatch();
 
   const workspaces = useSelector(
@@ -55,14 +50,19 @@ const MainSectionMenu: React.FC<MainSectionProps> = ({ showCreateWorkspace, togg
     <div className="mainSectionMenuDiv">
       <h3>Menu</h3>
 
-      <div onClick={() => toggleMainView("recentsAndHighlights")} className="menuBoards">
-        <i className="bi bi-calendar-check"></i>
-        <p className="menuBoardsDescription">Boards</p>
-      </div>
-      <div onClick={() => toggleMainView("landingView")} className="menuHome">
-        <i className="bi bi-house"></i>
-        <p className="menuHomeDescription">Home</p>
-      </div>
+      <Link className="menuLink" to="/boards">
+        <div className="menuBoards">
+          <i className="bi bi-calendar-check"></i>
+          <p className="menuBoardsDescription">Boards</p>
+        </div>
+      </Link>
+
+      <Link className="menuLink" to="/overview">
+        <div className="menuHome">
+          <i className="bi bi-house"></i>
+          <p className="menuHomeDescription">Home</p>
+        </div>
+      </Link>
 
       <div className="menuWorkspacesHeading">
         <p
@@ -75,7 +75,6 @@ const MainSectionMenu: React.FC<MainSectionProps> = ({ showCreateWorkspace, togg
           Workspaces
         </p>
         <i
-          onClick={() => showCreateWorkspace()}
           style={
             isWorkspace
               ? { fontSize: "1.2em" }
@@ -147,4 +146,4 @@ const MainSectionMenu: React.FC<MainSectionProps> = ({ showCreateWorkspace, togg
   );
 };
 
-export default MainSectionMenu;
+export default MainMenu;

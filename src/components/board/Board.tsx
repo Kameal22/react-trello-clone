@@ -143,10 +143,6 @@ const Board: React.FC = () => {
       style={{ background: `${shownBoard?.boardBackground}` }}
       className="boardDivBOARD"
     >
-      <Nav
-        showCreateBoard={showBoardCreation}
-        showCreateWorkspace={showWorkspaceCreation}
-      />
       {createWorkspacePopUp ? (
         <CreateWorkspacePopUp
           forwardRef={createWorkspaceRef}

@@ -1,25 +1,18 @@
 import "../../styles/navStyles/nav.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import NavWorkspaces from "./navMenu/WorkspaceMenu";
+import NavWorkspaces from "./navMenu/NavWorkspaces";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../redux/Store";
-import NavRecent from "./navMenu/RecentMenu";
+import NavRecent from "./navMenu/NavRecent";
 import NavSearchBar from "./NavSearch";
 import Register from "./NavRegister";
 import { showDropdown } from "../../redux/features/navigationSlice";
-import NavUserMenu from "./navMenu/UserMenu";
+import NavUserMenu from "./navMenu/NavUserMenu";
 import { Link } from "react-router-dom";
-import CreateMenu from "./navMenu/CreateMenu";
+import NavCreateMenu from "./navMenu/NavCreateMenu";
 import { useState, useRef, useEffect } from "react";
 
-interface NavProps {
-  showCreateWorkspace: () => void;
-  showCreateBoard: () => void;
-  hideBoards?: () => void;
-  showBoards?: () => void;
-}
-
-const Nav: React.FC<NavProps> = ({ showCreateWorkspace, showCreateBoard, hideBoards, showBoards }) => {
+const Nav: React.FC = () => {
   const navDropdownRef = useRef<HTMLDivElement>(null);
 
   const dispatch = useDispatch();
@@ -34,12 +27,6 @@ const Nav: React.FC<NavProps> = ({ showCreateWorkspace, showCreateBoard, hideBoa
     dispatch(showDropdown({ dropdownItem }));
   };
 
-  const hideBoardsFunc = () => {
-    if (hideBoards) {
-      hideBoards();
-    }
-  };
-
   useEffect(() => {
     document.addEventListener("mousedown", (event) => {
       if (!navDropdownRef.current?.contains(event.target as Node)) {
@@ -52,7 +39,7 @@ const Nav: React.FC<NavProps> = ({ showCreateWorkspace, showCreateBoard, hideBoa
     <div style={{ background: navColor }} className="navigationDiv">
       <div className="navigationLeftSide">
         <Link to="/" onClick={() => setDropdown("")} className="logoLink">
-          <h3 onClick={() => hideBoardsFunc()} className="navigationLogo">
+          <h3 className="navigationLogo">
             Trello
           </h3>
         </Link>
@@ -70,7 +57,6 @@ const Nav: React.FC<NavProps> = ({ showCreateWorkspace, showCreateBoard, hideBoa
         {dropdown === "workspaces" ? (
           <NavWorkspaces
             forwardRef={navDropdownRef}
-            showCreateWorkspace={showCreateWorkspace}
           />
         ) : null}
         <div
@@ -99,10 +85,8 @@ const Nav: React.FC<NavProps> = ({ showCreateWorkspace, showCreateBoard, hideBoa
           <i className="bi bi-chevron-down"></i>
         </div>
         {dropdown === "create" ? (
-          <CreateMenu
+          <NavCreateMenu
             forwardRef={navDropdownRef}
-            showCreateBoard={showCreateBoard}
-            showCreateWorkspace={showCreateWorkspace}
           />
         ) : null}
       </div>
@@ -139,7 +123,6 @@ const Nav: React.FC<NavProps> = ({ showCreateWorkspace, showCreateBoard, hideBoa
           {dropdown === "userChoices" ? (
             <NavUserMenu
               forwardRef={navDropdownRef}
-              showBoards={showBoards}
             />
           ) : null}
         </div>

@@ -4,12 +4,10 @@ import { RootState } from "../../../redux/Store";
 import { useDispatch, useSelector } from "react-redux";
 
 interface NavCreateInterface {
-  showCreateWorkspace: () => void;
-  showCreateBoard: () => void;
   forwardRef: React.RefObject<HTMLDivElement>;
 }
 
-const CreateMenu: React.FC<NavCreateInterface> = ({ showCreateWorkspace, showCreateBoard, forwardRef }) => {
+const NavCreateMenu: React.FC<NavCreateInterface> = ({ forwardRef }) => {
   const dispatch = useDispatch();
 
   const setDropdown = (dropdownItem: string) => {
@@ -21,12 +19,10 @@ const CreateMenu: React.FC<NavCreateInterface> = ({ showCreateWorkspace, showCre
   );
 
   const showCreateWorkspaceFunc = () => {
-    showCreateWorkspace();
     setDropdown("");
   };
 
   const showCreateBoardFunc = () => {
-    showCreateBoard();
     setDropdown("");
   };
 
@@ -59,4 +55,4 @@ const CreateMenu: React.FC<NavCreateInterface> = ({ showCreateWorkspace, showCre
   );
 };
 
-export default CreateMenu;
+export default NavCreateMenu;

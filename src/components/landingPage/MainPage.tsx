@@ -1,28 +1,23 @@
-import "../../styles/landingPageStyles/landingPage.css";
+import "./mainPage.css"
 import Nav from "../nav/Nav";
 import PopUpMessage from "../popups/PopUpMessage";
-import MainSection from "../mainSection/MainSection";
 import CreateWorkspacePopUp from "../popups/CreateWorkspacePopUp";
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { changeColor } from "../../redux/features/navigationSlice";
 import CreateBoardPopUp from "../popups/CreateBoardPopUp";
+import MainOverview from "./overview/MainOverview";
 
-const LandingPage: React.FC = () => {
+const MainPage: React.FC = () => {
   const [workspaceCreating, setWorkspaceCreating] =
     useState<boolean>(false);
   const [boardCreating, setBoardCreating] = useState<boolean>(false);
-  const [homeView, toggleHomeView] = useState<string>("landingView");
 
   const dispatch = useDispatch();
 
   const createWorkspaceRef = useRef<HTMLDivElement>(null);
 
   const createBoardRef = useRef<HTMLDivElement>(null);
-
-  const toggleMainView = (view: string) => {
-    toggleHomeView(view)
-  }
 
   const showBoardCreating = () => {
     setBoardCreating(!boardCreating);
@@ -58,16 +53,8 @@ const LandingPage: React.FC = () => {
   });
 
   return (
-    <div className="landingPageDiv">
-      <Nav
-        showCreateBoard={showBoardCreating}
-        showCreateWorkspace={showWorkspaceCreation}
-      />
-      <MainSection
-        homeView={homeView}
-        toggleMainView={toggleMainView}
-        showCreateWorkspace={showWorkspaceCreation}
-      />
+    <div className="mainPageDiv">
+      <MainOverview />
       {workspaceCreating ? (
         <div>
           <CreateWorkspacePopUp
@@ -84,4 +71,4 @@ const LandingPage: React.FC = () => {
   );
 };
 
-export default LandingPage;
+export default MainPage;

@@ -1,9 +1,9 @@
-import "../../styles/mainSectionStyles/mainSectionBoards.css";
-import { RootState } from "../../redux/Store";
+import "../../../styles/mainSectionStyles/mainBoards.css";
+import { RootState } from "../../../redux/Store";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-const MainSectionBoards: React.FC = () => {
+const MainBoards: React.FC = () => {
   const workspaces = useSelector(
     (state: RootState) => state.workspace.workspace
   );
@@ -71,4 +71,4 @@ const MainSectionBoards: React.FC = () => {
   );
 };
 
-export default MainSectionBoards;
+export default MainBoards;

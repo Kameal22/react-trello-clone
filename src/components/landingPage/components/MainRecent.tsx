@@ -1,15 +1,15 @@
-import "../../styles/mainSectionStyles/mainSectionRecent.css";
-import { RootState } from "../../redux/Store";
+import "../../../styles/mainSectionStyles/mainRecent.css";
+import { RootState } from "../../../redux/Store";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
-const MainSectionRecent: React.FC = () => {
+const MainRecent: React.FC = () => {
   const recents = useSelector(
     (state: RootState) => state.recents.recentlyViewed
   );
 
   return (
-    <div className="mainSectionRecentDiv">
+    <div className="mainRecentDiv">
       <h3>Recently viewed</h3>
 
       {recents.map((board) => {
@@ -37,4 +37,4 @@ const MainSectionRecent: React.FC = () => {
   );
 };
 
-export default MainSectionRecent;
+export default MainRecent;

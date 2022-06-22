@@ -4,6 +4,11 @@
     flex-direction: column;
 }
 
+.menuLink{
+    text-decoration: none;
+    color: black;
+}
+
 .menuBoards{
     display: flex;
     font-weight: bold;

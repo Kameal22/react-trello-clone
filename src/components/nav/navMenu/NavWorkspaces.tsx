@@ -5,11 +5,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 interface WorkspaceProps {
-  showCreateWorkspace: () => void;
   forwardRef: React.RefObject<HTMLDivElement>;
 }
 
-const NavWorkspaces: React.FC<WorkspaceProps> = ({ showCreateWorkspace, forwardRef }) => {
+const NavWorkspaces: React.FC<WorkspaceProps> = ({ forwardRef }) => {
   const dispatch = useDispatch();
 
   const setDropdown = (dropdownItem: string) => {
@@ -23,7 +22,6 @@ const NavWorkspaces: React.FC<WorkspaceProps> = ({ showCreateWorkspace, forwardR
   const isWorkspace = workspaces[0];
 
   const showCreateWorkspacePopUp = () => {
-    showCreateWorkspace();
     dispatch(setDropdown(""));
   };
 
