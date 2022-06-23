@@ -8,7 +8,7 @@ import { useDispatch } from "react-redux";
 import SearchForBoards from "./SearchForBoards";
 import { useEffect, useState } from "react";
 import { deleteBoard } from "../../redux/features/WorkspaceSlice";
-import { removeRecentlyViewedThatWasDeleted } from "../../redux/features/recentlyViewedSlice";
+import { removeRecentlyViewedThatWasDeletedFromWorkspaceComponent } from "../../redux/features/recentlyViewedSlice";
 import { setCreateBoard } from "../../redux/features/popUpCreateComponentSlice";
 
 interface WorkspaceBoardsInterface {
@@ -26,12 +26,13 @@ const WorkspaceBoards: React.FC<WorkspaceBoardsInterface> = (props) => {
   const dispatch = useDispatch();
 
   const showBoardCreating = () => {
-    dispatch(
-      setCreateBoard()
-    )
-  }
+    dispatch(setCreateBoard());
+  };
 
-  const deleteBoardFunc = (workspaceName: string | undefined, boardId: string) => {
+  const deleteBoardFunc = (
+    workspaceName: string | undefined,
+    boardId: string
+  ) => {
     dispatch(
       deleteBoard({
         workspaceName: workspaceName,
@@ -40,20 +41,17 @@ const WorkspaceBoards: React.FC<WorkspaceBoardsInterface> = (props) => {
     );
   };
 
-  const removeFromLastWatched = (workspaceName: string) => {
+  const removeFromLastWatched = (boardId: string) => {
     dispatch(
-      removeRecentlyViewedThatWasDeleted({
-        boardsWorkspaceName: workspaceName,
+      removeRecentlyViewedThatWasDeletedFromWorkspaceComponent({
+        boardId: boardId,
       })
     );
   };
 
-  const handleWorkspaceRemove = (
-    workspaceName: string,
-    workspaceId: string
-  ) => {
-    deleteBoardFunc(workspaceName, workspaceId);
-    removeFromLastWatched(workspaceName);
+  const handleWorkspaceRemove = (workspaceName: string, boardId: string) => {
+    deleteBoardFunc(workspaceName, boardId);
+    removeFromLastWatched(boardId);
     window.location.reload();
   };
 
@@ -108,22 +106,30 @@ const WorkspaceBoards: React.FC<WorkspaceBoardsInterface> = (props) => {
 
           {props.shownWorkspace
             ? shownBoards?.map((board) => {
-              return (
-                <div
-                  key={board.boardId}
-                  style={{ background: `${board.boardBackground}` }}
-                  className="workspaceYourBoard"
-                >
-                  <Link
-                    className="workspaceMenuLink"
-                    to={`/board/${props.shownWorkspace?.workspaceName}/${board.boardId}`}
+                return (
+                  <div
+                    key={board.boardId}
+                    style={{ background: `${board.boardBackground}` }}
+                    className="workspaceYourBoard"
                   >
-                    <p>{board.boardName}</p>
-                  </Link>
-                  <i onClick={() => handleWorkspaceRemove(board.boardWorkspace, board.boardId)} className="bi bi-trash3"></i>
-                </div>
-              );
-            })
+                    <Link
+                      className="workspaceMenuLink"
+                      to={`/board/${props.shownWorkspace?.workspaceName}/${board.boardId}`}
+                    >
+                      <p>{board.boardName}</p>
+                    </Link>
+                    <i
+                      onClick={() =>
+                        handleWorkspaceRemove(
+                          board.boardWorkspace,
+                          board.boardId
+                        )
+                      }
+                      className="bi bi-trash3"
+                    ></i>
+                  </div>
+                );
+              })
             : null}
         </div>
       </div>
