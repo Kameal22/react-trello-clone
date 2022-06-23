@@ -1,7 +1,6 @@
 import "../../styles/workspaceStyles/workspace.css";
 import { useParams } from "react-router-dom";
 import { RootState } from "../../redux/Store";
-import Nav from "../nav/Nav";
 import { useState, useEffect, useRef } from "react";
 import { editWorkspace } from "../../redux/features/WorkspaceSlice";
 import { useSelector, useDispatch } from "react-redux";
@@ -114,9 +113,7 @@ const Workspace: React.FC = () => {
           </div>
         )}
       </div>
-      <WorkspaceBoards
-        shownWorkspace={shownWorkspace}
-      />
+      <WorkspaceBoards shownWorkspace={shownWorkspace} />
       <PopUp />
     </div>
   );

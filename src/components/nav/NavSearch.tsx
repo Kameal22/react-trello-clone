@@ -15,6 +15,7 @@ const NavSearchBar: React.FC = () => {
   const [boards, setBoards] = useState<SearchedData[]>([]);
   const [filteredData, setFilteredData] = useState<SearchedData[]>([]);
   const [searching, setSearching] = useState<boolean>(false);
+  const [enteredValue, setEnteredValue] = useState<string>("");
 
   const workspaces = useSelector(
     (state: RootState) => state.workspace.workspace
@@ -41,6 +42,7 @@ const NavSearchBar: React.FC = () => {
     e: React.FormEvent<HTMLInputElement>
   ): void => {
     let searchingValue = e.currentTarget.value;
+    setEnteredValue(searchingValue);
 
     setSearching(true);
 
@@ -55,10 +57,16 @@ const NavSearchBar: React.FC = () => {
     setFilteredData(filtered);
   };
 
+  const clearInput = () => {
+    setSearching(false);
+    setEnteredValue("");
+  };
+
   return (
     <div className="navSearchBarDiv">
       <form autoComplete="off">
         <input
+          value={enteredValue}
           onChange={handleSearchValueChange}
           className="navSearchInput"
           placeholder="Search.."
@@ -76,6 +84,7 @@ const NavSearchBar: React.FC = () => {
             filteredData.map((data) => {
               return (
                 <Link
+                  onClick={() => clearInput()}
                   className="searchingLink"
                   key={data.boardId}
                   to={`/board/${data.workspaceId}/${data.boardId}`}
@@ -85,7 +94,9 @@ const NavSearchBar: React.FC = () => {
                       className="searchHintColorDiv"
                       style={{ background: `${data.background}` }}
                     ></div>
-                    <p className="searchHint">{data.name} <span>board</span></p>
+                    <p className="searchHint">
+                      {data.name} <span>board</span>
+                    </p>
                   </div>
                 </Link>
               );

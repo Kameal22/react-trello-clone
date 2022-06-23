@@ -39,9 +39,7 @@ const Nav: React.FC = () => {
     <div style={{ background: navColor }} className="navigationDiv">
       <div className="navigationLeftSide">
         <Link to="/" onClick={() => setDropdown("")} className="logoLink">
-          <h3 className="navigationLogo">
-            Trello
-          </h3>
+          <h3 className="navigationLogo">Trello</h3>
         </Link>
         <div
           onClick={
@@ -55,9 +53,7 @@ const Nav: React.FC = () => {
           <i className="bi bi-chevron-down"></i>
         </div>
         {dropdown === "workspaces" ? (
-          <NavWorkspaces
-            forwardRef={navDropdownRef}
-          />
+          <NavWorkspaces forwardRef={navDropdownRef} />
         ) : null}
         <div
           onClick={
@@ -85,9 +81,7 @@ const Nav: React.FC = () => {
           <i className="bi bi-chevron-down"></i>
         </div>
         {dropdown === "create" ? (
-          <NavCreateMenu
-            forwardRef={navDropdownRef}
-          />
+          <NavCreateMenu forwardRef={navDropdownRef} />
         ) : null}
       </div>
 
@@ -121,9 +115,7 @@ const Nav: React.FC = () => {
           {dropdown === "registering" ? <Register /> : null}
 
           {dropdown === "userChoices" ? (
-            <NavUserMenu
-              forwardRef={navDropdownRef}
-            />
+            <NavUserMenu forwardRef={navDropdownRef} />
           ) : null}
         </div>
       </div>
