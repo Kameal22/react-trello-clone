@@ -12,9 +12,11 @@ import { Link } from "react-router-dom";
 import NavCreateMenu from "./navMenu/NavCreateMenu";
 import { useState, useRef, useEffect } from "react";
 
-const Nav: React.FC = () => {
-  const navDropdownRef = useRef<HTMLDivElement>(null);
+interface NavProps {
+  forwardRef: React.RefObject<HTMLDivElement>;
+}
 
+const Nav: React.FC<NavProps> = ({ forwardRef }) => {
   const dispatch = useDispatch();
 
   const user = useSelector((state: RootState) => state.users.user);
@@ -26,14 +28,6 @@ const Nav: React.FC = () => {
   const setDropdown = (dropdownItem: string) => {
     dispatch(showDropdown({ dropdownItem }));
   };
-
-  useEffect(() => {
-    document.addEventListener("mousedown", (event) => {
-      if (!navDropdownRef.current?.contains(event.target as Node)) {
-        setDropdown("");
-      }
-    });
-  });
 
   return (
     <div style={{ background: navColor }} className="navigationDiv">
@@ -53,7 +47,7 @@ const Nav: React.FC = () => {
           <i className="bi bi-chevron-down"></i>
         </div>
         {dropdown === "workspaces" ? (
-          <NavWorkspaces forwardRef={navDropdownRef} />
+          <NavWorkspaces forwardRef={forwardRef} />
         ) : null}
         <div
           onClick={
@@ -66,9 +60,7 @@ const Nav: React.FC = () => {
           <h5>Recent</h5>
           <i className="bi bi-chevron-down"></i>
         </div>
-        {dropdown === "recent" ? (
-          <NavRecent forwardRef={navDropdownRef} />
-        ) : null}
+        {dropdown === "recent" ? <NavRecent forwardRef={forwardRef} /> : null}
         <div
           onClick={
             dropdown === "create"
@@ -81,7 +73,7 @@ const Nav: React.FC = () => {
           <i className="bi bi-chevron-down"></i>
         </div>
         {dropdown === "create" ? (
-          <NavCreateMenu forwardRef={navDropdownRef} />
+          <NavCreateMenu forwardRef={forwardRef} />
         ) : null}
       </div>
 
@@ -115,7 +107,7 @@ const Nav: React.FC = () => {
           {dropdown === "registering" ? <Register /> : null}
 
           {dropdown === "userChoices" ? (
-            <NavUserMenu forwardRef={navDropdownRef} />
+            <NavUserMenu forwardRef={forwardRef} />
           ) : null}
         </div>
       </div>

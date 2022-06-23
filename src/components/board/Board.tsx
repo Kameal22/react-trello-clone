@@ -1,6 +1,5 @@
 import "../../styles/boardStyles/board.css";
-import Nav from "../nav/Nav";
-import { useState, useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { RootState } from "../../redux/Store";
 import { useSelector, useDispatch } from "react-redux";
@@ -10,10 +9,7 @@ import AddColumnForm from "../column/AddColumnForm";
 import { changeColor } from "../../redux/features/navigationSlice";
 import { reArangeColumn } from "../../redux/features/WorkspaceSlice";
 
-import {
-  DragDropContext,
-  DropResult,
-} from "react-beautiful-dnd";
+import { DragDropContext, DropResult } from "react-beautiful-dnd";
 import { ColumnInterface } from "../../interfaces/WorkspaceInterface";
 
 const Board: React.FC = () => {
@@ -58,65 +54,59 @@ const Board: React.FC = () => {
     );
   };
 
-  // useEffect(() => {
-  //   document.addEventListener("mousedown", (event) => {
-  //     if (!createWorkspaceRef.current?.contains(event.target as Node)) {
-  //       setCreateWorkspacePopUp(false);
-  //     }
-  //   });
-  // });
-
-  // useEffect(() => {
-  //   document.addEventListener("mousedown", (event) => {
-  //     if (!createBoardRef.current?.contains(event.target as Node)) {
-  //       setBoardCreating(false);
-  //     }
-  //   });
-  // });
-
-  const reArangeColumnFunc = (newColumn: ColumnInterface, columnName: string) => {
+  const reArangeColumnFunc = (
+    newColumn: ColumnInterface,
+    columnName: string
+  ) => {
     dispatch(
       reArangeColumn({
         workspaceId: shownWorkspace?.workspaceId,
         boardId: shownBoard?.boardId,
         columnName,
-        newColumn
+        newColumn,
       })
-    )
-  }
+    );
+  };
 
   const onDragEnd = (result: DropResult) => {
     const { destination, source, draggableId } = result;
 
     if (!destination) {
-      return
+      return;
     }
 
-    if (destination.droppableId === source.droppableId && destination.index === source.index) {
-      return
+    if (
+      destination.droppableId === source.droppableId &&
+      destination.index === source.index
+    ) {
+      return;
     }
 
     // VERY IMPORTANT = REFACTOR TO COLUMN ID INSTEAD OF NAME. THERE COULD BE MANY COLUMNS WITH THE SAME NAME!
 
-    const column = boardsColumns?.find(column => column.columnName === source.droppableId)
+    const column = boardsColumns?.find(
+      (column) => column.columnName === source.droppableId
+    );
 
     if (column) {
-      const newTaskIds = Array.from(column?.columnTasks)
+      const newTaskIds = Array.from(column?.columnTasks);
 
-      const itemToReArange = newTaskIds.find(item => item.taskId === draggableId);
+      const itemToReArange = newTaskIds.find(
+        (item) => item.taskId === draggableId
+      );
 
       newTaskIds.splice(source.index, 1);
 
       if (itemToReArange) {
-        newTaskIds.splice(destination.index, 0, itemToReArange)
+        newTaskIds.splice(destination.index, 0, itemToReArange);
       }
 
       const newColumn = {
         ...column,
-        columnTasks: newTaskIds
-      }
+        columnTasks: newTaskIds,
+      };
 
-      reArangeColumnFunc(newColumn, source.droppableId)
+      reArangeColumnFunc(newColumn, source.droppableId);
     }
   };
 

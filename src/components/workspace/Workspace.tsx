@@ -1,7 +1,7 @@
 import "../../styles/workspaceStyles/workspace.css";
 import { useParams } from "react-router-dom";
 import { RootState } from "../../redux/Store";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { editWorkspace } from "../../redux/features/WorkspaceSlice";
 import { useSelector, useDispatch } from "react-redux";
 import EditWorkspaceDetails from "./EditWorkspaceDetails";
@@ -12,10 +12,6 @@ import { useNavigate } from "react-router-dom";
 
 const Workspace: React.FC = () => {
   const [workspaceEditing, setWorkspaceEditing] = useState<boolean>(false);
-
-  const createWorkspaceRef = useRef<HTMLDivElement>(null);
-
-  const createBoardRef = useRef<HTMLDivElement>(null);
 
   const workspaces = useSelector(
     // These are all workspaces from redux store
@@ -56,22 +52,6 @@ const Workspace: React.FC = () => {
   ) => {
     dispatch(editWorkspace({ id, description }));
   };
-
-  // useEffect(() => {
-  //   document.addEventListener("mousedown", (event) => {
-  //     if (!createWorkspaceRef.current?.contains(event.target as Node)) {
-  //       setCreateWorkspacePopUp(false);
-  //     }
-  //   });
-  // });
-
-  // useEffect(() => {
-  //   document.addEventListener("mousedown", (event) => {
-  //     if (!createBoardRef.current?.contains(event.target as Node)) {
-  //       setBoardCreating(false);
-  //     }
-  //   });
-  // });
 
   return (
     <div className="yourWorkspaceDiv">

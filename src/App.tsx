@@ -14,6 +14,7 @@ import CreateBoardPopUp from "./components/popups/CreateBoardPopUp";
 import CreateWorkspacePopUp from "./components/popups/CreateWorkspacePopUp";
 import { hideCreateWorkspace } from "./redux/features/popUpCreateComponentSlice";
 import { hideCreateBoard } from "./redux/features/popUpCreateComponentSlice";
+import { showDropdown } from "./redux/features/navigationSlice";
 
 function App() {
   const dispatch = useDispatch();
@@ -29,6 +30,12 @@ function App() {
   const createWorkspaceRef = useRef<HTMLDivElement>(null);
 
   const createBoardRef = useRef<HTMLDivElement>(null);
+
+  const dropdownMenuRef = useRef<HTMLDivElement>(null);
+
+  const setDropdown = (dropdownItem: string) => {
+    dispatch(showDropdown({ dropdownItem }));
+  };
 
   useEffect(() => {
     document.addEventListener("mousedown", (event) => {
@@ -46,10 +53,18 @@ function App() {
     });
   });
 
+  useEffect(() => {
+    document.addEventListener("mousedown", (event) => {
+      if (!dropdownMenuRef.current?.contains(event.target as Node)) {
+        dispatch(setDropdown(""));
+      }
+    });
+  });
+
   return (
     <div className="App">
       <BrowserRouter>
-        <Nav />
+        <Nav forwardRef={dropdownMenuRef} />
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="/overview" element={<MainOverview />} />

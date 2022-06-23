@@ -1,17 +1,11 @@
-import "./mainPage.css";
 import PopUpMessage from "../popups/PopUpMessage";
-import React, { useState, useEffect, useRef } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "../../redux/Store";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { changeColor } from "../../redux/features/navigationSlice";
 import MainOverview from "./overview/MainOverview";
 
 const MainPage: React.FC = () => {
   const dispatch = useDispatch();
-
-  const createWorkspaceRef = useRef<HTMLDivElement>(null);
-
-  const createBoardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     dispatch(
@@ -20,22 +14,6 @@ const MainPage: React.FC = () => {
       })
     );
   }, []); // Change color to original after leaving a board.
-
-  useEffect(() => {
-    document.addEventListener("mousedown", (event) => {
-      if (!createWorkspaceRef.current?.contains(event.target as Node)) {
-        // setWorkspaceCreating(false);
-      }
-    });
-  });
-
-  useEffect(() => {
-    document.addEventListener("mousedown", (event) => {
-      if (!createBoardRef.current?.contains(event.target as Node)) {
-        // setBoardCreating(false);
-      }
-    });
-  });
 
   return (
     <div className="mainPageDiv">
