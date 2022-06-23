@@ -44,3 +44,10 @@
     margin-left: .5em;
     font-size: .9em;
 }
+
+#cornerIcon{
+    position: absolute;
+    z-index: 999;
+    top: 8px;
+    right: 8px;
+}

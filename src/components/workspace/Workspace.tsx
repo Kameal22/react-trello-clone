@@ -13,23 +13,19 @@ import { useNavigate } from "react-router-dom";
 const Workspace: React.FC = () => {
   const [workspaceEditing, setWorkspaceEditing] = useState<boolean>(false);
 
+  const dispatch = useDispatch();
+
+  const { workspaceId } = useParams(); //This gives you ID of workspace showing in the component
+
   const workspaces = useSelector(
     // These are all workspaces from redux store
     (state: RootState) => state.workspace.workspace
   );
 
-  const { workspaceId } = useParams(); //This gives you ID of workspace showing in the component
-
   const shownWorkspace = workspaces.find((workspace) => {
     //And this is the specific workspace that is viewed in component found by this ID up above.
     return workspace.workspaceId === workspaceId;
   });
-
-  useEffect(() => {
-    if (workspaces.length < 1) {
-      navigate("/", { replace: true });
-    }
-  }, [shownWorkspace]);
 
   useEffect(() => {
     dispatch(
@@ -38,9 +34,6 @@ const Workspace: React.FC = () => {
       })
     );
   }, []); // Change color to original after leaving a board.
-
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const setEditting = () => {
     setWorkspaceEditing(!workspaceEditing);

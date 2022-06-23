@@ -51,75 +51,89 @@ const Task: React.FC<TaskProps> = (props) => {
 
   useEffect(() => {
     document.addEventListener("mousedown", (event) => {
-      if (!taskDetailsRef.current?.contains(event.target as Node)) {
-        showTaskDetails(false);
-      }
-    });
-  });
-
-  useEffect(() => {
-    document.addEventListener("mousedown", (event) => {
       if (!taskLabelsRef.current?.contains(event.target as Node)) {
         showTaskLabels(false);
       }
     });
   });
 
+  useEffect(() => {
+    document.addEventListener("mousedown", (event) => {
+      if (!taskDetailsRef.current?.contains(event.target as Node)) {
+        showTaskDetails(false);
+      }
+    });
+  });
+
   return (
-    <Draggable draggableId={props.taskId} index={props.index}>
-      {(provided) => (
-        <div
-          onClick={() => showDetails()}
-          {...provided.draggableProps}
-          {...provided.dragHandleProps}
-          ref={provided.innerRef}
-          onMouseEnter={(e) => {
-            setIconVisibility({ display: "block" });
-          }}
-          onMouseLeave={(e) => {
-            setIconVisibility({ display: "none" });
-          }}
-          className="taskDiv"
-        >
-          {props.taskIndicatorColor ? (
-            <div
-              style={{ background: props.taskIndicatorColor }}
-              className="taskDivIndicator"
-            ></div>
-          ) : null}
-
-          <div className="taskDivName">
-            <p className="taskName">{props.taskName}</p>
-          </div>
-
-          <i
-            onClick={() => showOptions()}
-            style={iconVisibility}
-            className="bi bi-pencil"
-            id="cornerIcon"
-          ></i>
-
-          <div className="taskIcons">
-            {props.taskComments[0] ? <i className="bi bi-chat"></i> : null}
-            {props.taskDescription ? (
-              <i className="bi bi-justify-left"></i>
+    <>
+      <Draggable draggableId={props.taskId} index={props.index}>
+        {(provided) => (
+          <div
+            {...provided.draggableProps}
+            {...provided.dragHandleProps}
+            ref={provided.innerRef}
+            onMouseEnter={(e) => {
+              setIconVisibility({ display: "block" });
+            }}
+            onMouseLeave={(e) => {
+              setIconVisibility({ display: "none" });
+            }}
+            className="taskDiv"
+          >
+            {props.taskIndicatorColor ? (
+              <div
+                style={{ background: props.taskIndicatorColor }}
+                className="taskDivIndicator"
+              ></div>
             ) : null}
+
+            <div className="taskDivName">
+              <p onClick={() => showDetails()} className="taskName">
+                {props.taskName}
+              </p>
+            </div>
+
+            <i
+              onClick={() => showOptions()}
+              style={iconVisibility}
+              className="bi bi-pencil"
+              id="cornerIcon"
+            ></i>
+
+            <div className="taskIcons">
+              {props.taskComments[0] ? <i className="bi bi-chat"></i> : null}
+              {props.taskDescription ? (
+                <i className="bi bi-justify-left"></i>
+              ) : null}
+            </div>
           </div>
+        )}
+      </Draggable>
 
-          {taskOptions ? (
-            <TaskOptionsForm
-              forwardRef={optionsRef}
-              workspaceId={props.workspaceId}
-              boardId={props.boardId}
-              columnId={props.columnId}
-              taskId={props.taskId}
-              showForm={showOptions}
-              editLabels={showLabels}
-              showDetails={showDetails}
-            />
-          ) : null}
+      {taskDetails ? (
+        <TaskDetailsPopUp
+          forwardRef={taskDetailsRef}
+          workspaceId={props.workspaceId}
+          boardId={props.boardId}
+          columnId={props.columnId}
+          taskId={props.taskId}
+          taskName={props.taskName}
+          taskIndicator={props.taskIndicatorColor}
+          taskComments={props.taskComments}
+          columnName={props.columnName}
+          showTaskDetails={showDetails}
+          taskDescription={props.taskDescription}
+        />
+      ) : null}
+    </>
+  );
+};
 
-          {taskLabels ? (
+export default Task;
+
+{
+  /* {taskLabels ? (
             <TaskLabelsPopUp
               forwardRef={taskLabelsRef}
               workspaceId={props.workspaceId}
@@ -129,26 +143,18 @@ const Task: React.FC<TaskProps> = (props) => {
               editLabels={showLabels}
               chosenIndicator={props.taskIndicatorColor}
             />
-          ) : null}
-          {taskDetails ? (
-            <TaskDetailsPopUp
-              workspaceId={props.workspaceId}
-              boardId={props.boardId}
-              columnId={props.columnId}
-              taskId={props.taskId}
-              taskName={props.taskName}
-              taskIndicator={props.taskIndicatorColor}
-              taskComments={props.taskComments}
-              columnName={props.columnName}
-              showTaskDetails={showDetails}
-              taskDescription={props.taskDescription}
-              forwardRef={taskDetailsRef}
-            />
-          ) : null}
-        </div>
-      )}
-    </Draggable>
-  );
-};
+          ) : null} */
+}
 
-export default Task;
+// {taskOptions ? (
+//   <TaskOptionsForm
+//     forwardRef={optionsRef}
+//     workspaceId={props.workspaceId}
+//     boardId={props.boardId}
+//     columnId={props.columnId}
+//     taskId={props.taskId}
+//     showForm={showOptions}
+//     editLabels={showLabels}
+//     showDetails={showDetails}
+//   />
+// ) : null}

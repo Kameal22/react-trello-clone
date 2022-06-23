@@ -6,13 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../redux/Store";
 import AddTaskForm from "../task/AddTaskForm";
 import Task from "../task/Task";
-import {
-  DragDropContext,
-  Draggable,
-  Droppable,
-  DropResult,
-} from "react-beautiful-dnd";
-import { reArangeColumn } from "../../redux/features/WorkspaceSlice";
+import { Droppable } from "react-beautiful-dnd";
 
 interface ColumnInterface {
   columnName: string;
@@ -25,8 +19,6 @@ interface ColumnInterface {
 const Column: React.FC<ColumnInterface> = (props) => {
   const [columnEditing, setColumnEditing] = useState<boolean>(false);
   const [taskAdding, setTaskAdding] = useState<boolean>(false);
-
-  const dispatch = useDispatch();
 
   const addTaskRef = useRef<HTMLDivElement>(null);
 
