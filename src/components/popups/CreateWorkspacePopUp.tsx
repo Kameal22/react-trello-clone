@@ -8,10 +8,16 @@ import { guestName } from "../../utils/RandomizeGuestName";
 import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import { showDropdown } from "../../redux/features/navigationSlice";
-import { setCreateWorkspace } from "../../redux/features/popUpCreateComponentSlice";
+import { hideCreateWorkspace } from "../../redux/features/popUpCreateComponentSlice";
 import { generateRandomColor } from "../../utils/GenerateRandomColor";
 
-const CreateWorkspacePopUp: React.FC = () => {
+interface CreateWorkspaceProps {
+  forwardRef: React.RefObject<HTMLDivElement>;
+}
+
+const CreateWorkspacePopUp: React.FC<CreateWorkspaceProps> = ({
+  forwardRef,
+}) => {
   const [workspaceName, setWorkspaceName] = useState<string>("");
   const [workspaceDescription, setWorkspaceDescription] = useState<string>("");
   const [workspaceId] = useState<string>(uuidv4());
@@ -23,15 +29,13 @@ const CreateWorkspacePopUp: React.FC = () => {
 
   const user = useSelector((state: RootState) => state.users.user);
 
+  const hideCreating = () => {
+    dispatch(hideCreateWorkspace());
+  };
+
   const setDropdown = (dropdownItem: string) => {
     dispatch(showDropdown({ dropdownItem }));
   };
-
-  const showWorkspaceCreating = () => {
-    dispatch(
-      setCreateWorkspace()
-    )
-  }
 
   const handleWorkspaceNameChange = (
     e: React.FormEvent<HTMLInputElement>
@@ -48,9 +52,9 @@ const CreateWorkspacePopUp: React.FC = () => {
     e: React.FormEvent<HTMLInputElement>
   ): void => {
     if (e.currentTarget.value.length > 14) {
-      setDescriptionError("Workspace description cannot excide 14 characters")
+      setDescriptionError("Workspace description cannot excide 14 characters");
     } else {
-      setDescriptionError("")
+      setDescriptionError("");
     }
     setWorkspaceDescription(e.currentTarget.value);
   };
@@ -71,7 +75,7 @@ const CreateWorkspacePopUp: React.FC = () => {
             workspaceId,
           })
         );
-        showWorkspaceCreating();
+        hideCreating();
       } else {
         dispatch(
           addWorkspace({
@@ -85,7 +89,7 @@ const CreateWorkspacePopUp: React.FC = () => {
             workspaceId,
           })
         );
-        showWorkspaceCreating()
+        hideCreating();
       }
       setDropdown("");
       navigate(`/workspace/${workspaceId}`, { replace: true });
@@ -93,8 +97,8 @@ const CreateWorkspacePopUp: React.FC = () => {
   };
 
   return (
-    <div className="createWorkspacePopUp">
-      <i onClick={() => showWorkspaceCreating()} className="bi bi-x-lg"></i>
+    <div ref={forwardRef} className="createWorkspacePopUp">
+      <i onClick={() => hideCreating()} className="bi bi-x-lg"></i>
       <div className="createWorkspace">
         <div className="createWorkspaceInfo">
           <h2>
@@ -123,7 +127,9 @@ const CreateWorkspacePopUp: React.FC = () => {
                 name="workspaceName"
               />
             </div>
-            {nameError ? <p className="workspaceNameError">{nameError}</p> : null}
+            {nameError ? (
+              <p className="workspaceNameError">{nameError}</p>
+            ) : null}
             <div className="workspaceDescriptionInputDiv">
               <p className="workspaceDescription">Workspace description</p>
               <input
@@ -135,8 +141,18 @@ const CreateWorkspacePopUp: React.FC = () => {
                 name="workspaceName"
               />
             </div>
-            {descriptionError ? <p className="workspaceNameError">{descriptionError}</p> : null}
-            <button disabled={nameError !== "" || workspaceName.length < 1 || descriptionError !== ""} className="submitBtn" type="submit">
+            {descriptionError ? (
+              <p className="workspaceNameError">{descriptionError}</p>
+            ) : null}
+            <button
+              disabled={
+                nameError !== "" ||
+                workspaceName.length < 1 ||
+                descriptionError !== ""
+              }
+              className="submitBtn"
+              type="submit"
+            >
               Submit
             </button>
           </form>
