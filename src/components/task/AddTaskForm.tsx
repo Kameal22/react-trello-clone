@@ -19,6 +19,7 @@ const AddTaskForm: React.FC<AddTaskInterface> = (props) => {
   const [taskDescription] = useState<string>("");
   const [taskComments] = useState<TaskCommentsInterface[]>([]);
   const [taskColor] = useState<string>("");
+  const [placeholderMessage, setPlaceholderMessage] = useState<string>("Enter a title for this task");
 
   const dispatch = useDispatch();
 
@@ -28,19 +29,23 @@ const AddTaskForm: React.FC<AddTaskInterface> = (props) => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    dispatch(
-      addTask({
-        workspaceId: props.workspaceId,
-        boardId: props.boardId,
-        columnId: props.columnId,
-        taskName,
-        taskId,
-        taskIndicatorColor: taskColor,
-        taskComments,
-        taskDescription,
-      })
-    );
-    props.addTask();
+    if (taskName === "") {
+      setPlaceholderMessage("Can't add an empty task")
+    } else {
+      dispatch(
+        addTask({
+          workspaceId: props.workspaceId,
+          boardId: props.boardId,
+          columnId: props.columnId,
+          taskName,
+          taskId,
+          taskIndicatorColor: taskColor,
+          taskComments,
+          taskDescription,
+        })
+      );
+      props.addTask();
+    }
   };
 
   return (
@@ -56,7 +61,7 @@ const AddTaskForm: React.FC<AddTaskInterface> = (props) => {
             onChange={handleTaskNameChange}
             type="text"
             name="taskName"
-            placeholder="Enter a title for this task.."
+            placeholder={placeholderMessage}
             autoFocus
           />
           <div className="addTaskButtonIcon">
