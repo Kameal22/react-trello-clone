@@ -95,7 +95,7 @@ export const workspaceSlice = createSlice({
     reArangeColumn: (
       state,
       action: PayloadAction<{
-        columnName: string;
+        columnId: string;
         boardId: string | undefined;
         workspaceId: string | undefined;
         newColumn: ColumnInterface;
@@ -105,18 +105,20 @@ export const workspaceSlice = createSlice({
         (value) => value.workspaceId === action.payload.workspaceId
       );
 
-      const board = state.workspace[
-        workspace
-      ].workspaceBoards.findIndex(
+      const board = state.workspace[workspace].workspaceBoards.findIndex(
         (board) => board.boardId === action.payload.boardId
       );
 
-      const columnToRearange = state.workspace[workspace].workspaceBoards[board].boardColumns.findIndex(column => column.columnName === action.payload.columnName)
+      const columnToRearange = state.workspace[workspace].workspaceBoards[
+        board
+      ].boardColumns.findIndex(
+        (column) => column.columnId === action.payload.columnId
+      );
 
-      state.workspace[workspace].workspaceBoards[board].boardColumns[columnToRearange] = action.payload.newColumn;
+      state.workspace[workspace].workspaceBoards[board].boardColumns[
+        columnToRearange
+      ] = action.payload.newColumn;
     },
-
-
 
     addColumn: (
       state,
@@ -124,7 +126,7 @@ export const workspaceSlice = createSlice({
         workspaceId: string | undefined;
         boardId: string | undefined;
         columnName: string;
-        columnId: string | undefined;
+        columnId: string;
         columnTasks: TaskInterface[];
       }>
     ) => {

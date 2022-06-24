@@ -12,6 +12,7 @@
     position: absolute;
     top: 8px;
     right: 5px;
+    cursor: pointer;
 }
 
 .edidColumnFormDivHeading{

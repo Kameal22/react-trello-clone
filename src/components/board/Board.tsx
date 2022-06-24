@@ -8,7 +8,6 @@ import Column from "../column/Column";
 import AddColumnForm from "../column/AddColumnForm";
 import { changeColor } from "../../redux/features/navigationSlice";
 import { reArangeColumn } from "../../redux/features/WorkspaceSlice";
-
 import { DragDropContext, DropResult } from "react-beautiful-dnd";
 import { ColumnInterface } from "../../interfaces/WorkspaceInterface";
 
@@ -54,15 +53,12 @@ const Board: React.FC = () => {
     );
   };
 
-  const reArangeColumnFunc = (
-    newColumn: ColumnInterface,
-    columnName: string
-  ) => {
+  const reArangeColumnFunc = (newColumn: ColumnInterface, columnId: string) => {
     dispatch(
       reArangeColumn({
         workspaceId: shownWorkspace?.workspaceId,
         boardId: shownBoard?.boardId,
-        columnName,
+        columnId,
         newColumn,
       })
     );
@@ -82,10 +78,8 @@ const Board: React.FC = () => {
       return;
     }
 
-    // VERY IMPORTANT = REFACTOR TO COLUMN ID INSTEAD OF NAME. THERE COULD BE MANY COLUMNS WITH THE SAME NAME!
-
     const column = boardsColumns?.find(
-      (column) => column.columnName === source.droppableId
+      (column) => column.columnId === source.droppableId
     );
 
     if (column) {

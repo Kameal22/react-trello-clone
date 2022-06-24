@@ -111,6 +111,19 @@ const Task: React.FC<TaskProps> = (props) => {
         )}
       </Draggable>
 
+      {taskOptions ? (
+        <TaskOptionsForm
+          forwardRef={optionsRef}
+          workspaceId={props.workspaceId}
+          boardId={props.boardId}
+          columnId={props.columnId}
+          taskId={props.taskId}
+          showForm={showOptions}
+          editLabels={showLabels}
+          showDetails={showDetails}
+        />
+      ) : null}
+
       {taskDetails ? (
         <TaskDetailsPopUp
           forwardRef={taskDetailsRef}
@@ -126,35 +139,20 @@ const Task: React.FC<TaskProps> = (props) => {
           taskDescription={props.taskDescription}
         />
       ) : null}
+
+      {taskLabels ? (
+        <TaskLabelsPopUp
+          forwardRef={taskLabelsRef}
+          workspaceId={props.workspaceId}
+          boardId={props.boardId}
+          columnId={props.columnId}
+          taskId={props.taskId}
+          editLabels={showLabels}
+          chosenIndicator={props.taskIndicatorColor}
+        />
+      ) : null}
     </>
   );
 };
 
 export default Task;
-
-{
-  /* {taskLabels ? (
-            <TaskLabelsPopUp
-              forwardRef={taskLabelsRef}
-              workspaceId={props.workspaceId}
-              boardId={props.boardId}
-              columnId={props.columnId}
-              taskId={props.taskId}
-              editLabels={showLabels}
-              chosenIndicator={props.taskIndicatorColor}
-            />
-          ) : null} */
-}
-
-// {taskOptions ? (
-//   <TaskOptionsForm
-//     forwardRef={optionsRef}
-//     workspaceId={props.workspaceId}
-//     boardId={props.boardId}
-//     columnId={props.columnId}
-//     taskId={props.taskId}
-//     showForm={showOptions}
-//     editLabels={showLabels}
-//     showDetails={showDetails}
-//   />
-// ) : null}

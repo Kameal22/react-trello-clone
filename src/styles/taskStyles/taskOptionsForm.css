@@ -17,6 +17,7 @@
     font-size: 1.02em;
     padding: .8vh .8vh;
     border-radius: 5px;
+    cursor: pointer;
 }
 
 .taskOptionsFormDiv >p:hover{

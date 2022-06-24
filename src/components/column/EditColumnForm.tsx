@@ -2,7 +2,6 @@ import "../../styles/columnStyles/editColumnForm.css";
 import { deleteColumn } from "../../redux/features/WorkspaceSlice";
 import { useDispatch } from "react-redux";
 import { copyColumn } from "../../redux/features/WorkspaceSlice";
-import { v4 as uuidv4 } from "uuid";
 
 interface EditColumnInterface {
   setEditing: () => void;
@@ -43,9 +42,7 @@ const EditColumnForm: React.FC<EditColumnInterface> = (props) => {
   };
 
   return (
-    <div
-      className="editColumnFormDiv"
-    >
+    <div className="editColumnFormDiv">
       <div className="edidColumnFormDivHeading">
         <p className="editColumnHeading">Column actions</p>
         <i onClick={() => props.setEditing()} className="bi bi-x-lg"></i>

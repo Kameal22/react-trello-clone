@@ -21,7 +21,7 @@ export interface TaskInterface {
 
 export interface ColumnInterface {
   columnName: string;
-  columnId: string | undefined;
+  columnId: string;
   boardId: string | undefined;
   workspaceId: string | undefined;
   columnTasks: TaskInterface[];

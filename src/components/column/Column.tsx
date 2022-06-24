@@ -2,7 +2,7 @@ import "../../styles/columnStyles/column.css";
 import { TaskInterface } from "../../interfaces/WorkspaceInterface";
 import EditColumnForm from "./EditColumnForm";
 import { useState, useRef, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootState } from "../../redux/Store";
 import AddTaskForm from "../task/AddTaskForm";
 import Task from "../task/Task";
@@ -10,7 +10,7 @@ import { Droppable } from "react-beautiful-dnd";
 
 interface ColumnInterface {
   columnName: string;
-  columnId: string | undefined;
+  columnId: string;
   boardId: string | undefined;
   workspaceId: string | undefined;
   columnTasks: TaskInterface[];
@@ -73,9 +73,7 @@ const Column: React.FC<ColumnInterface> = (props) => {
         />
       ) : null}
 
-      {/* REFACTOR COLUMN NAME TO COLUMN ID */}
-
-      <Droppable droppableId={props.columnName}>
+      <Droppable droppableId={props.columnId}>
         {(provided) => (
           <div
             className="droppableTasks"
