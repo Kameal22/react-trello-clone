@@ -10,7 +10,6 @@ import { showDropdown } from "../../redux/features/navigationSlice";
 import NavUserMenu from "./navMenu/NavUserMenu";
 import { Link } from "react-router-dom";
 import NavCreateMenu from "./navMenu/NavCreateMenu";
-import { useState, useRef, useEffect } from "react";
 
 interface NavProps {
   forwardRef: React.RefObject<HTMLDivElement>;

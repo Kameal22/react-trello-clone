@@ -3,6 +3,7 @@ import { showDropdown } from "../../../redux/features/navigationSlice";
 import { RootState } from "../../../redux/Store";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { setCreateWorkspace } from "../../../redux/features/popUpCreateComponentSlice";
 
 interface WorkspaceProps {
   forwardRef: React.RefObject<HTMLDivElement>;
@@ -15,15 +16,16 @@ const NavWorkspaces: React.FC<WorkspaceProps> = ({ forwardRef }) => {
     dispatch(showDropdown({ dropdownItem }));
   };
 
+  const showWorkspaceCreating = () => {
+    dispatch(setCreateWorkspace());
+    setDropdown("");
+  };
+
   const workspaces = useSelector(
     (state: RootState) => state.workspace.workspace
   );
 
   const isWorkspace = workspaces[0];
-
-  const showCreateWorkspacePopUp = () => {
-    dispatch(setDropdown(""));
-  };
 
   return (
     <div ref={forwardRef} className="navWorkspacesDiv">
@@ -64,7 +66,7 @@ const NavWorkspaces: React.FC<WorkspaceProps> = ({ forwardRef }) => {
       ) : (
         <div className="navWorkspaceChoices">
           <p
-            onClick={() => showCreateWorkspacePopUp()}
+            onClick={() => showWorkspaceCreating()}
             className="navCreateWorkspace"
           >
             Create workspace
