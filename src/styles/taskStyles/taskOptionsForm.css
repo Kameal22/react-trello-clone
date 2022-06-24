@@ -1,8 +1,8 @@
 .taskOptionsFormDiv{
     background: white;
     position: absolute;
-    left: 250px;
-    top: 1px;
+    left: 260px;
+    top: 60px;
     z-index: 99999999;
     width: 70%;
     padding: 10px 10px;
