@@ -36,6 +36,7 @@ const TaskDetailsPopUp: React.FC<TaskDetailsInterface> = (props) => {
   const dispatch = useDispatch();
 
   const taskDescriptionRef = useRef<HTMLDivElement>(null);
+  const taskNameRef = useRef<HTMLFormElement>(null);
 
   const handleTaskNameChange = (e: React.FormEvent<HTMLInputElement>): void => {
     setTaskName(e.currentTarget.value);
@@ -93,11 +94,19 @@ const TaskDetailsPopUp: React.FC<TaskDetailsInterface> = (props) => {
     });
   });
 
+  useEffect(() => {
+    document.addEventListener("mousedown", (event) => {
+      if (!taskNameRef.current?.contains(event.target as Node)) {
+        setEditingTaskName(false);
+      }
+    });
+  });
+
   return (
     <div ref={props.forwardRef} className="taskDetailsDiv">
       <div className="taskDetailsName">
         {editingTaskName ? (
-          <form
+          <form ref={taskNameRef}
             className="editTaskNameForm"
             autoComplete="off"
             onSubmit={handleSubmit}
