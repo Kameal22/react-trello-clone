@@ -59,7 +59,7 @@ const Column: React.FC<ColumnInterface> = (props) => {
   return (
     <div className="boardCOLUMNdiv">
       <div className="boardCOLUMNHeader">
-        <p>{props.columnName}</p>
+        <p>{shownColumn?.columnName}</p>
         <i onClick={() => editAColumn()} className="bi bi-three-dots"></i>
       </div>
 
