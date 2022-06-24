@@ -15,11 +15,22 @@ interface TaskProps {
   workspaceId: string | undefined;
   boardId: string | undefined;
   columnId: string | undefined;
-  columnName: string;
+  columnName: string | undefined;
   index: number;
 }
 
-const Task: React.FC<TaskProps> = (props) => {
+const Task: React.FC<TaskProps> = ({
+  taskName,
+  taskId,
+  taskIndicatorColor,
+  taskDescription,
+  taskComments,
+  workspaceId,
+  boardId,
+  columnId,
+  columnName,
+  index,
+}) => {
   const [iconVisibility, setIconVisibility] = useState({ display: "none" });
   const [taskOptions, showTaskOptions] = useState<boolean>(false);
   const [taskDetails, showTaskDetails] = useState<boolean>(false);
@@ -67,7 +78,7 @@ const Task: React.FC<TaskProps> = (props) => {
 
   return (
     <>
-      <Draggable draggableId={props.taskId} index={props.index}>
+      <Draggable draggableId={taskId} index={index}>
         {(provided) => (
           <div
             {...provided.draggableProps}
@@ -81,16 +92,16 @@ const Task: React.FC<TaskProps> = (props) => {
             }}
             className="taskDiv"
           >
-            {props.taskIndicatorColor ? (
+            {taskIndicatorColor ? (
               <div
-                style={{ background: props.taskIndicatorColor }}
+                style={{ background: taskIndicatorColor }}
                 className="taskDivIndicator"
               ></div>
             ) : null}
 
             <div className="taskDivName">
               <p onClick={() => showDetails()} className="taskName">
-                {props.taskName}
+                {taskName}
               </p>
             </div>
 
@@ -102,10 +113,8 @@ const Task: React.FC<TaskProps> = (props) => {
             ></i>
 
             <div className="taskIcons">
-              {props.taskComments[0] ? <i className="bi bi-chat"></i> : null}
-              {props.taskDescription ? (
-                <i className="bi bi-justify-left"></i>
-              ) : null}
+              {taskComments[0] ? <i className="bi bi-chat"></i> : null}
+              {taskDescription ? <i className="bi bi-justify-left"></i> : null}
             </div>
           </div>
         )}
@@ -114,10 +123,10 @@ const Task: React.FC<TaskProps> = (props) => {
       {taskOptions ? (
         <TaskOptionsForm
           forwardRef={optionsRef}
-          workspaceId={props.workspaceId}
-          boardId={props.boardId}
-          columnId={props.columnId}
-          taskId={props.taskId}
+          workspaceId={workspaceId}
+          boardId={boardId}
+          columnId={columnId}
+          taskId={taskId}
           showForm={showOptions}
           editLabels={showLabels}
           showDetails={showDetails}
@@ -127,28 +136,28 @@ const Task: React.FC<TaskProps> = (props) => {
       {taskDetails ? (
         <TaskDetailsPopUp
           forwardRef={taskDetailsRef}
-          workspaceId={props.workspaceId}
-          boardId={props.boardId}
-          columnId={props.columnId}
-          taskId={props.taskId}
-          taskName={props.taskName}
-          taskIndicator={props.taskIndicatorColor}
-          taskComments={props.taskComments}
-          columnName={props.columnName}
+          workspaceId={workspaceId}
+          boardId={boardId}
+          columnId={columnId}
+          taskId={taskId}
+          taskName={taskName}
+          taskIndicator={taskIndicatorColor}
+          taskComments={taskComments}
+          columnName={columnName}
           showTaskDetails={showDetails}
-          taskDescription={props.taskDescription}
+          taskDescription={taskDescription}
         />
       ) : null}
 
       {taskLabels ? (
         <TaskLabelsPopUp
           forwardRef={taskLabelsRef}
-          workspaceId={props.workspaceId}
-          boardId={props.boardId}
-          columnId={props.columnId}
-          taskId={props.taskId}
+          workspaceId={workspaceId}
+          boardId={boardId}
+          columnId={columnId}
+          taskId={taskId}
           editLabels={showLabels}
-          chosenIndicator={props.taskIndicatorColor}
+          chosenIndicator={taskIndicatorColor}
         />
       ) : null}
     </>

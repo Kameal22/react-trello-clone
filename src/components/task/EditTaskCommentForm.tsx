@@ -12,31 +12,40 @@ interface EditTaskCommentInterface {
   setEditing: (comment: string) => void;
 }
 
-const EditTaskCommentForm: React.FC<EditTaskCommentInterface> = (props) => {
-  const [taskComment, setTaskComment] = useState<string>("");
+const EditTaskCommentForm: React.FC<EditTaskCommentInterface> = ({
+  workspaceId,
+  boardId,
+  columnId,
+  taskId,
+  taskComment,
+  setEditing,
+}) => {
+  const [newTaskComment, setNewTaskComment] = useState<string>("");
 
   const dispatch = useDispatch();
 
   const handleDescriptionChange = (
     e: React.FormEvent<HTMLInputElement>
   ): void => {
-    setTaskComment(e.currentTarget.value);
+    setNewTaskComment(e.currentTarget.value);
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    dispatch(editTaskComment({
-      workspaceId: props.workspaceId,
-      boardId: props.boardId,
-      columnId: props.columnId,
-      taskId: props.taskId,
-      taskComment: props.taskComment,
-      newComment: taskComment
-    }))
+    dispatch(
+      editTaskComment({
+        workspaceId: workspaceId,
+        boardId: boardId,
+        columnId: columnId,
+        taskId: taskId,
+        taskComment: taskComment,
+        newComment: taskComment,
+      })
+    );
 
-    props.setEditing("")
-  }
+    setEditing("");
+  };
 
   return (
     <div className="taskCommentFormDiv">
@@ -47,7 +56,7 @@ const EditTaskCommentForm: React.FC<EditTaskCommentInterface> = (props) => {
       >
         <input
           className="taskCommentInput"
-          value={taskComment}
+          value={newTaskComment}
           onChange={handleDescriptionChange}
           type="text"
           name="comment"

@@ -103,7 +103,9 @@ const Nav: React.FC<NavProps> = ({ forwardRef }) => {
               Register
             </h5>
           )}
-          {dropdown === "registering" ? <Register /> : null}
+          {dropdown === "registering" ? (
+            <Register forwardRef={forwardRef} />
+          ) : null}
 
           {dropdown === "userChoices" ? (
             <NavUserMenu forwardRef={forwardRef} />

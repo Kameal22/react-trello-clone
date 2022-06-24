@@ -7,23 +7,26 @@ interface SearchForBoardsInterface {
   initialBoards: BoardInterface[] | undefined;
 }
 
-const SearchForBoards: React.FC<SearchForBoardsInterface> = (props) => {
-
+const SearchForBoards: React.FC<SearchForBoardsInterface> = ({
+  showSearchedBoards,
+  initialBoards,
+  setBoardsBackToInitial,
+}) => {
   const handleSearchValueChange = (
     e: React.FormEvent<HTMLInputElement>
   ): void => {
     let searchingValue = e.currentTarget.value;
 
     if (searchingValue) {
-      props.showSearchedBoards(searchingValue);
+      showSearchedBoards(searchingValue);
     } else {
-      props.setBoardsBackToInitial(props.initialBoards);
+      setBoardsBackToInitial(initialBoards);
     }
   };
 
   return (
     <div className="searchBoardsDiv">
-      {props.initialBoards?.length ? (
+      {initialBoards?.length ? (
         <form autoComplete="off">
           <input
             onChange={handleSearchValueChange}

@@ -10,7 +10,10 @@ interface AddingColumnFormInterface {
   boardId: string | undefined;
 }
 
-const AddColumnForm: React.FC<AddingColumnFormInterface> = (props) => {
+const AddColumnForm: React.FC<AddingColumnFormInterface> = ({
+  boardId,
+  workspaceId,
+}) => {
   const [addingColumn, setAddingColumn] = useState(false);
   const [columnName, setColumnName] = useState<string>("");
   const [columnTasks] = useState<TaskInterface[]>([]);
@@ -24,11 +27,11 @@ const AddColumnForm: React.FC<AddingColumnFormInterface> = (props) => {
     e: React.FormEvent<HTMLInputElement>
   ): void => {
     if (e.currentTarget.value.length > 50) {
-      setError("Column name must be maximum of 30 characters")
+      setError("Column name must be maximum of 30 characters");
     } else {
-      setError("")
+      setError("");
     }
-    setColumnName(e.currentTarget.value)
+    setColumnName(e.currentTarget.value);
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -38,8 +41,8 @@ const AddColumnForm: React.FC<AddingColumnFormInterface> = (props) => {
         addColumn({
           columnName,
           columnId: uuidv4(),
-          boardId: props.boardId,
-          workspaceId: props.workspaceId,
+          boardId: boardId,
+          workspaceId: workspaceId,
           columnTasks,
         })
       );
@@ -74,7 +77,9 @@ const AddColumnForm: React.FC<AddingColumnFormInterface> = (props) => {
           />
           {error ? <p className="error">{error}</p> : null}
           <div className="addColumnButtonIcon">
-            <button disabled={error !== ""} type="submit">Add Column</button>
+            <button disabled={error !== ""} type="submit">
+              Add Column
+            </button>
             <i
               onClick={() => setAddingColumn(!addingColumn)}
               style={{ fontSize: "1.1em" }}

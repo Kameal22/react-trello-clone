@@ -2,7 +2,6 @@ import "../../styles/workspaceStyles/editWorkspaceDetails.css";
 import { useState } from "react";
 
 interface EditWorkspaceProps {
-  workspaceName: string | undefined;
   workspaceDescription: string | undefined;
   workspaceId: string | undefined;
   editWorkspace: (
@@ -12,10 +11,15 @@ interface EditWorkspaceProps {
   setEditting: () => void;
 }
 
-const EditWorkspaceDetails: React.FC<EditWorkspaceProps> = (props) => {
-  const [workspaceDescription, setWorkspaceDesscription] = useState<
+const EditWorkspaceDetails: React.FC<EditWorkspaceProps> = ({
+  workspaceDescription,
+  workspaceId,
+  editWorkspace,
+  setEditting,
+}) => {
+  const [newWorkspaceDescription, setNewWorkspaceDesscription] = useState<
     string | undefined
-  >(props.workspaceDescription);
+  >(workspaceDescription);
   const [descriptionError, setDescriptionError] = useState<string>("");
 
   const handleWorkspaceDescriptionChange = (
@@ -23,17 +27,17 @@ const EditWorkspaceDetails: React.FC<EditWorkspaceProps> = (props) => {
   ): void => {
     if (workspaceDescription)
       if (workspaceDescription?.length > 14) {
-        setDescriptionError("Description cannot excide 14 characters")
+        setDescriptionError("Description cannot excide 14 characters");
       } else {
-        setDescriptionError("")
+        setDescriptionError("");
       }
-    setWorkspaceDesscription(e.currentTarget.value);
+    setNewWorkspaceDesscription(e.currentTarget.value);
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    props.editWorkspace(props.workspaceId, workspaceDescription);
-    props.setEditting();
+    editWorkspace(workspaceId, newWorkspaceDescription);
+    setEditting();
   };
 
   return (
@@ -43,19 +47,25 @@ const EditWorkspaceDetails: React.FC<EditWorkspaceProps> = (props) => {
           <p className="workspaceDescription">Workspace description</p>
           <input
             className="workspaceDescriptionInput"
-            value={workspaceDescription}
+            value={newWorkspaceDescription}
             onChange={handleWorkspaceDescriptionChange}
             type="text"
             name="workspaceName"
           />
         </div>
-        {descriptionError ? <p className="editWorkspaceDescriptionError">{descriptionError}</p> : null}
+        {descriptionError ? (
+          <p className="editWorkspaceDescriptionError">{descriptionError}</p>
+        ) : null}
 
         <div className="editWorkspaceButtons">
-          <button disabled={descriptionError !== ""} type="submit" className="saveButton">
+          <button
+            disabled={descriptionError !== ""}
+            type="submit"
+            className="saveButton"
+          >
             Save
           </button>
-          <button onClick={() => props.setEditting()} className="cancelButton">
+          <button onClick={() => setEditting()} className="cancelButton">
             Cancel
           </button>
         </div>

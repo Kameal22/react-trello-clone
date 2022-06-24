@@ -8,7 +8,6 @@ import EditWorkspaceDetails from "./EditWorkspaceDetails";
 import WorkspaceBoards from "./WorkspaceBoards";
 import PopUp from "../popups/PopUpMessage";
 import { changeColor } from "../../redux/features/navigationSlice";
-import { useNavigate } from "react-router-dom";
 
 const Workspace: React.FC = () => {
   const [workspaceEditing, setWorkspaceEditing] = useState<boolean>(false);
@@ -53,7 +52,6 @@ const Workspace: React.FC = () => {
           <EditWorkspaceDetails
             editWorkspace={editWorkspaceFunc}
             setEditting={setEditting}
-            workspaceName={shownWorkspace?.workspaceName}
             workspaceDescription={shownWorkspace?.workspaceDescription}
             workspaceId={shownWorkspace?.workspaceId}
           />

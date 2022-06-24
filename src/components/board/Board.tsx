@@ -126,11 +126,9 @@ const Board: React.FC = () => {
             <DragDropContext key={column.columnId} onDragEnd={onDragEnd}>
               <Column
                 key={column.columnId}
-                columnName={column.columnName}
                 columnId={column.columnId}
                 boardId={shownBoard?.boardId}
                 workspaceId={shownWorkspace?.workspaceId}
-                columnTasks={column.columnTasks}
               />
             </DragDropContext>
           );

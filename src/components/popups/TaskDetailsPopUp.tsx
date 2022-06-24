@@ -18,7 +18,7 @@ interface TaskDetailsInterface {
   taskIndicator: string;
   taskDescription: string;
   taskComments: TaskCommentsInterface[];
-  columnName: string;
+  columnName: string | undefined;
   workspaceId: string | undefined;
   boardId: string | undefined;
   columnId: string | undefined;

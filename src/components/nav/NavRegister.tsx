@@ -5,7 +5,11 @@ import { showDropdown } from "../../redux/features/navigationSlice";
 import { setPopUpMessage } from "../../redux/features/popUpMessagSlice";
 import { useDispatch } from "react-redux";
 
-const Register: React.FC = () => {
+interface RegisterProps {
+  forwardRef: React.RefObject<HTMLDivElement>;
+}
+
+const Register: React.FC<RegisterProps> = ({ forwardRef }) => {
   const [name, setName] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<string>("");
@@ -45,7 +49,7 @@ const Register: React.FC = () => {
   };
 
   return (
-    <div className="registerDiv">
+    <div ref={forwardRef} className="registerDiv">
       <p className="registerHeading">Create account</p>
       <form autoComplete="off" onSubmit={handleSubmit}>
         <div className="registerInputs">

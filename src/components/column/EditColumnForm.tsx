@@ -11,45 +11,51 @@ interface EditColumnInterface {
   workspaceId: string | undefined;
 }
 
-const EditColumnForm: React.FC<EditColumnInterface> = (props) => {
+const EditColumnForm: React.FC<EditColumnInterface> = ({
+  setEditing,
+  addTask,
+  columnId,
+  boardId,
+  workspaceId,
+}) => {
   const dispatch = useDispatch();
 
   const deleteColumnFunc = () => {
     dispatch(
       deleteColumn({
-        workspaceId: props.workspaceId,
-        boardId: props.boardId,
-        columnId: props.columnId,
+        workspaceId: workspaceId,
+        boardId: boardId,
+        columnId: columnId,
       })
     );
-    props.setEditing();
+    setEditing();
   };
 
-  const addTask = () => {
-    props.addTask();
-    props.setEditing();
+  const addTaskFunc = () => {
+    addTask();
+    setEditing();
   };
 
   const copyColumnFunc = () => {
     dispatch(
       copyColumn({
-        workspaceId: props.workspaceId,
-        columnId: props.columnId,
-        boardId: props.boardId,
+        workspaceId: workspaceId,
+        columnId: columnId,
+        boardId: boardId,
       })
     );
-    props.setEditing();
+    setEditing();
   };
 
   return (
     <div className="editColumnFormDiv">
       <div className="edidColumnFormDivHeading">
         <p className="editColumnHeading">Column actions</p>
-        <i onClick={() => props.setEditing()} className="bi bi-x-lg"></i>
+        <i onClick={() => setEditing()} className="bi bi-x-lg"></i>
       </div>
 
       <div className="editColumnFormActions">
-        <p onClick={() => addTask()}>Add task..</p>
+        <p onClick={() => addTaskFunc()}>Add task..</p>
         <p onClick={() => deleteColumnFunc()}>Delete column..</p>
         <p onClick={() => copyColumnFunc()}>Copy column..</p>
       </div>

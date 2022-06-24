@@ -2,7 +2,6 @@ import "../../styles/popUpStyles/taskLabelsPopUp.css";
 import { colorChoices } from "../../utils/TaskLabelColorChoices";
 import { selectTaskLabel } from "../../redux/features/WorkspaceSlice";
 import { useDispatch } from "react-redux";
-import { useRef, useEffect } from "react";
 
 interface TaskLabelsInterface {
   editLabels: () => void;

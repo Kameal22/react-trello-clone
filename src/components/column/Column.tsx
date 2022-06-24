@@ -1,5 +1,4 @@
 import "../../styles/columnStyles/column.css";
-import { TaskInterface } from "../../interfaces/WorkspaceInterface";
 import EditColumnForm from "./EditColumnForm";
 import { useState, useRef, useEffect } from "react";
 import { useSelector } from "react-redux";
@@ -9,14 +8,16 @@ import Task from "../task/Task";
 import { Droppable } from "react-beautiful-dnd";
 
 interface ColumnInterface {
-  columnName: string;
   columnId: string;
   boardId: string | undefined;
   workspaceId: string | undefined;
-  columnTasks: TaskInterface[];
 }
 
-const Column: React.FC<ColumnInterface> = (props) => {
+const Column: React.FC<ColumnInterface> = ({
+  columnId,
+  boardId,
+  workspaceId,
+}) => {
   const [columnEditing, setColumnEditing] = useState<boolean>(false);
   const [taskAdding, setTaskAdding] = useState<boolean>(false);
 
@@ -27,15 +28,15 @@ const Column: React.FC<ColumnInterface> = (props) => {
   );
 
   const shownWorkspace = workspaces.find((workspace) => {
-    return workspace.workspaceId === props.workspaceId;
+    return workspace.workspaceId === workspaceId;
   });
 
   const shownBoard = shownWorkspace?.workspaceBoards.find((board) => {
-    return board.boardId === props.boardId;
+    return board.boardId === boardId;
   });
 
   const shownColumn = shownBoard?.boardColumns.find((column) => {
-    return column.columnId === props.columnId;
+    return column.columnId === columnId;
   });
 
   const columnTasks = shownColumn?.columnTasks;
@@ -67,13 +68,13 @@ const Column: React.FC<ColumnInterface> = (props) => {
         <EditColumnForm
           addTask={addATask}
           setEditing={editAColumn}
-          columnId={props.columnId}
-          boardId={props.boardId}
-          workspaceId={props.workspaceId}
+          columnId={columnId}
+          boardId={boardId}
+          workspaceId={workspaceId}
         />
       ) : null}
 
-      <Droppable droppableId={props.columnId}>
+      <Droppable droppableId={columnId}>
         {(provided) => (
           <div
             className="droppableTasks"
@@ -89,10 +90,10 @@ const Column: React.FC<ColumnInterface> = (props) => {
                   taskIndicatorColor={task.taskIndicatorColor}
                   taskDescription={task.taskDescription}
                   taskComments={task.taskComments}
-                  workspaceId={props.workspaceId}
-                  boardId={props.boardId}
-                  columnId={props.columnId}
-                  columnName={props.columnName}
+                  workspaceId={workspaceId}
+                  boardId={boardId}
+                  columnId={columnId}
+                  columnName={shownColumn?.columnName}
                   index={index}
                 />
               );
@@ -104,11 +105,11 @@ const Column: React.FC<ColumnInterface> = (props) => {
 
       {taskAdding ? (
         <AddTaskForm
-          key={props.columnId}
+          key={columnId}
           addTask={addATask}
-          workspaceId={props.workspaceId}
-          boardId={props.boardId}
-          columnId={props.columnId}
+          workspaceId={workspaceId}
+          boardId={boardId}
+          columnId={columnId}
           forwardRef={addTaskRef}
         />
       ) : (
