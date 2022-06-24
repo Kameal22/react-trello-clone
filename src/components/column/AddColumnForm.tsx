@@ -31,12 +31,14 @@ const AddColumnForm: React.FC<AddingColumnFormInterface> = ({
     } else {
       setError("");
     }
-    setColumnName(e.currentTarget.value);
+    setColumnName(e.currentTarget.value.trim());
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (columnName) {
+    if (!columnName) {
+      setError("Can't add an empty column")
+    } else {
       dispatch(
         addColumn({
           columnName,
