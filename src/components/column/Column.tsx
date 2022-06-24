@@ -22,6 +22,7 @@ const Column: React.FC<ColumnInterface> = ({
   const [taskAdding, setTaskAdding] = useState<boolean>(false);
 
   const addTaskRef = useRef<HTMLDivElement>(null);
+  const editColumnRef = useRef<HTMLDivElement>(null);
 
   const workspaces = useSelector(
     (state: RootState) => state.workspace.workspace
@@ -57,6 +58,14 @@ const Column: React.FC<ColumnInterface> = ({
     });
   });
 
+  useEffect(() => {
+    document.addEventListener("mousedown", (event) => {
+      if (!editColumnRef.current?.contains(event.target as Node)) {
+        setColumnEditing(false);
+      }
+    });
+  });
+
   return (
     <div className="boardCOLUMNdiv">
       <div className="boardCOLUMNHeader">
@@ -66,6 +75,7 @@ const Column: React.FC<ColumnInterface> = ({
 
       {columnEditing ? (
         <EditColumnForm
+          forwardRef={editColumnRef}
           addTask={addATask}
           setEditing={editAColumn}
           columnId={columnId}

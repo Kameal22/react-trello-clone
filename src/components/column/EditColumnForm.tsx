@@ -9,6 +9,7 @@ interface EditColumnInterface {
   columnId: string | undefined;
   boardId: string | undefined;
   workspaceId: string | undefined;
+  forwardRef: React.RefObject<HTMLDivElement>;
 }
 
 const EditColumnForm: React.FC<EditColumnInterface> = ({
@@ -17,6 +18,7 @@ const EditColumnForm: React.FC<EditColumnInterface> = ({
   columnId,
   boardId,
   workspaceId,
+  forwardRef
 }) => {
   const dispatch = useDispatch();
 
@@ -48,7 +50,7 @@ const EditColumnForm: React.FC<EditColumnInterface> = ({
   };
 
   return (
-    <div className="editColumnFormDiv">
+    <div ref={forwardRef} className="editColumnFormDiv">
       <div className="edidColumnFormDivHeading">
         <p className="editColumnHeading">Column actions</p>
         <i onClick={() => setEditing()} className="bi bi-x-lg"></i>
