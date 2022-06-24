@@ -64,7 +64,7 @@ const NavSearchBar: React.FC = () => {
 
   return (
     <div className="navSearchBarDiv">
-      <form autoComplete="off">
+      <form autoComplete="off" onSubmit={(e) => e.preventDefault()}>
         <input
           value={enteredValue}
           onChange={handleSearchValueChange}
