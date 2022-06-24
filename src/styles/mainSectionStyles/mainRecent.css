@@ -1,8 +1,8 @@
-.mainSectionRecentDiv{
+.mainRecentDiv{
     width: 25%;
 }
 
-.mainSectionRecentDiv h3{
+.mainRecentDiv h3{
     text-align: right;
     margin-bottom: 2vh;
 }
