@@ -1,12 +1,12 @@
-.boardDivBOARD{
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-}
-
 .boardHeadingBOARD{
     margin-top: 1vh;
     display: flex;
+}
+
+.boardDivBOARD{
+    min-height: calc(100vh - 55px);
+    display: flex;
+    flex-direction: column;
 }
 
 .boardNameBOARD{

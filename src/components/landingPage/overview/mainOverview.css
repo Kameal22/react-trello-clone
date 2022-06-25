@@ -3,3 +3,9 @@
     margin: 4vh auto;
     display: flex;
 }
+
+@media screen and (max-width: 1300px) {
+    .mainOverviewDiv{
+        width: 70%;
+    }
+  }

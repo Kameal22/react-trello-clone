@@ -78,29 +78,61 @@ const Board: React.FC = () => {
       return;
     }
 
-    const column = boardsColumns?.find(
+    const startColumn = boardsColumns?.find(
+      (column) => column.columnId === source.droppableId
+    );
+    const endColumn = boardsColumns?.find(
       (column) => column.columnId === source.droppableId
     );
 
-    if (column) {
-      const newTaskIds = Array.from(column?.columnTasks);
+    if (startColumn === endColumn) {
+      if (startColumn) {
+        const newTaskIds = Array.from(startColumn?.columnTasks);
 
-      const itemToReArange = newTaskIds.find(
+        const itemToReArange = newTaskIds.find(
+          (item) => item.taskId === draggableId
+        );
+
+        newTaskIds.splice(source.index, 1);
+
+        if (itemToReArange) {
+          newTaskIds.splice(destination.index, 0, itemToReArange);
+        }
+
+        const newColumn = {
+          ...startColumn,
+          columnTasks: newTaskIds,
+        };
+
+        reArangeColumnFunc(newColumn, source.droppableId);
+        return;
+      }
+    }
+
+    if (startColumn && endColumn) {
+      const startTaskIds = Array.from(startColumn?.columnTasks);
+
+      const itemToReArange = startTaskIds.find(
         (item) => item.taskId === draggableId
       );
 
-      newTaskIds.splice(source.index, 1);
+      startTaskIds.splice(source.index, 1);
 
-      if (itemToReArange) {
-        newTaskIds.splice(destination.index, 0, itemToReArange);
-      }
-
-      const newColumn = {
-        ...column,
-        columnTasks: newTaskIds,
+      const newStartColumn = {
+        ...startColumn,
+        columnTasks: startTaskIds,
       };
 
-      reArangeColumnFunc(newColumn, source.droppableId);
+      const finishTaskIds = Array.from(endColumn?.columnTasks);
+
+      if (itemToReArange) {
+        finishTaskIds.splice(destination.index, 0, itemToReArange)
+      }
+
+      const newFinishColumn = {
+        ...endColumn,
+        columnTasks: finishTaskIds,
+      };
     }
   };
 

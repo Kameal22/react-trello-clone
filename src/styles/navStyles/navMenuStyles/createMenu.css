@@ -52,3 +52,9 @@
 .navCreateItemHeading:hover{
     background-color: rgba(223, 223, 223, 0.541);
 }
+
+@media screen and (max-width: 1300px) {
+    .navCreateDiv{
+        width: 18%;
+    }
+  }

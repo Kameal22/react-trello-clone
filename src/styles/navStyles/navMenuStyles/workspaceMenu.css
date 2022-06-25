@@ -77,3 +77,9 @@
     overflow: hidden;           
     text-overflow: ellipsis;
 }
+
+@media screen and (max-width: 1300px) {
+    .navWorkspacesDiv{
+        width: 18%;
+    }
+  }

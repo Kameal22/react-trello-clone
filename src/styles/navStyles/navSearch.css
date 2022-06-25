@@ -71,3 +71,10 @@
     width: 25px;
     height: 25px;
 }
+
+@media screen and (max-width: 1300px) {
+    .navSearchBarDiv{
+        position: absolute;
+        right: 15%;
+    }
+  }
