@@ -32,6 +32,8 @@ const Board: React.FC = () => {
 
   const boardsColumns = shownBoard?.boardColumns;
 
+  console.log(boardsColumns)
+
   useEffect(() => {
     if (shownBoard) {
       dispatch(addRecentlyViewed(shownBoard));
@@ -65,7 +67,6 @@ const Board: React.FC = () => {
   };
 
   const reArangeBetweenColumnFunc = (startId: string, finishId: string, newColumnStart: ColumnInterface, newColumnFinish: ColumnInterface) => {
-    console.log("It executes!")
     dispatch(
       reArangeBetweenColumn({
         workspaceId: shownWorkspace?.workspaceId,
@@ -81,12 +82,9 @@ const Board: React.FC = () => {
   const onDragEnd = (result: DropResult) => {
     const { destination, source, draggableId } = result;
 
-    console.log(destination) //Returns null when dropping on other column
-
     if (!destination) {
       return;
     }
-    // THERE IS A PROBLEM WITH DESTINATION. THERE IS NO DESTINATION ON THE OTHER COLUMN
 
     if (
       destination.droppableId === source.droppableId &&
@@ -151,7 +149,6 @@ const Board: React.FC = () => {
         columnTasks: finishTaskIds,
       };
 
-      console.log("TEST") // This doesn't happen
       reArangeBetweenColumnFunc(source.droppableId, destination.droppableId, newStartColumn, newFinishColumn)
     }
   };
@@ -176,7 +173,6 @@ const Board: React.FC = () => {
         <DragDropContext onDragEnd={onDragEnd}>
           {boardsColumns?.map((column) => {
             return (
-
               <Column
                 key={column.columnId}
                 columnId={column.columnId}

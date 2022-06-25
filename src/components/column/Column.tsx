@@ -110,6 +110,7 @@ const Column: React.FC<ColumnInterface> = ({
                 />
               );
             })}
+            <div style={{ width: "1px", height: "1px" }} className="droppable_ID_adder"></div>
             {provided.placeholder}
           </div>
         )}
