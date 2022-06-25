@@ -15,6 +15,7 @@ import CreateWorkspacePopUp from "./components/popups/CreateWorkspacePopUp";
 import { hideCreateWorkspace } from "./redux/features/popUpCreateComponentSlice";
 import { hideCreateBoard } from "./redux/features/popUpCreateComponentSlice";
 import { showDropdown } from "./redux/features/navigationSlice";
+import useOutsideClick from "./components/hooks/UseClickOutside";
 
 function App() {
   const dispatch = useDispatch();
@@ -29,29 +30,25 @@ function App() {
 
   const createWorkspaceRef = useRef<HTMLDivElement>(null);
 
+  const closeWorkspacePopUp = () => {
+    dispatch(hideCreateWorkspace());
+  }
+
+  useOutsideClick(createWorkspaceRef, closeWorkspacePopUp)
+
   const createBoardRef = useRef<HTMLDivElement>(null);
+
+  const closeBoardPopUp = () => {
+    dispatch(hideCreateBoard());
+  }
+
+  useOutsideClick(createBoardRef, closeBoardPopUp)
 
   const dropdownMenuRef = useRef<HTMLDivElement>(null);
 
   const setDropdown = (dropdownItem: string) => {
     dispatch(showDropdown({ dropdownItem }));
   };
-
-  useEffect(() => {
-    document.addEventListener("mousedown", (event) => {
-      if (!createWorkspaceRef.current?.contains(event.target as Node)) {
-        dispatch(hideCreateWorkspace());
-      }
-    });
-  });
-
-  useEffect(() => {
-    document.addEventListener("mousedown", (event) => {
-      if (!createBoardRef.current?.contains(event.target as Node)) {
-        dispatch(hideCreateBoard());
-      }
-    });
-  });
 
   useEffect(() => {
     document.addEventListener("mousedown", (event) => {
