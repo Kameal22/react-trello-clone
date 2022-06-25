@@ -84,6 +84,8 @@ const Column: React.FC<ColumnInterface> = ({
         />
       ) : null}
 
+      {/* This columnId might be the problem */}
+
       <Droppable droppableId={columnId}>
         {(provided) => (
           <div

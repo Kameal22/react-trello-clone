@@ -120,6 +120,39 @@ export const workspaceSlice = createSlice({
       ] = action.payload.newColumn;
     },
 
+    reArangeBetweenColumn: (
+      state,
+      action: PayloadAction<{
+        startColumnId: string;
+        finishColumnId: string;
+        boardId: string | undefined;
+        workspaceId: string | undefined;
+        newStartColumn: ColumnInterface;
+        newFinishColumn: ColumnInterface;
+      }>
+    ) => {
+      const workspace = state.workspace.findIndex(
+        (value) => value.workspaceId === action.payload.workspaceId
+      );
+
+      const board = state.workspace[workspace].workspaceBoards.findIndex(
+        (board) => board.boardId === action.payload.boardId
+      );
+
+      const startColumnId = state.workspace[workspace].workspaceBoards[board].boardColumns.findIndex(
+        (column) => column.columnId === action.payload.startColumnId
+      );
+
+      const finishColumnId = state.workspace[workspace].workspaceBoards[board].boardColumns.findIndex(
+        (column) => column.columnId === action.payload.finishColumnId
+      );
+
+      state.workspace[workspace].workspaceBoards[board].boardColumns[startColumnId] = action.payload.newStartColumn;
+      state.workspace[workspace].workspaceBoards[board].boardColumns[finishColumnId] = action.payload.newFinishColumn;
+
+      console.log("test") // Does nothing
+    },
+
     addColumn: (
       state,
       action: PayloadAction<{
@@ -553,6 +586,7 @@ export const {
   copyColumn,
   deleteColumn,
   reArangeColumn,
+  reArangeBetweenColumn,
   addTask,
   deleteTask,
   copyTask,

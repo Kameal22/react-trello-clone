@@ -7,7 +7,7 @@ import { addRecentlyViewed } from "../../redux/features/recentlyViewedSlice";
 import Column from "../column/Column";
 import AddColumnForm from "../column/AddColumnForm";
 import { changeColor } from "../../redux/features/navigationSlice";
-import { reArangeColumn } from "../../redux/features/WorkspaceSlice";
+import { reArangeColumn, reArangeBetweenColumn } from "../../redux/features/WorkspaceSlice";
 import { DragDropContext, DropResult } from "react-beautiful-dnd";
 import { ColumnInterface } from "../../interfaces/WorkspaceInterface";
 
@@ -58,18 +58,35 @@ const Board: React.FC = () => {
       reArangeColumn({
         workspaceId: shownWorkspace?.workspaceId,
         boardId: shownBoard?.boardId,
-        columnId,
         newColumn,
+        columnId,
       })
     );
   };
 
+  const reArangeBetweenColumnFunc = (startId: string, finishId: string, newColumnStart: ColumnInterface, newColumnFinish: ColumnInterface) => {
+    console.log("It executes!")
+    dispatch(
+      reArangeBetweenColumn({
+        workspaceId: shownWorkspace?.workspaceId,
+        boardId: shownBoard?.boardId,
+        startColumnId: startId,
+        finishColumnId: finishId,
+        newStartColumn: newColumnStart,
+        newFinishColumn: newColumnFinish
+      })
+    )
+  }
+
   const onDragEnd = (result: DropResult) => {
     const { destination, source, draggableId } = result;
+
+    console.log(destination) //Returns null when dropping on other column
 
     if (!destination) {
       return;
     }
+    // THERE IS A PROBLEM WITH DESTINATION. THERE IS NO DESTINATION ON THE OTHER COLUMN
 
     if (
       destination.droppableId === source.droppableId &&
@@ -82,7 +99,7 @@ const Board: React.FC = () => {
       (column) => column.columnId === source.droppableId
     );
     const endColumn = boardsColumns?.find(
-      (column) => column.columnId === source.droppableId
+      (column) => column.columnId === destination.droppableId
     );
 
     if (startColumn === endColumn) {
@@ -105,7 +122,7 @@ const Board: React.FC = () => {
         };
 
         reArangeColumnFunc(newColumn, source.droppableId);
-        return;
+        return
       }
     }
 
@@ -133,6 +150,9 @@ const Board: React.FC = () => {
         ...endColumn,
         columnTasks: finishTaskIds,
       };
+
+      console.log("TEST") // This doesn't happen
+      reArangeBetweenColumnFunc(source.droppableId, destination.droppableId, newStartColumn, newFinishColumn)
     }
   };
 
@@ -153,18 +173,19 @@ const Board: React.FC = () => {
       </div>
 
       <div className="boardAllColumnsDivBOARD">
-        {boardsColumns?.map((column) => {
-          return (
-            <DragDropContext key={column.columnId} onDragEnd={onDragEnd}>
+        <DragDropContext onDragEnd={onDragEnd}>
+          {boardsColumns?.map((column) => {
+            return (
+
               <Column
                 key={column.columnId}
                 columnId={column.columnId}
                 boardId={shownBoard?.boardId}
                 workspaceId={shownWorkspace?.workspaceId}
               />
-            </DragDropContext>
-          );
-        })}
+            );
+          })}
+        </DragDropContext>
 
         <AddColumnForm
           workspaceId={shownWorkspace?.workspaceId}
