@@ -34,7 +34,7 @@ const CreateBoardPopUp: React.FC<CreateBoardProps> = ({ forwardRef }) => {
   const handleBoardNameChange = (
     e: React.FormEvent<HTMLInputElement>
   ): void => {
-    setBoardName(e.currentTarget.value);
+    setBoardName(e.currentTarget.value.trim());
   };
 
   const handleBoardWorkspaceChange = (

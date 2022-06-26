@@ -11,6 +11,7 @@ import {
 } from "../../redux/features/WorkspaceSlice";
 import EditTaskCommentForm from "../task/EditTaskCommentForm";
 import CreateLabelPopUp from "./SpecialLabelPopUp";
+import useClickOutside from "../hooks/useClickOutside";
 
 interface TaskDetailsInterface {
   showTaskDetails: () => void;
@@ -86,21 +87,8 @@ const TaskDetailsPopUp: React.FC<TaskDetailsInterface> = (props) => {
     setDescription(!description);
   };
 
-  useEffect(() => {
-    document.addEventListener("mousedown", (event) => {
-      if (!taskDescriptionRef.current?.contains(event.target as Node)) {
-        setDescription(false);
-      }
-    });
-  });
-
-  useEffect(() => {
-    document.addEventListener("mousedown", (event) => {
-      if (!taskNameRef.current?.contains(event.target as Node)) {
-        setEditingTaskName(false);
-      }
-    });
-  });
+  useClickOutside(taskDescriptionRef, () => setDescription(false))
+  useClickOutside(taskNameRef, () => setEditingTaskName(false))
 
   return (
     <div ref={props.forwardRef} className="taskDetailsDiv">

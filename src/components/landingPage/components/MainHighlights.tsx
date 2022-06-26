@@ -20,28 +20,24 @@ const MainHighlights: React.FC = () => {
     (state: RootState) => state.workspace.workspace
   );
 
-  const highlightedWorkspace =
-    workspaces[Math.floor(Math.random() * workspaces.length)];
+  const highlightedWorkspaces =
+    workspaces.filter(workspace => workspace.workspaceBoards.length > 0)
 
-  const highlightedBoard =
-    highlightedWorkspace?.workspaceBoards[
-    Math.floor(Math.random() * highlightedWorkspace.workspaceBoards.length)
-    ];
+  const highlightedWorkspace = highlightedWorkspaces[Math.floor(Math.random() * highlightedWorkspaces.length)]
 
-  const highlightedColumn =
-    highlightedBoard?.boardColumns[
-    Math.floor(Math.random() * highlightedBoard.boardColumns.length)
-    ];
+  const highlightedBoards = highlightedWorkspace.workspaceBoards.filter(board => board.boardColumns.length > 0)
 
-  const highlightedTask =
-    highlightedColumn?.columnTasks[
-    Math.floor(Math.random() * highlightedColumn.columnTasks.length)
-    ];
+  const highlightedBoard = highlightedBoards[Math.floor(Math.random() * highlightedBoards.length)]
+
+  const highlightedColumns = highlightedBoard.boardColumns.filter(column => column.columnTasks.length > 0)
+
+  const highlightedColumn = highlightedColumns[Math.floor(Math.random() * highlightedColumns.length)];
+
+  const highlightedTasks = highlightedColumn.columnTasks.filter(task => task.taskName !== undefined)
+
+  const highlightedTask = highlightedTasks[Math.floor(Math.random() * highlightedTasks.length)]
 
   useEffect(() => {
-    if (!highlightedTask) {
-      return;
-    }
 
     const label = highlightedTask?.taskIndicatorColor;
     const message = highlightedTask?.taskName;
@@ -60,18 +56,9 @@ const MainHighlights: React.FC = () => {
       <h3>Highlights</h3>
 
       <div className="highlightsInfo">
-        {highlightedWorkspace ? (
-          <p className="highlightsInfoDescription">
-            Stay up to date with activity from your Workspaces and boards.
-          </p>
-        ) : (
-          <p
-            style={{ fontWeight: "bold", textAlign: "center" }}
-            className="highlightsInfoDescription"
-          >
-            There are no highlights to show
-          </p>
-        )}
+        <p className="highlightsInfoDescription">
+          Stay up to date with activity from your Workspaces and boards.
+        </p>
       </div>
 
       {taskToShow?.message !== undefined ? (

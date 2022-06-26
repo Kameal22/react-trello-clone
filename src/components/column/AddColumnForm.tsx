@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 import { TaskInterface } from "../../interfaces/WorkspaceInterface";
 import { addColumn } from "../../redux/features/WorkspaceSlice";
 import { useDispatch } from "react-redux";
+import useClickOutside from "../hooks/useClickOutside"
 
 interface AddingColumnFormInterface {
   workspaceId: string | undefined;
@@ -53,13 +54,7 @@ const AddColumnForm: React.FC<AddingColumnFormInterface> = ({
     }
   };
 
-  useEffect(() => {
-    document.addEventListener("mousedown", (event) => {
-      if (!createColumnRef.current?.contains(event.target as Node)) {
-        setAddingColumn(false);
-      }
-    });
-  });
+  useClickOutside(createColumnRef, () => setAddingColumn(false))
 
   if (addingColumn) {
     return (

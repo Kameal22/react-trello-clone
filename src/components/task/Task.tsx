@@ -5,6 +5,7 @@ import TaskDetailsPopUp from "../popups/TaskDetailsPopUp";
 import TaskLabelsPopUp from "../popups/TaskLabelsPopUp";
 import { TaskCommentsInterface } from "../../interfaces/WorkspaceInterface";
 import { Draggable } from "react-beautiful-dnd";
+import useClickOutside from "../hooks/useClickOutside";
 
 interface TaskProps {
   taskName: string;
@@ -52,29 +53,9 @@ const Task: React.FC<TaskProps> = ({
     showTaskDetails(!taskDetails);
   };
 
-  useEffect(() => {
-    document.addEventListener("mousedown", (event) => {
-      if (!optionsRef.current?.contains(event.target as Node)) {
-        showTaskOptions(false);
-      }
-    });
-  });
-
-  useEffect(() => {
-    document.addEventListener("mousedown", (event) => {
-      if (!taskLabelsRef.current?.contains(event.target as Node)) {
-        showTaskLabels(false);
-      }
-    });
-  });
-
-  useEffect(() => {
-    document.addEventListener("mousedown", (event) => {
-      if (!taskDetailsRef.current?.contains(event.target as Node)) {
-        showTaskDetails(false);
-      }
-    });
-  });
+  useClickOutside(optionsRef, () => showTaskOptions(false))
+  useClickOutside(taskLabelsRef, () => showTaskLabels(false))
+  useClickOutside(taskDetailsRef, () => showTaskDetails(false))
 
   return (
     <>

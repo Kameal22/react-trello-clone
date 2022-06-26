@@ -6,6 +6,7 @@ import { RootState } from "../../redux/Store";
 import AddTaskForm from "../task/AddTaskForm";
 import Task from "../task/Task";
 import { Droppable } from "react-beautiful-dnd";
+import useClickOutside from "../hooks/useClickOutside";
 
 interface ColumnInterface {
   columnId: string;
@@ -50,21 +51,9 @@ const Column: React.FC<ColumnInterface> = ({
     setTaskAdding(!taskAdding);
   };
 
-  useEffect(() => {
-    document.addEventListener("mousedown", (event) => {
-      if (!addTaskRef.current?.contains(event.target as Node)) {
-        setTaskAdding(false);
-      }
-    });
-  });
+  useClickOutside(addTaskRef, () => setTaskAdding(false))
 
-  useEffect(() => {
-    document.addEventListener("mousedown", (event) => {
-      if (!editColumnRef.current?.contains(event.target as Node)) {
-        setColumnEditing(false);
-      }
-    });
-  });
+  useClickOutside(editColumnRef, () => setColumnEditing(false))
 
   return (
     <div className="boardCOLUMNdiv">

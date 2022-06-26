@@ -45,7 +45,7 @@ const CreateWorkspacePopUp: React.FC<CreateWorkspaceProps> = ({
     } else {
       setNameError("");
     }
-    setWorkspaceName(e.currentTarget.value);
+    setWorkspaceName(e.currentTarget.value.trim());
   };
 
   const handleWorkspaceDescriptionChange = (
@@ -121,7 +121,6 @@ const CreateWorkspacePopUp: React.FC<CreateWorkspaceProps> = ({
               <input
                 className="workspaceNameInput"
                 placeholder="Code together"
-                value={workspaceName}
                 onChange={handleWorkspaceNameChange}
                 type="text"
                 name="workspaceName"

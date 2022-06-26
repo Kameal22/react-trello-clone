@@ -15,7 +15,7 @@ import CreateWorkspacePopUp from "./components/popups/CreateWorkspacePopUp";
 import { hideCreateWorkspace } from "./redux/features/popUpCreateComponentSlice";
 import { hideCreateBoard } from "./redux/features/popUpCreateComponentSlice";
 import { showDropdown } from "./redux/features/navigationSlice";
-import useOutsideClick from "./components/hooks/UseClickOutside";
+import useOutsideClick from "./components/hooks/useClickOutside";
 
 function App() {
   const dispatch = useDispatch();
