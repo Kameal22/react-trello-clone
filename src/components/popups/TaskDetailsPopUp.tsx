@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import "../../styles/popUpStyles/taskDetailsPopUp.css";
 import TaskCommentForm from "../task/TaskCommentForm";
 import TaskDescriptionForm from "../task/TaskDescriptionForm";
@@ -87,14 +87,15 @@ const TaskDetailsPopUp: React.FC<TaskDetailsInterface> = (props) => {
     setDescription(!description);
   };
 
-  useClickOutside(taskDescriptionRef, () => setDescription(false))
-  useClickOutside(taskNameRef, () => setEditingTaskName(false))
+  useClickOutside(taskDescriptionRef, () => setDescription(false));
+  useClickOutside(taskNameRef, () => setEditingTaskName(false));
 
   return (
     <div ref={props.forwardRef} className="taskDetailsDiv">
       <div className="taskDetailsName">
         {editingTaskName ? (
-          <form ref={taskNameRef}
+          <form
+            ref={taskNameRef}
             className="editTaskNameForm"
             autoComplete="off"
             onSubmit={handleSubmit}

@@ -6,11 +6,11 @@ import { useState, useEffect } from "react";
 
 interface TaskToShowInterface {
   message: string;
-  label: string;
-  board: string;
-  boardId: string;
-  user: string;
-  workspace: string;
+  label: string | undefined;
+  board: string | undefined;
+  boardId: string | undefined;
+  user: string | undefined;
+  workspaceName: string | undefined;
 }
 
 const MainHighlights: React.FC = () => {
@@ -20,47 +20,50 @@ const MainHighlights: React.FC = () => {
     (state: RootState) => state.workspace.workspace
   );
 
-  const highlightedWorkspace =
-    workspaces[Math.floor(Math.random() * workspaces.length)];
+  const highlights = useSelector(
+    (state: RootState) => state.highlight.highlights
+  );
 
-  const highlightedBoard =
-    highlightedWorkspace?.workspaceBoards[
-    Math.floor(Math.random() * highlightedWorkspace.workspaceBoards.length)
-    ];
-
-  const highlightedColumn =
-    highlightedBoard?.boardColumns[
-    Math.floor(Math.random() * highlightedBoard.boardColumns.length)
-    ];
-
-  const highlightedTask =
-    highlightedColumn?.columnTasks[
-    Math.floor(Math.random() * highlightedColumn.columnTasks.length)
-    ];
+  console.log(highlights);
 
   useEffect(() => {
-    if (!highlightedTask) {
-      return;
-    }
+    const taskComment =
+      highlights[Math.floor(Math.random() * highlights.length)];
 
-    const label = highlightedTask?.taskIndicatorColor;
-    const message = highlightedTask?.taskName;
-    const board = highlightedBoard?.boardName;
-    const user = highlightedWorkspace?.workspaceMember;
-    const boardId = highlightedBoard?.boardId;
-    const workspace = highlightedWorkspace?.workspaceName;
+    const tasksWorkspace = workspaces.find(
+      (workspaces) => workspaces.workspaceId === taskComment.workspaceId
+    );
 
-    const wholeTask = { label, message, board, user, boardId, workspace };
+    const tasksBoard = tasksWorkspace?.workspaceBoards.find(
+      (board) => board.boardId === taskComment.boardId
+    );
+
+    const taskColumn = tasksBoard?.boardColumns.find(
+      (column) => column.columnId === taskComment.columnId
+    );
+
+    const tasks = taskColumn?.columnTasks.find(
+      (task) => task.taskId === task.taskId
+    );
+
+    const message = taskComment.taskComment;
+    const label = tasks?.taskIndicatorColor;
+    const board = tasksBoard?.boardName;
+    const user = tasksWorkspace?.workspaceMember;
+    const boardId = tasksBoard?.boardId;
+    const workspaceName = tasksWorkspace?.workspaceName;
+
+    const wholeTask = { workspaceName, boardId, board, user, label, message };
 
     setTaskToShow(wholeTask);
-  }, [highlightedWorkspace]);
+  }, [highlights]);
 
   return (
     <div className="mainSectionHighlightsDiv">
       <h3>Highlights</h3>
 
       <div className="highlightsInfo">
-        {highlightedWorkspace ? (
+        {highlights ? (
           <p className="highlightsInfoDescription">
             Stay up to date with activity from your Workspaces and boards.
           </p>
@@ -76,7 +79,7 @@ const MainHighlights: React.FC = () => {
 
       {taskToShow?.message !== undefined ? (
         <div className="highlight">
-          <p className="highlightUser">{taskToShow?.user}</p>
+          <p className="highlightUser">{taskToShow.user}</p>
           <div
             style={{
               background: taskToShow?.label,
@@ -90,7 +93,7 @@ const MainHighlights: React.FC = () => {
           <p className="highlightMessage">{taskToShow?.message}</p>
           <Link
             className="workspaceMenuLink"
-            to={`/board/${taskToShow?.workspace}/${taskToShow?.boardId}`}
+            to={`/board/${taskToShow.workspaceName}/${taskToShow?.boardId}`}
           >
             <p className="highlightBoardInfo">
               <span>from</span>: {taskToShow?.board} <span>board</span>

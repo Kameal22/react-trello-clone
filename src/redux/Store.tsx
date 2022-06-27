@@ -5,9 +5,10 @@ import popUpReducer from "./features/popUpMessagSlice";
 import workspaceReducer from "./features/WorkspaceSlice";
 import recentlyViewedReducer from "./features/recentlyViewedSlice";
 import createComponentReducer from "./features/popUpCreateComponentSlice";
-import { persistStore, persistReducer } from "redux-persist";
+import highlightMessageReducer from "./features/highlightsSlice";
+import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import thunk from 'redux-thunk';
+import thunk from "redux-thunk";
 
 const reducers = combineReducers({
   users: registeredUsersReducer,
@@ -15,20 +16,21 @@ const reducers = combineReducers({
   message: popUpReducer,
   workspace: workspaceReducer,
   recents: recentlyViewedReducer,
-  create: createComponentReducer
-})
+  create: createComponentReducer,
+  highlight: highlightMessageReducer,
+});
 
 const persistConfig = {
-  key: 'root',
-  storage
-}
+  key: "root",
+  storage,
+};
 
-const persistedReducer = persistReducer(persistConfig, reducers)
+const persistedReducer = persistReducer(persistConfig, reducers);
 
 export const store = configureStore({
   reducer: persistedReducer,
-  devTools: process.env.NODE_ENV !== 'production',
-  middleware: [thunk]
+  devTools: process.env.NODE_ENV !== "production",
+  middleware: [thunk],
 });
 
 export type RootState = ReturnType<typeof store.getState>;

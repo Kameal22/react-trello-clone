@@ -1,5 +1,6 @@
 import "../../styles/taskStyles/taskCommentForm.css";
 import { addTaskComment } from "../../redux/features/WorkspaceSlice";
+import { addHighlight } from "../../redux/features/highlightsSlice";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../redux/Store";
@@ -27,7 +28,7 @@ const TaskCommentForm: React.FC<TaskCommentFormInterface> = (props) => {
     event.preventDefault();
 
     dispatch(
-      addTaskComment({
+      addHighlight({
         workspaceId: props.workspaceId,
         boardId: props.boardId,
         columnId: props.columnId,
@@ -38,6 +39,17 @@ const TaskCommentForm: React.FC<TaskCommentFormInterface> = (props) => {
       })
     );
 
+    dispatch(
+      addTaskComment({
+        workspaceId: props.workspaceId,
+        boardId: props.boardId,
+        columnId: props.columnId,
+        taskId: props.taskId,
+        taskComment,
+        taskAuthor: user.name,
+        taskDate: date,
+      })
+    );
     setTaskComment("");
   };
 

@@ -7,7 +7,10 @@ import { addRecentlyViewed } from "../../redux/features/recentlyViewedSlice";
 import Column from "../column/Column";
 import AddColumnForm from "../column/AddColumnForm";
 import { changeColor } from "../../redux/features/navigationSlice";
-import { reArangeColumn, reArangeBetweenColumn } from "../../redux/features/WorkspaceSlice";
+import {
+  reArangeColumn,
+  reArangeBetweenColumn,
+} from "../../redux/features/WorkspaceSlice";
 import { DragDropContext, DropResult } from "react-beautiful-dnd";
 import { ColumnInterface } from "../../interfaces/WorkspaceInterface";
 
@@ -31,8 +34,6 @@ const Board: React.FC = () => {
   });
 
   const boardsColumns = shownBoard?.boardColumns;
-
-  console.log(boardsColumns)
 
   useEffect(() => {
     if (shownBoard) {
@@ -66,7 +67,12 @@ const Board: React.FC = () => {
     );
   };
 
-  const reArangeBetweenColumnFunc = (startId: string, finishId: string, newColumnStart: ColumnInterface, newColumnFinish: ColumnInterface) => {
+  const reArangeBetweenColumnFunc = (
+    startId: string,
+    finishId: string,
+    newColumnStart: ColumnInterface,
+    newColumnFinish: ColumnInterface
+  ) => {
     dispatch(
       reArangeBetweenColumn({
         workspaceId: shownWorkspace?.workspaceId,
@@ -74,10 +80,10 @@ const Board: React.FC = () => {
         startColumnId: startId,
         finishColumnId: finishId,
         newStartColumn: newColumnStart,
-        newFinishColumn: newColumnFinish
+        newFinishColumn: newColumnFinish,
       })
-    )
-  }
+    );
+  };
 
   const onDragEnd = (result: DropResult) => {
     const { destination, source, draggableId } = result;
@@ -120,7 +126,7 @@ const Board: React.FC = () => {
         };
 
         reArangeColumnFunc(newColumn, source.droppableId);
-        return
+        return;
       }
     }
 
@@ -141,7 +147,7 @@ const Board: React.FC = () => {
       const finishTaskIds = Array.from(endColumn?.columnTasks);
 
       if (itemToReArange) {
-        finishTaskIds.splice(destination.index, 0, itemToReArange)
+        finishTaskIds.splice(destination.index, 0, itemToReArange);
       }
 
       const newFinishColumn = {
@@ -149,7 +155,12 @@ const Board: React.FC = () => {
         columnTasks: finishTaskIds,
       };
 
-      reArangeBetweenColumnFunc(source.droppableId, destination.droppableId, newStartColumn, newFinishColumn)
+      reArangeBetweenColumnFunc(
+        source.droppableId,
+        destination.droppableId,
+        newStartColumn,
+        newFinishColumn
+      );
     }
   };
 
