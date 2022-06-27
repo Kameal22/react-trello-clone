@@ -1,5 +1,5 @@
 import "../../styles/taskStyles/task.css";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import TaskOptionsForm from "../task/TaskOptionsForm";
 import TaskDetailsPopUp from "../popups/TaskDetailsPopUp";
 import TaskLabelsPopUp from "../popups/TaskLabelsPopUp";
