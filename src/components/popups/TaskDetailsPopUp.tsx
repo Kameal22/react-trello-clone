@@ -12,6 +12,7 @@ import {
 import EditTaskCommentForm from "../task/EditTaskCommentForm";
 import CreateLabelPopUp from "./SpecialLabelPopUp";
 import useClickOutside from "../hooks/useClickOutside";
+import { removeHighlightOnCommentDeleting } from "../../redux/features/highlightsSlice";
 
 interface TaskDetailsInterface {
   showTaskDetails: () => void;
@@ -39,6 +40,14 @@ const TaskDetailsPopUp: React.FC<TaskDetailsInterface> = (props) => {
   const taskDescriptionRef = useRef<HTMLDivElement>(null);
   const taskNameRef = useRef<HTMLFormElement>(null);
 
+  const handleHighlightRemove = (comment: string) => {
+    dispatch(
+      removeHighlightOnCommentDeleting({
+        comment: comment,
+      })
+    );
+  };
+
   const handleTaskNameChange = (e: React.FormEvent<HTMLInputElement>): void => {
     setTaskName(e.currentTarget.value);
   };
@@ -64,6 +73,7 @@ const TaskDetailsPopUp: React.FC<TaskDetailsInterface> = (props) => {
   };
 
   const deleteComment = (taskComment: string) => {
+    handleHighlightRemove(taskComment);
     dispatch(
       deleteTaskComment({
         workspaceId: props.workspaceId,

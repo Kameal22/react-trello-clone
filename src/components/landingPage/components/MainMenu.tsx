@@ -6,6 +6,7 @@ import {
   deleteWorkspace,
 } from "../../../redux/features/WorkspaceSlice";
 import { removeRecentlyViewedAfterWorkspaceDeleting } from "../../../redux/features/recentlyViewedSlice";
+import { removeHighlightOnWorkspaceDeleting } from "../../../redux/features/highlightsSlice";
 import { Link } from "react-router-dom";
 import { setCreateWorkspace } from "../../../redux/features/popUpCreateComponentSlice";
 
@@ -15,6 +16,12 @@ const MainMenu: React.FC = () => {
   const workspaces = useSelector(
     (state: RootState) => state.workspace.workspace
   );
+
+  const highlights = useSelector(
+    (state: RootState) => state.highlight.highlights
+  );
+
+  console.log(highlights);
 
   const showDropdown = (id: string) => {
     dispatch(showWorkspaceDropdown({ id }));
@@ -42,12 +49,21 @@ const MainMenu: React.FC = () => {
     );
   };
 
+  const handleRemoveHighlight = (workspaceId: string) => {
+    dispatch(
+      removeHighlightOnWorkspaceDeleting({
+        workspaceId: workspaceId,
+      })
+    );
+  };
+
   const handleWorkspaceRemove = (
     workspaceId: string,
     workspaceName: string
   ) => {
     deleteWorkspaceFunc(workspaceId);
     removeFromLastWatched(workspaceName);
+    handleRemoveHighlight(workspaceId);
     window.location.reload();
   };
 
@@ -93,7 +109,7 @@ const MainMenu: React.FC = () => {
       {isWorkspace
         ? workspaces.map((workspace) => {
             return (
-              <div key={workspace.workspaceId} className="menuWorkspaces">
+              <ul key={workspace.workspaceId} className="menuWorkspaces">
                 <div
                   onClick={() => showDropdown(workspace.workspaceId)}
                   className="workspace"
@@ -121,7 +137,7 @@ const MainMenu: React.FC = () => {
                 </div>
                 {workspace.workspaceLandingPageMenu ? (
                   <div className="workspaceSettings">
-                    <div className="workspaceOption">
+                    <li className="workspaceOption">
                       <i className="bi bi-calendar-check"></i>
                       <Link
                         className="workspaceMenuLink"
@@ -129,7 +145,7 @@ const MainMenu: React.FC = () => {
                       >
                         <p className="menuBoardsDescription">Boards</p>
                       </Link>
-                    </div>
+                    </li>
                     <div
                       onClick={() =>
                         handleWorkspaceRemove(
@@ -144,7 +160,7 @@ const MainMenu: React.FC = () => {
                     </div>
                   </div>
                 ) : null}
-              </div>
+              </ul>
             );
           })
         : null}

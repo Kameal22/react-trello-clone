@@ -1,6 +1,7 @@
 import "../../styles/taskStyles/taskOptionsForm.css";
 import { deleteTask, copyTask } from "../../redux/features/WorkspaceSlice";
 import { useDispatch } from "react-redux";
+import { removeHighlightOnTaskDeleting } from "../../redux/features/highlightsSlice";
 
 interface OptionsFormInterface {
   showForm: () => void;
@@ -10,11 +11,19 @@ interface OptionsFormInterface {
   boardId: string | undefined;
   columnId: string | undefined;
   taskId: string;
-  forwardRef: React.RefObject<HTMLDivElement>
+  forwardRef: React.RefObject<HTMLDivElement>;
 }
 
 const TaskOptionsForm: React.FC<OptionsFormInterface> = (props) => {
   const dispatch = useDispatch();
+
+  const handleRemoveHighlight = (taskId: string) => {
+    dispatch(
+      removeHighlightOnTaskDeleting({
+        taskId: taskId,
+      })
+    );
+  };
 
   const deleteTaskFunc = () => {
     dispatch(
@@ -25,6 +34,7 @@ const TaskOptionsForm: React.FC<OptionsFormInterface> = (props) => {
         taskId: props.taskId,
       })
     );
+    handleRemoveHighlight(props.taskId);
     props.showForm();
     window.location.reload();
   };

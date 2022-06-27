@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import { deleteBoard } from "../../redux/features/WorkspaceSlice";
 import { removeRecentlyViewedThatWasDeletedFromWorkspaceComponent } from "../../redux/features/recentlyViewedSlice";
 import { setCreateBoard } from "../../redux/features/popUpCreateComponentSlice";
+import { removeHighlightOnBoardDeleting } from "../../redux/features/highlightsSlice";
 
 interface WorkspaceBoardsInterface {
   shownWorkspace: WorkspaceInterface | undefined;
@@ -49,9 +50,18 @@ const WorkspaceBoards: React.FC<WorkspaceBoardsInterface> = (props) => {
     );
   };
 
+  const removeFromHighlights = (boardId: string) => {
+    dispatch(
+      removeHighlightOnBoardDeleting({
+        boardId: boardId,
+      })
+    );
+  };
+
   const handleWorkspaceRemove = (workspaceName: string, boardId: string) => {
     deleteBoardFunc(workspaceName, boardId);
     removeFromLastWatched(boardId);
+    removeFromHighlights(boardId);
     window.location.reload();
   };
 

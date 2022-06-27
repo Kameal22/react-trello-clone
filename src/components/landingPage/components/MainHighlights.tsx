@@ -24,9 +24,10 @@ const MainHighlights: React.FC = () => {
     (state: RootState) => state.highlight.highlights
   );
 
-  console.log(highlights);
-
   useEffect(() => {
+    if (highlights.length < 1) {
+      return;
+    }
     const taskComment =
       highlights[Math.floor(Math.random() * highlights.length)];
 
@@ -46,7 +47,7 @@ const MainHighlights: React.FC = () => {
       (task) => task.taskId === task.taskId
     );
 
-    const message = taskComment.taskComment;
+    const message = taskComment?.taskComment;
     const label = tasks?.taskIndicatorColor;
     const board = tasksBoard?.boardName;
     const user = tasksWorkspace?.workspaceMember;
@@ -56,25 +57,16 @@ const MainHighlights: React.FC = () => {
     const wholeTask = { workspaceName, boardId, board, user, label, message };
 
     setTaskToShow(wholeTask);
-  }, [highlights]);
+  }, []);
 
   return (
     <div className="mainSectionHighlightsDiv">
       <h3>Highlights</h3>
 
       <div className="highlightsInfo">
-        {highlights ? (
-          <p className="highlightsInfoDescription">
-            Stay up to date with activity from your Workspaces and boards.
-          </p>
-        ) : (
-          <p
-            style={{ fontWeight: "bold", textAlign: "center" }}
-            className="highlightsInfoDescription"
-          >
-            There are no highlights to show
-          </p>
-        )}
+        <p className="highlightsInfoDescription">
+          Stay up to date with activity from your Workspaces and boards.
+        </p>
       </div>
 
       {taskToShow?.message !== undefined ? (

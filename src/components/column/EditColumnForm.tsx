@@ -2,6 +2,7 @@ import "../../styles/columnStyles/editColumnForm.css";
 import { deleteColumn } from "../../redux/features/WorkspaceSlice";
 import { useDispatch } from "react-redux";
 import { copyColumn } from "../../redux/features/WorkspaceSlice";
+import { removeHighlightOnColumnDeleting } from "../../redux/features/highlightsSlice";
 
 interface EditColumnInterface {
   setEditing: () => void;
@@ -18,11 +19,20 @@ const EditColumnForm: React.FC<EditColumnInterface> = ({
   columnId,
   boardId,
   workspaceId,
-  forwardRef
+  forwardRef,
 }) => {
   const dispatch = useDispatch();
 
+  const handleHighlightRemove = (columnId: string | undefined) => {
+    dispatch(
+      removeHighlightOnColumnDeleting({
+        columnId: columnId,
+      })
+    );
+  };
+
   const deleteColumnFunc = () => {
+    handleHighlightRemove(columnId);
     dispatch(
       deleteColumn({
         workspaceId: workspaceId,
