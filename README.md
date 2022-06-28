@@ -1,6 +1,6 @@
 # React Trello clone.
 
-# To run it - simply clone a repository and run npm start after installing npm. Project will be deployed soon.
+# To run it - visit https://react-trello-clone-p46rl40ht-kameal22.vercel.app/.
 
 ## My newest project which I'm creating with a use of Redux toolkit to learn it in practice. It is also written in Typescript to improve my capability of using it in applications.
 
