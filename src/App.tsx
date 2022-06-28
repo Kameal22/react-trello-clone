@@ -15,7 +15,7 @@ import CreateWorkspacePopUp from "./components/popups/CreateWorkspacePopUp";
 import { hideCreateWorkspace } from "./redux/features/popUpCreateComponentSlice";
 import { hideCreateBoard } from "./redux/features/popUpCreateComponentSlice";
 import { showDropdown } from "./redux/features/navigationSlice";
-import useClickOutside from "./components/hooks/useClickOutside";
+import UseClickOutside from "./hooks/UseClickOutside";
 
 function App() {
   const dispatch = useDispatch();
@@ -32,17 +32,17 @@ function App() {
 
   const closeWorkspacePopUp = () => {
     dispatch(hideCreateWorkspace());
-  }
+  };
 
-  useClickOutside(createWorkspaceRef, closeWorkspacePopUp)
+  UseClickOutside(createWorkspaceRef, closeWorkspacePopUp);
 
   const createBoardRef = useRef<HTMLDivElement>(null);
 
   const closeBoardPopUp = () => {
     dispatch(hideCreateBoard());
-  }
+  };
 
-  useClickOutside(createBoardRef, closeBoardPopUp)
+  UseClickOutside(createBoardRef, closeBoardPopUp);
 
   const dropdownMenuRef = useRef<HTMLDivElement>(null);
 

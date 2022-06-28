@@ -6,7 +6,7 @@ import { RootState } from "../../redux/Store";
 import AddTaskForm from "../task/AddTaskForm";
 import Task from "../task/Task";
 import { Droppable } from "react-beautiful-dnd";
-import useClickOutside from "../hooks/useClickOutside";
+import UseClickOutside from "../../hooks/UseClickOutside";
 
 interface ColumnInterface {
   columnId: string;
@@ -51,9 +51,9 @@ const Column: React.FC<ColumnInterface> = ({
     setTaskAdding(!taskAdding);
   };
 
-  useClickOutside(addTaskRef, () => setTaskAdding(false))
+  UseClickOutside(addTaskRef, () => setTaskAdding(false));
 
-  useClickOutside(editColumnRef, () => setColumnEditing(false))
+  UseClickOutside(editColumnRef, () => setColumnEditing(false));
 
   return (
     <div className="boardCOLUMNdiv">
@@ -99,7 +99,10 @@ const Column: React.FC<ColumnInterface> = ({
                 />
               );
             })}
-            <div style={{ width: "1px", height: "1px" }} className="droppable_ID_adder"></div>
+            <div
+              style={{ width: "1px", height: "1px" }}
+              className="droppable_ID_adder"
+            ></div>
             {provided.placeholder}
           </div>
         )}

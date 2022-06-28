@@ -5,7 +5,7 @@ import TaskDetailsPopUp from "../popups/TaskDetailsPopUp";
 import TaskLabelsPopUp from "../popups/TaskLabelsPopUp";
 import { TaskCommentsInterface } from "../../interfaces/WorkspaceInterface";
 import { Draggable } from "react-beautiful-dnd";
-import useClickOutside from "../hooks/useClickOutside";
+import UseClickOutside from "../../hooks/UseClickOutside";
 
 interface TaskProps {
   taskName: string;
@@ -53,9 +53,9 @@ const Task: React.FC<TaskProps> = ({
     showTaskDetails(!taskDetails);
   };
 
-  useClickOutside(optionsRef, () => showTaskOptions(false))
-  useClickOutside(taskLabelsRef, () => showTaskLabels(false))
-  useClickOutside(taskDetailsRef, () => showTaskDetails(false))
+  UseClickOutside(optionsRef, () => showTaskOptions(false));
+  UseClickOutside(taskLabelsRef, () => showTaskLabels(false));
+  UseClickOutside(taskDetailsRef, () => showTaskDetails(false));
 
   return (
     <>

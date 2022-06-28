@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 import { TaskInterface } from "../../interfaces/WorkspaceInterface";
 import { addColumn } from "../../redux/features/WorkspaceSlice";
 import { useDispatch } from "react-redux";
-import useClickOutside from "../hooks/useClickOutside"
+import UseClickOutside from "../../hooks/UseClickOutside";
 
 interface AddingColumnFormInterface {
   workspaceId: string | undefined;
@@ -38,7 +38,7 @@ const AddColumnForm: React.FC<AddingColumnFormInterface> = ({
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!columnName) {
-      setError("Can't add an empty column")
+      setError("Can't add an empty column");
     } else {
       dispatch(
         addColumn({
@@ -54,7 +54,7 @@ const AddColumnForm: React.FC<AddingColumnFormInterface> = ({
     }
   };
 
-  useClickOutside(createColumnRef, () => setAddingColumn(false))
+  UseClickOutside(createColumnRef, () => setAddingColumn(false));
 
   if (addingColumn) {
     return (

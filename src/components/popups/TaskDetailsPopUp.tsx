@@ -11,7 +11,7 @@ import {
 } from "../../redux/features/WorkspaceSlice";
 import EditTaskCommentForm from "../task/EditTaskCommentForm";
 import CreateLabelPopUp from "./SpecialLabelPopUp";
-import useClickOutside from "../hooks/useClickOutside";
+import UseClickOutside from "../../hooks/UseClickOutside";
 import { removeHighlightOnCommentDeleting } from "../../redux/features/highlightsSlice";
 
 interface TaskDetailsInterface {
@@ -97,8 +97,8 @@ const TaskDetailsPopUp: React.FC<TaskDetailsInterface> = (props) => {
     setDescription(!description);
   };
 
-  useClickOutside(taskDescriptionRef, () => setDescription(false));
-  useClickOutside(taskNameRef, () => setEditingTaskName(false));
+  UseClickOutside(taskDescriptionRef, () => setDescription(false));
+  UseClickOutside(taskNameRef, () => setEditingTaskName(false));
 
   return (
     <div ref={props.forwardRef} className="taskDetailsDiv">
