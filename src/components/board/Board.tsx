@@ -10,8 +10,9 @@ import { changeColor } from "../../redux/features/navigationSlice";
 import {
   reArangeColumn,
   reArangeBetweenColumn,
+  removeDraggedTaskFromColumn,
 } from "../../redux/features/WorkspaceSlice";
-import { DragDropContext, DropResult } from "react-beautiful-dnd";
+import { DragDropContext, DropResult, Droppable } from "react-beautiful-dnd";
 import { ColumnInterface } from "../../interfaces/WorkspaceInterface";
 
 const Board: React.FC = () => {
@@ -67,6 +68,20 @@ const Board: React.FC = () => {
     );
   };
 
+  const removeDraggedTaskFunc = (
+    newColumn: ColumnInterface,
+    columnId: string
+  ) => {
+    dispatch(
+      removeDraggedTaskFromColumn({
+        workspaceId: shownWorkspace?.workspaceId,
+        boardId: shownBoard?.boardId,
+        newColumn,
+        columnId,
+      })
+    );
+  };
+
   const reArangeBetweenColumnFunc = (
     startId: string,
     finishId: string,
@@ -102,6 +117,26 @@ const Board: React.FC = () => {
     const startColumn = boardsColumns?.find(
       (column) => column.columnId === source.droppableId
     );
+
+    if (startColumn && destination.droppableId === "delete") {
+      console.log(destination);
+
+      const newTaskIds = Array.from(startColumn?.columnTasks);
+
+      const itemToRemove = newTaskIds.find(
+        (item) => item.taskId === draggableId
+      );
+
+      newTaskIds.splice(source.index, 1);
+
+      const newColumn = {
+        ...startColumn,
+        columnTasks: newTaskIds,
+      };
+
+      removeDraggedTaskFunc(newColumn, source.droppableId);
+    }
+
     const endColumn = boardsColumns?.find(
       (column) => column.columnId === destination.droppableId
     );
@@ -192,6 +227,18 @@ const Board: React.FC = () => {
               />
             );
           })}
+          <Droppable droppableId="delete">
+            {(provided) => (
+              <i
+                id="trash"
+                className="bi bi-trash"
+                {...provided.droppableProps}
+                ref={provided.innerRef}
+              >
+                {provided.placeholder}
+              </i>
+            )}
+          </Droppable>
         </DragDropContext>
 
         <AddColumnForm

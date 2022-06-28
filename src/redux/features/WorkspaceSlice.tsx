@@ -139,18 +139,52 @@ export const workspaceSlice = createSlice({
         (board) => board.boardId === action.payload.boardId
       );
 
-      const startColumnId = state.workspace[workspace].workspaceBoards[board].boardColumns.findIndex(
+      const startColumnId = state.workspace[workspace].workspaceBoards[
+        board
+      ].boardColumns.findIndex(
         (column) => column.columnId === action.payload.startColumnId
       );
 
-      const finishColumnId = state.workspace[workspace].workspaceBoards[board].boardColumns.findIndex(
+      const finishColumnId = state.workspace[workspace].workspaceBoards[
+        board
+      ].boardColumns.findIndex(
         (column) => column.columnId === action.payload.finishColumnId
       );
 
-      state.workspace[workspace].workspaceBoards[board].boardColumns[startColumnId] = action.payload.newStartColumn;
-      state.workspace[workspace].workspaceBoards[board].boardColumns[finishColumnId] = action.payload.newFinishColumn;
+      state.workspace[workspace].workspaceBoards[board].boardColumns[
+        startColumnId
+      ] = action.payload.newStartColumn;
+      state.workspace[workspace].workspaceBoards[board].boardColumns[
+        finishColumnId
+      ] = action.payload.newFinishColumn;
+    },
 
-      console.log("test") // Does nothing
+    removeDraggedTaskFromColumn: (
+      state,
+      action: PayloadAction<{
+        columnId: string;
+        boardId: string | undefined;
+        workspaceId: string | undefined;
+        newColumn: ColumnInterface;
+      }>
+    ) => {
+      const workspace = state.workspace.findIndex(
+        (value) => value.workspaceId === action.payload.workspaceId
+      );
+
+      const board = state.workspace[workspace].workspaceBoards.findIndex(
+        (board) => board.boardId === action.payload.boardId
+      );
+
+      const columnToRearange = state.workspace[workspace].workspaceBoards[
+        board
+      ].boardColumns.findIndex(
+        (column) => column.columnId === action.payload.columnId
+      );
+
+      state.workspace[workspace].workspaceBoards[board].boardColumns[
+        columnToRearange
+      ] = action.payload.newColumn;
     },
 
     addColumn: (
@@ -587,6 +621,7 @@ export const {
   deleteColumn,
   reArangeColumn,
   reArangeBetweenColumn,
+  removeDraggedTaskFromColumn,
   addTask,
   deleteTask,
   copyTask,

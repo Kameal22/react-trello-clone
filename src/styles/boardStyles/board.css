@@ -30,3 +30,10 @@
     overflow: auto;
     flex: 1;
 }
+
+#trash{
+    position: fixed;
+    bottom: 6vh;
+    right: 2.5em;
+    font-size: 2em;
+}
