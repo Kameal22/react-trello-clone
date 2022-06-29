@@ -53,7 +53,7 @@ function App() {
   useEffect(() => {
     document.addEventListener("mousedown", (event) => {
       if (!dropdownMenuRef.current?.contains(event.target as Node)) {
-        dispatch(setDropdown(""));
+        setDropdown("");
       }
     });
   });

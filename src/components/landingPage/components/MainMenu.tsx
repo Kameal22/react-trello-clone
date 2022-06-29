@@ -21,8 +21,6 @@ const MainMenu: React.FC = () => {
     (state: RootState) => state.highlight.highlights
   );
 
-  console.log(highlights);
-
   const showDropdown = (id: string) => {
     dispatch(showWorkspaceDropdown({ id }));
   };
