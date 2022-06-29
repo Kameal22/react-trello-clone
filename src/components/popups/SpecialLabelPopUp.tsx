@@ -40,6 +40,7 @@ const CreateLabelPopUp: React.FC<CreateLabelInterface> = (props) => {
         {fancyColorChoices.map((choice) => {
           return (
             <div
+              key={choice}
               onClick={() => setLabel(choice)}
               className="labelOption"
               style={{ background: choice }}

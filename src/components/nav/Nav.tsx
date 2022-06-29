@@ -13,9 +13,19 @@ import NavCreateMenu from "./navMenu/NavCreateMenu";
 
 interface NavProps {
   forwardRef: React.RefObject<HTMLDivElement>;
+  workspacesRef: React.RefObject<HTMLDivElement>;
+  recentsRef: React.RefObject<HTMLDivElement>;
+  createRef: React.RefObject<HTMLDivElement>;
+  registerRef: React.RefObject<HTMLDivElement>;
 }
 
-const Nav: React.FC<NavProps> = ({ forwardRef }) => {
+const Nav: React.FC<NavProps> = ({
+  forwardRef,
+  workspacesRef,
+  recentsRef,
+  createRef,
+  registerRef,
+}) => {
   const dispatch = useDispatch();
 
   const user = useSelector((state: RootState) => state.users.user);
@@ -35,6 +45,7 @@ const Nav: React.FC<NavProps> = ({ forwardRef }) => {
           <h3 className="navigationLogo">Trello</h3>
         </Link>
         <div
+          ref={workspacesRef}
           onClick={
             dropdown === "workspaces"
               ? () => setDropdown("")
@@ -49,6 +60,7 @@ const Nav: React.FC<NavProps> = ({ forwardRef }) => {
           <NavWorkspaces forwardRef={forwardRef} />
         ) : null}
         <div
+          ref={recentsRef}
           onClick={
             dropdown === "recent"
               ? () => setDropdown("")
@@ -61,6 +73,7 @@ const Nav: React.FC<NavProps> = ({ forwardRef }) => {
         </div>
         {dropdown === "recent" ? <NavRecent forwardRef={forwardRef} /> : null}
         <div
+          ref={createRef}
           onClick={
             dropdown === "create"
               ? () => setDropdown("")
@@ -80,7 +93,7 @@ const Nav: React.FC<NavProps> = ({ forwardRef }) => {
         <div className="navigationSearch">
           <NavSearchBar />
         </div>
-        <div className="navigationRegister">
+        <div ref={registerRef} className="navigationRegister">
           {user.name ? (
             <h5
               className="navUserName"

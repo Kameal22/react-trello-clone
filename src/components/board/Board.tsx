@@ -14,6 +14,7 @@ import {
 } from "../../redux/features/WorkspaceSlice";
 import { DragDropContext, DropResult, Droppable } from "react-beautiful-dnd";
 import { ColumnInterface } from "../../interfaces/WorkspaceInterface";
+import { removeHighlightOnTaskDeleting } from "../../redux/features/highlightsSlice";
 
 const Board: React.FC = () => {
   const { workspaceName, boardId } = useParams();
@@ -100,6 +101,14 @@ const Board: React.FC = () => {
     );
   };
 
+  const handleRemoveHighlight = (taskId: string) => {
+    dispatch(
+      removeHighlightOnTaskDeleting({
+        taskId: taskId,
+      })
+    );
+  };
+
   const onDragEnd = (result: DropResult) => {
     const { destination, source, draggableId } = result;
 
@@ -119,13 +128,7 @@ const Board: React.FC = () => {
     );
 
     if (startColumn && destination.droppableId === "delete") {
-      console.log(destination);
-
       const newTaskIds = Array.from(startColumn?.columnTasks);
-
-      const itemToRemove = newTaskIds.find(
-        (item) => item.taskId === draggableId
-      );
 
       newTaskIds.splice(source.index, 1);
 
@@ -135,6 +138,7 @@ const Board: React.FC = () => {
       };
 
       removeDraggedTaskFunc(newColumn, source.droppableId);
+      handleRemoveHighlight(draggableId);
     }
 
     const endColumn = boardsColumns?.find(
