@@ -78,3 +78,14 @@
         right: 15%;
     }
   }
+
+  
+  @media screen and (max-width: 900px) {
+    .navSearchInput{
+        width: 220px;
+    }
+
+    .searchHints{
+        width: 200px;
+    }
+  }

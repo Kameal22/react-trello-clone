@@ -82,4 +82,10 @@
     .navWorkspacesDiv{
         width: 18%;
     }
+}
+
+@media screen and (max-width: 1100px) {
+    .navWorkspacesDiv{
+        width: 25%;
+    }
   }

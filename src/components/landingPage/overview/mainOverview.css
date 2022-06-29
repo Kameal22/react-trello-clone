@@ -9,3 +9,10 @@
         width: 70%;
     }
   }
+
+  @media screen and (max-width: 900px) {
+    .mainOverviewDiv{
+        width: 90%;
+        justify-content: space-around;
+    }
+  }

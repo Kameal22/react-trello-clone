@@ -130,3 +130,9 @@
 .workspaceOption p{
     margin-left: 1em;
 }
+
+@media screen and (max-width: 900px) {
+    .mainSectionMenuDiv{
+        width: 30%;
+    }
+  }

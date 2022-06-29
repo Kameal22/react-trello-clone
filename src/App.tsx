@@ -77,7 +77,7 @@ function App() {
           workspacesRef={workspacesRef}
           recentsRef={recentsRef}
           createRef={createRef}
-          registerRef={recentsRef}
+          registerRef={registerRef}
         />
         <Routes>
           <Route path="/" element={<MainPage />} />

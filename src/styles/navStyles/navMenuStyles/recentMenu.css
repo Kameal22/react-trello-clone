@@ -63,3 +63,9 @@
         width: 18%;
     }
   }
+
+  @media screen and (max-width: 1100px) {
+    .navRecentDiv{
+        width: 25%;
+    }
+  }

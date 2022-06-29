@@ -66,3 +66,9 @@
     text-align: center;
     font-size: .75em;
 }
+
+@media screen and (max-width: 1100px) {
+    .registerDiv{
+        width: 25%;
+    }
+  }
