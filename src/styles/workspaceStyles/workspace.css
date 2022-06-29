@@ -60,3 +60,30 @@
 .editWorkspaceDiv:hover{
     background-color: rgba(167, 167, 167, 0.548);
 }
+
+
+@media screen and (max-width: 1100px) {
+    .editWorkspaceDiv{
+        max-width: 65%;
+    }
+  }
+
+  @media screen and (max-width: 900px) {
+    .yourWorkspaceHeadingDivComponents{
+        width: 50%;
+    }
+
+    .editWorkspaceDiv{
+        max-width: 55%;
+    }
+  }
+
+  @media screen and (max-width: 700px) {
+    .yourWorkspaceHeadingDivComponents{
+        width: 60%;
+    }
+
+    .editWorkspaceDiv{
+        max-width: 80%;
+    }
+  }

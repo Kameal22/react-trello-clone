@@ -64,3 +64,13 @@
         width: 25%;
     }
   }
+
+  @media screen and (max-width: 900px) {
+    .navCreateDiv{
+        left: 35%;
+    }
+
+    .navCreateItemHeading{
+        font-size: .8em;
+    }
+  }

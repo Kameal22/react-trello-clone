@@ -46,7 +46,7 @@ const NavRecent: React.FC<RecentProps> = ({ forwardRef }) => {
                   ></div>
 
                   <div className="mainRecentTextDiv">
-                    <p className="recentBoardName">{board.boardName}</p>
+                    <p className="recentMenuBoardName">{board.boardName}</p>
                   </div>
                 </div>
               </Link>
