@@ -8,33 +8,46 @@ const MainRecent: React.FC = () => {
     (state: RootState) => state.recents.recentlyViewed
   );
 
-  return (
-    <div className="mainRecentDiv">
-      <h3>Recently viewed</h3>
+  console.log(recents.length);
 
-      {recents.map((board) => {
-        return (
-          <Link
-            key={board.boardId}
-            className="workspaceMenuLink"
-            to={`/board/${board.boardWorkspace}/${board.boardId}`}
-          >
-            <div className="recentsDiv">
-              <div
-                style={{ background: `${board.boardBackground}` }}
-                className="mainRecentSmallBlock"
-              ></div>
+  if (recents.length > 0) {
+    return (
+      <div className="mainRecentDiv">
+        <h3>Recently viewed</h3>
 
-              <div className="mainRecentTextDiv">
-                <p className="recentBoardName">{board.boardName}</p>
-                <p className="recentBoardDescription">{board.boardWorkspace}</p>
+        {recents.map((board) => {
+          return (
+            <Link
+              key={board.boardId}
+              className="workspaceMenuLink"
+              to={`/board/${board.boardWorkspace}/${board.boardId}`}
+            >
+              <div className="recentsDiv">
+                <div
+                  style={{ background: `${board.boardBackground}` }}
+                  className="mainRecentSmallBlock"
+                ></div>
+
+                <div className="mainRecentTextDiv">
+                  <p className="recentBoardName">{board.boardName}</p>
+                  <p className="recentBoardDescription">
+                    {board.boardWorkspace}
+                  </p>
+                </div>
               </div>
-            </div>
-          </Link>
-        );
-      })}
-    </div>
-  );
+            </Link>
+          );
+        })}
+      </div>
+    );
+  } else {
+    return (
+      <div className="mainRecentDiv">
+        <h3>Recently viewed</h3>
+        <p className="noRecentsInfo">There are no recently viewed boards.</p>
+      </div>
+    );
+  }
 };
 
 export default MainRecent;

@@ -76,13 +76,35 @@
     color: red;
 }
 
-@media screen and (max-width: 1100px) {
-  }
 
-  @media screen and (max-width: 900px) {
+@media screen and (max-width: 900px) {
+    .workspaceBoardsDiv{
+        width: 95%;
+        margin: 4vh auto;
+    }
 
-  }
+    .workspaceCreateBoard{
+        height: 2vh;
+        width: 25%;
+    }
 
-  @media screen and (max-width: 700px) {
+    .workspaceYourBoard{
+        height: 2vh;
+        width: 25%;
+    }
+}
 
-  }
+@media screen and (max-width: 700px) {
+    .workspaceBoardsDiv{
+        width: 95%;
+        margin: 4vh auto;
+    }
+
+    .workspaceCreateBoard{
+        width: 35%;
+    }
+
+    .workspaceYourBoard{
+        width: 35%;
+    }
+}
