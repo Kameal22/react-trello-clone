@@ -64,3 +64,13 @@
 .createLabelBtn:hover{
     background: rgba(194, 194, 194, 0.76);
 }
+
+@media screen and (max-width: 700px) {
+    .editTaskLabelsDiv{
+        width: 280px;
+        position: absolute;
+        left: 180px;
+        z-index: 999;
+    }
+    
+}

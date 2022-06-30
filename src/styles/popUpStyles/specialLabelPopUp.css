@@ -54,3 +54,9 @@
     right: 8px;
     cursor: pointer;
 }
+
+@media screen and (max-width: 700px) {
+    .createLabel{
+        width: 65%;
+    }
+}

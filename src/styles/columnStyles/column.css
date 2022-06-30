@@ -58,3 +58,14 @@
 .droppableTasks{
     list-style-type: none;
 }
+
+@media screen and (max-width: 700px) {
+    .boardCOLUMNdiv{
+        margin-top: 1vh;
+        min-width: 94%;
+        max-width: 300px;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+    }
+}

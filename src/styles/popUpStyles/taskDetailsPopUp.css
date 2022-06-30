@@ -203,3 +203,17 @@
     top: 8px;
     right: 8px;
 }
+
+@media screen and (max-width: 700px) {
+    .taskDetailsDiv{
+        z-index: 9999;
+        width: 90%;
+        height: 80%;
+    }
+
+    .taskDetailsLabelDivs{
+        display: flex;
+        justify-content: space-around;
+        width: 30%;
+    }
+}
