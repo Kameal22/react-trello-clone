@@ -131,3 +131,27 @@
     cursor: pointer;
     margin-top: 20vh;
 }
+
+@media screen and (max-width: 1300px) {
+    .createBoardDiv{
+        width: 30%;
+    }
+  }
+
+  @media screen and (max-width: 1100px) {
+    .createBoardDiv{
+        width: 40%;
+    }
+  }
+
+  @media screen and (max-width: 800px) {
+    .createBoardDiv{
+        width: 50%;
+    }
+  }
+
+  @media screen and (max-width: 700px) {
+    .createBoardDiv{
+        width: 70%;
+    }
+  }
