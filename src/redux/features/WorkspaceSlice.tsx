@@ -238,6 +238,10 @@ export const workspaceSlice = createSlice({
 
       columnToCopyClone.columnId = uuidv4();
 
+      columnToCopyClone.columnTasks.forEach(
+        (task: { taskId: string }) => (task.taskId = uuidv4())
+      );
+
       state.workspace[workspace].workspaceBoards[board].boardColumns.push(
         columnToCopyClone
       );
