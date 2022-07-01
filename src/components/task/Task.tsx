@@ -62,6 +62,7 @@ const Task: React.FC<TaskProps> = ({
       <Draggable draggableId={taskId} index={index}>
         {(provided) => (
           <div
+            onClick={() => showDetails()}
             {...provided.draggableProps}
             {...provided.dragHandleProps}
             ref={provided.innerRef}
@@ -81,13 +82,14 @@ const Task: React.FC<TaskProps> = ({
             ) : null}
 
             <div className="taskDivName">
-              <p onClick={() => showDetails()} className="taskName">
-                {taskName}
-              </p>
+              <p className="taskName">{taskName}</p>
             </div>
 
             <i
-              onClick={() => showOptions()}
+              onClick={(e) => {
+                e.stopPropagation();
+                showOptions();
+              }}
               style={iconVisibility}
               className="bi bi-pencil"
               id="cornerIcon"
