@@ -72,6 +72,23 @@
     height: 25px;
 }
 
+.mobileSearch{
+    display: none !important;
+}
+
+.mobileSearch:hover{
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    cursor: pointer;
+}
+
+.mobileSearch h4{
+    font-size: .85em;
+}
+
 @media screen and (max-width: 1300px) {
     .navSearchBarDiv{
         position: absolute;
@@ -86,6 +103,82 @@
     }
 
     .searchHints{
+        width: 220px;
+        right: -80%;
+        top: 88px;
+        padding: 4px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.284);
+    }
+
+    .searchHint{
+        padding: 4px;
+    }
+
+    .mobileSearch{
+        display: flex !important;
+        justify-content: space-between;
+        padding: 8px !important;
+    }
+
+    .mobileSearch i{
+        margin-left: .2em;
+    }
+
+    .navigationSearchForm{
+        display: none;
+        position: absolute;
+        right: -80%;
+        top: 52px;
+        color: black;
+    }
+
+    .navSearchInput{
+        border: 1px solid black;
+    }
+
+    .navSearchInput::placeholder{
+        color: black;
+    }
+
+    #navSearchIcon{
+        position: absolute;
+        top: 8px;
+    }
+
+    .mobileSearch h4{
+        font-size: .7em;
+        padding: 2px !important;
+    }
+
+    .mobileSearch:hover{
+        background: inherit;
+        border-radius: 0px;
+        box-shadow: none;
+    }
+  }
+
+  @media screen and (max-width: 700px) {
+    .navSearchInput{
         width: 200px;
+    }
+
+    .searchHints{
+        width: 200px;
+        right: -50%;
+        top: 88px;
+        padding: 4px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.284);
+    }
+
+    .searchHint{
+        font-size: .85em;
+    }
+
+    .navigationSearchForm{
+        display: none;
+        position: absolute;
+        right: -50%;
+        top: 52px;
+        color: black;
     }
   }

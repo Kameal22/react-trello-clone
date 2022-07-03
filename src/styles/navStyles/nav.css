@@ -153,6 +153,35 @@
     }
 
     .navigationRightSide{
-        width: 25%;
+        width: 30%;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .navigationRecent{
+        display: none !important;
+    }
+
+    .navigationDiv  h5{
+        font-size: .7em;
+        padding: 2px;
+    }
+
+    .navigationWorkspace:hover{
+        background: inherit;
+        border-radius: 0px;
+        box-shadow: none;
+    }
+
+    .navigationStarred:hover{
+        background: inherit;
+        border-radius: 0px;
+        box-shadow: none;
+    }
+
+    .navigationRightSide h5:hover{
+        background: inherit;
+        border-radius: 0px;
+        box-shadow: none;
     }
   }
