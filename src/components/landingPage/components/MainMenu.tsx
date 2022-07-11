@@ -17,10 +17,6 @@ const MainMenu: React.FC = () => {
     (state: RootState) => state.workspace.workspace
   );
 
-  const highlights = useSelector(
-    (state: RootState) => state.highlight.highlights
-  );
-
   const showDropdown = (id: string) => {
     dispatch(showWorkspaceDropdown({ id }));
   };
