@@ -17,8 +17,6 @@ const NavSearchBar: React.FC = () => {
   const [searching, setSearching] = useState<boolean>(false);
   const [enteredValue, setEnteredValue] = useState<string>("");
 
-  const [mobileSearchForm, setMobileSearchForm] = useState<boolean>(false)
-
   const workspaces = useSelector(
     (state: RootState) => state.workspace.workspace
   );
@@ -66,11 +64,11 @@ const NavSearchBar: React.FC = () => {
 
   return (
     <div className="navSearchBarDiv">
-      <div onClick={() => setMobileSearchForm(!mobileSearchForm)} className="mobileSearch">
-        <h4>Search</h4>
-        <i className="bi bi-chevron-down"></i>
-      </div>
-      <form style={!mobileSearchForm ? { display: "flex" } : { display: "none" }} className="navigationSearchForm" autoComplete="off" onSubmit={(e) => e.preventDefault()}>
+      <form
+        className="navigationSearchForm"
+        autoComplete="off"
+        onSubmit={(e) => e.preventDefault()}
+      >
         <input
           value={enteredValue}
           onChange={handleSearchValueChange}

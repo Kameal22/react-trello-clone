@@ -96,10 +96,9 @@
     }
   }
 
-  
-  @media screen and (max-width: 900px) {
+  @media screen and (max-width: 799px){
     .navSearchInput{
-        width: 220px;
+        width: 200px;
     }
 
     .searchHints{
@@ -118,6 +117,7 @@
         display: flex !important;
         justify-content: space-between;
         padding: 8px !important;
+        position: relative;
     }
 
     .mobileSearch i{
