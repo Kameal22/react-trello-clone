@@ -1,6 +1,6 @@
 import "../../styles/boardStyles/board.css";
 import { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { RootState } from "../../redux/Store";
 import { useSelector, useDispatch } from "react-redux";
 import { addRecentlyViewed } from "../../redux/features/recentlyViewedSlice";
@@ -15,11 +15,13 @@ import {
 import { DragDropContext, DropResult, Droppable } from "react-beautiful-dnd";
 import { ColumnInterface } from "../../interfaces/WorkspaceInterface";
 import { removeHighlightOnTaskDeleting } from "../../redux/features/highlightsSlice";
+import { Navigate } from "react-router-dom";
 
 const Board: React.FC = () => {
   const { workspaceName, boardId } = useParams();
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const workspaces = useSelector(
     (state: RootState) => state.workspace.workspace
@@ -36,6 +38,12 @@ const Board: React.FC = () => {
   });
 
   const boardsColumns = shownBoard?.boardColumns;
+
+  useEffect(() => {
+    if (!shownBoard) {
+      navigate(`/`, { replace: true });
+    }
+  }, [shownBoard])
 
   useEffect(() => {
     if (shownBoard) {

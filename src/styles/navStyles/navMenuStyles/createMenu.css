@@ -74,3 +74,15 @@
         font-size: .8em;
     }
   }
+
+  @media screen and (max-width: 900px) {
+    .navCreateDiv{
+        width: 35%;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .navCreateDiv{
+        width: 50%;
+    }
+}

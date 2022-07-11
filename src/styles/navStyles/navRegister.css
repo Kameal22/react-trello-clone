@@ -72,3 +72,9 @@
         width: 25%;
     }
   }
+
+  @media screen and (max-width: 900px) {
+    .registerDiv{
+        width: 50%;
+    }
+  }

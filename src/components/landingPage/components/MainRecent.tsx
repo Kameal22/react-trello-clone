@@ -8,8 +8,6 @@ const MainRecent: React.FC = () => {
     (state: RootState) => state.recents.recentlyViewed
   );
 
-  console.log(recents.length);
-
   if (recents.length > 0) {
     return (
       <div className="mainRecentDiv">

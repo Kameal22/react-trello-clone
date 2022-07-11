@@ -1,5 +1,5 @@
 import "../../styles/workspaceStyles/workspace.css";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { RootState } from "../../redux/Store";
 import { useState, useEffect } from "react";
 import { editWorkspace } from "../../redux/features/WorkspaceSlice";
@@ -8,11 +8,13 @@ import EditWorkspaceDetails from "./EditWorkspaceDetails";
 import WorkspaceBoards from "./WorkspaceBoards";
 import PopUp from "../popups/PopUpMessage";
 import { changeColor } from "../../redux/features/navigationSlice";
+import { Navigate } from "react-router-dom";
 
 const Workspace: React.FC = () => {
   const [workspaceEditing, setWorkspaceEditing] = useState<boolean>(false);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const { workspaceId } = useParams(); //This gives you ID of workspace showing in the component
 
@@ -37,6 +39,12 @@ const Workspace: React.FC = () => {
   const setEditting = () => {
     setWorkspaceEditing(!workspaceEditing);
   };
+
+  useEffect(() => {
+    if (!shownWorkspace) {
+      navigate(`/`, { replace: true });
+    }
+  }, [shownWorkspace])
 
   const editWorkspaceFunc = (
     id: string | undefined,
