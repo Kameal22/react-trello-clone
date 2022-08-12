@@ -25,9 +25,8 @@ const MainHighlights: React.FC = () => {
   );
 
   useEffect(() => {
-    if (highlights.length < 1) {
-      return;
-    }
+    if (highlights.length < 1) return;
+
     const taskComment =
       highlights[Math.floor(Math.random() * highlights.length)];
 

@@ -8,7 +8,6 @@ import EditWorkspaceDetails from "./EditWorkspaceDetails";
 import WorkspaceBoards from "./WorkspaceBoards";
 import PopUp from "../popups/PopUpMessage";
 import { changeColor } from "../../redux/features/navigationSlice";
-import { Navigate } from "react-router-dom";
 
 const Workspace: React.FC = () => {
   const [workspaceEditing, setWorkspaceEditing] = useState<boolean>(false);

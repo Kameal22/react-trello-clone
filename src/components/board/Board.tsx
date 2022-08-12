@@ -15,7 +15,6 @@ import {
 import { DragDropContext, DropResult, Droppable } from "react-beautiful-dnd";
 import { ColumnInterface } from "../../interfaces/WorkspaceInterface";
 import { removeHighlightOnTaskDeleting } from "../../redux/features/highlightsSlice";
-import { Navigate } from "react-router-dom";
 
 const Board: React.FC = () => {
   const { workspaceName, boardId } = useParams();
