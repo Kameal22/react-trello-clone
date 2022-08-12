@@ -103,7 +103,7 @@ const Task: React.FC<TaskProps> = ({
         )}
       </Draggable>
 
-      {taskOptions ? (
+      {taskOptions && (
         <TaskOptionsForm
           forwardRef={optionsRef}
           workspaceId={workspaceId}
@@ -114,9 +114,9 @@ const Task: React.FC<TaskProps> = ({
           editLabels={showLabels}
           showDetails={showDetails}
         />
-      ) : null}
+      )}
 
-      {taskDetails ? (
+      {taskDetails && (
         <TaskDetailsPopUp
           forwardRef={taskDetailsRef}
           workspaceId={workspaceId}
@@ -130,9 +130,9 @@ const Task: React.FC<TaskProps> = ({
           showTaskDetails={showDetails}
           taskDescription={taskDescription}
         />
-      ) : null}
+      )}
 
-      {taskLabels ? (
+      {taskLabels && (
         <TaskLabelsPopUp
           forwardRef={taskLabelsRef}
           workspaceId={workspaceId}
@@ -142,7 +142,7 @@ const Task: React.FC<TaskProps> = ({
           editLabels={showLabels}
           chosenIndicator={taskIndicatorColor}
         />
-      ) : null}
+      )}
     </>
   );
 };
