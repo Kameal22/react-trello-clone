@@ -1,15 +1,16 @@
-import "../../styles/popUpStyles/createWorkspacePopUp.css";
+import "../../../styles/popUpStyles/createWorkspacePopUp.css";
 import { useState } from "react";
-import { addWorkspace } from "../../redux/features/WorkspaceSlice";
+import { addWorkspace } from "../../../redux/features/WorkspaceSlice";
 import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "../../redux/Store";
-import { date } from "../../utils/GetDate";
-import { guestName } from "../../utils/RandomizeGuestName";
+import { RootState } from "../../../redux/Store";
+import { date } from "../../../utils/GetDate";
+import { guestName } from "../../../utils/RandomizeGuestName";
 import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
-import { showDropdown } from "../../redux/features/navigationSlice";
-import { hideCreateWorkspace } from "../../redux/features/popUpCreateComponentSlice";
-import { generateRandomColor } from "../../utils/GenerateRandomColor";
+import { showDropdown } from "../../../redux/features/navigationSlice";
+import { hideCreateWorkspace } from "../../../redux/features/popUpCreateComponentSlice";
+import { generateRandomColor } from "../../../utils/GenerateRandomColor";
+import CreateWorkspaceForm from "./CreateWorkspaceForm";
 
 interface CreateWorkspaceProps {
   forwardRef: React.RefObject<HTMLDivElement>;
@@ -111,50 +112,7 @@ const CreateWorkspacePopUp: React.FC<CreateWorkspaceProps> = ({
         </div>
 
         <div className="createWorkspaceFormDiv">
-          <form
-            className="createWorkspaceForm"
-            autoComplete="off"
-            onSubmit={handleSubmit}
-          >
-            <div className="workspaceNameInputDiv">
-              <p className="workspaceName">Workspace name</p>
-              <input
-                className="workspaceNameInput"
-                placeholder="Code together"
-                onChange={handleWorkspaceNameChange}
-                type="text"
-                name="workspaceName"
-              />
-            </div>
-            {nameError ? (
-              <p className="workspaceNameError">{nameError}</p>
-            ) : null}
-            <div className="workspaceDescriptionInputDiv">
-              <p className="workspaceDescription">Workspace description</p>
-              <input
-                placeholder="We organize everything here"
-                className="workspaceDescriptionInput"
-                value={workspaceDescription}
-                onChange={handleWorkspaceDescriptionChange}
-                type="text"
-                name="workspaceName"
-              />
-            </div>
-            {descriptionError ? (
-              <p className="workspaceNameError">{descriptionError}</p>
-            ) : null}
-            <button
-              disabled={
-                nameError !== "" ||
-                workspaceName.length < 1 ||
-                descriptionError !== ""
-              }
-              className="submitBtn"
-              type="submit"
-            >
-              Submit
-            </button>
-          </form>
+          {<CreateWorkspaceForm handleSubmit={handleSubmit} handleWorkspaceDescriptionChange={handleWorkspaceDescriptionChange} handleWorkspaceNameChange={handleWorkspaceNameChange} nameError={nameError} workspaceName={workspaceName} descriptionError={descriptionError} workspaceDescription={workspaceDescription} />}
         </div>
       </div>
       <div className="createWorkspaceRIGHTSIDE"></div>

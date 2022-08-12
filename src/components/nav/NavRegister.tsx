@@ -1,18 +1,17 @@
 import "../../styles/navStyles/navRegister.css";
-import { useState } from "react";
 import { registerUser } from "../../redux/features/registerSlice";
 import { showDropdown } from "../../redux/features/navigationSlice";
 import { setPopUpMessage } from "../../redux/features/popUpMessagSlice";
 import { useDispatch } from "react-redux";
+import useInputState from "../../hooks/useInputState";
 
 interface RegisterProps {
   forwardRef: React.RefObject<HTMLDivElement>;
 }
 
 const Register: React.FC<RegisterProps> = ({ forwardRef }) => {
-  const [name, setName] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-  const [error, setError] = useState<string>("");
+  const [name, setName, error, handleError] = useInputState('')
+  const [password, setPassword] = useInputState('')
 
   const dispatch = useDispatch();
 
@@ -24,20 +23,12 @@ const Register: React.FC<RegisterProps> = ({ forwardRef }) => {
     dispatch(setPopUpMessage({ message }));
   };
 
-  const handleNameChange = (e: React.FormEvent<HTMLInputElement>): void => {
-    setName(e.currentTarget.value);
-  };
-
-  const handlePasswordChange = (e: React.FormEvent<HTMLInputElement>): void => {
-    setPassword(e.currentTarget.value);
-  };
-
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (name === "" || password === "") {
-      setError("Please provide name and password");
+      handleError("Please provide name and password");
     } else if (password.length < 5) {
-      setError("Password must contain at least 5 characters");
+      handleError("Password must contain at least 5 characters");
     } else {
       dispatch(registerUser({ name, password }));
       setDropdown("");
@@ -56,14 +47,14 @@ const Register: React.FC<RegisterProps> = ({ forwardRef }) => {
           <input
             placeholder="email"
             value={name}
-            onChange={handleNameChange}
+            onChange={setName}
             type="text"
             name="name"
           />
           <input
             placeholder="password"
             value={password}
-            onChange={handlePasswordChange}
+            onChange={setPassword}
             type="password"
             name="name"
           />

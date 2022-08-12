@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import { addTask } from "../../redux/features/WorkspaceSlice";
 import { TaskCommentsInterface } from "../../interfaces/WorkspaceInterface";
+import useInputState from "../../hooks/useInputState";
 
 interface AddTaskInterface {
   addTask: () => void;
@@ -14,18 +15,13 @@ interface AddTaskInterface {
 }
 
 const AddTaskForm: React.FC<AddTaskInterface> = (props) => {
-  const [taskName, setTaskName] = useState<string>("");
+  const [taskName, setTaskName, error, setError] = useInputState('');
   const [taskId] = useState<string>(uuidv4());
   const [taskDescription] = useState<string>("");
   const [taskComments] = useState<TaskCommentsInterface[]>([]);
   const [taskColor] = useState<string>("");
-  const [error, setError] = useState<string>("")
 
   const dispatch = useDispatch();
-
-  const handleTaskNameChange = (e: React.FormEvent<HTMLInputElement>): void => {
-    setTaskName(e.currentTarget.value.trim());
-  };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -58,7 +54,7 @@ const AddTaskForm: React.FC<AddTaskInterface> = (props) => {
         >
           <input
             className="taskNameInput"
-            onChange={handleTaskNameChange}
+            onChange={setTaskName}
             type="text"
             name="taskName"
             placeholder="Enter a title for this task"

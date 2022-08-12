@@ -2,6 +2,7 @@ import "../../styles/taskStyles/taskDescriptionForm.css";
 import { useState } from "react";
 import { addTaskDescription } from "../../redux/features/WorkspaceSlice";
 import { useDispatch } from "react-redux";
+import useInputState from "../../hooks/useInputState";
 
 interface TaskDescriptionFormInterface {
   workspaceId: string | undefined;
@@ -13,15 +14,9 @@ interface TaskDescriptionFormInterface {
 }
 
 const TaskDescriptionForm: React.FC<TaskDescriptionFormInterface> = (props) => {
-  const [taskDescription, setTaskDescription] = useState<string>("");
+  const [taskDescription, setTaskDescription] = useInputState('')
 
   const dispatch = useDispatch();
-
-  const handleDescriptionChange = (
-    e: React.FormEvent<HTMLInputElement>
-  ): void => {
-    setTaskDescription(e.currentTarget.value);
-  };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -48,7 +43,7 @@ const TaskDescriptionForm: React.FC<TaskDescriptionFormInterface> = (props) => {
         <input
           className="taskDescriptionInput"
           value={taskDescription}
-          onChange={handleDescriptionChange}
+          onChange={setTaskDescription}
           type="text"
           name="description"
           placeholder="Enter description"

@@ -1,19 +1,21 @@
-import "../../styles/popUpStyles/createBoardPopUp.css";
-import { colorChoices } from "../../utils/BoardBgColorChoices";
+import "../../../styles/popUpStyles/createBoardPopUp.css";
+import { colorChoices } from "../../../utils/BoardBgColorChoices";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "../../redux/Store";
-import { addBoard } from "../../redux/features/WorkspaceSlice";
+import { RootState } from "../../../redux/Store";
+import { addBoard } from "../../../redux/features/WorkspaceSlice";
 import { useNavigate } from "react-router-dom";
-import { hideCreateBoard } from "../../redux/features/popUpCreateComponentSlice";
+import { hideCreateBoard } from "../../../redux/features/popUpCreateComponentSlice";
+import useInputState from "../../../hooks/useInputState";
+import CreateBoardForm from "./CreateBoardForm";
 
 interface CreateBoardProps {
   forwardRef: React.RefObject<HTMLDivElement>;
 }
 
 const CreateBoardPopUp: React.FC<CreateBoardProps> = ({ forwardRef }) => {
-  const [boardName, setBoardName] = useState<string>("");
+  const [boardName, setBoardName] = useInputState('')
   const [boardId] = useState<string>(uuidv4());
   const [boardBackground, setBoardBackground] = useState<string>(
     "linear-gradient(#e66465, #9198e5)"
@@ -29,12 +31,6 @@ const CreateBoardPopUp: React.FC<CreateBoardProps> = ({ forwardRef }) => {
 
   const hideCreating = () => {
     dispatch(hideCreateBoard());
-  };
-
-  const handleBoardNameChange = (
-    e: React.FormEvent<HTMLInputElement>
-  ): void => {
-    setBoardName(e.currentTarget.value.trim());
   };
 
   const handleBoardWorkspaceChange = (
@@ -87,58 +83,7 @@ const CreateBoardPopUp: React.FC<CreateBoardProps> = ({ forwardRef }) => {
           })}
         </div>
       </div>
-
-      <form
-        className="createBoardForm"
-        autoComplete="off"
-        onSubmit={handleSubmit}
-      >
-        <div className="boardTitleDiv">
-          <p className="boardTitle">Board title</p>
-          <input
-            className="boardNameInput"
-            onChange={handleBoardNameChange}
-            type="text"
-            name="boardName"
-          />
-          <p className="boardTitleInfo">Board title is required!</p>
-        </div>
-
-        <div className="chooseWorkspaceDiv">
-          <p className="workspaceChoiceHeading">Workspace</p>
-          <select
-            onChange={handleBoardWorkspaceChange}
-            className="workspaceSelect"
-            name="workspaces"
-            id="workspaces"
-          >
-            <option value="" disabled selected>
-              Select your option
-            </option>
-            {workspaces.map((workspace) => {
-              return (
-                <option
-                  key={workspace.workspaceId}
-                  value={workspace.workspaceName}
-                >
-                  {workspace.workspaceName}
-                </option>
-              );
-            })}
-          </select>
-          <p className="boardTitleInfo">Workspace is required!</p>
-        </div>
-
-        <div className="submitDiv">
-          <button
-            type="submit"
-            disabled={boardName === "" || !boardWorkspace}
-            className="submitBoardBtn"
-          >
-            Create
-          </button>
-        </div>
-      </form>
+      {<CreateBoardForm handleSubmit={handleSubmit} setBoardName={setBoardName} handleBoardWorkspaceChange={handleBoardWorkspaceChange} boardName={boardName} boardWorkspace={boardWorkspace} workspaces={workspaces} />}
     </div>
   );
 };

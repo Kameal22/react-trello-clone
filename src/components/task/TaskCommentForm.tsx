@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../redux/Store";
 import { date } from "../../utils/GetDate";
+import useInputState from "../../hooks/useInputState";
 
 interface TaskCommentFormInterface {
   workspaceId: string | undefined;
@@ -14,15 +15,11 @@ interface TaskCommentFormInterface {
 }
 
 const TaskCommentForm: React.FC<TaskCommentFormInterface> = (props) => {
-  const [taskComment, setTaskComment] = useState<string>("");
+  const [taskComment, setTaskComment, , , reset] = useInputState('');
 
   const dispatch = useDispatch();
 
   const user = useSelector((state: RootState) => state.users.user);
-
-  const handleCommentChange = (e: React.FormEvent<HTMLInputElement>): void => {
-    setTaskComment(e.currentTarget.value);
-  };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -50,7 +47,7 @@ const TaskCommentForm: React.FC<TaskCommentFormInterface> = (props) => {
         taskDate: date,
       })
     );
-    setTaskComment("");
+    reset()
   };
 
   return (
@@ -63,7 +60,7 @@ const TaskCommentForm: React.FC<TaskCommentFormInterface> = (props) => {
         <input
           className="taskCommentInput"
           value={taskComment}
-          onChange={handleCommentChange}
+          onChange={setTaskComment}
           type="text"
           name="comment"
           placeholder="Write a comment.."

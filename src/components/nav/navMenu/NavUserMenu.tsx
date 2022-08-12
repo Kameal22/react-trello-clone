@@ -37,7 +37,7 @@ const NavUserMenu: React.FC<NavUserMenuInterface> = ({ forwardRef }) => {
         <i onClick={() => logout()} className="bi bi-door-closed"></i>
       </div>
 
-      <div className="userChoiceDiv">
+      {randomWorkspace && <div className="userChoiceDiv">
         <Link
           onClick={() => setDropdown("")}
           className="workspaceMenuLink"
@@ -46,7 +46,8 @@ const NavUserMenu: React.FC<NavUserMenuInterface> = ({ forwardRef }) => {
           <p className="userChoice">Your boards</p>
         </Link>
         <i className="bi bi-clipboard"></i>
-      </div>
+      </div>}
+
     </div>
   );
 };
