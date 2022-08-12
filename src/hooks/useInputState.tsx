@@ -2,10 +2,20 @@ import { useState } from "react";
 
 const useInputState = (initialValue = '') => {
     const [value, setValue] = useState(initialValue);
-    const [error, setError] = useState('');
+    const [limitedValue, setLimitedValue] = useState('');
+    const [error, setError] = useState(initialValue);
 
     const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
         setValue(e.currentTarget.value)
+    }
+
+    const handleLimitedChange = (e: React.FormEvent<HTMLInputElement>) => {
+        if (limitedValue.length > 14) {
+            setError("Cannot excide 14 characters");
+        } else {
+            setError("");
+        }
+        setLimitedValue(e.currentTarget.value)
     }
 
     const reset = () => {
@@ -16,7 +26,7 @@ const useInputState = (initialValue = '') => {
         setError(error)
     }
 
-    return [value, handleChange, error, handleError, reset] as const;
+    return [value, handleChange, limitedValue, handleLimitedChange, error, handleError, reset] as const;
 }
 
 export default useInputState;

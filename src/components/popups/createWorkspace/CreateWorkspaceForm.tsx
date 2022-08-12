@@ -1,14 +1,14 @@
 interface Props {
     handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
-    handleWorkspaceNameChange: (e: React.FormEvent<HTMLInputElement>) => void;
+    setWorkspaceName: (e: React.FormEvent<HTMLInputElement>) => void
     nameError: string;
     workspaceDescription: string;
-    handleWorkspaceDescriptionChange: (e: React.FormEvent<HTMLInputElement>) => void;
+    setWorkspaceDescription: (e: React.FormEvent<HTMLInputElement>) => void
     descriptionError: string;
     workspaceName: string
 }
 
-const CreateWorkspaceForm: React.FC<Props> = ({ handleSubmit, handleWorkspaceDescriptionChange, handleWorkspaceNameChange, nameError, workspaceDescription, workspaceName, descriptionError }) => {
+const CreateWorkspaceForm: React.FC<Props> = ({ handleSubmit, setWorkspaceDescription, setWorkspaceName, nameError, workspaceDescription, workspaceName, descriptionError }) => {
     return (
         <form
             className="createWorkspaceForm"
@@ -20,7 +20,7 @@ const CreateWorkspaceForm: React.FC<Props> = ({ handleSubmit, handleWorkspaceDes
                 <input
                     className="workspaceNameInput"
                     placeholder="Code together"
-                    onChange={handleWorkspaceNameChange}
+                    onChange={setWorkspaceName}
                     type="text"
                     name="workspaceName"
                 />
@@ -34,7 +34,7 @@ const CreateWorkspaceForm: React.FC<Props> = ({ handleSubmit, handleWorkspaceDes
                     placeholder="We organize everything here"
                     className="workspaceDescriptionInput"
                     value={workspaceDescription}
-                    onChange={handleWorkspaceDescriptionChange}
+                    onChange={setWorkspaceDescription}
                     type="text"
                     name="workspaceName"
                 />

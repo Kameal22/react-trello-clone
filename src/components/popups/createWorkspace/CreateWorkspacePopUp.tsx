@@ -11,6 +11,7 @@ import { showDropdown } from "../../../redux/features/navigationSlice";
 import { hideCreateWorkspace } from "../../../redux/features/popUpCreateComponentSlice";
 import { generateRandomColor } from "../../../utils/GenerateRandomColor";
 import CreateWorkspaceForm from "./CreateWorkspaceForm";
+import useInputState from "../../../hooks/useInputState";
 
 interface CreateWorkspaceProps {
   forwardRef: React.RefObject<HTMLDivElement>;
@@ -19,11 +20,9 @@ interface CreateWorkspaceProps {
 const CreateWorkspacePopUp: React.FC<CreateWorkspaceProps> = ({
   forwardRef,
 }) => {
-  const [workspaceName, setWorkspaceName] = useState<string>("");
-  const [workspaceDescription, setWorkspaceDescription] = useState<string>("");
+  const [, , workspaceName, setWorkspaceName, nameError] = useInputState('')
+  const [, , workspaceDescription, setWorkspaceDescription, descriptionError] = useInputState('')
   const [workspaceId] = useState<string>(uuidv4());
-  const [nameError, setNameError] = useState<string>("");
-  const [descriptionError, setDescriptionError] = useState<string>("");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -36,28 +35,6 @@ const CreateWorkspacePopUp: React.FC<CreateWorkspaceProps> = ({
 
   const setDropdown = (dropdownItem: string) => {
     dispatch(showDropdown({ dropdownItem }));
-  };
-
-  const handleWorkspaceNameChange = (
-    e: React.FormEvent<HTMLInputElement>
-  ): void => {
-    if (e.currentTarget.value.length > 14) {
-      setNameError("Workspace name cannot excide 14 characters");
-    } else {
-      setNameError("");
-    }
-    setWorkspaceName(e.currentTarget.value.trim());
-  };
-
-  const handleWorkspaceDescriptionChange = (
-    e: React.FormEvent<HTMLInputElement>
-  ): void => {
-    if (e.currentTarget.value.length > 14) {
-      setDescriptionError("Workspace description cannot excide 14 characters");
-    } else {
-      setDescriptionError("");
-    }
-    setWorkspaceDescription(e.currentTarget.value);
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -112,7 +89,7 @@ const CreateWorkspacePopUp: React.FC<CreateWorkspaceProps> = ({
         </div>
 
         <div className="createWorkspaceFormDiv">
-          {<CreateWorkspaceForm handleSubmit={handleSubmit} handleWorkspaceDescriptionChange={handleWorkspaceDescriptionChange} handleWorkspaceNameChange={handleWorkspaceNameChange} nameError={nameError} workspaceName={workspaceName} descriptionError={descriptionError} workspaceDescription={workspaceDescription} />}
+          {<CreateWorkspaceForm handleSubmit={handleSubmit} setWorkspaceDescription={setWorkspaceDescription} setWorkspaceName={setWorkspaceName} nameError={nameError} workspaceName={workspaceName} descriptionError={descriptionError} workspaceDescription={workspaceDescription} />}
         </div>
       </div>
       <div className="createWorkspaceRIGHTSIDE"></div>

@@ -15,7 +15,7 @@ interface AddTaskInterface {
 }
 
 const AddTaskForm: React.FC<AddTaskInterface> = (props) => {
-  const [taskName, setTaskName, error, setError] = useInputState('');
+  const [taskName, setTaskName, , , error, setError] = useInputState('');
   const [taskId] = useState<string>(uuidv4());
   const [taskDescription] = useState<string>("");
   const [taskComments] = useState<TaskCommentsInterface[]>([]);
