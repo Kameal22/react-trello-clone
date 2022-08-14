@@ -18,23 +18,20 @@ interface WorkspaceBoardsInterface {
 }
 
 const WorkspaceBoards: React.FC<WorkspaceBoardsInterface> = (props) => {
-  const [initialBoards] = useState<BoardInterface[] | undefined>(
-    props.shownWorkspace?.workspaceBoards
-  );
-  const [shownBoards, setShownBoards] = useState<BoardInterface[] | undefined>(
-    props.shownWorkspace?.workspaceBoards
-  );
+  const [shownBoards, setShownBoards] = useState<BoardInterface[] | undefined>([]);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setBoardsBackToInitial(props.shownWorkspace?.workspaceBoards);
+    setShownBoards(props.shownWorkspace?.workspaceBoards)
   }, [props.shownWorkspace?.workspaceId]); // Do this to update shown boards in workspace that user routed to.
 
-  console.log(props.shownWorkspace?.workspaceId)
+  const showSearchedBoards = (searchingValue: string) => {
+    const filtered = props.shownWorkspace?.workspaceBoards.filter((board) => {
+      return includesIgnoredCase(board.boardName, searchingValue)
+    });
 
-  const showBoardCreating = () => {
-    dispatch(setCreateBoard());
+    setShownBoards(filtered);
   };
 
   const deleteBoardFunc = (
@@ -72,20 +69,8 @@ const WorkspaceBoards: React.FC<WorkspaceBoardsInterface> = (props) => {
     window.location.reload();
   };
 
-  const showSearchedBoards = (searchingValue: string) => {
-    if (searchingValue) {
-      const filtered = props.shownWorkspace?.workspaceBoards.filter((board) => {
-        return includesIgnoredCase(board.boardName, searchingValue)
-      });
-
-      setShownBoards(filtered);
-    }
-  };
-
-  const setBoardsBackToInitial = (
-    initialBoards: BoardInterface[] | undefined
-  ) => {
-    setShownBoards(initialBoards);
+  const showBoardCreating = () => {
+    dispatch(setCreateBoard());
   };
 
   return (
@@ -93,8 +78,7 @@ const WorkspaceBoards: React.FC<WorkspaceBoardsInterface> = (props) => {
       <div className="workspaceBoardsHeading">
         <h4>Your boards</h4>
         <SearchForBoards
-          setBoardsBackToInitial={setBoardsBackToInitial}
-          initialBoards={initialBoards}
+          boards={shownBoards}
           showSearchedBoards={showSearchedBoards}
         />
       </div>

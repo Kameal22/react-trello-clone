@@ -2,31 +2,24 @@ import "../../styles/workspaceStyles/searchForBoards.css";
 import { BoardInterface } from "../../interfaces/WorkspaceInterface";
 
 interface SearchForBoardsInterface {
+  boards: BoardInterface[] | undefined
   showSearchedBoards: (searchingValue: string) => void;
-  setBoardsBackToInitial: (initialBoards: BoardInterface[] | undefined) => void;
-  initialBoards: BoardInterface[] | undefined;
 }
 
 const SearchForBoards: React.FC<SearchForBoardsInterface> = ({
   showSearchedBoards,
-  initialBoards,
-  setBoardsBackToInitial,
+  boards
 }) => {
   const handleSearchValueChange = (
     e: React.FormEvent<HTMLInputElement>
   ): void => {
     let searchingValue = e.currentTarget.value;
-
-    if (searchingValue) {
-      showSearchedBoards(searchingValue);
-    } else {
-      setBoardsBackToInitial(initialBoards);
-    }
+    showSearchedBoards(searchingValue);
   };
 
   return (
     <div className="searchBoardsDiv">
-      {initialBoards?.length ? (
+      {boards?.length ? (
         <form autoComplete="off">
           <input
             onChange={handleSearchValueChange}
