@@ -19,7 +19,7 @@ const SearchForBoards: React.FC<SearchForBoardsInterface> = ({
 
   return (
     <div className="searchBoardsDiv">
-      {boards?.length ? (
+      {boards && (
         <form autoComplete="off">
           <input
             onChange={handleSearchValueChange}
@@ -29,7 +29,7 @@ const SearchForBoards: React.FC<SearchForBoardsInterface> = ({
             name="search"
           ></input>
         </form>
-      ) : null}
+      )}
     </div>
   );
 };
