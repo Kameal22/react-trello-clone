@@ -29,6 +29,8 @@ function App() {
   );
 
   const createWorkspaceRef = useRef<HTMLDivElement>(null);
+  const createBoardRef = useRef<HTMLDivElement>(null);
+  const dropdownMenuRef = useRef<HTMLDivElement>(null);
 
   const closeWorkspacePopUp = () => {
     dispatch(hideCreateWorkspace());
@@ -36,15 +38,11 @@ function App() {
 
   UseClickOutside(createWorkspaceRef, closeWorkspacePopUp);
 
-  const createBoardRef = useRef<HTMLDivElement>(null);
-
   const closeBoardPopUp = () => {
     dispatch(hideCreateBoard());
   };
 
   UseClickOutside(createBoardRef, closeBoardPopUp);
-
-  const dropdownMenuRef = useRef<HTMLDivElement>(null);
 
   const setDropdown = (dropdownItem: string) => {
     dispatch(showDropdown({ dropdownItem }));

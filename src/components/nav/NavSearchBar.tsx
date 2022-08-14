@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/Store";
 import { Link } from "react-router-dom";
+import { includesIgnoredCase } from "../../utils/IgnoreCase";
 
 interface SearchedData {
   name: string;
@@ -14,7 +15,6 @@ interface SearchedData {
 const NavSearchBar: React.FC = () => {
   const [boards, setBoards] = useState<SearchedData[]>([]);
   const [filteredData, setFilteredData] = useState<SearchedData[]>([]);
-  const [searching, setSearching] = useState<boolean>(false);
   const [enteredValue, setEnteredValue] = useState<string>("");
 
   const workspaces = useSelector(
@@ -41,24 +41,16 @@ const NavSearchBar: React.FC = () => {
   const handleSearchValueChange = (
     e: React.FormEvent<HTMLInputElement>
   ): void => {
-    let searchingValue = e.currentTarget.value;
-    setEnteredValue(searchingValue);
-
-    setSearching(true);
-
-    if (!searchingValue) {
-      setSearching(false);
-    }
+    setEnteredValue(e.currentTarget.value);
 
     const filtered = boards.filter((board) => {
-      return board.name.toLowerCase().includes(searchingValue.toLowerCase());
+      return includesIgnoredCase(board.name, e.currentTarget.value);
     });
 
     setFilteredData(filtered);
   };
 
   const clearInput = () => {
-    setSearching(false);
     setEnteredValue("");
   };
 
@@ -80,7 +72,7 @@ const NavSearchBar: React.FC = () => {
         <i id="navSearchIcon" className="bi bi-search"></i>
       </form>
 
-      {searching ? (
+      {enteredValue && (
         <div className="searchHints">
           {filteredData.length === 0 ? (
             <p className="searchHint">No matching data</p>
@@ -107,7 +99,7 @@ const NavSearchBar: React.FC = () => {
             })
           )}
         </div>
-      ) : null}
+      )}
     </div>
   );
 };

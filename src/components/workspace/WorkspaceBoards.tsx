@@ -11,6 +11,7 @@ import { deleteBoard } from "../../redux/features/WorkspaceSlice";
 import { removeRecentlyViewedThatWasDeletedFromWorkspaceComponent } from "../../redux/features/recentlyViewedSlice";
 import { setCreateBoard } from "../../redux/features/popUpCreateComponentSlice";
 import { removeHighlightOnBoardDeleting } from "../../redux/features/highlightsSlice";
+import { includesIgnoredCase } from "../../utils/IgnoreCase";
 
 interface WorkspaceBoardsInterface {
   shownWorkspace: WorkspaceInterface | undefined;
@@ -25,6 +26,12 @@ const WorkspaceBoards: React.FC<WorkspaceBoardsInterface> = (props) => {
   );
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    setBoardsBackToInitial(props.shownWorkspace?.workspaceBoards);
+  }, [props.shownWorkspace?.workspaceId]); // Do this to update shown boards in workspace that user routed to.
+
+  console.log(props.shownWorkspace?.workspaceId)
 
   const showBoardCreating = () => {
     dispatch(setCreateBoard());
@@ -68,9 +75,7 @@ const WorkspaceBoards: React.FC<WorkspaceBoardsInterface> = (props) => {
   const showSearchedBoards = (searchingValue: string) => {
     if (searchingValue) {
       const filtered = props.shownWorkspace?.workspaceBoards.filter((board) => {
-        return board.boardName
-          .toLowerCase()
-          .includes(searchingValue.toLowerCase());
+        return includesIgnoredCase(board.boardName, searchingValue)
       });
 
       setShownBoards(filtered);
@@ -82,10 +87,6 @@ const WorkspaceBoards: React.FC<WorkspaceBoardsInterface> = (props) => {
   ) => {
     setShownBoards(initialBoards);
   };
-
-  useEffect(() => {
-    setBoardsBackToInitial(props.shownWorkspace?.workspaceBoards);
-  }, [props.shownWorkspace?.workspaceId]); // Do this to update shown boards in workspace that user routed to.
 
   return (
     <div className="workspaceBoardsDiv">
@@ -101,11 +102,8 @@ const WorkspaceBoards: React.FC<WorkspaceBoardsInterface> = (props) => {
       <div className="workspaceBoardsBoards">
         <p className="showingBoards">
           Showing {shownBoards?.length} of{" "}
-          {props.shownWorkspace
-            ? props.shownWorkspace.workspaceBoards.length
-            : null}
+          {props.shownWorkspace && props.shownWorkspace.workspaceBoards.length}
         </p>
-
         <div className="workspaceBoards">
           <div
             onClick={() => showBoardCreating()}
@@ -114,33 +112,33 @@ const WorkspaceBoards: React.FC<WorkspaceBoardsInterface> = (props) => {
             <p>Create new board</p>
           </div>
 
-          {props.shownWorkspace
-            ? shownBoards?.map((board) => {
-                return (
-                  <div
-                    key={board.boardId}
-                    style={{ background: `${board.boardBackground}` }}
-                    className="workspaceYourBoard"
+          {props.shownWorkspace &&
+            shownBoards?.map((board) => {
+              return (
+                <div
+                  key={board.boardId}
+                  style={{ background: `${board.boardBackground}` }}
+                  className="workspaceYourBoard"
+                >
+                  <Link
+                    className="workspaceMenuLink"
+                    to={`/board/${props.shownWorkspace?.workspaceName}/${board.boardId}`}
                   >
-                    <Link
-                      className="workspaceMenuLink"
-                      to={`/board/${props.shownWorkspace?.workspaceName}/${board.boardId}`}
-                    >
-                      <p>{board.boardName}</p>
-                    </Link>
-                    <i
-                      onClick={() =>
-                        handleWorkspaceRemove(
-                          board.boardWorkspace,
-                          board.boardId
-                        )
-                      }
-                      className="bi bi-trash3"
-                    ></i>
-                  </div>
-                );
-              })
-            : null}
+                    <p>{board.boardName}</p>
+                  </Link>
+                  <i
+                    onClick={() =>
+                      handleWorkspaceRemove(
+                        board.boardWorkspace,
+                        board.boardId
+                      )
+                    }
+                    className="bi bi-trash3"
+                  ></i>
+                </div>
+              );
+            })
+          }
         </div>
       </div>
     </div>

@@ -4,7 +4,7 @@ import NavWorkspaces from "./navMenu/NavWorkspaces";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../redux/Store";
 import NavRecent from "./navMenu/NavRecent";
-import NavSearchBar from "./NavSearch";
+import NavSearchBar from "./NavSearchBar";
 import Register from "./NavRegister";
 import { showDropdown } from "../../redux/features/navigationSlice";
 import NavUserMenu from "./navMenu/NavUserMenu";
