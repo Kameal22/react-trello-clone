@@ -12,8 +12,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "./redux/Store";
 import CreateBoardPopUp from "./components/popups/createBoard/CreateBoardPopUp";
 import CreateWorkspacePopUp from "./components/popups/createWorkspace/CreateWorkspacePopUp";
-import { hideCreateWorkspace } from "./redux/features/popUpCreateComponentSlice";
-import { hideCreateBoard } from "./redux/features/popUpCreateComponentSlice";
+import {
+  hideCreateWorkspace,
+  hideCreateBoard,
+} from "./redux/features/popUpCreateComponentSlice";
 import { showDropdown } from "./redux/features/navigationSlice";
 import UseClickOutside from "./hooks/UseClickOutside";
 

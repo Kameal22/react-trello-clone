@@ -41,7 +41,7 @@ const Nav: React.FC<NavProps> = ({
   return (
     <div style={{ background: navColor }} className="navigationDiv">
       <div className="navigationLeftSide">
-        <Link to="/" onClick={() => setDropdown("")} className="logoLink">
+        <Link to="/" className="logoLink">
           <h3 className="navigationLogo">Trello</h3>
         </Link>
         <div
@@ -56,9 +56,7 @@ const Nav: React.FC<NavProps> = ({
           <h5>Workspaces</h5>
           <i className="bi bi-chevron-down"></i>
         </div>
-        {dropdown === "workspaces" ? (
-          <NavWorkspaces forwardRef={forwardRef} />
-        ) : null}
+        {dropdown === "workspaces" && <NavWorkspaces forwardRef={forwardRef} />}
         <div
           ref={recentsRef}
           onClick={
@@ -71,7 +69,7 @@ const Nav: React.FC<NavProps> = ({
           <h5>Recent</h5>
           <i className="bi bi-chevron-down"></i>
         </div>
-        {dropdown === "recent" ? <NavRecent forwardRef={forwardRef} /> : null}
+        {dropdown === "recent" && <NavRecent forwardRef={forwardRef} />}
         <div
           ref={createRef}
           onClick={
@@ -84,9 +82,7 @@ const Nav: React.FC<NavProps> = ({
           <h5>Create</h5>
           <i className="bi bi-chevron-down"></i>
         </div>
-        {dropdown === "create" ? (
-          <NavCreateMenu forwardRef={forwardRef} />
-        ) : null}
+        {dropdown === "create" && <NavCreateMenu forwardRef={forwardRef} />}
       </div>
 
       <div className="navigationRightSide">
@@ -116,13 +112,11 @@ const Nav: React.FC<NavProps> = ({
               Register
             </h5>
           )}
-          {dropdown === "registering" ? (
-            <Register forwardRef={forwardRef} />
-          ) : null}
+          {dropdown === "registering" && <Register forwardRef={forwardRef} />}
 
-          {dropdown === "userChoices" ? (
+          {dropdown === "userChoices" && (
             <NavUserMenu forwardRef={forwardRef} />
-          ) : null}
+          )}
         </div>
       </div>
     </div>
