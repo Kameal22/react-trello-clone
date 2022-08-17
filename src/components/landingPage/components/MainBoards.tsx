@@ -2,15 +2,15 @@ import "../../../styles/mainSectionStyles/mainBoards.css";
 import { RootState } from "../../../redux/Store";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { RecentlyViewedContext } from "../../../context/recentlyViewedContext";
+import { useContext } from "react";
 
 const MainBoards: React.FC = () => {
   const workspaces = useSelector(
     (state: RootState) => state.workspace.workspace
   );
 
-  const recents = useSelector(
-    (state: RootState) => state.recents.recentlyViewed
-  );
+  const recents = useContext(RecentlyViewedContext)
 
   return (
     <div className="mainSectionBoards">
@@ -20,19 +20,19 @@ const MainBoards: React.FC = () => {
       </div>
 
       <div className="mainSectionBoardsDivs">
-        {recents.map((recentBoard) => {
+        {recents.map((board) => {
           return (
             <div
-              key={recentBoard.boardId}
+              key={board.id}
               className="mainSectionYourBoard"
-              style={{ background: `${recentBoard.boardBackground}` }}
+              style={{ background: `${board.background}` }}
             >
               {" "}
               <Link
                 className="workspaceMenuLink"
-                to={`/board/${recentBoard.boardWorkspace}/${recentBoard.boardId}`}
+                to={`/board/${board.workspace}/${board.id}`}
               >
-                <p>{recentBoard.boardName}</p>{" "}
+                <p>{board.name}</p>{" "}
               </Link>
             </div>
           );

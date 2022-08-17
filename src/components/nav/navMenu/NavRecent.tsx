@@ -1,7 +1,6 @@
 import "../../../styles/navStyles/navMenuStyles/recentMenu.css";
 import { showDropdown } from "../../../redux/features/navigationSlice";
-import { RootState } from "../../../redux/Store";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { RecentlyViewedContext } from "../../../context/recentlyViewedContext";
 import { useContext } from "react";
@@ -13,17 +12,11 @@ interface RecentProps {
 const NavRecent: React.FC<RecentProps> = ({ forwardRef }) => {
   const dispatch = useDispatch();
 
-  const recentos = useContext(RecentlyViewedContext);
+  const recents = useContext(RecentlyViewedContext);
 
   const setDropdown = (dropdownItem: string) => {
     dispatch(showDropdown({ dropdownItem }));
   };
-
-  const recents = useSelector(
-    (state: RootState) => state.recents.recentlyViewed
-  );
-
-  console.log(recentos);
 
   return (
     <div ref={forwardRef} className="navRecentDiv">
@@ -38,21 +31,21 @@ const NavRecent: React.FC<RecentProps> = ({ forwardRef }) => {
             return (
               <Link
                 onClick={() => setDropdown("")}
-                key={board.boardId}
+                key={board.id}
                 className="workspaceMenuLink"
-                to={`/board/${board.boardWorkspace}/${board.boardId}`}
+                to={`/board/${board.workspace}/${board.id}`}
               >
                 <div className="recentsDiv">
                   <div
                     style={{
-                      background: `${board.boardBackground}`,
+                      background: `${board.background}`,
                       width: "22px",
                       height: "22px",
                     }}
                   ></div>
 
                   <div className="mainRecentTextDiv">
-                    <p className="recentMenuBoardName">{board.boardName}</p>
+                    <p className="recentMenuBoardName">{board.name}</p>
                   </div>
                 </div>
               </Link>

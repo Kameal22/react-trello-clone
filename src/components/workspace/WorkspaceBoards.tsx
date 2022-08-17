@@ -8,7 +8,6 @@ import { useDispatch } from "react-redux";
 import SearchForBoards from "./SearchForBoards";
 import { useEffect, useState } from "react";
 import { deleteBoard } from "../../redux/features/WorkspaceSlice";
-import { removeRecentlyViewedThatWasDeletedFromWorkspaceComponent } from "../../redux/features/recentlyViewedSlice";
 import { setCreateBoard } from "../../redux/features/popUpCreateComponentSlice";
 import { removeHighlightOnBoardDeleting } from "../../redux/features/highlightsSlice";
 import { includesIgnoredCase } from "../../utils/IgnoreCase";
@@ -47,11 +46,7 @@ const WorkspaceBoards: React.FC<WorkspaceBoardsInterface> = (props) => {
   };
 
   const removeFromLastWatched = (boardId: string) => {
-    dispatch(
-      removeRecentlyViewedThatWasDeletedFromWorkspaceComponent({
-        boardId: boardId,
-      })
-    );
+    console.log("ADD REMOVAL FROM LAST WATCHED")
   };
 
   const removeFromHighlights = (boardId: string) => {

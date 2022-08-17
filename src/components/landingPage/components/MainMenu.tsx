@@ -5,7 +5,6 @@ import {
   showWorkspaceDropdown,
   deleteWorkspace,
 } from "../../../redux/features/WorkspaceSlice";
-import { removeRecentlyViewedAfterWorkspaceDeleting } from "../../../redux/features/recentlyViewedSlice";
 import { removeHighlightOnWorkspaceDeleting } from "../../../redux/features/highlightsSlice";
 import { Link } from "react-router-dom";
 import { setCreateWorkspace } from "../../../redux/features/popUpCreateComponentSlice";
@@ -36,11 +35,7 @@ const MainMenu: React.FC = () => {
   };
 
   const removeFromLastWatched = (workspaceName: string) => {
-    dispatch(
-      removeRecentlyViewedAfterWorkspaceDeleting({
-        boardsWorkspace: workspaceName,
-      })
-    );
+    console.log("ADD A REMOVAL HERE")
   };
 
   const handleRemoveHighlight = (workspaceId: string) => {
@@ -102,61 +97,61 @@ const MainMenu: React.FC = () => {
 
       {isWorkspace
         ? workspaces.map((workspace) => {
-            return (
-              <ul key={workspace.workspaceId} className="menuWorkspaces">
-                <div
-                  onClick={() => showDropdown(workspace.workspaceId)}
-                  className="workspace"
-                >
-                  <p>
-                    <span
-                      style={{
-                        color: workspace.workspaceLetterColor,
-                        fontSize: "1.4em",
-                        marginRight: ".1em",
-                      }}
+          return (
+            <ul key={workspace.workspaceId} className="menuWorkspaces">
+              <div
+                onClick={() => showDropdown(workspace.workspaceId)}
+                className="workspace"
+              >
+                <p>
+                  <span
+                    style={{
+                      color: workspace.workspaceLetterColor,
+                      fontSize: "1.4em",
+                      marginRight: ".1em",
+                    }}
+                  >
+                    {workspace.workspaceName[0]}
+                  </span>
+                  {workspace.workspaceName.substring(1)}
+                </p>
+                <i
+                  style={{ fontSize: "1.3em" }}
+                  className={
+                    workspace.workspaceLandingPageMenu
+                      ? "bi bi-arrow-up-short"
+                      : "bi bi-arrow-down-short"
+                  }
+                ></i>
+              </div>
+              {workspace.workspaceLandingPageMenu && (
+                <div className="workspaceSettings">
+                  <li className="workspaceOption">
+                    <i className="bi bi-calendar-check"></i>
+                    <Link
+                      className="workspaceMenuLink"
+                      to={`/workspace/${workspace.workspaceId}`}
                     >
-                      {workspace.workspaceName[0]}
-                    </span>
-                    {workspace.workspaceName.substring(1)}
-                  </p>
-                  <i
-                    style={{ fontSize: "1.3em" }}
-                    className={
-                      workspace.workspaceLandingPageMenu
-                        ? "bi bi-arrow-up-short"
-                        : "bi bi-arrow-down-short"
+                      <p className="menuBoardsDescription">Boards</p>
+                    </Link>
+                  </li>
+                  <div
+                    onClick={() =>
+                      handleWorkspaceRemove(
+                        workspace.workspaceId,
+                        workspace.workspaceName
+                      )
                     }
-                  ></i>
-                </div>
-                {workspace.workspaceLandingPageMenu && (
-                  <div className="workspaceSettings">
-                    <li className="workspaceOption">
-                      <i className="bi bi-calendar-check"></i>
-                      <Link
-                        className="workspaceMenuLink"
-                        to={`/workspace/${workspace.workspaceId}`}
-                      >
-                        <p className="menuBoardsDescription">Boards</p>
-                      </Link>
-                    </li>
-                    <div
-                      onClick={() =>
-                        handleWorkspaceRemove(
-                          workspace.workspaceId,
-                          workspace.workspaceName
-                        )
-                      }
-                      className="workspaceOption"
-                    >
-                      <i className="bi bi-trash"></i>
-                      <p className="menuBoardsDescription">Delete</p>
-                    </div>
+                    className="workspaceOption"
+                  >
+                    <i className="bi bi-trash"></i>
+                    <p className="menuBoardsDescription">Delete</p>
                   </div>
-                )}
-              </ul>
-            );
-          })
+                </div>
+              )}
+            </ul>
+          );
+        })
         : null}
     </div>
   );

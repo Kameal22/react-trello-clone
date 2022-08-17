@@ -3,7 +3,6 @@ import { useEffect, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { RootState } from "../../redux/Store";
 import { useSelector, useDispatch } from "react-redux";
-import { addRecentlyViewed } from "../../redux/features/recentlyViewedSlice";
 import Column from "../column/Column";
 import AddColumnForm from "../column/AddColumnForm";
 import { changeColor } from "../../redux/features/navigationSlice";
@@ -57,7 +56,6 @@ const Board: React.FC = () => {
 
   useEffect(() => {
     if (shownBoard) {
-      dispatch(addRecentlyViewed(shownBoard));
       changeColorFunc(shownBoard.boardBackground);
     }
   }, []);

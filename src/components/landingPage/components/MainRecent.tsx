@@ -2,11 +2,11 @@ import "../../../styles/mainSectionStyles/mainRecent.css";
 import { RootState } from "../../../redux/Store";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { RecentlyViewedContext } from "../../../context/recentlyViewedContext";
+import { useContext } from "react";
 
 const MainRecent: React.FC = () => {
-  const recents = useSelector(
-    (state: RootState) => state.recents.recentlyViewed
-  );
+  const recents = useContext(RecentlyViewedContext)
 
   if (recents.length > 0) {
     return (
@@ -16,20 +16,20 @@ const MainRecent: React.FC = () => {
         {recents.map((board) => {
           return (
             <Link
-              key={board.boardId}
+              key={board.id}
               className="workspaceMenuLink"
-              to={`/board/${board.boardWorkspace}/${board.boardId}`}
+              to={`/board/${board.workspace}/${board.id}`}
             >
               <div className="recentsDiv">
                 <div
-                  style={{ background: `${board.boardBackground}` }}
+                  style={{ background: `${board.background}` }}
                   className="mainRecentSmallBlock"
                 ></div>
 
                 <div className="mainRecentTextDiv">
-                  <p className="recentBoardName">{board.boardName}</p>
+                  <p className="recentBoardName">{board.name}</p>
                   <p className="recentBoardDescription">
-                    {board.boardWorkspace}
+                    {board.workspace}
                   </p>
                 </div>
               </div>

@@ -3,7 +3,6 @@ import registeredUsersReducer from "./features/registerSlice";
 import navigationReducer from "./features/navigationSlice";
 import popUpReducer from "./features/popUpMessagSlice";
 import workspaceReducer from "./features/WorkspaceSlice";
-import recentlyViewedReducer from "./features/recentlyViewedSlice";
 import createComponentReducer from "./features/popUpCreateComponentSlice";
 import highlightMessageReducer from "./features/highlightsSlice";
 import { persistReducer } from "redux-persist";
@@ -15,7 +14,6 @@ const reducers = combineReducers({
   nav: navigationReducer,
   message: popUpReducer,
   workspace: workspaceReducer,
-  recents: recentlyViewedReducer,
   create: createComponentReducer,
   highlight: highlightMessageReducer,
 });
