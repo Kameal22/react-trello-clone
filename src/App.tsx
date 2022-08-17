@@ -18,6 +18,7 @@ import {
 } from "./redux/features/popUpCreateComponentSlice";
 import { showDropdown } from "./redux/features/navigationSlice";
 import UseClickOutside from "./hooks/UseClickOutside";
+import { RWProvider } from "./context/recentlyViewedContext";
 
 function App() {
   const dispatch = useDispatch();
@@ -70,29 +71,31 @@ function App() {
   });
 
   return (
-    <div className="App">
-      <BrowserRouter>
-        <Nav
-          forwardRef={dropdownMenuRef}
-          workspacesRef={workspacesRef}
-          recentsRef={recentsRef}
-          createRef={createRef}
-          registerRef={registerRef}
-        />
-        <Routes>
-          <Route path="/" element={<MainPage />} />
-          <Route path="/overview" element={<MainOverview />} />
-          <Route path="/boards" element={<MainBoardsOverview />} />
-          <Route path="/workspace/:workspaceId" element={<Workspace />} />
-          <Route path="/board/:workspaceName/:boardId" element={<Board />} />
-          <Route path="*" element={<NotFoundPage />} />
-        </Routes>
-        {createWorkspace && (
-          <CreateWorkspacePopUp forwardRef={createWorkspaceRef} />
-        )}
-        {createBoard && <CreateBoardPopUp forwardRef={createBoardRef} />}
-      </BrowserRouter>
-    </div>
+    <RWProvider>
+      <div className="App">
+        <BrowserRouter>
+          <Nav
+            forwardRef={dropdownMenuRef}
+            workspacesRef={workspacesRef}
+            recentsRef={recentsRef}
+            createRef={createRef}
+            registerRef={registerRef}
+          />
+          <Routes>
+            <Route path="/" element={<MainPage />} />
+            <Route path="/overview" element={<MainOverview />} />
+            <Route path="/boards" element={<MainBoardsOverview />} />
+            <Route path="/workspace/:workspaceId" element={<Workspace />} />
+            <Route path="/board/:workspaceName/:boardId" element={<Board />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+          {createWorkspace && (
+            <CreateWorkspacePopUp forwardRef={createWorkspaceRef} />
+          )}
+          {createBoard && <CreateBoardPopUp forwardRef={createBoardRef} />}
+        </BrowserRouter>
+      </div>
+    </RWProvider>
   );
 }
 

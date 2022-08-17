@@ -1,5 +1,5 @@
 import "../../styles/boardStyles/board.css";
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { RootState } from "../../redux/Store";
 import { useSelector, useDispatch } from "react-redux";
@@ -16,6 +16,9 @@ import { DragDropContext, DropResult, Droppable } from "react-beautiful-dnd";
 import { ColumnInterface } from "../../interfaces/WorkspaceInterface";
 import { removeHighlightOnTaskDeleting } from "../../redux/features/highlightsSlice";
 import { useSetRW } from "../../context/recentlyViewedContext";
+import { handleSetRecentlyViewed } from "../../utils/SetRecentlyViewed";
+import { RecentlyViewedContext } from "../../context/recentlyViewedContext";
+
 
 const Board: React.FC = () => {
   const { workspaceName, boardId } = useParams();
@@ -24,6 +27,7 @@ const Board: React.FC = () => {
   const navigate = useNavigate();
 
   const setLastWatched = useSetRW();
+  const recents = useContext(RecentlyViewedContext);
 
   const workspaces = useSelector(
     (state: RootState) => state.workspace.workspace
@@ -46,6 +50,10 @@ const Board: React.FC = () => {
       navigate(`/`, { replace: true });
     }
   }, [shownBoard]);
+
+  useEffect(() => {
+    handleSetRecentlyViewed(recents, shownBoard?.boardName, shownBoard?.boardBackground, shownBoard?.boardWorkspace, shownBoard?.boardId, setLastWatched)
+  }, [shownBoard])
 
   useEffect(() => {
     if (shownBoard) {

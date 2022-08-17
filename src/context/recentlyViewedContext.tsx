@@ -1,9 +1,5 @@
 import React, { createContext, useContext, useState } from "react";
-import { BoardInterface } from "../interfaces/WorkspaceInterface";
-
-interface RecentlyViewedInterface {
-  recentlyViewed: BoardInterface[];
-}
+import { RecentlyViewedInterface } from "../interfaces/RecentlyViewedInterface";
 
 export const RecentlyViewedContext = createContext<RecentlyViewedInterface[]>(
   []
@@ -14,12 +10,12 @@ export const SetRWContext = createContext<
 >(undefined);
 
 export const useSetRW = () => {
-  const setLW = useContext(SetRWContext);
+  const setRW = useContext(SetRWContext);
 
-  if (!setLW) {
+  if (!setRW) {
     throw new Error("Called outside setRW provider");
   }
-  return setLW;
+  return setRW;
 };
 
 export const RWProvider: React.FC = ({ children }) => {
