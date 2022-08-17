@@ -8,13 +8,20 @@ import {
 import { removeHighlightOnWorkspaceDeleting } from "../../../redux/features/highlightsSlice";
 import { Link } from "react-router-dom";
 import { setCreateWorkspace } from "../../../redux/features/popUpCreateComponentSlice";
+import { handleRemoveAllRecentsFromDeletedBoard } from "../../../utils/SetRecentlyViewed";
+import { RecentlyViewedContext } from "../../../context/recentlyViewedContext";
+import { useContext } from "react";
+import { useSetRW } from "../../../context/recentlyViewedContext";
 
 const MainMenu: React.FC = () => {
   const dispatch = useDispatch();
+  const setLastWatched = useSetRW();
 
   const workspaces = useSelector(
     (state: RootState) => state.workspace.workspace
   );
+
+  const recents = useContext(RecentlyViewedContext);
 
   const showDropdown = (id: string) => {
     dispatch(showWorkspaceDropdown({ id }));
@@ -35,7 +42,7 @@ const MainMenu: React.FC = () => {
   };
 
   const removeFromLastWatched = (workspaceName: string) => {
-    console.log("ADD A REMOVAL HERE")
+    handleRemoveAllRecentsFromDeletedBoard(recents, workspaceName, setLastWatched)
   };
 
   const handleRemoveHighlight = (workspaceId: string) => {

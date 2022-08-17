@@ -14,3 +14,19 @@ export const handleSetRecentlyViewed = (recents: RecentlyViewedInterface[], name
         }
     }
 }
+
+export const handleRemoveRecentlyViewed = (recents: RecentlyViewedInterface[], id: string, setRecentlyViewed: React.Dispatch<React.SetStateAction<RecentlyViewedInterface[]>>) => {
+    const removedRecent = recents.filter(board => (
+        board.id !== id
+    ))
+
+    setRecentlyViewed(removedRecent)
+}
+
+export const handleRemoveAllRecentsFromDeletedBoard = (recents: RecentlyViewedInterface[], workspaceName: string, setRecentlyViewed: React.Dispatch<React.SetStateAction<RecentlyViewedInterface[]>>) => {
+    const removedRecent = recents.filter(board => (
+        board.workspace !== workspaceName
+    ))
+
+    setRecentlyViewed(removedRecent)
+}

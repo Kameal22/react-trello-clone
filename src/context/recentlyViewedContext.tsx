@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
 import { RecentlyViewedInterface } from "../interfaces/RecentlyViewedInterface";
 
 export const RecentlyViewedContext = createContext<RecentlyViewedInterface[]>(
@@ -22,6 +22,18 @@ export const RWProvider: React.FC = ({ children }) => {
   const [recentlyWatched, setRecentlyWatched] = useState<
     RecentlyViewedInterface[]
   >([]);
+
+  useEffect(() => {
+    const recents = window.localStorage.getItem('recents');
+
+    if (recents) {
+      setRecentlyWatched(JSON.parse(recents))
+    }
+  }, [])
+
+  useEffect(() => {
+    window.localStorage.setItem('recents', JSON.stringify(recentlyWatched))
+  }, [recentlyWatched])
 
   return (
     <RecentlyViewedContext.Provider value={recentlyWatched}>

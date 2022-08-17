@@ -6,11 +6,14 @@ import {
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import SearchForBoards from "./SearchForBoards";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { deleteBoard } from "../../redux/features/WorkspaceSlice";
 import { setCreateBoard } from "../../redux/features/popUpCreateComponentSlice";
 import { removeHighlightOnBoardDeleting } from "../../redux/features/highlightsSlice";
 import { includesIgnoredCase } from "../../utils/IgnoreCase";
+import { RecentlyViewedContext } from "../../context/recentlyViewedContext";
+import { handleRemoveRecentlyViewed } from "../../utils/SetRecentlyViewed";
+import { useSetRW } from "../../context/recentlyViewedContext";
 
 interface WorkspaceBoardsInterface {
   shownWorkspace: WorkspaceInterface | undefined;
@@ -20,6 +23,9 @@ const WorkspaceBoards: React.FC<WorkspaceBoardsInterface> = (props) => {
   const [shownBoards, setShownBoards] = useState<BoardInterface[] | undefined>([]);
 
   const dispatch = useDispatch();
+  const setLastWatched = useSetRW();
+
+  const recents = useContext(RecentlyViewedContext);
 
   useEffect(() => {
     setShownBoards(props.shownWorkspace?.workspaceBoards)
@@ -46,7 +52,7 @@ const WorkspaceBoards: React.FC<WorkspaceBoardsInterface> = (props) => {
   };
 
   const removeFromLastWatched = (boardId: string) => {
-    console.log("ADD REMOVAL FROM LAST WATCHED")
+    handleRemoveRecentlyViewed(recents, boardId, setLastWatched)
   };
 
   const removeFromHighlights = (boardId: string) => {
