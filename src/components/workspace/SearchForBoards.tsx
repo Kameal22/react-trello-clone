@@ -2,19 +2,18 @@ import "../../styles/workspaceStyles/searchForBoards.css";
 import { BoardInterface } from "../../interfaces/WorkspaceInterface";
 
 interface SearchForBoardsInterface {
-  boards: BoardInterface[] | undefined
+  boards: BoardInterface[] | undefined;
   showSearchedBoards: (searchingValue: string) => void;
 }
 
 const SearchForBoards: React.FC<SearchForBoardsInterface> = ({
   showSearchedBoards,
-  boards
+  boards,
 }) => {
   const handleSearchValueChange = (
     e: React.FormEvent<HTMLInputElement>
   ): void => {
-    let searchingValue = e.currentTarget.value;
-    showSearchedBoards(searchingValue);
+    showSearchedBoards(e.currentTarget.value);
   };
 
   return (

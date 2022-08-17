@@ -31,7 +31,7 @@ const MainHighlights: React.FC = () => {
       highlights[Math.floor(Math.random() * highlights.length)];
 
     const tasksWorkspace = workspaces.find(
-      (workspaces) => workspaces.workspaceId === taskComment.workspaceId
+      (workspace) => workspace.workspaceId === taskComment.workspaceId
     );
 
     const tasksBoard = tasksWorkspace?.workspaceBoards.find(

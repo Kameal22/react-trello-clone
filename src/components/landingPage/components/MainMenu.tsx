@@ -102,61 +102,61 @@ const MainMenu: React.FC = () => {
 
       {isWorkspace
         ? workspaces.map((workspace) => {
-          return (
-            <ul key={workspace.workspaceId} className="menuWorkspaces">
-              <div
-                onClick={() => showDropdown(workspace.workspaceId)}
-                className="workspace"
-              >
-                <p>
-                  <span
-                    style={{
-                      color: workspace.workspaceLetterColor,
-                      fontSize: "1.4em",
-                      marginRight: ".1em",
-                    }}
-                  >
-                    {workspace.workspaceName[0]}
-                  </span>
-                  {workspace.workspaceName.substring(1)}
-                </p>
-                <i
-                  style={{ fontSize: "1.3em" }}
-                  className={
-                    workspace.workspaceLandingPageMenu
-                      ? "bi bi-arrow-up-short"
-                      : "bi bi-arrow-down-short"
-                  }
-                ></i>
-              </div>
-              {workspace.workspaceLandingPageMenu ? (
-                <div className="workspaceSettings">
-                  <li className="workspaceOption">
-                    <i className="bi bi-calendar-check"></i>
-                    <Link
-                      className="workspaceMenuLink"
-                      to={`/workspace/${workspace.workspaceId}`}
+            return (
+              <ul key={workspace.workspaceId} className="menuWorkspaces">
+                <div
+                  onClick={() => showDropdown(workspace.workspaceId)}
+                  className="workspace"
+                >
+                  <p>
+                    <span
+                      style={{
+                        color: workspace.workspaceLetterColor,
+                        fontSize: "1.4em",
+                        marginRight: ".1em",
+                      }}
                     >
-                      <p className="menuBoardsDescription">Boards</p>
-                    </Link>
-                  </li>
-                  <div
-                    onClick={() =>
-                      handleWorkspaceRemove(
-                        workspace.workspaceId,
-                        workspace.workspaceName
-                      )
+                      {workspace.workspaceName[0]}
+                    </span>
+                    {workspace.workspaceName.substring(1)}
+                  </p>
+                  <i
+                    style={{ fontSize: "1.3em" }}
+                    className={
+                      workspace.workspaceLandingPageMenu
+                        ? "bi bi-arrow-up-short"
+                        : "bi bi-arrow-down-short"
                     }
-                    className="workspaceOption"
-                  >
-                    <i className="bi bi-trash"></i>
-                    <p className="menuBoardsDescription">Delete</p>
-                  </div>
+                  ></i>
                 </div>
-              ) : null}
-            </ul>
-          );
-        })
+                {workspace.workspaceLandingPageMenu && (
+                  <div className="workspaceSettings">
+                    <li className="workspaceOption">
+                      <i className="bi bi-calendar-check"></i>
+                      <Link
+                        className="workspaceMenuLink"
+                        to={`/workspace/${workspace.workspaceId}`}
+                      >
+                        <p className="menuBoardsDescription">Boards</p>
+                      </Link>
+                    </li>
+                    <div
+                      onClick={() =>
+                        handleWorkspaceRemove(
+                          workspace.workspaceId,
+                          workspace.workspaceName
+                        )
+                      }
+                      className="workspaceOption"
+                    >
+                      <i className="bi bi-trash"></i>
+                      <p className="menuBoardsDescription">Delete</p>
+                    </div>
+                  </div>
+                )}
+              </ul>
+            );
+          })
         : null}
     </div>
   );

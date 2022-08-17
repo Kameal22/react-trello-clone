@@ -43,7 +43,7 @@ const Workspace: React.FC = () => {
     if (!shownWorkspace) {
       navigate(`/`, { replace: true });
     }
-  }, [shownWorkspace])
+  }, [shownWorkspace]);
 
   const editWorkspaceFunc = (
     id: string | undefined,
@@ -59,7 +59,6 @@ const Workspace: React.FC = () => {
           <EditWorkspaceDetails
             editWorkspace={editWorkspaceFunc}
             setEditting={setEditting}
-            workspaceDescription={shownWorkspace?.workspaceDescription}
             workspaceId={shownWorkspace?.workspaceId}
           />
         ) : (

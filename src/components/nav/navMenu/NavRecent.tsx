@@ -3,6 +3,8 @@ import { showDropdown } from "../../../redux/features/navigationSlice";
 import { RootState } from "../../../redux/Store";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { RecentlyViewedContext } from "../../../context/recentlyViewedContext";
+import { useContext } from "react";
 
 interface RecentProps {
   forwardRef: React.RefObject<HTMLDivElement>;
@@ -11,6 +13,8 @@ interface RecentProps {
 const NavRecent: React.FC<RecentProps> = ({ forwardRef }) => {
   const dispatch = useDispatch();
 
+  const recentos = useContext(RecentlyViewedContext);
+
   const setDropdown = (dropdownItem: string) => {
     dispatch(showDropdown({ dropdownItem }));
   };
@@ -18,6 +22,8 @@ const NavRecent: React.FC<RecentProps> = ({ forwardRef }) => {
   const recents = useSelector(
     (state: RootState) => state.recents.recentlyViewed
   );
+
+  console.log(recentos);
 
   return (
     <div ref={forwardRef} className="navRecentDiv">

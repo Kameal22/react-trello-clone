@@ -15,12 +15,15 @@ import {
 import { DragDropContext, DropResult, Droppable } from "react-beautiful-dnd";
 import { ColumnInterface } from "../../interfaces/WorkspaceInterface";
 import { removeHighlightOnTaskDeleting } from "../../redux/features/highlightsSlice";
+import { useSetRW } from "../../context/recentlyViewedContext";
 
 const Board: React.FC = () => {
   const { workspaceName, boardId } = useParams();
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const setLastWatched = useSetRW();
 
   const workspaces = useSelector(
     (state: RootState) => state.workspace.workspace
@@ -42,7 +45,7 @@ const Board: React.FC = () => {
     if (!shownBoard) {
       navigate(`/`, { replace: true });
     }
-  }, [shownBoard])
+  }, [shownBoard]);
 
   useEffect(() => {
     if (shownBoard) {

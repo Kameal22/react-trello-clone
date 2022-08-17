@@ -1,8 +1,7 @@
 import "../../styles/workspaceStyles/editWorkspaceDetails.css";
-import { useState } from "react";
+import useInputState from "../../hooks/useInputState";
 
 interface EditWorkspaceProps {
-  workspaceDescription: string | undefined;
   workspaceId: string | undefined;
   editWorkspace: (
     id: string | undefined,
@@ -12,31 +11,15 @@ interface EditWorkspaceProps {
 }
 
 const EditWorkspaceDetails: React.FC<EditWorkspaceProps> = ({
-  workspaceDescription,
   workspaceId,
   editWorkspace,
   setEditting,
 }) => {
-  const [newWorkspaceDescription, setNewWorkspaceDesscription] = useState<
-    string | undefined
-  >(workspaceDescription);
-  const [descriptionError, setDescriptionError] = useState<string>("");
-
-  const handleWorkspaceDescriptionChange = (
-    e: React.FormEvent<HTMLInputElement>
-  ): void => {
-    if (workspaceDescription)
-      if (workspaceDescription?.length > 14) {
-        setDescriptionError("Description cannot excide 14 characters");
-      } else {
-        setDescriptionError("");
-      }
-    setNewWorkspaceDesscription(e.currentTarget.value);
-  };
+  const [, , newDescription, setNewDescription, error] = useInputState("");
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    editWorkspace(workspaceId, newWorkspaceDescription);
+    editWorkspace(workspaceId, newDescription);
     setEditting();
   };
 
@@ -47,22 +30,18 @@ const EditWorkspaceDetails: React.FC<EditWorkspaceProps> = ({
           <p className="workspaceDescription">Workspace description</p>
           <input
             className="workspaceDescriptionInput"
-            value={newWorkspaceDescription}
-            onChange={handleWorkspaceDescriptionChange}
+            value={newDescription}
+            onChange={setNewDescription}
             type="text"
-            name="workspaceName"
+            name="workspaceDescription"
           />
         </div>
-        {descriptionError ? (
-          <p className="editWorkspaceDescriptionError">{descriptionError}</p>
+        {error ? (
+          <p className="editWorkspaceDescriptionError">{error}</p>
         ) : null}
 
         <div className="editWorkspaceButtons">
-          <button
-            disabled={descriptionError !== ""}
-            type="submit"
-            className="saveButton"
-          >
+          <button disabled={error !== ""} type="submit" className="saveButton">
             Save
           </button>
           <button onClick={() => setEditting()} className="cancelButton">
