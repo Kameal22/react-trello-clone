@@ -9,6 +9,8 @@ const MainHighlights: React.FC = () => {
 
   const highlightedTasks = useContext(HighlightedTaskContext);
 
+  console.log(highlightedTasks);
+
   useEffect(() => {
     const randomizedTask =
       highlightedTasks[Math.floor(Math.random() * highlightedTasks.length)];

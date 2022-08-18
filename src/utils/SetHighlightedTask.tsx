@@ -54,7 +54,7 @@ export const handleRemoveHighlightedTask = (
     React.SetStateAction<HighlightedTaskInterface[]>
   >
 ) => {
-  const removedHighlight = highlights.filter((task) => task.taskId !== id);
+  const removedHighlight = highlights.filter((task) => task.workspaceId !== id); // Remove dynamically
 
   setHighlightedTask(removedHighlight);
 };

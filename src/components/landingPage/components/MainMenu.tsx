@@ -5,23 +5,27 @@ import {
   showWorkspaceDropdown,
   deleteWorkspace,
 } from "../../../redux/features/WorkspaceSlice";
-import { removeHighlightOnWorkspaceDeleting } from "../../../redux/features/highlightsSlice";
 import { Link } from "react-router-dom";
 import { setCreateWorkspace } from "../../../redux/features/popUpCreateComponentSlice";
 import { handleRemoveAllRecentsFromDeletedBoard } from "../../../utils/SetRecentlyViewed";
 import { RecentlyViewedContext } from "../../../context/recentlyViewedContext";
+import { HighlightedTaskContext } from "../../../context/highlightedTaskContext";
 import { useContext } from "react";
 import { useSetRW } from "../../../context/recentlyViewedContext";
+import { useSetHT } from "../../../context/highlightedTaskContext";
+import { handleRemoveHighlightedTask } from "../../../utils/SetHighlightedTask";
 
 const MainMenu: React.FC = () => {
   const dispatch = useDispatch();
   const setLastWatched = useSetRW();
+  const setHighlights = useSetHT();
 
   const workspaces = useSelector(
     (state: RootState) => state.workspace.workspace
   );
 
   const recents = useContext(RecentlyViewedContext);
+  const highlights = useContext(HighlightedTaskContext);
 
   const showDropdown = (id: string) => {
     dispatch(showWorkspaceDropdown({ id }));
@@ -50,11 +54,7 @@ const MainMenu: React.FC = () => {
   };
 
   const handleRemoveHighlight = (workspaceId: string) => {
-    dispatch(
-      removeHighlightOnWorkspaceDeleting({
-        workspaceId: workspaceId,
-      })
-    );
+    handleRemoveHighlightedTask(highlights, workspaceId, setHighlights);
   };
 
   const handleWorkspaceRemove = (
