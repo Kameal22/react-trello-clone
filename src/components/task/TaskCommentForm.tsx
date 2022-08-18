@@ -1,7 +1,5 @@
 import "../../styles/taskStyles/taskCommentForm.css";
 import { addTaskComment } from "../../redux/features/WorkspaceSlice";
-import { addHighlight } from "../../redux/features/highlightsSlice";
-import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../redux/Store";
 import { date } from "../../utils/GetDate";
@@ -23,19 +21,6 @@ const TaskCommentForm: React.FC<TaskCommentFormInterface> = (props) => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
-    dispatch(
-      addHighlight({
-        workspaceId: props.workspaceId,
-        boardId: props.boardId,
-        columnId: props.columnId,
-        taskId: props.taskId,
-        taskComment,
-        taskAuthor: user.name,
-        taskDate: date,
-      })
-    );
-
     dispatch(
       addTaskComment({
         workspaceId: props.workspaceId,

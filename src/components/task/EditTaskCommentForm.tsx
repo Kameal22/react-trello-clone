@@ -2,7 +2,6 @@ import "../../styles/taskStyles/editTaskComment.css";
 import { editTaskComment } from "../../redux/features/WorkspaceSlice";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
-import { editHighlight } from "../../redux/features/highlightsSlice";
 
 interface EditTaskCommentInterface {
   workspaceId: string | undefined;
@@ -25,15 +24,6 @@ const EditTaskCommentForm: React.FC<EditTaskCommentInterface> = ({
 
   const dispatch = useDispatch();
 
-  const handleEditHighlight = (taskId: string | undefined, comment: string) => {
-    dispatch(
-      editHighlight({
-        taskId: taskId,
-        taskComment: comment,
-      })
-    );
-  };
-
   const handleDescriptionChange = (
     e: React.FormEvent<HTMLInputElement>
   ): void => {
@@ -42,8 +32,6 @@ const EditTaskCommentForm: React.FC<EditTaskCommentInterface> = ({
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
-    handleEditHighlight(taskId, newTaskComment);
 
     dispatch(
       editTaskComment({

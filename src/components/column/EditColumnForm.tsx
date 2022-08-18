@@ -2,7 +2,10 @@ import "../../styles/columnStyles/editColumnForm.css";
 import { deleteColumn } from "../../redux/features/WorkspaceSlice";
 import { useDispatch } from "react-redux";
 import { copyColumn } from "../../redux/features/WorkspaceSlice";
-import { removeHighlightOnColumnDeleting } from "../../redux/features/highlightsSlice";
+import { useSetHT } from "../../context/highlightedTaskContext";
+import { useContext } from "react";
+import { HighlightedTaskContext } from "../../context/highlightedTaskContext";
+import { handleRemoveHighlightedTaskOnColumnDeleting } from "../../utils/SetHighlightedTask";
 
 interface EditColumnInterface {
   setEditing: () => void;
@@ -22,13 +25,11 @@ const EditColumnForm: React.FC<EditColumnInterface> = ({
   forwardRef,
 }) => {
   const dispatch = useDispatch();
+  const setHighlights = useSetHT();
+  const highlights = useContext(HighlightedTaskContext);
 
   const handleHighlightRemove = (columnId: string | undefined) => {
-    dispatch(
-      removeHighlightOnColumnDeleting({
-        columnId: columnId,
-      })
-    );
+    handleRemoveHighlightedTaskOnColumnDeleting(highlights, columnId, setHighlights)
   };
 
   const deleteColumnFunc = () => {

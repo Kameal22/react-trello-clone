@@ -13,7 +13,7 @@ import { HighlightedTaskContext } from "../../../context/highlightedTaskContext"
 import { useContext } from "react";
 import { useSetRW } from "../../../context/recentlyViewedContext";
 import { useSetHT } from "../../../context/highlightedTaskContext";
-import { handleRemoveHighlightedTask } from "../../../utils/SetHighlightedTask";
+import { handleRemoveHighlightedTaskOnWorkspaceDeleting } from "../../../utils/SetHighlightedTask";
 
 const MainMenu: React.FC = () => {
   const dispatch = useDispatch();
@@ -54,7 +54,7 @@ const MainMenu: React.FC = () => {
   };
 
   const handleRemoveHighlight = (workspaceId: string) => {
-    handleRemoveHighlightedTask(highlights, workspaceId, setHighlights);
+    handleRemoveHighlightedTaskOnWorkspaceDeleting(highlights, workspaceId, setHighlights);
   };
 
   const handleWorkspaceRemove = (

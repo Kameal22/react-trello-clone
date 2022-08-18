@@ -13,10 +13,12 @@ import {
 } from "../../redux/features/WorkspaceSlice";
 import { DragDropContext, DropResult, Droppable } from "react-beautiful-dnd";
 import { ColumnInterface } from "../../interfaces/WorkspaceInterface";
-import { removeHighlightOnTaskDeleting } from "../../redux/features/highlightsSlice";
 import { useSetRW } from "../../context/recentlyViewedContext";
+import { useSetHT } from "../../context/highlightedTaskContext";
 import { handleSetRecentlyViewed } from "../../utils/SetRecentlyViewed";
 import { RecentlyViewedContext } from "../../context/recentlyViewedContext";
+import { handleRemoveHighlightedTaskOnTaskDeleting } from "../../utils/SetHighlightedTask";
+import { HighlightedTaskContext } from "../../context/highlightedTaskContext";
 
 
 const Board: React.FC = () => {
@@ -26,6 +28,8 @@ const Board: React.FC = () => {
   const navigate = useNavigate();
 
   const setLastWatched = useSetRW();
+  const setHighlights = useSetHT();
+  const highlights = useContext(HighlightedTaskContext);
   const recents = useContext(RecentlyViewedContext);
 
   const workspaces = useSelector(
@@ -118,11 +122,7 @@ const Board: React.FC = () => {
   };
 
   const handleRemoveHighlight = (taskId: string) => {
-    dispatch(
-      removeHighlightOnTaskDeleting({
-        taskId: taskId,
-      })
-    );
+    handleRemoveHighlightedTaskOnTaskDeleting(highlights, taskId, setHighlights)
   };
 
   const onDragEnd = (result: DropResult) => {

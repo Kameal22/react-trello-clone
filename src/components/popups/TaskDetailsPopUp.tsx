@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useContext } from "react";
 import "../../styles/popUpStyles/taskDetailsPopUp.css";
 import TaskCommentForm from "../task/TaskCommentForm";
 import TaskDescriptionForm from "../task/TaskDescriptionForm";
@@ -12,7 +12,9 @@ import {
 import EditTaskCommentForm from "../task/EditTaskCommentForm";
 import CreateLabelPopUp from "./SpecialLabelPopUp";
 import UseClickOutside from "../../hooks/UseClickOutside";
-import { removeHighlightOnCommentDeleting } from "../../redux/features/highlightsSlice";
+import { handleEditHighlight } from "../../utils/SetHighlightedTask";
+import { useSetHT } from "../../context/highlightedTaskContext";
+import { HighlightedTaskContext } from "../../context/highlightedTaskContext";
 
 interface TaskDetailsInterface {
   showTaskDetails: () => void;
@@ -35,18 +37,12 @@ const TaskDetailsPopUp: React.FC<TaskDetailsInterface> = (props) => {
   const [editingTaskName, setEditingTaskName] = useState<boolean>(false);
   const [taskName, setTaskName] = useState<string>(props.taskName);
 
+  const highlights = useContext(HighlightedTaskContext);
+  const setHighlights = useSetHT();
   const dispatch = useDispatch();
 
   const taskDescriptionRef = useRef<HTMLDivElement>(null);
   const taskNameRef = useRef<HTMLFormElement>(null);
-
-  const handleHighlightRemove = (comment: string) => {
-    dispatch(
-      removeHighlightOnCommentDeleting({
-        comment: comment,
-      })
-    );
-  };
 
   const handleTaskNameChange = (e: React.FormEvent<HTMLInputElement>): void => {
     setTaskName(e.currentTarget.value);
@@ -64,7 +60,7 @@ const TaskDetailsPopUp: React.FC<TaskDetailsInterface> = (props) => {
         newTask: taskName,
       })
     );
-
+    handleEditHighlight(highlights, props.taskId, taskName, setHighlights)
     setEditingTaskName(!editingTaskName);
   };
 
@@ -73,7 +69,6 @@ const TaskDetailsPopUp: React.FC<TaskDetailsInterface> = (props) => {
   };
 
   const deleteComment = (taskComment: string) => {
-    handleHighlightRemove(taskComment);
     dispatch(
       deleteTaskComment({
         workspaceId: props.workspaceId,

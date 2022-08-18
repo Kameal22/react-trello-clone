@@ -9,11 +9,13 @@ import SearchForBoards from "./SearchForBoards";
 import { useEffect, useState, useContext } from "react";
 import { deleteBoard } from "../../redux/features/WorkspaceSlice";
 import { setCreateBoard } from "../../redux/features/popUpCreateComponentSlice";
-import { removeHighlightOnBoardDeleting } from "../../redux/features/highlightsSlice";
 import { includesIgnoredCase } from "../../utils/IgnoreCase";
 import { RecentlyViewedContext } from "../../context/recentlyViewedContext";
 import { handleRemoveRecentlyViewed } from "../../utils/SetRecentlyViewed";
 import { useSetRW } from "../../context/recentlyViewedContext";
+import { handleRemoveHighlightedTaskOnBoardDeleting } from "../../utils/SetHighlightedTask";
+import { useSetHT } from "../../context/highlightedTaskContext";
+import { HighlightedTaskContext } from "../../context/highlightedTaskContext";
 
 interface WorkspaceBoardsInterface {
   shownWorkspace: WorkspaceInterface | undefined;
@@ -24,8 +26,10 @@ const WorkspaceBoards: React.FC<WorkspaceBoardsInterface> = (props) => {
 
   const dispatch = useDispatch();
   const setLastWatched = useSetRW();
+  const setHighlights = useSetHT();
 
   const recents = useContext(RecentlyViewedContext);
+  const highlights = useContext(HighlightedTaskContext);
 
   useEffect(() => {
     setShownBoards(props.shownWorkspace?.workspaceBoards)
@@ -56,11 +60,7 @@ const WorkspaceBoards: React.FC<WorkspaceBoardsInterface> = (props) => {
   };
 
   const removeFromHighlights = (boardId: string) => {
-    dispatch(
-      removeHighlightOnBoardDeleting({
-        boardId: boardId,
-      })
-    );
+    handleRemoveHighlightedTaskOnBoardDeleting(highlights, boardId, setHighlights)
   };
 
   const handleWorkspaceRemove = (workspaceName: string, boardId: string) => {
