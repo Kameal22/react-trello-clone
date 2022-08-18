@@ -1,10 +1,13 @@
 import "../../styles/taskStyles/addTaskForm.css";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useDispatch } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import { addTask } from "../../redux/features/WorkspaceSlice";
 import { TaskCommentsInterface } from "../../interfaces/WorkspaceInterface";
 import useInputState from "../../hooks/useInputState";
+import { useSetHT } from "../../context/highlightedTaskContext";
+import { HighlightedTaskContext } from "../../context/highlightedTaskContext";
+import { handleSetHighlightedTask } from "../../utils/SetHighlightedTask";
 
 interface AddTaskInterface {
   addTask: () => void;
@@ -15,18 +18,21 @@ interface AddTaskInterface {
 }
 
 const AddTaskForm: React.FC<AddTaskInterface> = (props) => {
-  const [taskName, setTaskName, , , error, setError] = useInputState('');
+  const [taskName, setTaskName, , , error, setError] = useInputState("");
   const [taskId] = useState<string>(uuidv4());
   const [taskDescription] = useState<string>("");
   const [taskComments] = useState<TaskCommentsInterface[]>([]);
   const [taskColor] = useState<string>("");
+
+  const setHighlight = useSetHT();
+  const highlights = useContext(HighlightedTaskContext);
 
   const dispatch = useDispatch();
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (taskName === "") {
-      setError("Can't add an empty task")
+      setError("Can't add an empty task");
     } else {
       dispatch(
         addTask({
@@ -41,6 +47,16 @@ const AddTaskForm: React.FC<AddTaskInterface> = (props) => {
         })
       );
       props.addTask();
+      handleSetHighlightedTask(
+        highlights,
+        props.workspaceId,
+        props.boardId,
+        props.columnId,
+        taskId,
+        "Author",
+        taskName,
+        setHighlight
+      );
     }
   };
 

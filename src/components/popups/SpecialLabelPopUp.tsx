@@ -2,6 +2,10 @@ import "../../styles/popUpStyles/specialLabelPopUp.css";
 import { fancyColorChoices } from "../../utils/TaskLabelColorChoices";
 import { selectTaskLabel } from "../../redux/features/WorkspaceSlice";
 import { useDispatch } from "react-redux";
+import { addLabelToHighlightedTask } from "../../utils/SetHighlightedTask";
+import { useSetHT } from "../../context/highlightedTaskContext";
+import { HighlightedTaskContext } from "../../context/highlightedTaskContext";
+import { useContext } from "react";
 
 interface CreateLabelInterface {
   setCreating: () => void;
@@ -13,6 +17,8 @@ interface CreateLabelInterface {
 
 const CreateLabelPopUp: React.FC<CreateLabelInterface> = (props) => {
   const dispatch = useDispatch();
+  const setHighlight = useSetHT();
+  const highlights = useContext(HighlightedTaskContext);
 
   const setLabel = (indicator: string) => {
     dispatch(
@@ -23,6 +29,12 @@ const CreateLabelPopUp: React.FC<CreateLabelInterface> = (props) => {
         taskId: props.taskId,
         taskIndicator: indicator,
       })
+    );
+    addLabelToHighlightedTask(
+      highlights,
+      props.taskId,
+      indicator,
+      setHighlight
     );
     props.setCreating();
   };

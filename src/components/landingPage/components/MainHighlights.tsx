@@ -2,7 +2,8 @@ import "../../../styles/mainSectionStyles/mainHighlights.css";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../redux/Store";
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { HighlightedTaskContext } from "../../../context/highlightedTaskContext";
 
 interface TaskToShowInterface {
   message: string;
@@ -15,6 +16,10 @@ interface TaskToShowInterface {
 
 const MainHighlights: React.FC = () => {
   const [taskToShow, setTaskToShow] = useState<TaskToShowInterface>();
+
+  const highlightsTest = useContext(HighlightedTaskContext);
+
+  console.log(highlightsTest);
 
   const workspaces = useSelector(
     (state: RootState) => state.workspace.workspace

@@ -2,6 +2,10 @@ import "../../styles/popUpStyles/taskLabelsPopUp.css";
 import { colorChoices } from "../../utils/TaskLabelColorChoices";
 import { selectTaskLabel } from "../../redux/features/WorkspaceSlice";
 import { useDispatch } from "react-redux";
+import { addLabelToHighlightedTask } from "../../utils/SetHighlightedTask";
+import { useSetHT } from "../../context/highlightedTaskContext";
+import { HighlightedTaskContext } from "../../context/highlightedTaskContext";
+import { useContext } from "react";
 
 interface TaskLabelsInterface {
   editLabels: () => void;
@@ -15,6 +19,8 @@ interface TaskLabelsInterface {
 
 const TaskLabelsPopUp: React.FC<TaskLabelsInterface> = (props) => {
   const dispatch = useDispatch();
+  const setHighlight = useSetHT();
+  const highlights = useContext(HighlightedTaskContext);
 
   const setLabel = (indicator: string) => {
     dispatch(
@@ -25,6 +31,12 @@ const TaskLabelsPopUp: React.FC<TaskLabelsInterface> = (props) => {
         taskId: props.taskId,
         taskIndicator: indicator,
       })
+    );
+    addLabelToHighlightedTask(
+      highlights,
+      props.taskId,
+      indicator,
+      setHighlight
     );
     props.editLabels();
   };
