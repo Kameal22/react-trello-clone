@@ -1,67 +1,20 @@
 import "../../../styles/mainSectionStyles/mainHighlights.css";
-import { useSelector } from "react-redux";
-import { RootState } from "../../../redux/Store";
 import { Link } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
 import { HighlightedTaskContext } from "../../../context/highlightedTaskContext";
-
-interface TaskToShowInterface {
-  message: string;
-  label: string | undefined;
-  board: string | undefined;
-  boardId: string | undefined;
-  user: string | undefined;
-  workspaceName: string | undefined;
-}
+import { HighlightedTaskInterface } from "../../../interfaces/HighlightedTaskInterface";
 
 const MainHighlights: React.FC = () => {
-  const [taskToShow, setTaskToShow] = useState<TaskToShowInterface>();
+  const [taskToShow, setTaskToShow] = useState<HighlightedTaskInterface>();
 
-  const highlightsTest = useContext(HighlightedTaskContext);
-
-  console.log(highlightsTest);
-
-  const workspaces = useSelector(
-    (state: RootState) => state.workspace.workspace
-  );
-
-  const highlights = useSelector(
-    (state: RootState) => state.highlight.highlights
-  );
+  const highlightedTasks = useContext(HighlightedTaskContext);
 
   useEffect(() => {
-    if (highlights.length < 1) return;
+    const randomizedTask =
+      highlightedTasks[Math.floor(Math.random() * highlightedTasks.length)];
 
-    const taskComment =
-      highlights[Math.floor(Math.random() * highlights.length)];
-
-    const tasksWorkspace = workspaces.find(
-      (workspace) => workspace.workspaceId === taskComment.workspaceId
-    );
-
-    const tasksBoard = tasksWorkspace?.workspaceBoards.find(
-      (board) => board.boardId === taskComment.boardId
-    );
-
-    const taskColumn = tasksBoard?.boardColumns.find(
-      (column) => column.columnId === taskComment.columnId
-    );
-
-    const tasks = taskColumn?.columnTasks.find(
-      (task) => task.taskId === task.taskId
-    );
-
-    const message = taskComment?.taskComment;
-    const label = tasks?.taskIndicatorColor;
-    const board = tasksBoard?.boardName;
-    const user = tasksWorkspace?.workspaceMember;
-    const boardId = tasksBoard?.boardId;
-    const workspaceName = tasksWorkspace?.workspaceName;
-
-    const wholeTask = { workspaceName, boardId, board, user, label, message };
-
-    setTaskToShow(wholeTask);
-  }, []);
+    setTaskToShow(randomizedTask);
+  }, [highlightedTasks]);
 
   return (
     <div className="mainSectionHighlightsDiv">
@@ -73,12 +26,12 @@ const MainHighlights: React.FC = () => {
         </p>
       </div>
 
-      {taskToShow?.message !== undefined ? (
+      {taskToShow && (
         <div className="highlight">
-          <p className="highlightUser">{taskToShow.user}</p>
+          <p className="highlightUser">{taskToShow.taskAuthor}</p>
           <div
             style={{
-              background: taskToShow?.label,
+              background: taskToShow.taskColor,
               width: "40px",
               height: "10px",
               borderRadius: "5px",
@@ -86,17 +39,17 @@ const MainHighlights: React.FC = () => {
             }}
             className="highlightLabel"
           ></div>
-          <p className="highlightMessage">{taskToShow?.message}</p>
-          <Link
+          <p className="highlightMessage">{taskToShow.task}</p>
+          {/* <Link
             className="workspaceMenuLink"
             to={`/board/${taskToShow.workspaceName}/${taskToShow?.boardId}`}
           >
             <p className="highlightBoardInfo">
               <span>from</span>: {taskToShow?.board} <span>board</span>
             </p>
-          </Link>
+          </Link> */}
         </div>
-      ) : null}
+      )}
     </div>
   );
 };

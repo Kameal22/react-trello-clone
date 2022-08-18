@@ -44,4 +44,3 @@ export const addLabelToHighlightedTask = (
 
   setHighlightedTask(chosenLabel);
 };
-// Add separate function for adding color to highlighted task. Initialy it doesnt have one.
