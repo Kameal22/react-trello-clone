@@ -8,6 +8,8 @@ import useInputState from "../../hooks/useInputState";
 import { useSetHT } from "../../context/highlightedTaskContext";
 import { HighlightedTaskContext } from "../../context/highlightedTaskContext";
 import { handleSetHighlightedTask } from "../../utils/SetHighlightedTask";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/Store";
 
 interface AddTaskInterface {
   addTask: () => void;
@@ -23,6 +25,18 @@ const AddTaskForm: React.FC<AddTaskInterface> = (props) => {
   const [taskDescription] = useState<string>("");
   const [taskComments] = useState<TaskCommentsInterface[]>([]);
   const [taskColor] = useState<string>("");
+
+  const workspaces = useSelector(
+    (state: RootState) => state.workspace.workspace
+  );
+
+  const shownWorkspace = workspaces.find((workspace) => {
+    return workspace.workspaceId === props.workspaceId;
+  });
+
+  const shownBoard = shownWorkspace?.workspaceBoards.find((board) => {
+    return board.boardId === props.boardId;
+  });
 
   const setHighlight = useSetHT();
   const highlights = useContext(HighlightedTaskContext);
@@ -51,6 +65,7 @@ const AddTaskForm: React.FC<AddTaskInterface> = (props) => {
         highlights,
         props.workspaceId,
         props.boardId,
+        shownBoard?.boardName,
         props.columnId,
         taskId,
         "Author",

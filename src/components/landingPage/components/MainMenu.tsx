@@ -42,7 +42,11 @@ const MainMenu: React.FC = () => {
   };
 
   const removeFromLastWatched = (workspaceName: string) => {
-    handleRemoveAllRecentsFromDeletedBoard(recents, workspaceName, setLastWatched)
+    handleRemoveAllRecentsFromDeletedBoard(
+      recents,
+      workspaceName,
+      setLastWatched
+    );
   };
 
   const handleRemoveHighlight = (workspaceId: string) => {
@@ -102,8 +106,8 @@ const MainMenu: React.FC = () => {
         ></i>
       </div>
 
-      {isWorkspace
-        ? workspaces.map((workspace) => {
+      {isWorkspace &&
+        workspaces.map((workspace) => {
           return (
             <ul key={workspace.workspaceId} className="menuWorkspaces">
               <div
@@ -158,8 +162,7 @@ const MainMenu: React.FC = () => {
               )}
             </ul>
           );
-        })
-        : null}
+        })}
     </div>
   );
 };

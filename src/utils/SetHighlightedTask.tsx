@@ -4,6 +4,7 @@ export const handleSetHighlightedTask = (
   highlights: HighlightedTaskInterface[],
   workspaceId: string | undefined,
   boardId: string | undefined,
+  boardName: string | undefined,
   columnId: string | undefined,
   taskId: string | undefined,
   taskAuthor: string,
@@ -18,6 +19,7 @@ export const handleSetHighlightedTask = (
       {
         workspaceId: workspaceId,
         boardId: boardId,
+        boardName: boardName,
         columnId: columnId,
         taskId: taskId,
         taskAuthor: taskAuthor,
@@ -43,4 +45,16 @@ export const addLabelToHighlightedTask = (
   });
 
   setHighlightedTask(chosenLabel);
+};
+
+export const handleRemoveHighlightedTask = (
+  highlights: HighlightedTaskInterface[],
+  id: string | undefined,
+  setHighlightedTask: React.Dispatch<
+    React.SetStateAction<HighlightedTaskInterface[]>
+  >
+) => {
+  const removedHighlight = highlights.filter((task) => task.taskId !== id);
+
+  setHighlightedTask(removedHighlight);
 };

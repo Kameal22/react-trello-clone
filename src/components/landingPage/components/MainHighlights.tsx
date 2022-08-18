@@ -29,6 +29,7 @@ const MainHighlights: React.FC = () => {
       {taskToShow && (
         <div className="highlight">
           <p className="highlightUser">{taskToShow.taskAuthor}</p>
+          <p className="highlightDate">3 days ago</p>
           <div
             style={{
               background: taskToShow.taskColor,
@@ -40,14 +41,14 @@ const MainHighlights: React.FC = () => {
             className="highlightLabel"
           ></div>
           <p className="highlightMessage">{taskToShow.task}</p>
-          {/* <Link
+          <Link
             className="workspaceMenuLink"
-            to={`/board/${taskToShow.workspaceName}/${taskToShow?.boardId}`}
+            to={`/board/${taskToShow.workspaceId}/${taskToShow?.boardId}`}
           >
             <p className="highlightBoardInfo">
-              <span>from</span>: {taskToShow?.board} <span>board</span>
+              <span>from</span>: {taskToShow.boardName} <span>board</span>
             </p>
-          </Link> */}
+          </Link>
         </div>
       )}
     </div>
