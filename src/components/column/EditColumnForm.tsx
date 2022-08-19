@@ -9,7 +9,7 @@ import { handleRemoveHighlightedTaskOnColumnDeleting } from "../../utils/SetHigh
 
 interface EditColumnInterface {
   setEditing: () => void;
-  addTask: () => void;
+  setTaskAdding: React.Dispatch<React.SetStateAction<boolean>>;
   columnId: string | undefined;
   boardId: string | undefined;
   workspaceId: string | undefined;
@@ -18,7 +18,7 @@ interface EditColumnInterface {
 
 const EditColumnForm: React.FC<EditColumnInterface> = ({
   setEditing,
-  addTask,
+  setTaskAdding,
   columnId,
   boardId,
   workspaceId,
@@ -29,7 +29,11 @@ const EditColumnForm: React.FC<EditColumnInterface> = ({
   const highlights = useContext(HighlightedTaskContext);
 
   const handleHighlightRemove = (columnId: string | undefined) => {
-    handleRemoveHighlightedTaskOnColumnDeleting(highlights, columnId, setHighlights)
+    handleRemoveHighlightedTaskOnColumnDeleting(
+      highlights,
+      columnId,
+      setHighlights
+    );
   };
 
   const deleteColumnFunc = () => {
@@ -45,7 +49,7 @@ const EditColumnForm: React.FC<EditColumnInterface> = ({
   };
 
   const addTaskFunc = () => {
-    addTask();
+    setTaskAdding(false);
     setEditing();
   };
 

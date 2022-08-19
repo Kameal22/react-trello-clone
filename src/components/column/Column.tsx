@@ -47,10 +47,6 @@ const Column: React.FC<ColumnInterface> = ({
     setColumnEditing(!columnEditing);
   };
 
-  const addATask = () => {
-    setTaskAdding(!taskAdding);
-  };
-
   UseClickOutside(addTaskRef, () => setTaskAdding(false));
 
   UseClickOutside(editColumnRef, () => setColumnEditing(false));
@@ -65,7 +61,7 @@ const Column: React.FC<ColumnInterface> = ({
       {columnEditing ? (
         <EditColumnForm
           forwardRef={editColumnRef}
-          addTask={addATask}
+          setTaskAdding={setTaskAdding}
           setEditing={editAColumn}
           columnId={columnId}
           boardId={boardId}
@@ -116,7 +112,7 @@ const Column: React.FC<ColumnInterface> = ({
           forwardRef={addTaskRef}
         />
       ) : (
-        <div onClick={() => addATask()} className="boardCOLUMNAddTask">
+        <div onClick={() => setTaskAdding(true)} className="boardCOLUMNAddTask">
           <i style={{ fontSize: "1.3em" }} className="bi bi-plus"></i>
           <p>Add a task</p>
         </div>
