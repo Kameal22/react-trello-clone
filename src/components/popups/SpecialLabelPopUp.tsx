@@ -15,7 +15,13 @@ interface CreateLabelInterface {
   taskId: string;
 }
 
-const CreateLabelPopUp: React.FC<CreateLabelInterface> = (props) => {
+const CreateLabelPopUp: React.FC<CreateLabelInterface> = ({
+  setCreating,
+  workspaceId,
+  boardId,
+  columnId,
+  taskId,
+}) => {
   const dispatch = useDispatch();
   const setHighlight = useSetHT();
   const highlights = useContext(HighlightedTaskContext);
@@ -23,30 +29,21 @@ const CreateLabelPopUp: React.FC<CreateLabelInterface> = (props) => {
   const setLabel = (indicator: string) => {
     dispatch(
       selectTaskLabel({
-        workspaceId: props.workspaceId,
-        boardId: props.boardId,
-        columnId: props.columnId,
-        taskId: props.taskId,
+        workspaceId: workspaceId,
+        boardId: boardId,
+        columnId: columnId,
+        taskId: taskId,
         taskIndicator: indicator,
       })
     );
-    addLabelToHighlightedTask(
-      highlights,
-      props.taskId,
-      indicator,
-      setHighlight
-    );
-    props.setCreating();
+    addLabelToHighlightedTask(highlights, taskId, indicator, setHighlight);
+    setCreating();
   };
 
   return (
     <div className="createLabel">
       <p className="createBoardHeading">Select special label</p>
-      <i
-        id="cornerIcon"
-        onClick={() => props.setCreating()}
-        className="bi bi-x"
-      ></i>
+      <i id="cornerIcon" onClick={() => setCreating()} className="bi bi-x"></i>
 
       <div className="createLabelOptions">
         {fancyColorChoices.map((choice) => {

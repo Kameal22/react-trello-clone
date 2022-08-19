@@ -30,12 +30,24 @@ interface TaskDetailsInterface {
   forwardRef: React.RefObject<HTMLDivElement>;
 }
 
-const TaskDetailsPopUp: React.FC<TaskDetailsInterface> = (props) => {
+const TaskDetailsPopUp: React.FC<TaskDetailsInterface> = ({
+  showTaskDetails,
+  taskName,
+  taskIndicator,
+  taskDescription,
+  taskComments,
+  columnName,
+  workspaceId,
+  boardId,
+  columnId,
+  taskId,
+  forwardRef,
+}) => {
   const [commentToEdit, setCommentToEdit] = useState<string>("");
   const [labelCreating, setLabelCreating] = useState<boolean>(false);
   const [description, setDescription] = useState<boolean>(false);
   const [editingTaskName, setEditingTaskName] = useState<boolean>(false);
-  const [taskName, setTaskName] = useState<string>(props.taskName);
+  const [newTaskName, setNewTaskName] = useState<string>(taskName);
 
   const highlights = useContext(HighlightedTaskContext);
   const setHighlights = useSetHT();
@@ -45,7 +57,7 @@ const TaskDetailsPopUp: React.FC<TaskDetailsInterface> = (props) => {
   const taskNameRef = useRef<HTMLFormElement>(null);
 
   const handleTaskNameChange = (e: React.FormEvent<HTMLInputElement>): void => {
-    setTaskName(e.currentTarget.value);
+    setNewTaskName(e.currentTarget.value);
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -53,14 +65,14 @@ const TaskDetailsPopUp: React.FC<TaskDetailsInterface> = (props) => {
 
     dispatch(
       editTask({
-        workspaceId: props.workspaceId,
-        boardId: props.boardId,
-        columnId: props.columnId,
-        taskId: props.taskId,
+        workspaceId: workspaceId,
+        boardId: boardId,
+        columnId: columnId,
+        taskId: taskId,
         newTask: taskName,
       })
     );
-    handleEditHighlight(highlights, props.taskId, taskName, setHighlights)
+    handleEditHighlight(highlights, taskId, taskName, setHighlights);
     setEditingTaskName(!editingTaskName);
   };
 
@@ -71,10 +83,10 @@ const TaskDetailsPopUp: React.FC<TaskDetailsInterface> = (props) => {
   const deleteComment = (taskComment: string) => {
     dispatch(
       deleteTaskComment({
-        workspaceId: props.workspaceId,
-        boardId: props.boardId,
-        columnId: props.columnId,
-        taskId: props.taskId,
+        workspaceId: workspaceId,
+        boardId: boardId,
+        columnId: columnId,
+        taskId: taskId,
         taskComment,
       })
     );
@@ -85,7 +97,7 @@ const TaskDetailsPopUp: React.FC<TaskDetailsInterface> = (props) => {
   );
 
   const shownWorkspace = workspaces.find((workspace) => {
-    return workspace.workspaceId === props.workspaceId;
+    return workspace.workspaceId === workspaceId;
   });
 
   const showDescriptionForm = () => {
@@ -96,7 +108,7 @@ const TaskDetailsPopUp: React.FC<TaskDetailsInterface> = (props) => {
   UseClickOutside(taskNameRef, () => setEditingTaskName(false));
 
   return (
-    <div ref={props.forwardRef} className="taskDetailsDiv">
+    <div ref={forwardRef} className="taskDetailsDiv">
       <div className="taskDetailsName">
         {editingTaskName ? (
           <form
@@ -115,27 +127,25 @@ const TaskDetailsPopUp: React.FC<TaskDetailsInterface> = (props) => {
             />
           </form>
         ) : (
-          <p onClick={() => setEditingTaskName(!editingTaskName)}>
-            {props.taskName}
-          </p>
+          <p onClick={() => setEditingTaskName(!editingTaskName)}>{taskName}</p>
         )}
 
         <i
           id="cornerIcon"
-          onClick={() => props.showTaskDetails()}
+          onClick={() => showTaskDetails()}
           className="bi bi-x"
         ></i>
       </div>
 
       <p className="taskDetailsListName">
-        In column: <span>{props.columnName}</span>
+        In column: <span>{columnName}</span>
       </p>
 
       <div className="taskDetailsLabel">
         <p>Label</p>
         <div className="taskDetailsLabelDivs">
           <div
-            style={{ background: props.taskIndicator }}
+            style={{ background: taskIndicator }}
             className="taskDetailsLabelDivWithColor"
           ></div>
           <div
@@ -148,10 +158,10 @@ const TaskDetailsPopUp: React.FC<TaskDetailsInterface> = (props) => {
 
         {labelCreating ? (
           <CreateLabelPopUp
-            workspaceId={props.workspaceId}
-            boardId={props.boardId}
-            columnId={props.columnId}
-            taskId={props.taskId}
+            workspaceId={workspaceId}
+            boardId={boardId}
+            columnId={columnId}
+            taskId={taskId}
             setCreating={setCreating}
           />
         ) : null}
@@ -162,20 +172,20 @@ const TaskDetailsPopUp: React.FC<TaskDetailsInterface> = (props) => {
         {description ? (
           <TaskDescriptionForm
             showForm={showDescriptionForm}
-            workspaceId={props.workspaceId}
-            boardId={props.boardId}
-            columnId={props.columnId}
-            taskId={props.taskId}
+            workspaceId={workspaceId}
+            boardId={boardId}
+            columnId={columnId}
+            taskId={taskId}
             forwardRef={taskDescriptionRef}
           />
         ) : (
           <div>
-            {props.taskDescription !== "" ? (
+            {taskDescription !== "" ? (
               <p
                 onClick={() => showDescriptionForm()}
                 className="taskDetailsDescription"
               >
-                {props.taskDescription}
+                {taskDescription}
               </p>
             ) : (
               <p
@@ -193,13 +203,13 @@ const TaskDetailsPopUp: React.FC<TaskDetailsInterface> = (props) => {
         <p className="taskDetailsActivityHeading">Activity</p>
 
         <TaskCommentForm
-          workspaceId={props.workspaceId}
-          boardId={props.boardId}
-          columnId={props.columnId}
-          taskId={props.taskId}
+          workspaceId={workspaceId}
+          boardId={boardId}
+          columnId={columnId}
+          taskId={taskId}
         />
 
-        {props.taskComments.map((comment) => {
+        {taskComments.map((comment) => {
           return (
             <div key={comment.columnId} className="taskDetailsWholeCommentDiv">
               <div className="taskDetailsCommentAuthorAndDate">
@@ -214,10 +224,10 @@ const TaskDetailsPopUp: React.FC<TaskDetailsInterface> = (props) => {
               </div>
               {commentToEdit === comment.taskComment ? (
                 <EditTaskCommentForm
-                  workspaceId={props.workspaceId}
-                  boardId={props.boardId}
-                  columnId={props.columnId}
-                  taskId={props.taskId}
+                  workspaceId={workspaceId}
+                  boardId={boardId}
+                  columnId={columnId}
+                  taskId={taskId}
                   taskComment={comment.taskComment}
                   setEditing={() => setCommentToEdit("")}
                 />

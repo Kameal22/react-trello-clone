@@ -54,7 +54,9 @@ export const handleRemoveHighlightedTaskOnWorkspaceDeleting = (
     React.SetStateAction<HighlightedTaskInterface[]>
   >
 ) => {
-  const removedHighlight = highlights.filter((highlightedTask) => highlightedTask.workspaceId !== id); // Remove dynamically
+  const removedHighlight = highlights.filter(
+    (highlightedTask) => highlightedTask.workspaceId !== id
+  );
 
   setHighlightedTask(removedHighlight);
 };
@@ -66,7 +68,9 @@ export const handleRemoveHighlightedTaskOnBoardDeleting = (
     React.SetStateAction<HighlightedTaskInterface[]>
   >
 ) => {
-  const removedHighlight = highlights.filter((highlightedTask) => highlightedTask.boardId !== id); // Remove dynamically
+  const removedHighlight = highlights.filter(
+    (highlightedTask) => highlightedTask.boardId !== id
+  );
 
   setHighlightedTask(removedHighlight);
 };
@@ -78,7 +82,9 @@ export const handleRemoveHighlightedTaskOnTaskDeleting = (
     React.SetStateAction<HighlightedTaskInterface[]>
   >
 ) => {
-  const removedHighlight = highlights.filter((highlightedTask) => highlightedTask.taskId !== id); // Remove dynamically
+  const removedHighlight = highlights.filter(
+    (highlightedTask) => highlightedTask.taskId !== id
+  );
 
   setHighlightedTask(removedHighlight);
 };
@@ -90,14 +96,21 @@ export const handleRemoveHighlightedTaskOnColumnDeleting = (
     React.SetStateAction<HighlightedTaskInterface[]>
   >
 ) => {
-  const removedHighlight = highlights.filter((highlightedTask) => highlightedTask.columnId !== id); // Remove dynamically
+  const removedHighlight = highlights.filter(
+    (highlightedTask) => highlightedTask.columnId !== id
+  );
 
   setHighlightedTask(removedHighlight);
 };
 
-export const handleEditHighlight = (highlights: HighlightedTaskInterface[], id: string | undefined, newTask: string, setHighlightedTask: React.Dispatch<
-  React.SetStateAction<HighlightedTaskInterface[]>
->) => {
+export const handleEditHighlight = (
+  highlights: HighlightedTaskInterface[],
+  id: string | undefined,
+  newTask: string,
+  setHighlightedTask: React.Dispatch<
+    React.SetStateAction<HighlightedTaskInterface[]>
+  >
+) => {
   const editedHighlight = highlights.map((highlightedTask) => {
     if (highlightedTask.taskId === id) {
       return { ...highlightedTask, task: newTask };
@@ -105,5 +118,5 @@ export const handleEditHighlight = (highlights: HighlightedTaskInterface[], id: 
     return highlightedTask;
   });
 
-  setHighlightedTask(editedHighlight)
-}
+  setHighlightedTask(editedHighlight);
+};

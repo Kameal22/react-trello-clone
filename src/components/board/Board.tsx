@@ -35,7 +35,6 @@ const Board: React.FC = () => {
   const workspaces = useSelector(
     (state: RootState) => state.workspace.workspace
   );
-
   const user = useSelector((state: RootState) => state.users.user);
 
   const shownWorkspace = workspaces.find((workspace) => {

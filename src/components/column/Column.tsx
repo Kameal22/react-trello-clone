@@ -109,7 +109,7 @@ const Column: React.FC<ColumnInterface> = ({
       {taskAdding ? (
         <AddTaskForm
           key={columnId}
-          addTask={addATask}
+          setTaskAdding={setTaskAdding}
           workspaceId={workspaceId}
           boardId={boardId}
           columnId={columnId}

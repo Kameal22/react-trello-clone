@@ -21,6 +21,9 @@ const CreateBoardPopUp: React.FC<CreateBoardProps> = ({ forwardRef }) => {
     "linear-gradient(#e66465, #9198e5)"
   );
   const [boardWorkspace, setBoardWorkspace] = useState<string>("");
+  const [boardWorkspaceId, setBoardWorkspaceId] = useState<string | undefined>(
+    ""
+  );
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -36,7 +39,11 @@ const CreateBoardPopUp: React.FC<CreateBoardProps> = ({ forwardRef }) => {
   const handleBoardWorkspaceChange = (
     e: React.FormEvent<HTMLSelectElement>
   ): void => {
+    const workspace = workspaces.find(
+      (workspace) => workspace.workspaceName === e.currentTarget.value
+    );
     setBoardWorkspace(e.currentTarget.value);
+    setBoardWorkspaceId(workspace?.workspaceId);
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -51,7 +58,7 @@ const CreateBoardPopUp: React.FC<CreateBoardProps> = ({ forwardRef }) => {
       })
     );
     hideCreating();
-    navigate(`/board/${boardWorkspace}/${boardId}`, { replace: true });
+    navigate(`/board/${boardWorkspaceId}/${boardId}`, { replace: true });
   };
 
   return (

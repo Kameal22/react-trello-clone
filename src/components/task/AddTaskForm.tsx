@@ -12,7 +12,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../redux/Store";
 
 interface AddTaskInterface {
-  addTask: () => void;
+  setTaskAdding: React.Dispatch<React.SetStateAction<boolean>>;
   workspaceId: string | undefined;
   boardId: string | undefined;
   columnId: string | undefined;
@@ -60,7 +60,7 @@ const AddTaskForm: React.FC<AddTaskInterface> = (props) => {
           taskDescription,
         })
       );
-      props.addTask();
+      props.setTaskAdding(false);
       handleSetHighlightedTask(
         highlights,
         props.workspaceId,
@@ -96,7 +96,7 @@ const AddTaskForm: React.FC<AddTaskInterface> = (props) => {
             <button type="submit">Add Task</button>
             <i
               style={{ fontSize: "1.3em" }}
-              onClick={() => props.addTask()}
+              onClick={() => props.setTaskAdding(false)}
               className="bi bi-x-lg"
             ></i>
           </div>
