@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import { showDropdown } from "../../../redux/features/navigationSlice";
 import { hideCreateWorkspace } from "../../../redux/features/popUpCreateComponentSlice";
-import { generateRandomColor } from "../../../utils/GenerateRandomColor";
+import { generateRandomColor } from "../../../utils/colors/GenerateRandomColor";
 import CreateWorkspaceForm from "./CreateWorkspaceForm";
 import useInputState from "../../../hooks/useInputState";
 
@@ -20,8 +20,9 @@ interface CreateWorkspaceProps {
 const CreateWorkspacePopUp: React.FC<CreateWorkspaceProps> = ({
   forwardRef,
 }) => {
-  const [, , workspaceName, setWorkspaceName, nameError] = useInputState('')
-  const [, , workspaceDescription, setWorkspaceDescription, descriptionError] = useInputState('')
+  const [, , workspaceName, setWorkspaceName, nameError] = useInputState("");
+  const [, , workspaceDescription, setWorkspaceDescription, descriptionError] =
+    useInputState("");
   const [workspaceId] = useState<string>(uuidv4());
 
   const dispatch = useDispatch();
@@ -89,7 +90,17 @@ const CreateWorkspacePopUp: React.FC<CreateWorkspaceProps> = ({
         </div>
 
         <div className="createWorkspaceFormDiv">
-          {<CreateWorkspaceForm handleSubmit={handleSubmit} setWorkspaceDescription={setWorkspaceDescription} setWorkspaceName={setWorkspaceName} nameError={nameError} workspaceName={workspaceName} descriptionError={descriptionError} workspaceDescription={workspaceDescription} />}
+          {
+            <CreateWorkspaceForm
+              handleSubmit={handleSubmit}
+              setWorkspaceDescription={setWorkspaceDescription}
+              setWorkspaceName={setWorkspaceName}
+              nameError={nameError}
+              workspaceName={workspaceName}
+              descriptionError={descriptionError}
+              workspaceDescription={workspaceDescription}
+            />
+          }
         </div>
       </div>
       <div className="createWorkspaceRIGHTSIDE"></div>

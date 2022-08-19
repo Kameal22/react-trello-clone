@@ -1,5 +1,5 @@
 import "../../../styles/popUpStyles/createBoardPopUp.css";
-import { colorChoices } from "../../../utils/BoardBgColorChoices";
+import { colorChoices } from "../../../utils/colors/BoardBgColorChoices";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { useSelector, useDispatch } from "react-redux";
@@ -15,7 +15,7 @@ interface CreateBoardProps {
 }
 
 const CreateBoardPopUp: React.FC<CreateBoardProps> = ({ forwardRef }) => {
-  const [boardName, setBoardName] = useInputState('')
+  const [boardName, setBoardName] = useInputState("");
   const [boardId] = useState<string>(uuidv4());
   const [boardBackground, setBoardBackground] = useState<string>(
     "linear-gradient(#e66465, #9198e5)"
@@ -83,7 +83,16 @@ const CreateBoardPopUp: React.FC<CreateBoardProps> = ({ forwardRef }) => {
           })}
         </div>
       </div>
-      {<CreateBoardForm handleSubmit={handleSubmit} setBoardName={setBoardName} handleBoardWorkspaceChange={handleBoardWorkspaceChange} boardName={boardName} boardWorkspace={boardWorkspace} workspaces={workspaces} />}
+      {
+        <CreateBoardForm
+          handleSubmit={handleSubmit}
+          setBoardName={setBoardName}
+          handleBoardWorkspaceChange={handleBoardWorkspaceChange}
+          boardName={boardName}
+          boardWorkspace={boardWorkspace}
+          workspaces={workspaces}
+        />
+      }
     </div>
   );
 };

@@ -28,6 +28,7 @@ const Board: React.FC = () => {
 
   const setLastWatched = useSetRW();
   const setHighlights = useSetHT();
+
   const highlights = useContext(HighlightedTaskContext);
   const recents = useContext(RecentlyViewedContext);
 

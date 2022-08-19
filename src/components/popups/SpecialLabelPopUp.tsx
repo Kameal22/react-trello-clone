@@ -1,5 +1,5 @@
 import "../../styles/popUpStyles/specialLabelPopUp.css";
-import { fancyColorChoices } from "../../utils/TaskLabelColorChoices";
+import { fancyColorChoices } from "../../utils/colors/TaskLabelColorChoices";
 import { selectTaskLabel } from "../../redux/features/WorkspaceSlice";
 import { useDispatch } from "react-redux";
 import { addLabelToHighlightedTask } from "../../utils/SetHighlightedTask";

@@ -6,7 +6,7 @@ import Board from "./components/board/Board";
 import Nav from "./components/nav/Nav";
 import MainOverview from "./components/landingPage/overview/MainOverview";
 import MainBoardsOverview from "./components/landingPage/boards/MainBoardsOverview";
-import NotFoundPage from "./utils/NotFoundPage";
+import NotFoundPage from "./components/NotFoundPage";
 import { useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "./redux/Store";
