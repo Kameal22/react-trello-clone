@@ -1,12 +1,10 @@
 import "../../../styles/mainSectionStyles/mainRecent.css";
-import { RootState } from "../../../redux/Store";
-import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { RecentlyViewedContext } from "../../../context/recentlyViewedContext";
 import { useContext } from "react";
 
 const MainRecent: React.FC = () => {
-  const recents = useContext(RecentlyViewedContext)
+  const recents = useContext(RecentlyViewedContext);
 
   if (recents.length > 0) {
     return (
@@ -18,7 +16,7 @@ const MainRecent: React.FC = () => {
             <Link
               key={board.id}
               className="workspaceMenuLink"
-              to={`/board/${board.workspace}/${board.id}`}
+              to={`/board/${board.workspaceId}/${board.id}`}
             >
               <div className="recentsDiv">
                 <div
@@ -28,9 +26,7 @@ const MainRecent: React.FC = () => {
 
                 <div className="mainRecentTextDiv">
                   <p className="recentBoardName">{board.name}</p>
-                  <p className="recentBoardDescription">
-                    {board.workspace}
-                  </p>
+                  <p className="recentBoardDescription">{board.workspace}</p>
                 </div>
               </div>
             </Link>

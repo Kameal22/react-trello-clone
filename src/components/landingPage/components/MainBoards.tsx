@@ -10,7 +10,7 @@ const MainBoards: React.FC = () => {
     (state: RootState) => state.workspace.workspace
   );
 
-  const recents = useContext(RecentlyViewedContext)
+  const recents = useContext(RecentlyViewedContext);
 
   return (
     <div className="mainSectionBoards">
@@ -30,7 +30,7 @@ const MainBoards: React.FC = () => {
               {" "}
               <Link
                 className="workspaceMenuLink"
-                to={`/board/${board.workspace}/${board.id}`}
+                to={`/board/${board.workspaceId}/${board.id}`}
               >
                 <p>{board.name}</p>{" "}
               </Link>
@@ -56,7 +56,7 @@ const MainBoards: React.FC = () => {
                     {" "}
                     <Link
                       className="workspaceMenuLink"
-                      to={`/board/${workspace.workspaceName}/${board.boardId}`}
+                      to={`/board/${workspace.workspaceId}/${board.boardId}`}
                     >
                       <p>{board.boardName}</p>
                     </Link>

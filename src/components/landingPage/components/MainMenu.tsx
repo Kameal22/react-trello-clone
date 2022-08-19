@@ -54,7 +54,11 @@ const MainMenu: React.FC = () => {
   };
 
   const handleRemoveHighlight = (workspaceId: string) => {
-    handleRemoveHighlightedTaskOnWorkspaceDeleting(highlights, workspaceId, setHighlights);
+    handleRemoveHighlightedTaskOnWorkspaceDeleting(
+      highlights,
+      workspaceId,
+      setHighlights
+    );
   };
 
   const handleWorkspaceRemove = (

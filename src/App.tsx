@@ -88,10 +88,7 @@ function App() {
               <Route path="/overview" element={<MainOverview />} />
               <Route path="/boards" element={<MainBoardsOverview />} />
               <Route path="/workspace/:workspaceId" element={<Workspace />} />
-              <Route
-                path="/board/:workspaceName/:boardId"
-                element={<Board />}
-              />
+              <Route path="/board/:workspaceId/:boardId" element={<Board />} />
               <Route path="*" element={<NotFoundPage />} />
             </Routes>
             {createWorkspace && (

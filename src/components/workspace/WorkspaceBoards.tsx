@@ -22,7 +22,9 @@ interface WorkspaceBoardsInterface {
 }
 
 const WorkspaceBoards: React.FC<WorkspaceBoardsInterface> = (props) => {
-  const [shownBoards, setShownBoards] = useState<BoardInterface[] | undefined>([]);
+  const [shownBoards, setShownBoards] = useState<BoardInterface[] | undefined>(
+    []
+  );
 
   const dispatch = useDispatch();
   const setLastWatched = useSetRW();
@@ -32,12 +34,12 @@ const WorkspaceBoards: React.FC<WorkspaceBoardsInterface> = (props) => {
   const highlights = useContext(HighlightedTaskContext);
 
   useEffect(() => {
-    setShownBoards(props.shownWorkspace?.workspaceBoards)
+    setShownBoards(props.shownWorkspace?.workspaceBoards);
   }, [props.shownWorkspace?.workspaceId]); // Do this to update shown boards in workspace that user routed to.
 
   const showSearchedBoards = (searchingValue: string) => {
     const filtered = props.shownWorkspace?.workspaceBoards.filter((board) => {
-      return includesIgnoredCase(board.boardName, searchingValue)
+      return includesIgnoredCase(board.boardName, searchingValue);
     });
 
     setShownBoards(filtered);
@@ -56,11 +58,15 @@ const WorkspaceBoards: React.FC<WorkspaceBoardsInterface> = (props) => {
   };
 
   const removeFromLastWatched = (boardId: string) => {
-    handleRemoveRecentlyViewed(recents, boardId, setLastWatched)
+    handleRemoveRecentlyViewed(recents, boardId, setLastWatched);
   };
 
   const removeFromHighlights = (boardId: string) => {
-    handleRemoveHighlightedTaskOnBoardDeleting(highlights, boardId, setHighlights)
+    handleRemoveHighlightedTaskOnBoardDeleting(
+      highlights,
+      boardId,
+      setHighlights
+    );
   };
 
   const handleWorkspaceRemove = (workspaceName: string, boardId: string) => {
@@ -107,23 +113,19 @@ const WorkspaceBoards: React.FC<WorkspaceBoardsInterface> = (props) => {
                 >
                   <Link
                     className="workspaceMenuLink"
-                    to={`/board/${props.shownWorkspace?.workspaceName}/${board.boardId}`}
+                    to={`/board/${props.shownWorkspace?.workspaceId}/${board.boardId}`}
                   >
                     <p>{board.boardName}</p>
                   </Link>
                   <i
                     onClick={() =>
-                      handleWorkspaceRemove(
-                        board.boardWorkspace,
-                        board.boardId
-                      )
+                      handleWorkspaceRemove(board.boardWorkspace, board.boardId)
                     }
                     className="bi bi-trash3"
                   ></i>
                 </div>
               );
-            })
-          }
+            })}
         </div>
       </div>
     </div>

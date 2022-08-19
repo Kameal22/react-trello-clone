@@ -20,9 +20,8 @@ import { RecentlyViewedContext } from "../../context/recentlyViewedContext";
 import { handleRemoveHighlightedTaskOnTaskDeleting } from "../../utils/SetHighlightedTask";
 import { HighlightedTaskContext } from "../../context/highlightedTaskContext";
 
-
 const Board: React.FC = () => {
-  const { workspaceName, boardId } = useParams();
+  const { workspaceId, boardId } = useParams();
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -39,7 +38,7 @@ const Board: React.FC = () => {
   const user = useSelector((state: RootState) => state.users.user);
 
   const shownWorkspace = workspaces.find((workspace) => {
-    return workspace.workspaceName === workspaceName;
+    return workspace.workspaceId === workspaceId;
   });
 
   const shownBoard = shownWorkspace?.workspaceBoards.find((board) => {
@@ -55,8 +54,16 @@ const Board: React.FC = () => {
   }, [shownBoard]);
 
   useEffect(() => {
-    handleSetRecentlyViewed(recents, shownBoard?.boardName, shownBoard?.boardBackground, shownBoard?.boardWorkspace, shownBoard?.boardId, setLastWatched)
-  }, [shownBoard])
+    handleSetRecentlyViewed(
+      recents,
+      shownBoard?.boardName,
+      shownBoard?.boardBackground,
+      shownBoard?.boardWorkspace,
+      shownWorkspace?.workspaceId,
+      shownBoard?.boardId,
+      setLastWatched
+    );
+  }, [shownBoard]);
 
   useEffect(() => {
     if (shownBoard) {
@@ -122,7 +129,11 @@ const Board: React.FC = () => {
   };
 
   const handleRemoveHighlight = (taskId: string) => {
-    handleRemoveHighlightedTaskOnTaskDeleting(highlights, taskId, setHighlights)
+    handleRemoveHighlightedTaskOnTaskDeleting(
+      highlights,
+      taskId,
+      setHighlights
+    );
   };
 
   const onDragEnd = (result: DropResult) => {

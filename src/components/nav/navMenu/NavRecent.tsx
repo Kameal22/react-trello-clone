@@ -33,7 +33,7 @@ const NavRecent: React.FC<RecentProps> = ({ forwardRef }) => {
                 onClick={() => setDropdown("")}
                 key={board.id}
                 className="workspaceMenuLink"
-                to={`/board/${board.workspace}/${board.id}`}
+                to={`/board/${board.workspaceId}/${board.id}`}
               >
                 <div className="recentsDiv">
                   <div
