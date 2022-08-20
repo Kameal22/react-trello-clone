@@ -7,6 +7,7 @@ import AddTaskForm from "../task/AddTaskForm";
 import Task from "../task/Task";
 import { Droppable } from "react-beautiful-dnd";
 import UseClickOutside from "../../hooks/UseClickOutside";
+import useToggle from "../../hooks/useToggle";
 
 interface ColumnInterface {
   columnId: string;
@@ -19,8 +20,8 @@ const Column: React.FC<ColumnInterface> = ({
   boardId,
   workspaceId,
 }) => {
-  const [columnEditing, setColumnEditing] = useState<boolean>(false);
-  const [taskAdding, setTaskAdding] = useState<boolean>(false);
+  const [columnEditing, setColumnEditing] = useToggle(false);
+  const [taskAdding, setTaskAdding] = useToggle(false);
 
   const addTaskRef = useRef<HTMLDivElement>(null);
   const editColumnRef = useRef<HTMLDivElement>(null);
@@ -43,15 +44,15 @@ const Column: React.FC<ColumnInterface> = ({
 
   const columnTasks = shownColumn?.columnTasks;
 
-  UseClickOutside(addTaskRef, () => setTaskAdding(false));
+  UseClickOutside(addTaskRef, () => setTaskAdding());
 
-  UseClickOutside(editColumnRef, () => setColumnEditing(false));
+  UseClickOutside(editColumnRef, () => setColumnEditing());
 
   return (
     <div className="boardCOLUMNdiv">
       <div className="boardCOLUMNHeader">
         <p>{shownColumn?.columnName}</p>
-        <i onClick={() => setColumnEditing(true)} className="bi bi-three-dots"></i>
+        <i onClick={() => setColumnEditing()} className="bi bi-three-dots"></i>
       </div>
 
       {columnEditing &&
@@ -108,7 +109,7 @@ const Column: React.FC<ColumnInterface> = ({
           forwardRef={addTaskRef}
         />
       ) : (
-        <div onClick={() => setTaskAdding(true)} className="boardCOLUMNAddTask">
+        <div onClick={() => setTaskAdding()} className="boardCOLUMNAddTask">
           <i style={{ fontSize: "1.3em" }} className="bi bi-plus"></i>
           <p>Add a task</p>
         </div>

@@ -6,6 +6,7 @@ import TaskLabelsPopUp from "../popups/TaskLabelsPopUp";
 import { TaskCommentsInterface } from "../../interfaces/WorkspaceInterface";
 import { Draggable } from "react-beautiful-dnd";
 import UseClickOutside from "../../hooks/UseClickOutside";
+import useToggle from "../../hooks/useToggle";
 
 interface TaskProps {
   taskName: string;
@@ -33,36 +34,24 @@ const Task: React.FC<TaskProps> = ({
   index,
 }) => {
   const [iconVisibility, setIconVisibility] = useState({ display: "none" });
-  const [taskOptions, showTaskOptions] = useState<boolean>(false);
-  const [taskDetails, showTaskDetails] = useState<boolean>(false);
-  const [taskLabels, showTaskLabels] = useState<boolean>(false);
+  const [taskOptions, showTaskOptions] = useToggle(false)
+  const [taskDetails, showTaskDetails] = useToggle(false)
+  const [taskLabels, showTaskLabels] = useToggle(false)
 
   const optionsRef = useRef<HTMLDivElement>(null);
   const taskLabelsRef = useRef<HTMLDivElement>(null);
   const taskDetailsRef = useRef<HTMLDivElement>(null);
 
-  const showOptions = () => {
-    showTaskOptions(!taskOptions);
-  };
-
-  const showLabels = () => {
-    showTaskLabels(!taskLabels);
-  };
-
-  const showDetails = () => {
-    showTaskDetails(!taskDetails);
-  };
-
-  UseClickOutside(optionsRef, () => showTaskOptions(false));
-  UseClickOutside(taskLabelsRef, () => showTaskLabels(false));
-  UseClickOutside(taskDetailsRef, () => showTaskDetails(false));
+  UseClickOutside(optionsRef, () => showTaskOptions());
+  UseClickOutside(taskLabelsRef, () => showTaskLabels());
+  UseClickOutside(taskDetailsRef, () => showTaskDetails());
 
   return (
     <>
       <Draggable draggableId={taskId} index={index}>
         {(provided) => (
           <div
-            onClick={() => showDetails()}
+            onClick={() => showTaskDetails()}
             {...provided.draggableProps}
             {...provided.dragHandleProps}
             ref={provided.innerRef}
@@ -88,7 +77,7 @@ const Task: React.FC<TaskProps> = ({
             <i
               onClick={(e) => {
                 e.stopPropagation();
-                showOptions();
+                showTaskOptions();
               }}
               style={iconVisibility}
               className="bi bi-pencil"
@@ -110,9 +99,9 @@ const Task: React.FC<TaskProps> = ({
           boardId={boardId}
           columnId={columnId}
           taskId={taskId}
-          showForm={showOptions}
-          editLabels={showLabels}
-          showDetails={showDetails}
+          showForm={showTaskOptions}
+          editLabels={showTaskLabels}
+          showDetails={showTaskDetails}
         />
       )}
 
@@ -127,7 +116,7 @@ const Task: React.FC<TaskProps> = ({
           taskIndicator={taskIndicatorColor}
           taskComments={taskComments}
           columnName={columnName}
-          showTaskDetails={showDetails}
+          showTaskDetails={showTaskDetails}
           taskDescription={taskDescription}
         />
       )}
@@ -139,7 +128,7 @@ const Task: React.FC<TaskProps> = ({
           boardId={boardId}
           columnId={columnId}
           taskId={taskId}
-          editLabels={showLabels}
+          editLabels={showTaskLabels}
           chosenIndicator={taskIndicatorColor}
         />
       )}

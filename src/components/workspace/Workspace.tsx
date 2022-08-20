@@ -8,9 +8,10 @@ import EditWorkspaceDetails from "./EditWorkspaceDetails";
 import WorkspaceBoards from "./WorkspaceBoards";
 import PopUp from "../popups/PopUpMessage";
 import { changeColor } from "../../redux/features/navigationSlice";
+import useToggle from "../../hooks/useToggle";
 
 const Workspace: React.FC = () => {
-  const [workspaceEditing, setWorkspaceEditing] = useState<boolean>(false);
+  const [workspaceEditing, setWorkspaceEditing] = useToggle(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -35,10 +36,6 @@ const Workspace: React.FC = () => {
     );
   }, []); // Change color to original after leaving a board.
 
-  const setEditting = () => {
-    setWorkspaceEditing(!workspaceEditing);
-  };
-
   useEffect(() => {
     if (!shownWorkspace) {
       navigate(`/`, { replace: true });
@@ -58,7 +55,7 @@ const Workspace: React.FC = () => {
         {workspaceEditing ? (
           <EditWorkspaceDetails
             editWorkspace={editWorkspaceFunc}
-            setEditting={setEditting}
+            setEditting={setWorkspaceEditing}
             workspaceId={shownWorkspace?.workspaceId}
           />
         ) : (
@@ -80,7 +77,7 @@ const Workspace: React.FC = () => {
                 {shownWorkspace?.workspaceDescription}
               </p>
             </div>
-            <div onClick={() => setEditting()} className="editWorkspaceDiv">
+            <div onClick={() => setWorkspaceEditing()} className="editWorkspaceDiv">
               <i
                 style={{ fontSize: ".8em", marginRight: "1em" }}
                 className="bi bi-pencil"

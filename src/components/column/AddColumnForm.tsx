@@ -5,6 +5,7 @@ import { TaskInterface } from "../../interfaces/WorkspaceInterface";
 import { addColumn } from "../../redux/features/WorkspaceSlice";
 import { useDispatch } from "react-redux";
 import UseClickOutside from "../../hooks/UseClickOutside";
+import useToggle from "../../hooks/useToggle";
 
 interface AddingColumnFormInterface {
   workspaceId: string | undefined;
@@ -15,7 +16,7 @@ const AddColumnForm: React.FC<AddingColumnFormInterface> = ({
   boardId,
   workspaceId,
 }) => {
-  const [addingColumn, setAddingColumn] = useState(false);
+  const [addingColumn, setAddingColumn] = useToggle(false);;
   const [columnName, setColumnName] = useState<string>("");
   const [columnTasks] = useState<TaskInterface[]>([]);
   const [error, setError] = useState<string>("");
@@ -49,12 +50,12 @@ const AddColumnForm: React.FC<AddingColumnFormInterface> = ({
           columnTasks,
         })
       );
-      setAddingColumn(!addingColumn);
+      setAddingColumn();
       setColumnName("");
     }
   };
 
-  UseClickOutside(createColumnRef, () => setAddingColumn(false));
+  UseClickOutside(createColumnRef, () => setAddingColumn());
 
   if (addingColumn) {
     return (
@@ -78,7 +79,7 @@ const AddColumnForm: React.FC<AddingColumnFormInterface> = ({
               Add Column
             </button>
             <i
-              onClick={() => setAddingColumn(!addingColumn)}
+              onClick={() => setAddingColumn()}
               style={{ fontSize: "1.1em" }}
               className="bi bi-x-lg"
             ></i>
@@ -89,7 +90,7 @@ const AddColumnForm: React.FC<AddingColumnFormInterface> = ({
   } else {
     return (
       <div
-        onClick={() => setAddingColumn(!addingColumn)}
+        onClick={() => setAddingColumn()}
         className="addColumnInitialDiv"
       >
         <i className="bi bi-plus-lg"></i>
