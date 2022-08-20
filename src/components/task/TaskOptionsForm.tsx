@@ -64,13 +64,13 @@ const TaskOptionsForm: React.FC<OptionsFormInterface> = (props) => {
 
   return (
     <div ref={props.forwardRef} className="taskOptionsFormDiv">
-      <p onClick={() => showDetailsFunc()}>Open task</p>
+      <p onClick={showDetailsFunc}>Open task</p>
 
-      <p onClick={() => editLabelsFunc()}>Edit labels</p>
+      <p onClick={editLabelsFunc}>Edit labels</p>
 
-      <p onClick={() => copyTaskFunc()}>Copy task</p>
+      <p onClick={copyTaskFunc}>Copy task</p>
 
-      <p onClick={() => deleteTaskFunc()}>Delete task</p>
+      <p onClick={deleteTaskFunc}>Delete task</p>
     </div>
   );
 };

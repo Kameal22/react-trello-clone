@@ -117,12 +117,12 @@ const TaskDetailsPopUp: React.FC<TaskDetailsInterface> = ({
             />
           </form>
         ) : (
-          <p onClick={() => setEditingTaskName()}>{taskName}</p>
+          <p onClick={setEditingTaskName}>{taskName}</p>
         )}
 
         <i
           id="cornerIcon"
-          onClick={() => showTaskDetails()}
+          onClick={showTaskDetails}
           className="bi bi-x"
         ></i>
       </div>
@@ -139,14 +139,14 @@ const TaskDetailsPopUp: React.FC<TaskDetailsInterface> = ({
             className="taskDetailsLabelDivWithColor"
           ></div>
           <div
-            onClick={() => setLabelCreating()}
+            onClick={setLabelCreating}
             className="taskDetailAddLabelDiv"
           >
             <i id="addLabelPlus" className="bi bi-plus-lg"></i>
           </div>
         </div>
 
-        {labelCreating ? (
+        {labelCreating &&
           <CreateLabelPopUp
             workspaceId={workspaceId}
             boardId={boardId}
@@ -154,7 +154,7 @@ const TaskDetailsPopUp: React.FC<TaskDetailsInterface> = ({
             taskId={taskId}
             setCreating={setLabelCreating}
           />
-        ) : null}
+        }
       </div>
 
       <div className="taskDetailsDescriptionDiv">
@@ -172,14 +172,14 @@ const TaskDetailsPopUp: React.FC<TaskDetailsInterface> = ({
           <div>
             {taskDescription !== "" ? (
               <p
-                onClick={() => showDescriptionForm()}
+                onClick={showDescriptionForm}
                 className="taskDetailsDescription"
               >
                 {taskDescription}
               </p>
             ) : (
               <p
-                onClick={() => showDescriptionForm()}
+                onClick={showDescriptionForm}
                 className="taskDetailsDescriptionEnter"
               >
                 Enter task description
