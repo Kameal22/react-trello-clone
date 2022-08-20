@@ -43,10 +43,6 @@ const Column: React.FC<ColumnInterface> = ({
 
   const columnTasks = shownColumn?.columnTasks;
 
-  const editAColumn = () => {
-    setColumnEditing(!columnEditing);
-  };
-
   UseClickOutside(addTaskRef, () => setTaskAdding(false));
 
   UseClickOutside(editColumnRef, () => setColumnEditing(false));
@@ -55,19 +51,19 @@ const Column: React.FC<ColumnInterface> = ({
     <div className="boardCOLUMNdiv">
       <div className="boardCOLUMNHeader">
         <p>{shownColumn?.columnName}</p>
-        <i onClick={() => editAColumn()} className="bi bi-three-dots"></i>
+        <i onClick={() => setColumnEditing(true)} className="bi bi-three-dots"></i>
       </div>
 
-      {columnEditing ? (
+      {columnEditing &&
         <EditColumnForm
           forwardRef={editColumnRef}
           setTaskAdding={setTaskAdding}
-          setEditing={editAColumn}
+          setColumnEditing={setColumnEditing}
           columnId={columnId}
           boardId={boardId}
           workspaceId={workspaceId}
         />
-      ) : null}
+      }
 
       <Droppable droppableId={columnId}>
         {(provided) => (

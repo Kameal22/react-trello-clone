@@ -8,7 +8,7 @@ import { HighlightedTaskContext } from "../../context/highlightedTaskContext";
 import { handleRemoveHighlightedTaskOnColumnDeleting } from "../../utils/SetHighlightedTask";
 
 interface EditColumnInterface {
-  setEditing: () => void;
+  setColumnEditing: React.Dispatch<React.SetStateAction<boolean>>;
   setTaskAdding: React.Dispatch<React.SetStateAction<boolean>>;
   columnId: string | undefined;
   boardId: string | undefined;
@@ -17,7 +17,7 @@ interface EditColumnInterface {
 }
 
 const EditColumnForm: React.FC<EditColumnInterface> = ({
-  setEditing,
+  setColumnEditing,
   setTaskAdding,
   columnId,
   boardId,
@@ -45,12 +45,12 @@ const EditColumnForm: React.FC<EditColumnInterface> = ({
         columnId: columnId,
       })
     );
-    setEditing();
+    setColumnEditing(false);
   };
 
   const addTaskFunc = () => {
     setTaskAdding(false);
-    setEditing();
+    setColumnEditing(false);
   };
 
   const copyColumnFunc = () => {
@@ -61,14 +61,14 @@ const EditColumnForm: React.FC<EditColumnInterface> = ({
         boardId: boardId,
       })
     );
-    setEditing();
+    setColumnEditing(false);
   };
 
   return (
     <div ref={forwardRef} className="editColumnFormDiv">
       <div className="edidColumnFormDivHeading">
         <p className="editColumnHeading">Column actions</p>
-        <i onClick={() => setEditing()} className="bi bi-x-lg"></i>
+        <i onClick={() => setColumnEditing(false)} className="bi bi-x-lg"></i>
       </div>
 
       <div className="editColumnFormActions">

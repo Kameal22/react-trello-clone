@@ -1,7 +1,7 @@
 import "../../styles/taskStyles/editTaskComment.css";
 import { editTaskComment } from "../../redux/features/WorkspaceSlice";
 import { useDispatch } from "react-redux";
-import { useState } from "react";
+import useInputState from "../../hooks/useInputState";
 
 interface EditTaskCommentInterface {
   workspaceId: string | undefined;
@@ -20,15 +20,9 @@ const EditTaskCommentForm: React.FC<EditTaskCommentInterface> = ({
   taskComment,
   setEditing,
 }) => {
-  const [newTaskComment, setNewTaskComment] = useState<string>("");
+  const [newTaskComment, setNewTaskComment] = useInputState('')
 
   const dispatch = useDispatch();
-
-  const handleDescriptionChange = (
-    e: React.FormEvent<HTMLInputElement>
-  ): void => {
-    setNewTaskComment(e.currentTarget.value);
-  };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -57,7 +51,7 @@ const EditTaskCommentForm: React.FC<EditTaskCommentInterface> = ({
         <input
           className="taskCommentInput"
           value={newTaskComment}
-          onChange={handleDescriptionChange}
+          onChange={setNewTaskComment}
           type="text"
           name="comment"
           placeholder="Enter new comment"

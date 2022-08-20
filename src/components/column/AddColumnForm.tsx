@@ -28,7 +28,7 @@ const AddColumnForm: React.FC<AddingColumnFormInterface> = ({
     e: React.FormEvent<HTMLInputElement>
   ): void => {
     if (e.currentTarget.value.length > 50) {
-      setError("Column name must be maximum of 30 characters");
+      setError("Column name must be maximum of 50 characters");
     } else {
       setError("");
     }
