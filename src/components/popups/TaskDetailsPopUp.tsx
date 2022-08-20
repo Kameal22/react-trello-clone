@@ -15,6 +15,8 @@ import UseClickOutside from "../../hooks/UseClickOutside";
 import { handleEditHighlight } from "../../utils/SetHighlightedTask";
 import { useSetHT } from "../../context/highlightedTaskContext";
 import { HighlightedTaskContext } from "../../context/highlightedTaskContext";
+import useToggle from "../../hooks/useToggle";
+import useInputState from "../../hooks/useInputState";
 
 interface TaskDetailsInterface {
   showTaskDetails: () => void;
@@ -44,10 +46,10 @@ const TaskDetailsPopUp: React.FC<TaskDetailsInterface> = ({
   forwardRef,
 }) => {
   const [commentToEdit, setCommentToEdit] = useState<string>("");
-  const [labelCreating, setLabelCreating] = useState<boolean>(false);
-  const [description, setDescription] = useState<boolean>(false);
-  const [editingTaskName, setEditingTaskName] = useState<boolean>(false);
-  const [newTaskName, setNewTaskName] = useState<string>(taskName);
+  const [labelCreating, setLabelCreating] = useToggle(false);
+  const [descriptionForm, showDescriptionForm] = useToggle(false);
+  const [editingTaskName, setEditingTaskName] = useToggle(false);
+  const [newTaskName, setNewTaskName] = useInputState("")
 
   const highlights = useContext(HighlightedTaskContext);
   const setHighlights = useSetHT();
@@ -55,10 +57,6 @@ const TaskDetailsPopUp: React.FC<TaskDetailsInterface> = ({
 
   const taskDescriptionRef = useRef<HTMLDivElement>(null);
   const taskNameRef = useRef<HTMLFormElement>(null);
-
-  const handleTaskNameChange = (e: React.FormEvent<HTMLInputElement>): void => {
-    setNewTaskName(e.currentTarget.value);
-  };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -69,15 +67,11 @@ const TaskDetailsPopUp: React.FC<TaskDetailsInterface> = ({
         boardId: boardId,
         columnId: columnId,
         taskId: taskId,
-        newTask: taskName,
+        newTask: newTaskName,
       })
     );
     handleEditHighlight(highlights, taskId, taskName, setHighlights);
-    setEditingTaskName(!editingTaskName);
-  };
-
-  const setCreating = () => {
-    setLabelCreating(!labelCreating);
+    setEditingTaskName();
   };
 
   const deleteComment = (taskComment: string) => {
@@ -100,12 +94,8 @@ const TaskDetailsPopUp: React.FC<TaskDetailsInterface> = ({
     return workspace.workspaceId === workspaceId;
   });
 
-  const showDescriptionForm = () => {
-    setDescription(!description);
-  };
-
-  UseClickOutside(taskDescriptionRef, () => setDescription(false));
-  UseClickOutside(taskNameRef, () => setEditingTaskName(false));
+  UseClickOutside(taskDescriptionRef, () => showDescriptionForm());
+  UseClickOutside(taskNameRef, () => setEditingTaskName());
 
   return (
     <div ref={forwardRef} className="taskDetailsDiv">
@@ -119,15 +109,15 @@ const TaskDetailsPopUp: React.FC<TaskDetailsInterface> = ({
           >
             {" "}
             <input
-              value={taskName}
+              value={newTaskName}
               className="editTaskNameInput"
-              onChange={handleTaskNameChange}
+              onChange={setNewTaskName}
               type="text"
               name="taskName"
             />
           </form>
         ) : (
-          <p onClick={() => setEditingTaskName(!editingTaskName)}>{taskName}</p>
+          <p onClick={() => setEditingTaskName()}>{taskName}</p>
         )}
 
         <i
@@ -149,7 +139,7 @@ const TaskDetailsPopUp: React.FC<TaskDetailsInterface> = ({
             className="taskDetailsLabelDivWithColor"
           ></div>
           <div
-            onClick={() => setLabelCreating(!labelCreating)}
+            onClick={() => setLabelCreating()}
             className="taskDetailAddLabelDiv"
           >
             <i id="addLabelPlus" className="bi bi-plus-lg"></i>
@@ -162,14 +152,14 @@ const TaskDetailsPopUp: React.FC<TaskDetailsInterface> = ({
             boardId={boardId}
             columnId={columnId}
             taskId={taskId}
-            setCreating={setCreating}
+            setCreating={setLabelCreating}
           />
         ) : null}
       </div>
 
       <div className="taskDetailsDescriptionDiv">
         <p className="taskDetailsDescriptionHeading">Description</p>
-        {description ? (
+        {descriptionForm ? (
           <TaskDescriptionForm
             showForm={showDescriptionForm}
             workspaceId={workspaceId}

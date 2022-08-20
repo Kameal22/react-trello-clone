@@ -191,6 +191,11 @@
 
 .commentDelete{
     margin-left: 1em;
+    cursor: pointer;
+}
+
+.commentEdit{
+    cursor: pointer;
 }
 
 .taskDetailsActivityCommentEditDelete > p:hover{
