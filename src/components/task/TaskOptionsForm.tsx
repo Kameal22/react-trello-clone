@@ -17,53 +17,66 @@ interface OptionsFormInterface {
   forwardRef: React.RefObject<HTMLDivElement>;
 }
 
-const TaskOptionsForm: React.FC<OptionsFormInterface> = (props) => {
+const TaskOptionsForm: React.FC<OptionsFormInterface> = ({
+  showDetails,
+  showForm,
+  editLabels,
+  workspaceId,
+  boardId,
+  columnId,
+  taskId,
+  forwardRef,
+}) => {
   const dispatch = useDispatch();
   const highlights = useContext(HighlightedTaskContext);
   const setHighlights = useSetHT();
 
   const handleRemoveHighlight = (taskId: string) => {
-    handleRemoveHighlightedTaskOnTaskDeleting(highlights, taskId, setHighlights)
+    handleRemoveHighlightedTaskOnTaskDeleting(
+      highlights,
+      taskId,
+      setHighlights
+    );
   };
 
   const deleteTaskFunc = () => {
     dispatch(
       deleteTask({
-        workspaceId: props.workspaceId,
-        boardId: props.boardId,
-        columnId: props.columnId,
-        taskId: props.taskId,
+        workspaceId: workspaceId,
+        boardId: boardId,
+        columnId: columnId,
+        taskId: taskId,
       })
     );
-    handleRemoveHighlight(props.taskId);
-    props.showForm();
+    handleRemoveHighlight(taskId);
+    showForm();
     window.location.reload();
   };
 
   const copyTaskFunc = () => {
     dispatch(
       copyTask({
-        workspaceId: props.workspaceId,
-        boardId: props.boardId,
-        columnId: props.columnId,
-        taskId: props.taskId,
+        workspaceId: workspaceId,
+        boardId: boardId,
+        columnId: columnId,
+        taskId: taskId,
       })
     );
-    props.showForm();
+    showForm();
   };
 
   const showDetailsFunc = () => {
-    props.showDetails();
-    props.showForm();
+    showDetails();
+    showForm();
   };
 
   const editLabelsFunc = () => {
-    props.editLabels();
-    props.showForm();
+    editLabels();
+    showForm();
   };
 
   return (
-    <div ref={props.forwardRef} className="taskOptionsFormDiv">
+    <div ref={forwardRef} className="taskOptionsFormDiv">
       <p onClick={showDetailsFunc}>Open task</p>
 
       <p onClick={editLabelsFunc}>Edit labels</p>

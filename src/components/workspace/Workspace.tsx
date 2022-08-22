@@ -37,10 +37,6 @@ const Workspace: React.FC = () => {
   }, [shownWorkspace]);
 
   useEffect(() => {
-    setShownBoards(shownWorkspace?.workspaceBoards);
-  }, [shownWorkspace?.workspaceId]); // Do this to update shown boards in workspace that user routed to.
-
-  useEffect(() => {
     dispatch(
       changeColor({
         color: "#3cc384",

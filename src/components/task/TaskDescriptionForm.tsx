@@ -13,8 +13,15 @@ interface TaskDescriptionFormInterface {
   forwardRef: React.RefObject<HTMLDivElement>;
 }
 
-const TaskDescriptionForm: React.FC<TaskDescriptionFormInterface> = (props) => {
-  const [taskDescription, setTaskDescription] = useInputState('')
+const TaskDescriptionForm: React.FC<TaskDescriptionFormInterface> = ({
+  workspaceId,
+  boardId,
+  columnId,
+  taskId,
+  showForm,
+  forwardRef,
+}) => {
+  const [taskDescription, setTaskDescription] = useInputState("");
 
   const dispatch = useDispatch();
 
@@ -23,18 +30,18 @@ const TaskDescriptionForm: React.FC<TaskDescriptionFormInterface> = (props) => {
 
     dispatch(
       addTaskDescription({
-        workspaceId: props.workspaceId,
-        boardId: props.boardId,
-        columnId: props.columnId,
-        taskId: props.taskId,
+        workspaceId: workspaceId,
+        boardId: boardId,
+        columnId: columnId,
+        taskId: taskId,
         taskDescription,
       })
     );
-    props.showForm();
+    showForm();
   };
 
   return (
-    <div ref={props.forwardRef} className="taskDescriptionFormDiv">
+    <div ref={forwardRef} className="taskDescriptionFormDiv">
       <form
         className="taskDescriptionForm"
         autoComplete="off"

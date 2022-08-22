@@ -12,7 +12,12 @@ interface TaskCommentFormInterface {
   taskId: string | undefined;
 }
 
-const TaskCommentForm: React.FC<TaskCommentFormInterface> = (props) => {
+const TaskCommentForm: React.FC<TaskCommentFormInterface> = ({
+  workspaceId,
+  boardId,
+  columnId,
+  taskId,
+}) => {
   const [taskComment, setTaskComment, , , , , , , reset] = useInputState("");
 
   const dispatch = useDispatch();
@@ -23,10 +28,10 @@ const TaskCommentForm: React.FC<TaskCommentFormInterface> = (props) => {
     event.preventDefault();
     dispatch(
       addTaskComment({
-        workspaceId: props.workspaceId,
-        boardId: props.boardId,
-        columnId: props.columnId,
-        taskId: props.taskId,
+        workspaceId: workspaceId,
+        boardId: boardId,
+        columnId: columnId,
+        taskId: taskId,
         taskComment,
         taskAuthor: user.name,
         taskDate: date,

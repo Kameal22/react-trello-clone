@@ -19,7 +19,13 @@ interface AddTaskInterface {
   forwardRef: React.RefObject<HTMLDivElement>;
 }
 
-const AddTaskForm: React.FC<AddTaskInterface> = (props) => {
+const AddTaskForm: React.FC<AddTaskInterface> = ({
+  setTaskAdding,
+  workspaceId,
+  boardId,
+  columnId,
+  forwardRef,
+}) => {
   const [taskName, setTaskName, , , , , error, setError] = useInputState("");
   const [taskId] = useState<string>(uuidv4());
   const [taskDescription] = useState<string>("");
@@ -31,11 +37,11 @@ const AddTaskForm: React.FC<AddTaskInterface> = (props) => {
   );
 
   const shownWorkspace = workspaces.find((workspace) => {
-    return workspace.workspaceId === props.workspaceId;
+    return workspace.workspaceId === workspaceId;
   });
 
   const shownBoard = shownWorkspace?.workspaceBoards.find((board) => {
-    return board.boardId === props.boardId;
+    return board.boardId === boardId;
   });
 
   const setHighlight = useSetHT();
@@ -50,9 +56,9 @@ const AddTaskForm: React.FC<AddTaskInterface> = (props) => {
     } else {
       dispatch(
         addTask({
-          workspaceId: props.workspaceId,
-          boardId: props.boardId,
-          columnId: props.columnId,
+          workspaceId: workspaceId,
+          boardId: boardId,
+          columnId: columnId,
           taskName,
           taskId,
           taskIndicatorColor: taskColor,
@@ -60,13 +66,13 @@ const AddTaskForm: React.FC<AddTaskInterface> = (props) => {
           taskDescription,
         })
       );
-      props.setTaskAdding(false);
+      setTaskAdding(false);
       handleSetHighlightedTask(
         highlights,
-        props.workspaceId,
-        props.boardId,
+        workspaceId,
+        boardId,
         shownBoard?.boardName,
-        props.columnId,
+        columnId,
         taskId,
         "Author",
         taskName,
@@ -76,7 +82,7 @@ const AddTaskForm: React.FC<AddTaskInterface> = (props) => {
   };
 
   return (
-    <div ref={props.forwardRef} className="addTaskFormDiv">
+    <div ref={forwardRef} className="addTaskFormDiv">
       <div className="addTaskDiv">
         <form
           className="addTaskForm"
@@ -96,7 +102,7 @@ const AddTaskForm: React.FC<AddTaskInterface> = (props) => {
             <button type="submit">Add Task</button>
             <i
               style={{ fontSize: "1.3em" }}
-              onClick={() => props.setTaskAdding(false)}
+              onClick={() => setTaskAdding(false)}
               className="bi bi-x-lg"
             />
           </div>

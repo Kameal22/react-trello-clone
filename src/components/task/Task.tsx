@@ -51,7 +51,7 @@ const Task: React.FC<TaskProps> = ({
       <Draggable draggableId={taskId} index={index}>
         {(provided) => (
           <div
-            onClick={() => showTaskDetails()}
+            onClick={showTaskDetails}
             {...provided.draggableProps}
             {...provided.dragHandleProps}
             ref={provided.innerRef}
