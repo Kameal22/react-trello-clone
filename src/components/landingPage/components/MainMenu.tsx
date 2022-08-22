@@ -77,14 +77,14 @@ const MainMenu: React.FC = () => {
 
       <Link className="menuLink" to="/boards">
         <div className="menuBoards">
-          <i className="bi bi-calendar-check"></i>
+          <i className="bi bi-calendar-check" />
           <p className="menuBoardsDescription">Boards</p>
         </div>
       </Link>
 
       <Link className="menuLink" to="/overview">
         <div className="menuHome">
-          <i className="bi bi-house"></i>
+          <i className="bi bi-house" />
           <p className="menuHomeDescription">Home</p>
         </div>
       </Link>
@@ -107,7 +107,7 @@ const MainMenu: React.FC = () => {
               : { fontSize: "1.2em", color: "black" }
           }
           className="bi bi-plus"
-        ></i>
+        />
       </div>
 
       {isWorkspace &&
@@ -137,7 +137,7 @@ const MainMenu: React.FC = () => {
                       ? "bi bi-arrow-up-short"
                       : "bi bi-arrow-down-short"
                   }
-                ></i>
+                />
               </div>
               {workspace.workspaceLandingPageMenu && (
                 <div className="workspaceSettings">
@@ -159,7 +159,7 @@ const MainMenu: React.FC = () => {
                     }
                     className="workspaceOption"
                   >
-                    <i className="bi bi-trash"></i>
+                    <i className="bi bi-trash" />
                     <p className="menuBoardsDescription">Delete</p>
                   </div>
                 </div>

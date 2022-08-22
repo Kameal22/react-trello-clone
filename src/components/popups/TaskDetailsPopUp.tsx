@@ -49,7 +49,7 @@ const TaskDetailsPopUp: React.FC<TaskDetailsInterface> = ({
   const [labelCreating, setLabelCreating] = useToggle(false);
   const [descriptionForm, showDescriptionForm] = useToggle(false);
   const [editingTaskName, setEditingTaskName] = useToggle(false);
-  const [newTaskName, setNewTaskName] = useInputState("")
+  const [newTaskName, setNewTaskName] = useInputState("");
 
   const highlights = useContext(HighlightedTaskContext);
   const setHighlights = useSetHT();
@@ -120,11 +120,7 @@ const TaskDetailsPopUp: React.FC<TaskDetailsInterface> = ({
           <p onClick={setEditingTaskName}>{taskName}</p>
         )}
 
-        <i
-          id="cornerIcon"
-          onClick={showTaskDetails}
-          className="bi bi-x"
-        ></i>
+        <i id="cornerIcon" onClick={showTaskDetails} className="bi bi-x" />
       </div>
 
       <p className="taskDetailsListName">
@@ -138,15 +134,12 @@ const TaskDetailsPopUp: React.FC<TaskDetailsInterface> = ({
             style={{ background: taskIndicator }}
             className="taskDetailsLabelDivWithColor"
           ></div>
-          <div
-            onClick={setLabelCreating}
-            className="taskDetailAddLabelDiv"
-          >
+          <div onClick={setLabelCreating} className="taskDetailAddLabelDiv">
             <i id="addLabelPlus" className="bi bi-plus-lg"></i>
           </div>
         </div>
 
-        {labelCreating &&
+        {labelCreating && (
           <CreateLabelPopUp
             workspaceId={workspaceId}
             boardId={boardId}
@@ -154,7 +147,7 @@ const TaskDetailsPopUp: React.FC<TaskDetailsInterface> = ({
             taskId={taskId}
             setCreating={setLabelCreating}
           />
-        }
+        )}
       </div>
 
       <div className="taskDetailsDescriptionDiv">

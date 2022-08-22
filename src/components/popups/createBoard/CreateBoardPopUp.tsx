@@ -64,7 +64,7 @@ const CreateBoardPopUp: React.FC<CreateBoardProps> = ({ forwardRef }) => {
   return (
     <div ref={forwardRef} className="createBoardDiv">
       <p className="createBoardHeading">Create board</p>
-      <i onClick={() => hideCreating()} className="bi bi-x"></i>
+      <i onClick={() => hideCreating()} className="bi bi-x" />
 
       <div className="createBoardImg">
         <img src="https://a.trellocdn.com/prgb/dist/images/board-preview-skeleton.14cda5dc635d1f13bc48.svg" />

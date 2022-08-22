@@ -10,8 +10,8 @@ interface RegisterProps {
 }
 
 const Register: React.FC<RegisterProps> = ({ forwardRef }) => {
-  const [name, setName, , , error, handleError] = useInputState('')
-  const [password, setPassword] = useInputState('')
+  const [name, setName, , , , , error, handleError] = useInputState("");
+  const [password, setPassword] = useInputState("");
 
   const dispatch = useDispatch();
 

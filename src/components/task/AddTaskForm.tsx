@@ -20,7 +20,7 @@ interface AddTaskInterface {
 }
 
 const AddTaskForm: React.FC<AddTaskInterface> = (props) => {
-  const [taskName, setTaskName, , , error, setError] = useInputState("");
+  const [taskName, setTaskName, , , , , error, setError] = useInputState("");
   const [taskId] = useState<string>(uuidv4());
   const [taskDescription] = useState<string>("");
   const [taskComments] = useState<TaskCommentsInterface[]>([]);
@@ -98,7 +98,7 @@ const AddTaskForm: React.FC<AddTaskInterface> = (props) => {
               style={{ fontSize: "1.3em" }}
               onClick={() => props.setTaskAdding(false)}
               className="bi bi-x-lg"
-            ></i>
+            />
           </div>
         </form>
       </div>

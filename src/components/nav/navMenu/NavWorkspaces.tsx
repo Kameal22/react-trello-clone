@@ -31,7 +31,7 @@ const NavWorkspaces: React.FC<WorkspaceProps> = ({ forwardRef }) => {
     <div ref={forwardRef} className="navWorkspacesDiv">
       <div className="navWorkspacesHeading">
         <p>Workspaces</p>
-        <i onClick={() => setDropdown("")} className="bi bi-x"></i>
+        <i onClick={() => setDropdown("")} className="bi bi-x" />
       </div>
 
       {isWorkspace ? (

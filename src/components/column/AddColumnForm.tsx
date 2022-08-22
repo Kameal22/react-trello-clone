@@ -1,11 +1,12 @@
 import "../../styles/columnStyles/addColumnForm.css";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { TaskInterface } from "../../interfaces/WorkspaceInterface";
 import { addColumn } from "../../redux/features/WorkspaceSlice";
 import { useDispatch } from "react-redux";
 import UseClickOutside from "../../hooks/UseClickOutside";
 import useToggle from "../../hooks/useToggle";
+import useInputState from "../../hooks/useInputState";
 
 interface AddingColumnFormInterface {
   workspaceId: string | undefined;
@@ -16,25 +17,16 @@ const AddColumnForm: React.FC<AddingColumnFormInterface> = ({
   boardId,
   workspaceId,
 }) => {
-  const [addingColumn, setAddingColumn] = useToggle(false);;
-  const [columnName, setColumnName] = useState<string>("");
+  const [addingColumn, setAddingColumn] = useToggle(false);
+  const [, , , , columnName, setColumnName, error, setError] =
+    useInputState("");
   const [columnTasks] = useState<TaskInterface[]>([]);
-  const [error, setError] = useState<string>("");
 
   const dispatch = useDispatch();
 
   const createColumnRef = useRef<HTMLDivElement>(null);
 
-  const handleColumnNameChange = (
-    e: React.FormEvent<HTMLInputElement>
-  ): void => {
-    if (e.currentTarget.value.length > 50) {
-      setError("Column name must be maximum of 50 characters");
-    } else {
-      setError("");
-    }
-    setColumnName(e.currentTarget.value.trim());
-  };
+  UseClickOutside(createColumnRef, () => setAddingColumn());
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -51,11 +43,8 @@ const AddColumnForm: React.FC<AddingColumnFormInterface> = ({
         })
       );
       setAddingColumn();
-      setColumnName("");
     }
   };
-
-  UseClickOutside(createColumnRef, () => setAddingColumn());
 
   if (addingColumn) {
     return (
@@ -67,33 +56,30 @@ const AddColumnForm: React.FC<AddingColumnFormInterface> = ({
         >
           <input
             className="columnNameInput"
-            onChange={handleColumnNameChange}
+            onChange={setColumnName}
             type="text"
             name="columnName"
             placeholder="Enter column title.."
             autoFocus
           />
-          {error ? <p className="error">{error}</p> : null}
+          {error && <p className="error">{error}</p>}
           <div className="addColumnButtonIcon">
             <button disabled={error !== ""} type="submit">
               Add Column
             </button>
             <i
-              onClick={() => setAddingColumn()}
+              onClick={setAddingColumn}
               style={{ fontSize: "1.1em" }}
               className="bi bi-x-lg"
-            ></i>
+            />
           </div>
         </form>
       </div>
     );
   } else {
     return (
-      <div
-        onClick={() => setAddingColumn()}
-        className="addColumnInitialDiv"
-      >
-        <i className="bi bi-plus-lg"></i>
+      <div onClick={setAddingColumn} className="addColumnInitialDiv">
+        <i className="bi bi-plus-lg" />
         <p> Add a column</p>
       </div>
     );

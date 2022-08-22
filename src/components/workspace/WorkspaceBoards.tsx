@@ -122,7 +122,7 @@ const WorkspaceBoards: React.FC<WorkspaceBoardsInterface> = (props) => {
                       handleWorkspaceRemove(board.boardWorkspace, board.boardId)
                     }
                     className="bi bi-trash3"
-                  ></i>
+                  />
                 </div>
               );
             })}

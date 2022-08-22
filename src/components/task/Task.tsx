@@ -34,9 +34,9 @@ const Task: React.FC<TaskProps> = ({
   index,
 }) => {
   const [iconVisibility, setIconVisibility] = useState({ display: "none" });
-  const [taskOptions, showTaskOptions] = useToggle(false)
-  const [taskDetails, showTaskDetails] = useToggle(false)
-  const [taskLabels, showTaskLabels] = useToggle(false)
+  const [taskOptions, showTaskOptions] = useToggle(false);
+  const [taskDetails, showTaskDetails] = useToggle(false);
+  const [taskLabels, showTaskLabels] = useToggle(false);
 
   const optionsRef = useRef<HTMLDivElement>(null);
   const taskLabelsRef = useRef<HTMLDivElement>(null);
@@ -63,12 +63,12 @@ const Task: React.FC<TaskProps> = ({
             }}
             className="taskDiv"
           >
-            {taskIndicatorColor ? (
+            {taskIndicatorColor && (
               <div
                 style={{ background: taskIndicatorColor }}
                 className="taskDivIndicator"
               ></div>
-            ) : null}
+            )}
 
             <div className="taskDivName">
               <p className="taskName">{taskName}</p>
@@ -82,11 +82,11 @@ const Task: React.FC<TaskProps> = ({
               style={iconVisibility}
               className="bi bi-pencil"
               id="cornerIcon"
-            ></i>
+            />
 
             <div className="taskIcons">
-              {taskComments[0] ? <i className="bi bi-chat"></i> : null}
-              {taskDescription ? <i className="bi bi-justify-left"></i> : null}
+              {taskComments[0] && <i className="bi bi-chat" />}
+              {taskDescription && <i className="bi bi-justify-left" />}
             </div>
           </div>
         )}

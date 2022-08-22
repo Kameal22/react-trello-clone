@@ -17,18 +17,14 @@ const NavCreateMenu: React.FC<NavCreateInterface> = ({ forwardRef }) => {
   };
 
   const showWorkspaceCreating = () => {
-    dispatch(
-      setCreateWorkspace()
-    )
-    setDropdown("")
-  }
+    dispatch(setCreateWorkspace());
+    setDropdown("");
+  };
 
   const showBoardCreating = () => {
-    dispatch(
-      setCreateBoard()
-    )
-    setDropdown("")
-  }
+    dispatch(setCreateBoard());
+    setDropdown("");
+  };
 
   const workspaces = useSelector(
     (state: RootState) => state.workspace.workspace
@@ -38,25 +34,19 @@ const NavCreateMenu: React.FC<NavCreateInterface> = ({ forwardRef }) => {
     <div ref={forwardRef} className="navCreateDiv">
       <div className="navCreateHeading">
         <p>Create..</p>
-        <i onClick={() => setDropdown("")} className="bi bi-x"></i>
+        <i onClick={() => setDropdown("")} className="bi bi-x" />
       </div>
 
       <div className="navCreateChoices">
         <div className="navCreateItems">
-          <p
-            onClick={() => showWorkspaceCreating()}
-            className="navCreateItemHeading"
-          >
+          <p onClick={showWorkspaceCreating} className="navCreateItemHeading">
             Create workspace
           </p>
-          {workspaces.length > 0 ? (
-            <p
-              onClick={() => showBoardCreating()}
-              className="navCreateItemHeading"
-            >
+          {workspaces.length > 0 && (
+            <p onClick={showBoardCreating} className="navCreateItemHeading">
               Create board
             </p>
-          ) : null}
+          )}
         </div>
       </div>
     </div>

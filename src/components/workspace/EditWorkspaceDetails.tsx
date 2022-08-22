@@ -36,9 +36,7 @@ const EditWorkspaceDetails: React.FC<EditWorkspaceProps> = ({
             name="workspaceDescription"
           />
         </div>
-        {error ? (
-          <p className="editWorkspaceDescriptionError">{error}</p>
-        ) : null}
+        {error && <p className="editWorkspaceDescriptionError">{error}</p>}
 
         <div className="editWorkspaceButtons">
           <button disabled={error !== ""} type="submit" className="saveButton">

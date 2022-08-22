@@ -1,6 +1,6 @@
 import "../../styles/columnStyles/column.css";
 import EditColumnForm from "./EditColumnForm";
-import { useState, useRef, useEffect } from "react";
+import { useRef } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/Store";
 import AddTaskForm from "../task/AddTaskForm";
@@ -52,10 +52,10 @@ const Column: React.FC<ColumnInterface> = ({
     <div className="boardCOLUMNdiv">
       <div className="boardCOLUMNHeader">
         <p>{shownColumn?.columnName}</p>
-        <i onClick={() => setColumnEditing()} className="bi bi-three-dots"></i>
+        <i onClick={setColumnEditing} className="bi bi-three-dots" />
       </div>
 
-      {columnEditing &&
+      {columnEditing && (
         <EditColumnForm
           forwardRef={editColumnRef}
           setTaskAdding={setTaskAdding}
@@ -64,7 +64,7 @@ const Column: React.FC<ColumnInterface> = ({
           boardId={boardId}
           workspaceId={workspaceId}
         />
-      }
+      )}
 
       <Droppable droppableId={columnId}>
         {(provided) => (
@@ -109,8 +109,8 @@ const Column: React.FC<ColumnInterface> = ({
           forwardRef={addTaskRef}
         />
       ) : (
-        <div onClick={() => setTaskAdding()} className="boardCOLUMNAddTask">
-          <i style={{ fontSize: "1.3em" }} className="bi bi-plus"></i>
+        <div onClick={setTaskAdding} className="boardCOLUMNAddTask">
+          <i style={{ fontSize: "1.3em" }} className="bi bi-plus" />
           <p>Add a task</p>
         </div>
       )}

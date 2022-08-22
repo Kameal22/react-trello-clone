@@ -54,7 +54,7 @@ const Nav: React.FC<NavProps> = ({
           className="navigationWorkspace"
         >
           <h5>Workspaces</h5>
-          <i className="bi bi-chevron-down"></i>
+          <i className="bi bi-chevron-down" />
         </div>
         {dropdown === "workspaces" && <NavWorkspaces forwardRef={forwardRef} />}
         <div
@@ -67,7 +67,7 @@ const Nav: React.FC<NavProps> = ({
           className="navigationRecent"
         >
           <h5>Recent</h5>
-          <i className="bi bi-chevron-down"></i>
+          <i className="bi bi-chevron-down" />
         </div>
         {dropdown === "recent" && <NavRecent forwardRef={forwardRef} />}
         <div
@@ -80,7 +80,7 @@ const Nav: React.FC<NavProps> = ({
           className="navigationStarred"
         >
           <h5>Create</h5>
-          <i className="bi bi-chevron-down"></i>
+          <i className="bi bi-chevron-down" />
         </div>
         {dropdown === "create" && <NavCreateMenu forwardRef={forwardRef} />}
       </div>

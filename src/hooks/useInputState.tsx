@@ -3,6 +3,7 @@ import { useState } from "react";
 const useInputState = (initialValue = "") => {
   const [value, setValue] = useState(initialValue);
   const [limitedValue, setLimitedValue] = useState(initialValue);
+  const [maxLimitedValue, setMaxLimitedValue] = useState(initialValue);
   const [error, setError] = useState(initialValue);
 
   const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
@@ -18,6 +19,15 @@ const useInputState = (initialValue = "") => {
     setLimitedValue(e.currentTarget.value);
   };
 
+  const handleMaxLimited = (e: React.FormEvent<HTMLInputElement>) => {
+    if (maxLimitedValue.length > 50) {
+      setError("Cannot excide 50 characters");
+    } else {
+      setError("");
+    }
+    setMaxLimitedValue(e.currentTarget.value);
+  };
+
   const reset = () => {
     setValue("");
   };
@@ -31,6 +41,8 @@ const useInputState = (initialValue = "") => {
     handleChange,
     limitedValue,
     handleLimitedChange,
+    maxLimitedValue,
+    handleMaxLimited,
     error,
     handleError,
     reset,

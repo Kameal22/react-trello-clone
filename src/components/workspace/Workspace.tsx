@@ -77,11 +77,14 @@ const Workspace: React.FC = () => {
                 {shownWorkspace?.workspaceDescription}
               </p>
             </div>
-            <div onClick={() => setWorkspaceEditing()} className="editWorkspaceDiv">
+            <div
+              onClick={() => setWorkspaceEditing()}
+              className="editWorkspaceDiv"
+            >
               <i
                 style={{ fontSize: ".8em", marginRight: "1em" }}
                 className="bi bi-pencil"
-              ></i>
+              />
               <p>Edit workspace details</p>
             </div>
           </div>

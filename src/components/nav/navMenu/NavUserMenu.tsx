@@ -34,20 +34,21 @@ const NavUserMenu: React.FC<NavUserMenuInterface> = ({ forwardRef }) => {
         <p onClick={() => logout()} className="userChoice">
           Logout
         </p>
-        <i onClick={() => logout()} className="bi bi-door-closed"></i>
+        <i onClick={() => logout()} className="bi bi-door-closed" />
       </div>
 
-      {randomWorkspace && <div className="userChoiceDiv">
-        <Link
-          onClick={() => setDropdown("")}
-          className="workspaceMenuLink"
-          to={`/workspace/${randomWorkspace.workspaceId}`}
-        >
-          <p className="userChoice">Your boards</p>
-        </Link>
-        <i className="bi bi-clipboard"></i>
-      </div>}
-
+      {randomWorkspace && (
+        <div className="userChoiceDiv">
+          <Link
+            onClick={() => setDropdown("")}
+            className="workspaceMenuLink"
+            to={`/workspace/${randomWorkspace.workspaceId}`}
+          >
+            <p className="userChoice">Your boards</p>
+          </Link>
+          <i className="bi bi-clipboard" />
+        </div>
+      )}
     </div>
   );
 };

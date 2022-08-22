@@ -49,7 +49,7 @@ const TaskLabelsPopUp: React.FC<TaskLabelsInterface> = (props) => {
           id="cornerIcon"
           onClick={() => props.editLabels()}
           className="bi bi-x"
-        ></i>
+        />
       </div>
 
       <p className="labelsInfo">Labels</p>
@@ -70,7 +70,7 @@ const TaskLabelsPopUp: React.FC<TaskLabelsInterface> = (props) => {
                     : { display: "none" }
                 }
                 className="bi bi-check-lg"
-              ></i>
+              />
             </div>
           );
         })}

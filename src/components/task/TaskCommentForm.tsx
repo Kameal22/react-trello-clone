@@ -13,7 +13,7 @@ interface TaskCommentFormInterface {
 }
 
 const TaskCommentForm: React.FC<TaskCommentFormInterface> = (props) => {
-  const [taskComment, setTaskComment, , , , , reset] = useInputState('');
+  const [taskComment, setTaskComment, , , , , , , reset] = useInputState("");
 
   const dispatch = useDispatch();
 
@@ -32,7 +32,7 @@ const TaskCommentForm: React.FC<TaskCommentFormInterface> = (props) => {
         taskDate: date,
       })
     );
-    reset()
+    reset();
   };
 
   return (

@@ -8,8 +8,8 @@ import { HighlightedTaskContext } from "../../context/highlightedTaskContext";
 import { handleRemoveHighlightedTaskOnColumnDeleting } from "../../utils/SetHighlightedTask";
 
 interface EditColumnInterface {
-  setColumnEditing: () => void
-  setTaskAdding: () => void
+  setColumnEditing: () => void;
+  setTaskAdding: () => void;
   columnId: string | undefined;
   boardId: string | undefined;
   workspaceId: string | undefined;
@@ -68,13 +68,13 @@ const EditColumnForm: React.FC<EditColumnInterface> = ({
     <div ref={forwardRef} className="editColumnFormDiv">
       <div className="edidColumnFormDivHeading">
         <p className="editColumnHeading">Column actions</p>
-        <i onClick={() => setColumnEditing()} className="bi bi-x-lg"></i>
+        <i onClick={setColumnEditing} className="bi bi-x-lg"></i>
       </div>
 
       <div className="editColumnFormActions">
-        <p onClick={() => addTaskFunc()}>Add task..</p>
-        <p onClick={() => deleteColumnFunc()}>Delete column..</p>
-        <p onClick={() => copyColumnFunc()}>Copy column..</p>
+        <p onClick={addTaskFunc}>Add task..</p>
+        <p onClick={deleteColumnFunc}>Delete column..</p>
+        <p onClick={copyColumnFunc}>Copy column..</p>
       </div>
     </div>
   );

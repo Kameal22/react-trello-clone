@@ -69,7 +69,7 @@ const NavSearchBar: React.FC = () => {
           type="text"
           name="search"
         ></input>
-        <i id="navSearchIcon" className="bi bi-search"></i>
+        <i id="navSearchIcon" className="bi bi-search" />
       </form>
 
       {enteredValue && (
