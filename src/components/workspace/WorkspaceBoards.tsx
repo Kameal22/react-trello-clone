@@ -19,13 +19,17 @@ import { HighlightedTaskContext } from "../../context/highlightedTaskContext";
 
 interface WorkspaceBoardsInterface {
   shownWorkspace: WorkspaceInterface | undefined;
+  shownBoards: BoardInterface[] | undefined;
+  setShownBoards: React.Dispatch<
+    React.SetStateAction<BoardInterface[] | undefined>
+  >;
 }
 
-const WorkspaceBoards: React.FC<WorkspaceBoardsInterface> = (props) => {
-  const [shownBoards, setShownBoards] = useState<BoardInterface[] | undefined>(
-    []
-  );
-
+const WorkspaceBoards: React.FC<WorkspaceBoardsInterface> = ({
+  shownWorkspace,
+  shownBoards,
+  setShownBoards,
+}) => {
   const dispatch = useDispatch();
   const setLastWatched = useSetRW();
   const setHighlights = useSetHT();
@@ -33,12 +37,8 @@ const WorkspaceBoards: React.FC<WorkspaceBoardsInterface> = (props) => {
   const recents = useContext(RecentlyViewedContext);
   const highlights = useContext(HighlightedTaskContext);
 
-  useEffect(() => {
-    setShownBoards(props.shownWorkspace?.workspaceBoards);
-  }, [props.shownWorkspace?.workspaceId]); // Do this to update shown boards in workspace that user routed to.
-
   const showSearchedBoards = (searchingValue: string) => {
-    const filtered = props.shownWorkspace?.workspaceBoards.filter((board) => {
+    const filtered = shownWorkspace?.workspaceBoards.filter((board) => {
       return includesIgnoredCase(board.boardName, searchingValue);
     });
 
@@ -69,11 +69,10 @@ const WorkspaceBoards: React.FC<WorkspaceBoardsInterface> = (props) => {
     );
   };
 
-  const handleWorkspaceRemove = (workspaceName: string, boardId: string) => {
+  const handleBoardRemove = (workspaceName: string, boardId: string) => {
     deleteBoardFunc(workspaceName, boardId);
     removeFromLastWatched(boardId);
     removeFromHighlights(boardId);
-    window.location.reload();
   };
 
   const showBoardCreating = () => {
@@ -93,14 +92,14 @@ const WorkspaceBoards: React.FC<WorkspaceBoardsInterface> = (props) => {
       <div className="workspaceBoardsBoards">
         <p className="showingBoards">
           Showing {shownBoards?.length} of{" "}
-          {props.shownWorkspace && props.shownWorkspace.workspaceBoards.length}
+          {shownWorkspace && shownWorkspace.workspaceBoards.length}
         </p>
         <div className="workspaceBoards">
           <div onClick={showBoardCreating} className="workspaceCreateBoard">
             <p>Create new board</p>
           </div>
 
-          {props.shownWorkspace &&
+          {shownWorkspace &&
             shownBoards?.map((board) => {
               return (
                 <div
@@ -110,13 +109,13 @@ const WorkspaceBoards: React.FC<WorkspaceBoardsInterface> = (props) => {
                 >
                   <Link
                     className="workspaceMenuLink"
-                    to={`/board/${props.shownWorkspace?.workspaceId}/${board.boardId}`}
+                    to={`/board/${shownWorkspace?.workspaceId}/${board.boardId}`}
                   >
                     <p>{board.boardName}</p>
                   </Link>
                   <i
                     onClick={() =>
-                      handleWorkspaceRemove(board.boardWorkspace, board.boardId)
+                      handleBoardRemove(board.boardWorkspace, board.boardId)
                     }
                     className="bi bi-trash3"
                   />

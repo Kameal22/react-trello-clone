@@ -30,11 +30,9 @@ const NavUserMenu: React.FC<NavUserMenuInterface> = ({ forwardRef }) => {
 
   return (
     <div ref={forwardRef} className="userChoicesDiv">
-      <div className="userChoiceDiv">
-        <p onClick={() => logout()} className="userChoice">
-          Logout
-        </p>
-        <i onClick={() => logout()} className="bi bi-door-closed" />
+      <div onClick={logout} className="userChoiceDiv">
+        <p className="userChoice">Logout</p>
+        <i className="bi bi-door-closed" />
       </div>
 
       {randomWorkspace && (

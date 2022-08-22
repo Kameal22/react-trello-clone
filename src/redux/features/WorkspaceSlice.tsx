@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction, current } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {
   WorkspaceInterface,
   BoardInterface,
@@ -94,7 +94,12 @@ export const workspaceSlice = createSlice({
         (board) => board.boardId === action.payload.boardId
       );
 
-      state.workspace[workspace].workspaceBoards.splice(boardToDelete, 1);
+      const deletedBoard = [
+        ...state.workspace[workspace].workspaceBoards.slice(0, boardToDelete),
+        ...state.workspace[workspace].workspaceBoards.slice(boardToDelete + 1),
+      ];
+
+      state.workspace[workspace].workspaceBoards = deletedBoard;
     },
 
     reArangeColumn: (

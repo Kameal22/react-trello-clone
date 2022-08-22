@@ -1,7 +1,7 @@
 import "../../styles/workspaceStyles/workspace.css";
 import { useNavigate, useParams } from "react-router-dom";
 import { RootState } from "../../redux/Store";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { editWorkspace } from "../../redux/features/WorkspaceSlice";
 import { useSelector, useDispatch } from "react-redux";
 import EditWorkspaceDetails from "./EditWorkspaceDetails";
@@ -9,9 +9,13 @@ import WorkspaceBoards from "./WorkspaceBoards";
 import PopUp from "../popups/PopUpMessage";
 import { changeColor } from "../../redux/features/navigationSlice";
 import useToggle from "../../hooks/useToggle";
+import { BoardInterface } from "../../interfaces/WorkspaceInterface";
 
 const Workspace: React.FC = () => {
   const [workspaceEditing, setWorkspaceEditing] = useToggle(false);
+  const [shownBoards, setShownBoards] = useState<BoardInterface[] | undefined>(
+    []
+  );
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -27,6 +31,14 @@ const Workspace: React.FC = () => {
     //And this is the specific workspace that is viewed in component found by this ID up above.
     return workspace.workspaceId === workspaceId;
   });
+
+  useEffect(() => {
+    setShownBoards(shownWorkspace?.workspaceBoards);
+  }, [shownWorkspace]);
+
+  useEffect(() => {
+    setShownBoards(shownWorkspace?.workspaceBoards);
+  }, [shownWorkspace?.workspaceId]); // Do this to update shown boards in workspace that user routed to.
 
   useEffect(() => {
     dispatch(
@@ -87,7 +99,11 @@ const Workspace: React.FC = () => {
           </div>
         )}
       </div>
-      <WorkspaceBoards shownWorkspace={shownWorkspace} />
+      <WorkspaceBoards
+        shownBoards={shownBoards}
+        setShownBoards={setShownBoards}
+        shownWorkspace={shownWorkspace}
+      />
       <PopUp />
     </div>
   );
