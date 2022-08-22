@@ -42,7 +42,7 @@ const EditWorkspaceDetails: React.FC<EditWorkspaceProps> = ({
           <button disabled={error !== ""} type="submit" className="saveButton">
             Save
           </button>
-          <button onClick={() => setEditting()} className="cancelButton">
+          <button onClick={setEditting} className="cancelButton">
             Cancel
           </button>
         </div>

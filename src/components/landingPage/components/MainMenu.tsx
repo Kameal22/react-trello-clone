@@ -68,7 +68,6 @@ const MainMenu: React.FC = () => {
     deleteWorkspaceFunc(workspaceId);
     removeFromLastWatched(workspaceName);
     handleRemoveHighlight(workspaceId);
-    window.location.reload();
   };
 
   return (
@@ -100,7 +99,7 @@ const MainMenu: React.FC = () => {
           Workspaces
         </p>
         <i
-          onClick={() => showWorkspaceCreating()}
+          onClick={showWorkspaceCreating}
           style={
             isWorkspace
               ? { fontSize: "1.2em" }

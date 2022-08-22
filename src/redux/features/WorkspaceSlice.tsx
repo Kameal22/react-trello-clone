@@ -52,7 +52,12 @@ export const workspaceSlice = createSlice({
         (value) => value.workspaceId === action.payload.workspaceId
       );
 
-      state.workspace.splice(workspace, 1);
+      const deletedWorkspace = [
+        ...state.workspace.slice(0, workspace),
+        ...state.workspace.slice(workspace + 1),
+      ];
+
+      state.workspace = deletedWorkspace;
     },
     showWorkspaceDropdown: (state, action: PayloadAction<{ id: string }>) => {
       const workspaceWithShownDropdown = state.workspace.findIndex(

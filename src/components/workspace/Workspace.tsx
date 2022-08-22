@@ -1,7 +1,7 @@
 import "../../styles/workspaceStyles/workspace.css";
 import { useNavigate, useParams } from "react-router-dom";
 import { RootState } from "../../redux/Store";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { editWorkspace } from "../../redux/features/WorkspaceSlice";
 import { useSelector, useDispatch } from "react-redux";
 import EditWorkspaceDetails from "./EditWorkspaceDetails";
@@ -77,10 +77,7 @@ const Workspace: React.FC = () => {
                 {shownWorkspace?.workspaceDescription}
               </p>
             </div>
-            <div
-              onClick={() => setWorkspaceEditing()}
-              className="editWorkspaceDiv"
-            >
+            <div onClick={setWorkspaceEditing} className="editWorkspaceDiv">
               <i
                 style={{ fontSize: ".8em", marginRight: "1em" }}
                 className="bi bi-pencil"

@@ -26,7 +26,7 @@ const SearchForBoards: React.FC<SearchForBoardsInterface> = ({
             placeholder="Search for boards.."
             type="text"
             name="search"
-          ></input>
+          />
         </form>
       )}
     </div>
