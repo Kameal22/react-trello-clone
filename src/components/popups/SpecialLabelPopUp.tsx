@@ -43,7 +43,7 @@ const CreateLabelPopUp: React.FC<CreateLabelInterface> = ({
   return (
     <div className="createLabel">
       <p className="createBoardHeading">Select special label</p>
-      <i id="cornerIcon" onClick={() => setCreating()} className="bi bi-x" />
+      <i id="cornerIcon" onClick={setCreating} className="bi bi-x" />
 
       <div className="createLabelOptions">
         {fancyColorChoices.map((choice) => {

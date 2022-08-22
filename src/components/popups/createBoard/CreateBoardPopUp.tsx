@@ -85,7 +85,7 @@ const CreateBoardPopUp: React.FC<CreateBoardProps> = ({ forwardRef }) => {
                     ? { border: "3px solid black", background: choice }
                     : { background: choice }
                 }
-              ></div>
+              />
             );
           })}
         </div>

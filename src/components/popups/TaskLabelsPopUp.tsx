@@ -17,7 +17,15 @@ interface TaskLabelsInterface {
   forwardRef: React.RefObject<HTMLDivElement>;
 }
 
-const TaskLabelsPopUp: React.FC<TaskLabelsInterface> = (props) => {
+const TaskLabelsPopUp: React.FC<TaskLabelsInterface> = ({
+  editLabels,
+  workspaceId,
+  boardId,
+  columnId,
+  taskId,
+  chosenIndicator,
+  forwardRef,
+}) => {
   const dispatch = useDispatch();
   const setHighlight = useSetHT();
   const highlights = useContext(HighlightedTaskContext);
@@ -25,31 +33,22 @@ const TaskLabelsPopUp: React.FC<TaskLabelsInterface> = (props) => {
   const setLabel = (indicator: string) => {
     dispatch(
       selectTaskLabel({
-        workspaceId: props.workspaceId,
-        boardId: props.boardId,
-        columnId: props.columnId,
-        taskId: props.taskId,
+        workspaceId: workspaceId,
+        boardId: boardId,
+        columnId: columnId,
+        taskId: taskId,
         taskIndicator: indicator,
       })
     );
-    addLabelToHighlightedTask(
-      highlights,
-      props.taskId,
-      indicator,
-      setHighlight
-    );
-    props.editLabels();
+    addLabelToHighlightedTask(highlights, taskId, indicator, setHighlight);
+    editLabels();
   };
 
   return (
-    <div ref={props.forwardRef} className="editTaskLabelsDiv">
+    <div ref={forwardRef} className="editTaskLabelsDiv">
       <div className="edidTaskDivHeading">
         <p className="editTaskHeading">Labels</p>
-        <i
-          id="cornerIcon"
-          onClick={() => props.editLabels()}
-          className="bi bi-x"
-        />
+        <i id="cornerIcon" onClick={editLabels} className="bi bi-x" />
       </div>
 
       <p className="labelsInfo">Labels</p>
@@ -65,7 +64,7 @@ const TaskLabelsPopUp: React.FC<TaskLabelsInterface> = (props) => {
             >
               <i
                 style={
-                  props.chosenIndicator === choice
+                  chosenIndicator === choice
                     ? { display: "block" }
                     : { display: "none" }
                 }

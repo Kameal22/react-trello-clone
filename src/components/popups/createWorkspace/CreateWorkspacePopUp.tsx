@@ -77,7 +77,7 @@ const CreateWorkspacePopUp: React.FC<CreateWorkspaceProps> = ({
 
   return (
     <div ref={forwardRef} className="createWorkspacePopUp">
-      <i onClick={() => hideCreating()} className="bi bi-x-lg" />
+      <i onClick={hideCreating} className="bi bi-x-lg" />
       <div className="createWorkspace">
         <div className="createWorkspaceInfo">
           <h2>

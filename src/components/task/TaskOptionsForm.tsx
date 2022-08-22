@@ -50,7 +50,6 @@ const TaskOptionsForm: React.FC<OptionsFormInterface> = ({
     );
     handleRemoveHighlight(taskId);
     showForm();
-    window.location.reload();
   };
 
   const copyTaskFunc = () => {
