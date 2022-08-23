@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../redux/Store";
 import { setPopUpMessage } from "../../redux/features/popUpMessagSlice";
 
-const PopUp: React.FC = () => {
+const PopUpMessage: React.FC = () => {
   const dispatch = useDispatch();
 
   const message = useSelector((state: RootState) => state.message.popUpMessage);
@@ -24,4 +24,4 @@ const PopUp: React.FC = () => {
   }
 };
 
-export default PopUp;
+export default PopUpMessage;

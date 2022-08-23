@@ -18,7 +18,6 @@ const MainPage: React.FC = () => {
   return (
     <div className="mainPageDiv">
       <MainOverview />
-      <PopUpMessage />
     </div>
   );
 };

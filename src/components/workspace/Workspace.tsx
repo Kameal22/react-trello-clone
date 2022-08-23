@@ -6,7 +6,6 @@ import { editWorkspace } from "../../redux/features/WorkspaceSlice";
 import { useSelector, useDispatch } from "react-redux";
 import EditWorkspaceDetails from "./EditWorkspaceDetails";
 import WorkspaceBoards from "./WorkspaceBoards";
-import PopUp from "../popups/PopUpMessage";
 import { changeColor } from "../../redux/features/navigationSlice";
 import useToggle from "../../hooks/useToggle";
 import { BoardInterface } from "../../interfaces/WorkspaceInterface";
@@ -100,7 +99,6 @@ const Workspace: React.FC = () => {
         setShownBoards={setShownBoards}
         shownWorkspace={shownWorkspace}
       />
-      <PopUp />
     </div>
   );
 };

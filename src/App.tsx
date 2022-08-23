@@ -20,6 +20,7 @@ import { showDropdown } from "./redux/features/navigationSlice";
 import UseClickOutside from "./hooks/UseClickOutside";
 import { RWProvider } from "./context/recentlyViewedContext";
 import { HTProvider } from "./context/highlightedTaskContext";
+import PopUpMessage from "./components/popups/PopUpMessage";
 
 function App() {
   const dispatch = useDispatch();
@@ -95,6 +96,7 @@ function App() {
               <CreateWorkspacePopUp forwardRef={createWorkspaceRef} />
             )}
             {createBoard && <CreateBoardPopUp forwardRef={createBoardRef} />}
+            {<PopUpMessage />}
           </BrowserRouter>
         </div>
       </HTProvider>
