@@ -28,7 +28,7 @@ const Nav: React.FC<NavProps> = ({
 }) => {
   const dispatch = useDispatch();
 
-  const user = useSelector((state: RootState) => state.users.user);
+  const user = localStorage.getItem("currentUser");
 
   const dropdown = useSelector((state: RootState) => state.nav.navDropdown);
 
@@ -90,7 +90,7 @@ const Nav: React.FC<NavProps> = ({
           <NavSearchBar />
         </div>
         <div ref={registerRef} className="navigationRegister">
-          {user.name ? (
+          {user ? (
             <h5
               className="navUserName"
               onClick={
@@ -99,7 +99,7 @@ const Nav: React.FC<NavProps> = ({
                   : () => setDropdown("userChoices")
               }
             >
-              {user.name}
+              {user}
             </h5>
           ) : (
             <h5

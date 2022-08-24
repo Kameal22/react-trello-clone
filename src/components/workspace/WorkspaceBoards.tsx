@@ -6,7 +6,7 @@ import {
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import SearchForBoards from "./SearchForBoards";
-import { useEffect, useState, useContext } from "react";
+import { useContext } from "react";
 import { deleteBoard } from "../../redux/features/WorkspaceSlice";
 import { setCreateBoard } from "../../redux/features/popUpCreateComponentSlice";
 import { includesIgnoredCase } from "../../utils/IgnoreCase";

@@ -1,6 +1,7 @@
 import "../../../styles/navStyles/navMenuStyles/userMenu.css";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../../../redux/features/registerSlice";
+import { testLogoutUser } from "../../../redux/features/usersSlice";
 import { showDropdown } from "../../../redux/features/navigationSlice";
 import { RootState } from "../../../redux/Store";
 import { Link } from "react-router-dom";
@@ -25,6 +26,7 @@ const NavUserMenu: React.FC<NavUserMenuInterface> = ({ forwardRef }) => {
 
   const logout = () => {
     dispatch(logoutUser());
+    dispatch(testLogoutUser());
     setDropdown("");
   };
 

@@ -28,7 +28,7 @@ const CreateWorkspacePopUp: React.FC<CreateWorkspaceProps> = ({
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const user = useSelector((state: RootState) => state.users.user);
+  const user = useSelector((state: RootState) => state.registration.user);
 
   const hideCreating = () => {
     dispatch(hideCreateWorkspace());

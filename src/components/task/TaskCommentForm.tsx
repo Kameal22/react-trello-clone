@@ -22,7 +22,7 @@ const TaskCommentForm: React.FC<TaskCommentFormInterface> = ({
 
   const dispatch = useDispatch();
 
-  const user = useSelector((state: RootState) => state.users.user);
+  const user = useSelector((state: RootState) => state.registration.user);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();

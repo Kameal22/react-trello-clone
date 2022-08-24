@@ -80,7 +80,7 @@ const NavSearchBar: React.FC = () => {
             filteredData.map((data) => {
               return (
                 <Link
-                  onClick={() => clearInput()}
+                  onClick={clearInput}
                   className="searchingLink"
                   key={data.boardId}
                   to={`/board/${data.workspaceId}/${data.boardId}`}
