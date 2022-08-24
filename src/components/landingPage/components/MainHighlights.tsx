@@ -9,6 +9,8 @@ const MainHighlights: React.FC = () => {
 
   const highlightedTasks = useContext(HighlightedTaskContext);
 
+  const user = localStorage.getItem("currentUser");
+
   useEffect(() => {
     const randomizedTask =
       highlightedTasks[Math.floor(Math.random() * highlightedTasks.length)];
@@ -28,7 +30,9 @@ const MainHighlights: React.FC = () => {
 
       {taskToShow && (
         <div className="highlight">
-          <p className="highlightUser">{taskToShow.taskAuthor}</p>
+          <p className="highlightUser">
+            {taskToShow.taskAuthor}: {user}
+          </p>
           <p className="highlightDate">3 days ago</p>
           <div
             style={{

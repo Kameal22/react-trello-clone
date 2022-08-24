@@ -28,7 +28,7 @@ const CreateWorkspacePopUp: React.FC<CreateWorkspaceProps> = ({
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const user = useSelector((state: RootState) => state.registration.user);
+  const user = localStorage.getItem("currentUser");
 
   const hideCreating = () => {
     dispatch(hideCreateWorkspace());
@@ -41,13 +41,13 @@ const CreateWorkspacePopUp: React.FC<CreateWorkspaceProps> = ({
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!nameError) {
-      if (user.name) {
+      if (user) {
         dispatch(
           addWorkspace({
             workspaceName,
             workspaceDescription,
             workspaceDate: date,
-            workspaceMember: user.name,
+            workspaceMember: user,
             workspaceLetterColor: generateRandomColor(),
             workspaceBoards: [],
             workspaceLandingPageMenu: false,

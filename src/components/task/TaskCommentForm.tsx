@@ -1,9 +1,9 @@
 import "../../styles/taskStyles/taskCommentForm.css";
 import { addTaskComment } from "../../redux/features/WorkspaceSlice";
-import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "../../redux/Store";
+import { useDispatch } from "react-redux";
 import { date } from "../../utils/GetDate";
 import useInputState from "../../hooks/useInputState";
+import { useEffect, useState } from "react";
 
 interface TaskCommentFormInterface {
   workspaceId: string | undefined;
@@ -19,10 +19,16 @@ const TaskCommentForm: React.FC<TaskCommentFormInterface> = ({
   taskId,
 }) => {
   const [taskComment, setTaskComment, , , , , , , reset] = useInputState("");
+  const [userName, setUserName] = useState("");
 
   const dispatch = useDispatch();
 
-  const user = useSelector((state: RootState) => state.registration.user);
+  useEffect(() => {
+    const user = localStorage.getItem("currentUser");
+    if (user) {
+      setUserName(user);
+    }
+  }, []);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -33,7 +39,7 @@ const TaskCommentForm: React.FC<TaskCommentFormInterface> = ({
         columnId: columnId,
         taskId: taskId,
         taskComment,
-        taskAuthor: user.name,
+        taskAuthor: userName,
         taskDate: date,
       })
     );

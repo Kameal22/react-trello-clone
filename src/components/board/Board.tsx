@@ -35,7 +35,7 @@ const Board: React.FC = () => {
   const workspaces = useSelector(
     (state: RootState) => state.workspace.workspace
   );
-  const user = useSelector((state: RootState) => state.registration.user);
+  const user = localStorage.getItem("currentUser");
 
   const shownWorkspace = workspaces.find((workspace) => {
     return workspace.workspaceId === workspaceId;
@@ -237,8 +237,8 @@ const Board: React.FC = () => {
     >
       <div className="boardHeadingBOARD">
         <h3 className="boardNameBOARD">board: {shownBoard?.boardName}</h3>
-        {user.name ? (
-          <h4 className="boardUserNameBOARD">{user.name} </h4>
+        {user ? (
+          <h4 className="boardUserNameBOARD">{user} </h4>
         ) : (
           <h4 className="boardUserNameBOARD">
             {shownWorkspace?.workspaceMember}

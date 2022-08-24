@@ -1,5 +1,4 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import registeredUsersReducer from "./features/registerSlice";
 import usersReducer from "./features/usersSlice";
 import navigationReducer from "./features/navigationSlice";
 import popUpReducer from "./features/popUpMessagSlice";
@@ -10,7 +9,6 @@ import storage from "redux-persist/lib/storage";
 import thunk from "redux-thunk";
 
 const reducers = combineReducers({
-  registration: registeredUsersReducer,
   users: usersReducer,
   nav: navigationReducer,
   message: popUpReducer,

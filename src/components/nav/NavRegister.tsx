@@ -1,5 +1,4 @@
 import "../../styles/navStyles/navRegister.css";
-import { registerUser } from "../../redux/features/registerSlice";
 import { showDropdown } from "../../redux/features/navigationSlice";
 import { setPopUpMessage } from "../../redux/features/popUpMessagSlice";
 import { testRegisterUser } from "../../redux/features/usersSlice";
@@ -36,7 +35,6 @@ const Register: React.FC<RegisterProps> = ({ forwardRef }) => {
     } else if (password.length < 5) {
       handleError("Password must contain at least 5 characters");
     } else {
-      dispatch(registerUser({ name, password }));
       setDropdown("");
       setMessage(`${name} registered in`);
       testRegistration(name, password);
