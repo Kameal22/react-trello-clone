@@ -1,7 +1,7 @@
 import "../../styles/navStyles/navRegister.css";
 import { showDropdown } from "../../redux/features/navigationSlice";
 import { setPopUpMessage } from "../../redux/features/popUpMessagSlice";
-import { testRegisterUser } from "../../redux/features/usersSlice";
+import { registerUser } from "../../redux/features/usersSlice";
 import { useDispatch } from "react-redux";
 import useInputState from "../../hooks/useInputState";
 
@@ -21,7 +21,7 @@ const Register: React.FC<RegisterProps> = ({ forwardRef }) => {
 
   const testRegistration = (testLogin: string, testPassword: string) => {
     const user = { login: testLogin, password: testPassword };
-    dispatch(testRegisterUser(user));
+    dispatch(registerUser(user));
   };
 
   const setMessage = (message: string) => {

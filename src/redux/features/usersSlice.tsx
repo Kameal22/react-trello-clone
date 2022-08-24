@@ -14,19 +14,24 @@ const initialState: Users = {
 };
 
 export const usersSlice = createSlice({
-  name: "Register",
+  name: "users",
   initialState,
   reducers: {
-    testRegisterUser: (state, action: PayloadAction<User>) => {
+    registerUser: (state, action: PayloadAction<User>) => {
       state.Users.push(action.payload);
       window.localStorage.setItem("currentUser", action.payload.login);
     },
-    testLogoutUser: (state) => {
+    logoutUser: (state, action: PayloadAction<{ login: string }>) => {
       window.localStorage.removeItem("currentUser");
+      const logout = state.Users.filter(
+        (user) => user.login !== action.payload.login
+      );
+
+      state.Users = logout;
     },
   },
 });
 
-export const { testRegisterUser, testLogoutUser } = usersSlice.actions;
+export const { registerUser, logoutUser } = usersSlice.actions;
 
 export default usersSlice.reducer;

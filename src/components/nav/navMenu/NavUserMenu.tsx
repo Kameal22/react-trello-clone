@@ -1,9 +1,10 @@
 import "../../../styles/navStyles/navMenuStyles/userMenu.css";
 import { useDispatch, useSelector } from "react-redux";
-import { testLogoutUser } from "../../../redux/features/usersSlice";
+import { logoutUser } from "../../../redux/features/usersSlice";
 import { showDropdown } from "../../../redux/features/navigationSlice";
 import { RootState } from "../../../redux/Store";
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 interface NavUserMenuInterface {
   forwardRef: React.RefObject<HTMLDivElement>;
@@ -11,10 +12,18 @@ interface NavUserMenuInterface {
 
 const NavUserMenu: React.FC<NavUserMenuInterface> = ({ forwardRef }) => {
   const dispatch = useDispatch();
+  const [login, setLogin] = useState("");
 
   const workspaces = useSelector(
     (state: RootState) => state.workspace.workspace
   );
+
+  useEffect(() => {
+    const user = localStorage.getItem("currentUser");
+    if (user) {
+      setLogin(user);
+    }
+  }, []);
 
   const randomWorkspace =
     workspaces[Math.floor(Math.random() * workspaces.length)];
@@ -24,7 +33,7 @@ const NavUserMenu: React.FC<NavUserMenuInterface> = ({ forwardRef }) => {
   };
 
   const logout = () => {
-    dispatch(testLogoutUser());
+    dispatch(logoutUser({ login }));
     setDropdown("");
   };
 
