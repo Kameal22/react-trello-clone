@@ -32,7 +32,7 @@ const Nav: React.FC = () => {
 
         <div
           ref={workspacesRef}
-          onClick={() => setWorkspaceMenuOpen(!open)}
+          onClick={() => setWorkspaceMenuOpen(!workspaceMenuOpen)}
           className="navigationWorkspace"
         >
           <h5>Workspaces</h5>
