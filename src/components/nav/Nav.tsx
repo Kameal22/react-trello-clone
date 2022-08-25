@@ -13,19 +13,9 @@ import NavCreateMenu from "./navMenu/NavCreateMenu";
 
 interface NavProps {
   forwardRef: React.RefObject<HTMLDivElement>;
-  workspacesRef: React.RefObject<HTMLDivElement>;
-  recentsRef: React.RefObject<HTMLDivElement>;
-  createRef: React.RefObject<HTMLDivElement>;
-  registerRef: React.RefObject<HTMLDivElement>;
 }
 
-const Nav: React.FC<NavProps> = ({
-  forwardRef,
-  workspacesRef,
-  recentsRef,
-  createRef,
-  registerRef,
-}) => {
+const Nav: React.FC<NavProps> = ({ forwardRef }) => {
   const dispatch = useDispatch();
 
   const user = localStorage.getItem("currentUser");
@@ -45,7 +35,6 @@ const Nav: React.FC<NavProps> = ({
           <h3 className="navigationLogo">Trello</h3>
         </Link>
         <div
-          ref={workspacesRef}
           onClick={
             dropdown === "workspaces"
               ? () => setDropdown("")
@@ -55,10 +44,12 @@ const Nav: React.FC<NavProps> = ({
         >
           <h5>Workspaces</h5>
           <i className="bi bi-chevron-down" />
+
+          {dropdown === "workspaces" && (
+            <NavWorkspaces forwardRef={forwardRef} />
+          )}
         </div>
-        {dropdown === "workspaces" && <NavWorkspaces forwardRef={forwardRef} />}
         <div
-          ref={recentsRef}
           onClick={
             dropdown === "recent"
               ? () => setDropdown("")
@@ -68,28 +59,27 @@ const Nav: React.FC<NavProps> = ({
         >
           <h5>Recent</h5>
           <i className="bi bi-chevron-down" />
+          {dropdown === "recent" && <NavRecent forwardRef={forwardRef} />}
         </div>
-        {dropdown === "recent" && <NavRecent forwardRef={forwardRef} />}
         <div
-          ref={createRef}
           onClick={
             dropdown === "create"
               ? () => setDropdown("")
               : () => setDropdown("create")
           }
-          className="navigationStarred"
+          className="navigationCreate"
         >
           <h5>Create</h5>
           <i className="bi bi-chevron-down" />
+          {dropdown === "create" && <NavCreateMenu forwardRef={forwardRef} />}
         </div>
-        {dropdown === "create" && <NavCreateMenu forwardRef={forwardRef} />}
       </div>
 
       <div className="navigationRightSide">
         <div className="navigationSearch">
           <NavSearchBar />
         </div>
-        <div ref={registerRef} className="navigationRegister">
+        <div className="navigationRegister">
           {user ? (
             <h5
               className="navUserName"
@@ -112,11 +102,9 @@ const Nav: React.FC<NavProps> = ({
               Register
             </h5>
           )}
-          {dropdown === "registering" && <Register forwardRef={forwardRef} />}
+          {dropdown === "registering" && <Register />}
 
-          {dropdown === "userChoices" && (
-            <NavUserMenu forwardRef={forwardRef} />
-          )}
+          {dropdown === "userChoices" && <NavUserMenu />}
         </div>
       </div>
     </div>

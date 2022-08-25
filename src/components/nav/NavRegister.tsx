@@ -5,11 +5,7 @@ import { registerUser } from "../../redux/features/usersSlice";
 import { useDispatch } from "react-redux";
 import useInputState from "../../hooks/useInputState";
 
-interface RegisterProps {
-  forwardRef: React.RefObject<HTMLDivElement>;
-}
-
-const Register: React.FC<RegisterProps> = ({ forwardRef }) => {
+const Register: React.FC = () => {
   const [name, setName, , , , , error, handleError] = useInputState("");
   const [password, setPassword] = useInputState("");
 
@@ -45,7 +41,7 @@ const Register: React.FC<RegisterProps> = ({ forwardRef }) => {
   };
 
   return (
-    <div ref={forwardRef} className="registerDiv">
+    <div className="registerDiv">
       <p className="registerHeading">Create account</p>
       <form autoComplete="off" onSubmit={handleSubmit}>
         <div className="registerInputs">

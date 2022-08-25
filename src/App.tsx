@@ -49,41 +49,18 @@ function App() {
 
   UseClickOutside(createBoardRef, closeBoardPopUp);
 
-  const setDropdown = (dropdownItem: string) => {
-    dispatch(showDropdown({ dropdownItem }));
-  };
+  // const setDropdown = (dropdownItem: string) => {
+  //   dispatch(showDropdown({ dropdownItem }));
+  // };
 
-  const workspacesRef = useRef<HTMLDivElement>(null); // This prevents navigation menu from closing and opening again.
-  const recentsRef = useRef<HTMLDivElement>(null);
-  const createRef = useRef<HTMLDivElement>(null);
-  const registerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    document.addEventListener("mousedown", (event) => {
-      if (
-        !dropdownMenuRef.current?.contains(event.target as Node) &&
-        !workspacesRef.current?.contains(event.target as Node) &&
-        !recentsRef.current?.contains(event.target as Node) &&
-        !createRef.current?.contains(event.target as Node) &&
-        !registerRef.current?.contains(event.target as Node)
-      ) {
-        setDropdown("");
-      }
-    });
-  });
+  // UseClickOutside(dropdownMenuRef, () => setDropdown(""));
 
   return (
     <RWProvider>
       <HTProvider>
         <div className="App">
           <BrowserRouter>
-            <Nav
-              forwardRef={dropdownMenuRef}
-              workspacesRef={workspacesRef}
-              recentsRef={recentsRef}
-              createRef={createRef}
-              registerRef={registerRef}
-            />
+            <Nav forwardRef={dropdownMenuRef} />
             <Routes>
               <Route path="/" element={<MainPage />} />
               <Route path="/overview" element={<MainOverview />} />

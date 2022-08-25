@@ -6,11 +6,7 @@ import { RootState } from "../../../redux/Store";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 
-interface NavUserMenuInterface {
-  forwardRef: React.RefObject<HTMLDivElement>;
-}
-
-const NavUserMenu: React.FC<NavUserMenuInterface> = ({ forwardRef }) => {
+const NavUserMenu: React.FC = () => {
   const dispatch = useDispatch();
   const [login, setLogin] = useState("");
 
@@ -38,7 +34,7 @@ const NavUserMenu: React.FC<NavUserMenuInterface> = ({ forwardRef }) => {
   };
 
   return (
-    <div ref={forwardRef} className="userChoicesDiv">
+    <div className="userChoicesDiv">
       <div onClick={logout} className="userChoiceDiv">
         <p className="userChoice">Logout</p>
         <i className="bi bi-door-closed" />
