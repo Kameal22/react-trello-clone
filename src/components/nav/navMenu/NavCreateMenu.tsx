@@ -5,11 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setCreateWorkspace } from "../../../redux/features/popUpCreateComponentSlice";
 import { setCreateBoard } from "../../../redux/features/popUpCreateComponentSlice";
 
-interface NavCreateInterface {
-  forwardRef: React.RefObject<HTMLDivElement>;
-}
-
-const NavCreateMenu: React.FC<NavCreateInterface> = ({ forwardRef }) => {
+const NavCreateMenu: React.FC = () => {
   const dispatch = useDispatch();
 
   const setDropdown = (dropdownItem: string) => {
@@ -31,7 +27,7 @@ const NavCreateMenu: React.FC<NavCreateInterface> = ({ forwardRef }) => {
   );
 
   return (
-    <div ref={forwardRef} className="navCreateDiv">
+    <div className="navCreateDiv">
       <div className="navCreateHeading">
         <p>Create..</p>
         <i onClick={() => setDropdown("")} className="bi bi-x" />

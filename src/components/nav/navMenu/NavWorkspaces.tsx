@@ -5,11 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { setCreateWorkspace } from "../../../redux/features/popUpCreateComponentSlice";
 
-interface WorkspaceProps {
-  forwardRef: React.RefObject<HTMLDivElement>;
-}
-
-const NavWorkspaces: React.FC<WorkspaceProps> = ({ forwardRef }) => {
+const NavWorkspaces: React.FC = () => {
   const dispatch = useDispatch();
 
   const setDropdown = (dropdownItem: string) => {
@@ -28,7 +24,7 @@ const NavWorkspaces: React.FC<WorkspaceProps> = ({ forwardRef }) => {
   const isWorkspace = workspaces[0];
 
   return (
-    <div ref={forwardRef} className="navWorkspacesDiv">
+    <div className="navWorkspacesDiv">
       <div className="navWorkspacesHeading">
         <p>Workspaces</p>
         <i onClick={() => setDropdown("")} className="bi bi-x" />

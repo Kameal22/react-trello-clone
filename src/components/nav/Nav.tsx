@@ -11,11 +11,7 @@ import NavUserMenu from "./navMenu/NavUserMenu";
 import { Link } from "react-router-dom";
 import NavCreateMenu from "./navMenu/NavCreateMenu";
 
-interface NavProps {
-  forwardRef: React.RefObject<HTMLDivElement>;
-}
-
-const Nav: React.FC<NavProps> = ({ forwardRef }) => {
+const Nav: React.FC = () => {
   const dispatch = useDispatch();
 
   const user = localStorage.getItem("currentUser");
@@ -45,9 +41,7 @@ const Nav: React.FC<NavProps> = ({ forwardRef }) => {
           <h5>Workspaces</h5>
           <i className="bi bi-chevron-down" />
 
-          {dropdown === "workspaces" && (
-            <NavWorkspaces forwardRef={forwardRef} />
-          )}
+          {dropdown === "workspaces" && <NavWorkspaces />}
         </div>
         <div
           onClick={
@@ -59,7 +53,7 @@ const Nav: React.FC<NavProps> = ({ forwardRef }) => {
         >
           <h5>Recent</h5>
           <i className="bi bi-chevron-down" />
-          {dropdown === "recent" && <NavRecent forwardRef={forwardRef} />}
+          {dropdown === "recent" && <NavRecent />}
         </div>
         <div
           onClick={
@@ -71,7 +65,7 @@ const Nav: React.FC<NavProps> = ({ forwardRef }) => {
         >
           <h5>Create</h5>
           <i className="bi bi-chevron-down" />
-          {dropdown === "create" && <NavCreateMenu forwardRef={forwardRef} />}
+          {dropdown === "create" && <NavCreateMenu />}
         </div>
       </div>
 

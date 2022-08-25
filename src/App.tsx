@@ -35,7 +35,6 @@ function App() {
 
   const createWorkspaceRef = useRef<HTMLDivElement>(null);
   const createBoardRef = useRef<HTMLDivElement>(null);
-  const dropdownMenuRef = useRef<HTMLDivElement>(null);
 
   const closeWorkspacePopUp = () => {
     dispatch(hideCreateWorkspace());
@@ -49,18 +48,12 @@ function App() {
 
   UseClickOutside(createBoardRef, closeBoardPopUp);
 
-  // const setDropdown = (dropdownItem: string) => {
-  //   dispatch(showDropdown({ dropdownItem }));
-  // };
-
-  // UseClickOutside(dropdownMenuRef, () => setDropdown(""));
-
   return (
     <RWProvider>
       <HTProvider>
         <div className="App">
           <BrowserRouter>
-            <Nav forwardRef={dropdownMenuRef} />
+            <Nav />
             <Routes>
               <Route path="/" element={<MainPage />} />
               <Route path="/overview" element={<MainOverview />} />

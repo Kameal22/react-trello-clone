@@ -5,11 +5,7 @@ import { Link } from "react-router-dom";
 import { RecentlyViewedContext } from "../../../context/recentlyViewedContext";
 import { useContext } from "react";
 
-interface RecentProps {
-  forwardRef: React.RefObject<HTMLDivElement>;
-}
-
-const NavRecent: React.FC<RecentProps> = ({ forwardRef }) => {
+const NavRecent: React.FC = () => {
   const dispatch = useDispatch();
 
   const recents = useContext(RecentlyViewedContext);
@@ -19,7 +15,7 @@ const NavRecent: React.FC<RecentProps> = ({ forwardRef }) => {
   };
 
   return (
-    <div ref={forwardRef} className="navRecentDiv">
+    <div className="navRecentDiv">
       <div className="navRecentHeading">
         <p>Recent boards</p>
         <i onClick={() => setDropdown("")} className="bi bi-x"></i>
