@@ -13,6 +13,7 @@ const NavWorkspaces: React.FC<Props> = ({ setOpen }) => {
 
   const showWorkspaceCreating = () => {
     dispatch(setCreateWorkspace());
+    setOpen(false);
   };
 
   const workspaces = useSelector(
@@ -22,7 +23,7 @@ const NavWorkspaces: React.FC<Props> = ({ setOpen }) => {
   const isWorkspace = workspaces[0];
 
   return (
-    <div className="navWorkspacesDiv">
+    <div onClick={(e) => e.stopPropagation()} className="navWorkspacesDiv">
       <div className="navWorkspacesHeading">
         <p>Workspaces</p>
         <i className="bi bi-x" onClick={() => setOpen(false)} />

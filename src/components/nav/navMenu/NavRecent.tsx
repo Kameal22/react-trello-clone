@@ -3,14 +3,18 @@ import { Link } from "react-router-dom";
 import { RecentlyViewedContext } from "../../../context/recentlyViewedContext";
 import { useContext } from "react";
 
-const NavRecent: React.FC = () => {
+interface Props {
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const NavRecent: React.FC<Props> = ({ setOpen }) => {
   const recents = useContext(RecentlyViewedContext);
 
   return (
-    <div className="navRecentDiv">
+    <div onClick={(e) => e.stopPropagation()} className="navRecentDiv">
       <div className="navRecentHeading">
         <p>Recent boards</p>
-        <i className="bi bi-x"></i>
+        <i onClick={() => setOpen(false)} className="bi bi-x" />
       </div>
 
       {recents.length > 0 ? (
@@ -18,6 +22,7 @@ const NavRecent: React.FC = () => {
           {recents.map((board) => {
             return (
               <Link
+                onClick={() => setOpen(false)}
                 key={board.id}
                 className="workspaceMenuLink"
                 to={`/board/${board.workspaceId}/${board.id}`}

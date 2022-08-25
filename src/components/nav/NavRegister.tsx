@@ -4,7 +4,11 @@ import { registerUser } from "../../redux/features/usersSlice";
 import { useDispatch } from "react-redux";
 import useInputState from "../../hooks/useInputState";
 
-const Register: React.FC = () => {
+interface Props {
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const Register: React.FC<Props> = ({ setOpen }) => {
   const [name, setName, , , , , error, handleError] = useInputState("");
   const [password, setPassword] = useInputState("");
 
@@ -28,6 +32,7 @@ const Register: React.FC = () => {
     } else {
       setMessage(`${name} registered in`);
       testRegistration(name, password);
+      setOpen(false);
       setTimeout(() => {
         setMessage("");
       }, 1500);
@@ -35,7 +40,7 @@ const Register: React.FC = () => {
   };
 
   return (
-    <div className="registerDiv">
+    <div onClick={(e) => e.stopPropagation()} className="registerDiv">
       <p className="registerHeading">Create account</p>
       <form autoComplete="off" onSubmit={handleSubmit}>
         <div className="registerInputs">

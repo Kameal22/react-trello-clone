@@ -28,7 +28,7 @@ const NavUserMenu: React.FC = () => {
   };
 
   return (
-    <div className="userChoicesDiv">
+    <div onClick={(e) => e.stopPropagation()} className="userChoicesDiv">
       <div onClick={logout} className="userChoiceDiv">
         <p className="userChoice">Logout</p>
         <i className="bi bi-door-closed" />

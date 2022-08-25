@@ -4,15 +4,21 @@ import { useDispatch, useSelector } from "react-redux";
 import { setCreateWorkspace } from "../../../redux/features/popUpCreateComponentSlice";
 import { setCreateBoard } from "../../../redux/features/popUpCreateComponentSlice";
 
-const NavCreateMenu: React.FC = () => {
+interface Props {
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const NavCreateMenu: React.FC<Props> = ({ setOpen }) => {
   const dispatch = useDispatch();
 
   const showWorkspaceCreating = () => {
     dispatch(setCreateWorkspace());
+    setOpen(false);
   };
 
   const showBoardCreating = () => {
     dispatch(setCreateBoard());
+    setOpen(false);
   };
 
   const workspaces = useSelector(
@@ -20,10 +26,10 @@ const NavCreateMenu: React.FC = () => {
   );
 
   return (
-    <div className="navCreateDiv">
+    <div onClick={(e) => e.stopPropagation()} className="navCreateDiv">
       <div className="navCreateHeading">
         <p>Create..</p>
-        <i className="bi bi-x" />
+        <i onClick={() => setOpen(false)} className="bi bi-x" />
       </div>
 
       <div className="navCreateChoices">
