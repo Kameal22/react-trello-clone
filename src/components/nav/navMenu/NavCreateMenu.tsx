@@ -1,5 +1,4 @@
 import "../../../styles/navStyles/navMenuStyles/createMenu.css";
-import { showDropdown } from "../../../redux/features/navigationSlice";
 import { RootState } from "../../../redux/Store";
 import { useDispatch, useSelector } from "react-redux";
 import { setCreateWorkspace } from "../../../redux/features/popUpCreateComponentSlice";
@@ -8,18 +7,12 @@ import { setCreateBoard } from "../../../redux/features/popUpCreateComponentSlic
 const NavCreateMenu: React.FC = () => {
   const dispatch = useDispatch();
 
-  const setDropdown = (dropdownItem: string) => {
-    dispatch(showDropdown({ dropdownItem }));
-  };
-
   const showWorkspaceCreating = () => {
     dispatch(setCreateWorkspace());
-    setDropdown("");
   };
 
   const showBoardCreating = () => {
     dispatch(setCreateBoard());
-    setDropdown("");
   };
 
   const workspaces = useSelector(
@@ -30,7 +23,7 @@ const NavCreateMenu: React.FC = () => {
     <div className="navCreateDiv">
       <div className="navCreateHeading">
         <p>Create..</p>
-        <i onClick={() => setDropdown("")} className="bi bi-x" />
+        <i className="bi bi-x" />
       </div>
 
       <div className="navCreateChoices">

@@ -1,20 +1,18 @@
 import "../../../styles/navStyles/navMenuStyles/workspaceMenu.css";
-import { showDropdown } from "../../../redux/features/navigationSlice";
 import { RootState } from "../../../redux/Store";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { setCreateWorkspace } from "../../../redux/features/popUpCreateComponentSlice";
 
-const NavWorkspaces: React.FC = () => {
-  const dispatch = useDispatch();
+interface Props {
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
-  const setDropdown = (dropdownItem: string) => {
-    dispatch(showDropdown({ dropdownItem }));
-  };
+const NavWorkspaces: React.FC<Props> = ({ setOpen }) => {
+  const dispatch = useDispatch();
 
   const showWorkspaceCreating = () => {
     dispatch(setCreateWorkspace());
-    setDropdown("");
   };
 
   const workspaces = useSelector(
@@ -27,7 +25,7 @@ const NavWorkspaces: React.FC = () => {
     <div className="navWorkspacesDiv">
       <div className="navWorkspacesHeading">
         <p>Workspaces</p>
-        <i onClick={() => setDropdown("")} className="bi bi-x" />
+        <i className="bi bi-x" onClick={() => setOpen(false)} />
       </div>
 
       {isWorkspace ? (
@@ -39,7 +37,6 @@ const NavWorkspaces: React.FC = () => {
               <div key={workspace.workspaceId} className="navWorkspaceItems">
                 <p className="navWorkspaceItemHeading">
                   <Link
-                    onClick={() => setDropdown("")}
                     className="workspaceMenuLink"
                     to={`/workspace/${workspace.workspaceId}`}
                   >
@@ -61,10 +58,7 @@ const NavWorkspaces: React.FC = () => {
         </div>
       ) : (
         <div className="navWorkspaceChoices">
-          <p
-            onClick={() => showWorkspaceCreating()}
-            className="navCreateWorkspace"
-          >
+          <p onClick={showWorkspaceCreating} className="navCreateWorkspace">
             Create workspace
           </p>
         </div>

@@ -1,13 +1,11 @@
 import "../../../styles/popUpStyles/createWorkspacePopUp.css";
 import { useState } from "react";
 import { addWorkspace } from "../../../redux/features/WorkspaceSlice";
-import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "../../../redux/Store";
+import { useDispatch } from "react-redux";
 import { date } from "../../../utils/GetDate";
 import { guestName } from "../../../utils/RandomizeGuestName";
 import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
-import { showDropdown } from "../../../redux/features/navigationSlice";
 import { hideCreateWorkspace } from "../../../redux/features/popUpCreateComponentSlice";
 import { generateRandomColor } from "../../../utils/colors/GenerateRandomColor";
 import CreateWorkspaceForm from "./CreateWorkspaceForm";
@@ -32,10 +30,6 @@ const CreateWorkspacePopUp: React.FC<CreateWorkspaceProps> = ({
 
   const hideCreating = () => {
     dispatch(hideCreateWorkspace());
-  };
-
-  const setDropdown = (dropdownItem: string) => {
-    dispatch(showDropdown({ dropdownItem }));
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -70,7 +64,6 @@ const CreateWorkspacePopUp: React.FC<CreateWorkspaceProps> = ({
         );
         hideCreating();
       }
-      setDropdown("");
       navigate(`/workspace/${workspaceId}`, { replace: true });
     }
   };

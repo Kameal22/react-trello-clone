@@ -1,24 +1,16 @@
 import "../../../styles/navStyles/navMenuStyles/recentMenu.css";
-import { showDropdown } from "../../../redux/features/navigationSlice";
-import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { RecentlyViewedContext } from "../../../context/recentlyViewedContext";
 import { useContext } from "react";
 
 const NavRecent: React.FC = () => {
-  const dispatch = useDispatch();
-
   const recents = useContext(RecentlyViewedContext);
-
-  const setDropdown = (dropdownItem: string) => {
-    dispatch(showDropdown({ dropdownItem }));
-  };
 
   return (
     <div className="navRecentDiv">
       <div className="navRecentHeading">
         <p>Recent boards</p>
-        <i onClick={() => setDropdown("")} className="bi bi-x"></i>
+        <i className="bi bi-x"></i>
       </div>
 
       {recents.length > 0 ? (
@@ -26,7 +18,6 @@ const NavRecent: React.FC = () => {
           {recents.map((board) => {
             return (
               <Link
-                onClick={() => setDropdown("")}
                 key={board.id}
                 className="workspaceMenuLink"
                 to={`/board/${board.workspaceId}/${board.id}`}

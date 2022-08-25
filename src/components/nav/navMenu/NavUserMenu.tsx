@@ -1,7 +1,6 @@
 import "../../../styles/navStyles/navMenuStyles/userMenu.css";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../../../redux/features/usersSlice";
-import { showDropdown } from "../../../redux/features/navigationSlice";
 import { RootState } from "../../../redux/Store";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
@@ -24,13 +23,8 @@ const NavUserMenu: React.FC = () => {
   const randomWorkspace =
     workspaces[Math.floor(Math.random() * workspaces.length)];
 
-  const setDropdown = (dropdownItem: string) => {
-    dispatch(showDropdown({ dropdownItem }));
-  };
-
   const logout = () => {
     dispatch(logoutUser({ login }));
-    setDropdown("");
   };
 
   return (
@@ -43,7 +37,6 @@ const NavUserMenu: React.FC = () => {
       {randomWorkspace && (
         <div className="userChoiceDiv">
           <Link
-            onClick={() => setDropdown("")}
             className="workspaceMenuLink"
             to={`/workspace/${randomWorkspace.workspaceId}`}
           >

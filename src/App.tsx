@@ -7,7 +7,7 @@ import Nav from "./components/nav/Nav";
 import MainOverview from "./components/landingPage/overview/MainOverview";
 import MainBoardsOverview from "./components/landingPage/boards/MainBoardsOverview";
 import NotFoundPage from "./components/NotFoundPage";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "./redux/Store";
 import CreateBoardPopUp from "./components/popups/createBoard/CreateBoardPopUp";
@@ -16,7 +16,6 @@ import {
   hideCreateWorkspace,
   hideCreateBoard,
 } from "./redux/features/popUpCreateComponentSlice";
-import { showDropdown } from "./redux/features/navigationSlice";
 import UseClickOutside from "./hooks/UseClickOutside";
 import { RWProvider } from "./context/recentlyViewedContext";
 import { HTProvider } from "./context/highlightedTaskContext";
