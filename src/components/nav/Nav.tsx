@@ -28,8 +28,13 @@ const Nav: React.FC = () => {
     const user = localStorage.getItem("currentUser");
     if (user) {
       setUser(user);
+    } else {
+      setUser("");
     }
   }, [users]);
+
+  console.log(users);
+  console.log(user);
 
   const workspacesRef = useRef<HTMLDivElement>(null);
   const recentsRef = useRef<HTMLDivElement>(null);
@@ -93,7 +98,7 @@ const Nav: React.FC = () => {
         {user ? (
           <div ref={userRef} onClick={() => setUserMenuOpen(!userMenuOpen)}>
             <h5 className="navUserName">{user}</h5>
-            {userMenuOpen && <NavUserMenu setOpen={setRegisterMenuOpen} />}
+            {userMenuOpen && <NavUserMenu setOpen={setUserMenuOpen} />}
           </div>
         ) : (
           <div

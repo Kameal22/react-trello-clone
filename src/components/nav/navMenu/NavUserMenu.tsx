@@ -33,9 +33,9 @@ const NavUserMenu: React.FC<Props> = ({ setOpen }) => {
     workspaces[Math.floor(Math.random() * workspaces.length)];
 
   const logout = () => {
+    setMessage("Logged out succesfully");
     dispatch(logoutUser({ login }));
     setOpen(false);
-    setMessage("Logged out succesfully");
     setTimeout(() => {
       setMessage("");
     }, 1500);
