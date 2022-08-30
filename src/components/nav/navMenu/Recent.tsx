@@ -7,7 +7,7 @@ interface Props {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const NavRecent: React.FC<Props> = ({ setOpen }) => {
+const Recent: React.FC<Props> = ({ setOpen }) => {
   const recents = useContext(RecentlyViewedContext);
 
   return (
@@ -51,4 +51,4 @@ const NavRecent: React.FC<Props> = ({ setOpen }) => {
   );
 };
 
-export default NavRecent;
+export default Recent;

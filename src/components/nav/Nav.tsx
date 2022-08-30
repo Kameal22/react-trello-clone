@@ -1,14 +1,14 @@
 import "../../styles/navStyles/nav.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import NavWorkspaces from "./navMenu/NavWorkspaces";
+import Workspaces from "./navMenu/Workspaces";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/Store";
-import NavRecent from "./navMenu/NavRecent";
+import Recent from "./navMenu/Recent";
 import NavSearchBar from "./NavSearchBar";
 import Register from "./NavRegister";
-import NavUserMenu from "./navMenu/NavUserMenu";
+import UserMenu from "./navMenu/UserMenu";
 import { Link } from "react-router-dom";
-import NavCreateMenu from "./navMenu/NavCreateMenu";
+import CreateMenu from "./navMenu/CreateMenu";
 import { useState, useRef, useEffect } from "react";
 import UseClickOutside from "../../hooks/UseClickOutside";
 
@@ -32,9 +32,6 @@ const Nav: React.FC = () => {
       setUser("");
     }
   }, [users]);
-
-  console.log(users);
-  console.log(user);
 
   const workspacesRef = useRef<HTMLDivElement>(null);
   const recentsRef = useRef<HTMLDivElement>(null);
@@ -63,9 +60,7 @@ const Nav: React.FC = () => {
           <h5>Workspaces</h5>
           <i className="bi bi-chevron-down" />
 
-          {workspaceMenuOpen && (
-            <NavWorkspaces setOpen={setWorkspaceMenuOpen} />
-          )}
+          {workspaceMenuOpen && <Workspaces setOpen={setWorkspaceMenuOpen} />}
         </div>
 
         <div
@@ -75,7 +70,7 @@ const Nav: React.FC = () => {
         >
           <h5>Recent</h5>
           <i className="bi bi-chevron-down" />
-          {recentMenuOpen && <NavRecent setOpen={setRecentMenuOpen} />}
+          {recentMenuOpen && <Recent setOpen={setRecentMenuOpen} />}
         </div>
 
         <div
@@ -86,7 +81,7 @@ const Nav: React.FC = () => {
           <h5>Create</h5>
           <i className="bi bi-chevron-down" />
 
-          {createMenuOpen && <NavCreateMenu setOpen={setCreateMenuOpen} />}
+          {createMenuOpen && <CreateMenu setOpen={setCreateMenuOpen} />}
         </div>
       </div>
 
@@ -98,7 +93,7 @@ const Nav: React.FC = () => {
         {user ? (
           <div ref={userRef} onClick={() => setUserMenuOpen(!userMenuOpen)}>
             <h5 className="navUserName">{user}</h5>
-            {userMenuOpen && <NavUserMenu setOpen={setUserMenuOpen} />}
+            {userMenuOpen && <UserMenu setOpen={setUserMenuOpen} />}
           </div>
         ) : (
           <div

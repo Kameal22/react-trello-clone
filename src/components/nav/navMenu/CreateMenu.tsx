@@ -8,7 +8,7 @@ interface Props {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const NavCreateMenu: React.FC<Props> = ({ setOpen }) => {
+const CreateMenu: React.FC<Props> = ({ setOpen }) => {
   const dispatch = useDispatch();
 
   const showWorkspaceCreating = () => {
@@ -48,4 +48,4 @@ const NavCreateMenu: React.FC<Props> = ({ setOpen }) => {
   );
 };
 
-export default NavCreateMenu;
+export default CreateMenu;

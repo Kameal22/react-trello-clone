@@ -18,6 +18,7 @@ export const usersSlice = createSlice({
   initialState,
   reducers: {
     registerUser: (state, action: PayloadAction<User>) => {
+      // Check if user already exists, if so - throw an error.
       state.Users.push(action.payload);
 
       window.localStorage.setItem("currentUser", action.payload.login);

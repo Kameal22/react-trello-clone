@@ -10,7 +10,7 @@ interface Props {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const NavUserMenu: React.FC<Props> = ({ setOpen }) => {
+const UserMenu: React.FC<Props> = ({ setOpen }) => {
   const dispatch = useDispatch();
   const [login, setLogin] = useState("");
 
@@ -63,4 +63,4 @@ const NavUserMenu: React.FC<Props> = ({ setOpen }) => {
   );
 };
 
-export default NavUserMenu;
+export default UserMenu;

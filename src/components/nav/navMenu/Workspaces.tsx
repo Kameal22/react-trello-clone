@@ -8,7 +8,7 @@ interface Props {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const NavWorkspaces: React.FC<Props> = ({ setOpen }) => {
+const Workspaces: React.FC<Props> = ({ setOpen }) => {
   const dispatch = useDispatch();
 
   const showWorkspaceCreating = () => {
@@ -68,4 +68,4 @@ const NavWorkspaces: React.FC<Props> = ({ setOpen }) => {
   );
 };
 
-export default NavWorkspaces;
+export default Workspaces;
