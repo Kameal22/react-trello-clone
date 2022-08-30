@@ -20,12 +20,16 @@ const Nav: React.FC = () => {
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const [user, setUser] = useState("");
 
+  const users = useSelector((state: RootState) => state.users.Users);
+
+  const navColor = useSelector((state: RootState) => state.nav.navColor);
+
   useEffect(() => {
     const user = localStorage.getItem("currentUser");
     if (user) {
       setUser(user);
     }
-  }, []);
+  }, [users]);
 
   const workspacesRef = useRef<HTMLDivElement>(null);
   const recentsRef = useRef<HTMLDivElement>(null);
@@ -38,8 +42,6 @@ const Nav: React.FC = () => {
   UseClickOutside(createRef, () => setCreateMenuOpen(false));
   UseClickOutside(registerRef, () => setRegisterMenuOpen(false));
   UseClickOutside(userRef, () => setUserMenuOpen(false));
-
-  const navColor = useSelector((state: RootState) => state.nav.navColor);
 
   return (
     <div style={{ background: navColor }} className="navigationDiv">
@@ -91,7 +93,7 @@ const Nav: React.FC = () => {
         {user ? (
           <div ref={userRef} onClick={() => setUserMenuOpen(!userMenuOpen)}>
             <h5 className="navUserName">{user}</h5>
-            {userMenuOpen && <NavUserMenu />}
+            {userMenuOpen && <NavUserMenu setOpen={setRegisterMenuOpen} />}
           </div>
         ) : (
           <div

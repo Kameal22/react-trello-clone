@@ -19,15 +19,16 @@ export const usersSlice = createSlice({
   reducers: {
     registerUser: (state, action: PayloadAction<User>) => {
       state.Users.push(action.payload);
+
       window.localStorage.setItem("currentUser", action.payload.login);
     },
     logoutUser: (state, action: PayloadAction<{ login: string }>) => {
-      window.localStorage.removeItem("currentUser");
       const logout = state.Users.filter(
         (user) => user.login !== action.payload.login
       );
-
       state.Users = logout;
+
+      window.localStorage.removeItem("currentUser");
     },
   },
 });

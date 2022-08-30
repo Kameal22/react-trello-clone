@@ -14,7 +14,7 @@ const Register: React.FC<Props> = ({ setOpen }) => {
 
   const dispatch = useDispatch();
 
-  const testRegistration = (testLogin: string, testPassword: string) => {
+  const registration = (testLogin: string, testPassword: string) => {
     const user = { login: testLogin, password: testPassword };
     dispatch(registerUser(user));
   };
@@ -31,7 +31,7 @@ const Register: React.FC<Props> = ({ setOpen }) => {
       handleError("Password must contain at least 5 characters");
     } else {
       setMessage(`${name} registered in`);
-      testRegistration(name, password);
+      registration(name, password);
       setOpen(false);
       setTimeout(() => {
         setMessage("");

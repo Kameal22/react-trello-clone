@@ -3,9 +3,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../../../redux/features/usersSlice";
 import { RootState } from "../../../redux/Store";
 import { Link } from "react-router-dom";
+import { setPopUpMessage } from "../../../redux/features/popUpMessagSlice";
 import { useState, useEffect } from "react";
 
-const NavUserMenu: React.FC = () => {
+interface Props {
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const NavUserMenu: React.FC<Props> = ({ setOpen }) => {
   const dispatch = useDispatch();
   const [login, setLogin] = useState("");
 
@@ -20,11 +25,20 @@ const NavUserMenu: React.FC = () => {
     }
   }, []);
 
+  const setMessage = (message: string) => {
+    dispatch(setPopUpMessage({ message }));
+  };
+
   const randomWorkspace =
     workspaces[Math.floor(Math.random() * workspaces.length)];
 
   const logout = () => {
     dispatch(logoutUser({ login }));
+    setOpen(false);
+    setMessage("Logged out succesfully");
+    setTimeout(() => {
+      setMessage("");
+    }, 1500);
   };
 
   return (
