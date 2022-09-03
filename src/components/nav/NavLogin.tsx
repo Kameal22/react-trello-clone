@@ -3,6 +3,8 @@ import { setPopUpMessage } from "../../redux/features/popUpMessagSlice";
 import { loginUser } from "../../redux/features/usersSlice";
 import { useDispatch } from "react-redux";
 import useInputState from "../../hooks/useInputState";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/Store";
 
 interface Props {
     setOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -13,6 +15,8 @@ const Login: React.FC<Props> = ({ setOpen }) => {
     const [password, setPassword] = useInputState("");
 
     const dispatch = useDispatch();
+
+    const users = useSelector((state: RootState) => state.users.Users);
 
     const logginIn = (login: string, password: string, isLoggedIn: boolean) => {
         const user = { login: login, password: password, isLoggedIn: isLoggedIn }
@@ -25,8 +29,9 @@ const Login: React.FC<Props> = ({ setOpen }) => {
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        if (login === "" || password === "") {
-            handleError("Please provide name and password");
+        const isUser = users.find(user => user.login === login) && users.find(user => user.password === password);
+        if (!isUser) {
+            handleError("Login or password doesn't match");
         } else {
             setMessage(`${login} logged in`);
             logginIn(login, password, true)

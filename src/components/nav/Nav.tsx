@@ -24,8 +24,6 @@ const Nav: React.FC = () => {
 
   const users = useSelector((state: RootState) => state.users.Users);
 
-  console.log(users)
-
   const navColor = useSelector((state: RootState) => state.nav.navColor);
 
   useEffect(() => {
