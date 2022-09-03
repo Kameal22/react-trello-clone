@@ -3,6 +3,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 interface User {
   login: string;
   password: string;
+  isLoggedIn: boolean;
 }
 
 interface Users {
@@ -23,17 +24,33 @@ export const usersSlice = createSlice({
 
       window.localStorage.setItem("currentUser", action.payload.login);
     },
+    loginUser: (state, action: PayloadAction<User>) => {
+      const login = state.Users.map(user => {
+        if (user.login === action.payload.login) {
+          return { ...user, isLoggedIn: true }
+        }
+        return user
+      })
+
+      state.Users = login
+
+      window.localStorage.setItem("currentUser", action.payload.login);
+    },
     logoutUser: (state, action: PayloadAction<{ login: string }>) => {
-      const logout = state.Users.filter(
-        (user) => user.login !== action.payload.login
-      );
-      state.Users = logout;
+      const logout = state.Users.map(user => {
+        if (user.login === action.payload.login) {
+          return { ...user, isLoggedIn: false }
+        }
+        return user
+      })
+
+      state.Users = logout
 
       window.localStorage.removeItem("currentUser");
     },
   },
 });
 
-export const { registerUser, logoutUser } = usersSlice.actions;
+export const { registerUser, loginUser, logoutUser } = usersSlice.actions;
 
 export default usersSlice.reducer;

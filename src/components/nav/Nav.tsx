@@ -11,16 +11,20 @@ import { Link } from "react-router-dom";
 import CreateMenu from "./navMenu/CreateMenu";
 import { useState, useRef, useEffect } from "react";
 import UseClickOutside from "../../hooks/UseClickOutside";
+import Login from "./NavLogin";
 
 const Nav: React.FC = () => {
   const [workspaceMenuOpen, setWorkspaceMenuOpen] = useState(false);
   const [recentMenuOpen, setRecentMenuOpen] = useState(false);
   const [createMenuOpen, setCreateMenuOpen] = useState(false);
   const [registerMenuOpen, setRegisterMenuOpen] = useState(false);
+  const [loginMenuOpen, setLoginMenuOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const [user, setUser] = useState("");
 
   const users = useSelector((state: RootState) => state.users.Users);
+
+  console.log(users)
 
   const navColor = useSelector((state: RootState) => state.nav.navColor);
 
@@ -37,12 +41,14 @@ const Nav: React.FC = () => {
   const recentsRef = useRef<HTMLDivElement>(null);
   const createRef = useRef<HTMLDivElement>(null);
   const registerRef = useRef<HTMLDivElement>(null);
+  const loginRef = useRef<HTMLDivElement>(null);
   const userRef = useRef<HTMLDivElement>(null);
 
   UseClickOutside(workspacesRef, () => setWorkspaceMenuOpen(false));
   UseClickOutside(recentsRef, () => setRecentMenuOpen(false));
   UseClickOutside(createRef, () => setCreateMenuOpen(false));
   UseClickOutside(registerRef, () => setRegisterMenuOpen(false));
+  UseClickOutside(loginRef, () => setLoginMenuOpen(false));
   UseClickOutside(userRef, () => setUserMenuOpen(false));
 
   return (
@@ -96,14 +102,20 @@ const Nav: React.FC = () => {
             {userMenuOpen && <UserMenu setOpen={setUserMenuOpen} />}
           </div>
         ) : (
-          <div
-            ref={registerRef}
-            onClick={() => setRegisterMenuOpen(!registerMenuOpen)}
-            className="navigationRegister"
-          >
-            <h5>Register</h5>
-            {registerMenuOpen && <Register setOpen={setRegisterMenuOpen} />}
-          </div>
+          <>
+            <div
+              ref={registerRef}
+              className="navigationRegister"
+            >
+              <h5 onClick={() => setRegisterMenuOpen(!registerMenuOpen)}>Register</h5>
+              {registerMenuOpen && <Register setOpen={setRegisterMenuOpen} />}
+            </div>
+
+            <div ref={loginRef} className="navigationRegister">
+              <h5 onClick={() => setLoginMenuOpen(!loginMenuOpen)}>Login</h5>
+              {loginMenuOpen && <Login setOpen={setLoginMenuOpen} />}
+            </div>
+          </>
         )}
       </div>
     </div>
