@@ -3,6 +3,8 @@ import { setPopUpMessage } from "../../redux/features/popUpMessagSlice";
 import { registerUser } from "../../redux/features/usersSlice";
 import { useDispatch } from "react-redux";
 import useInputState from "../../hooks/useInputState";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/Store";
 
 interface Props {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -13,6 +15,8 @@ const Register: React.FC<Props> = ({ setOpen }) => {
   const [password, setPassword] = useInputState("");
 
   const dispatch = useDispatch();
+
+  const users = useSelector((state: RootState) => state.users.Users);
 
   const registration = (login: string, password: string, isLoggedIn: boolean) => {
     const user = { login: login, password: password, isLoggedIn: isLoggedIn };
@@ -25,17 +29,23 @@ const Register: React.FC<Props> = ({ setOpen }) => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (name === "" || password === "") {
-      handleError("Please provide name and password");
-    } else if (password.length < 5) {
-      handleError("Password must contain at least 5 characters");
+    const isUser = users.find(user => user.login === name);
+
+    if (!isUser) {
+      if (name === "" || password === "") {
+        handleError("Please provide name and password");
+      } else if (password.length < 5) {
+        handleError("Password must contain at least 5 characters");
+      } else {
+        setMessage(`${name} registered in`);
+        registration(name, password, true);
+        setOpen(false);
+        setTimeout(() => {
+          setMessage("");
+        }, 1500);
+      }
     } else {
-      setMessage(`${name} registered in`);
-      registration(name, password, true);
-      setOpen(false);
-      setTimeout(() => {
-        setMessage("");
-      }, 1500);
+      handleError("Username already exists")
     }
   };
 
