@@ -1,6 +1,5 @@
 import { useState, useRef, useContext } from "react";
 import "../../../styles/popUpStyles/taskDetailsPopUp.css";
-import TaskCommentForm from "../../task/TaskCommentForm";
 import { TaskCommentsInterface } from "../../../interfaces/WorkspaceInterface";
 import { RootState } from "../../../redux/Store";
 import { useSelector, useDispatch } from "react-redux";
@@ -8,7 +7,6 @@ import {
   deleteTaskComment,
   editTask,
 } from "../../../redux/features/WorkspaceSlice";
-import EditTaskCommentForm from "../../task/EditTaskCommentForm";
 import CreateLabelPopUp from "../SpecialLabelPopUp";
 import UseClickOutside from "../../../hooks/UseClickOutside";
 import { handleEditHighlight } from "../../../utils/SetHighlightedTask";
@@ -18,6 +16,7 @@ import useToggle from "../../../hooks/useToggle";
 import useInputState from "../../../hooks/useInputState";
 import Description from "./Description";
 import Activity from "./Activity";
+import TaskName from "./TaskName";
 
 interface TaskDetailsInterface {
   showTaskDetails: () => void;
@@ -100,29 +99,7 @@ const TaskDetailsPopUp: React.FC<TaskDetailsInterface> = ({
 
   return (
     <div ref={forwardRef} className="taskDetailsDiv">
-      <div className="taskDetailsName">
-        {editingTaskName ? (
-          <form
-            ref={taskNameRef}
-            className="editTaskNameForm"
-            autoComplete="off"
-            onSubmit={handleSubmit}
-          >
-            {" "}
-            <input
-              value={newTaskName}
-              className="editTaskNameInput"
-              onChange={setNewTaskName}
-              type="text"
-              name="taskName"
-            />
-          </form>
-        ) : (
-          <p onClick={setEditingTaskName}>{taskName}</p>
-        )}
-
-        <i id="cornerIcon" onClick={showTaskDetails} className="bi bi-x" />
-      </div>
+      <TaskName editingTaskName={editingTaskName} taskNameRef={taskNameRef} handleSubmit={handleSubmit} newTaskName={newTaskName} setNewTaskName={setNewTaskName} setEditingTaskName={setEditingTaskName} taskName={taskName} showTaskDetails={showTaskDetails} />
 
       <p className="taskDetailsListName">
         In column: <span>{columnName}</span>
