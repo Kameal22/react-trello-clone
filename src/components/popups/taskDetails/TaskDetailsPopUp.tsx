@@ -1,22 +1,23 @@
 import { useState, useRef, useContext } from "react";
-import "../../styles/popUpStyles/taskDetailsPopUp.css";
-import TaskCommentForm from "../task/TaskCommentForm";
-import TaskDescriptionForm from "../task/TaskDescriptionForm";
-import { TaskCommentsInterface } from "../../interfaces/WorkspaceInterface";
-import { RootState } from "../../redux/Store";
+import "../../../styles/popUpStyles/taskDetailsPopUp.css";
+import TaskCommentForm from "../../task/TaskCommentForm";
+import { TaskCommentsInterface } from "../../../interfaces/WorkspaceInterface";
+import { RootState } from "../../../redux/Store";
 import { useSelector, useDispatch } from "react-redux";
 import {
   deleteTaskComment,
   editTask,
-} from "../../redux/features/WorkspaceSlice";
-import EditTaskCommentForm from "../task/EditTaskCommentForm";
-import CreateLabelPopUp from "./SpecialLabelPopUp";
-import UseClickOutside from "../../hooks/UseClickOutside";
-import { handleEditHighlight } from "../../utils/SetHighlightedTask";
-import { useSetHT } from "../../context/highlightedTaskContext";
-import { HighlightedTaskContext } from "../../context/highlightedTaskContext";
-import useToggle from "../../hooks/useToggle";
-import useInputState from "../../hooks/useInputState";
+} from "../../../redux/features/WorkspaceSlice";
+import EditTaskCommentForm from "../../task/EditTaskCommentForm";
+import CreateLabelPopUp from "../SpecialLabelPopUp";
+import UseClickOutside from "../../../hooks/UseClickOutside";
+import { handleEditHighlight } from "../../../utils/SetHighlightedTask";
+import { useSetHT } from "../../../context/highlightedTaskContext";
+import { HighlightedTaskContext } from "../../../context/highlightedTaskContext";
+import useToggle from "../../../hooks/useToggle";
+import useInputState from "../../../hooks/useInputState";
+import Description from "./Description";
+import Activity from "./Activity";
 
 interface TaskDetailsInterface {
   showTaskDetails: () => void;
@@ -150,96 +151,9 @@ const TaskDetailsPopUp: React.FC<TaskDetailsInterface> = ({
         )}
       </div>
 
-      <div className="taskDetailsDescriptionDiv">
-        <p className="taskDetailsDescriptionHeading">Description</p>
-        {descriptionForm ? (
-          <TaskDescriptionForm
-            showForm={showDescriptionForm}
-            workspaceId={workspaceId}
-            boardId={boardId}
-            columnId={columnId}
-            taskId={taskId}
-            forwardRef={taskDescriptionRef}
-          />
-        ) : (
-          <div>
-            {taskDescription !== "" ? (
-              <p
-                onClick={showDescriptionForm}
-                className="taskDetailsDescription"
-              >
-                {taskDescription}
-              </p>
-            ) : (
-              <p
-                onClick={showDescriptionForm}
-                className="taskDetailsDescriptionEnter"
-              >
-                Enter task description
-              </p>
-            )}
-          </div>
-        )}
-      </div>
+      <Description descriptionForm={descriptionForm} showDescriptionForm={showDescriptionForm} workspaceId={workspaceId} boardId={boardId} columnId={columnId} taskId={taskId} taskDescriptionRef={taskDescriptionRef} taskDescription={taskDescription} />
 
-      <div className="taskDetailsActivityDiv">
-        <p className="taskDetailsActivityHeading">Activity</p>
-
-        <TaskCommentForm
-          workspaceId={workspaceId}
-          boardId={boardId}
-          columnId={columnId}
-          taskId={taskId}
-        />
-
-        {taskComments.map((comment) => {
-          return (
-            <div key={comment.columnId} className="taskDetailsWholeCommentDiv">
-              <div className="taskDetailsCommentAuthorAndDate">
-                {comment.taskAuthor ? (
-                  <p className="commentAuthor">{comment.taskAuthor}</p>
-                ) : (
-                  <p className="commentAuthor">
-                    {shownWorkspace?.workspaceMember}
-                  </p>
-                )}
-                <p className="commentDate">{comment.taskDate}</p>
-              </div>
-              {commentToEdit === comment.taskComment ? (
-                <EditTaskCommentForm
-                  workspaceId={workspaceId}
-                  boardId={boardId}
-                  columnId={columnId}
-                  taskId={taskId}
-                  taskComment={comment.taskComment}
-                  setEditing={() => setCommentToEdit("")}
-                />
-              ) : (
-                <div className="taskDetailsActivityCommentDiv">
-                  <p className="taskDetailsActivityComment">
-                    {comment.taskComment}
-                  </p>
-                </div>
-              )}
-
-              <div className="taskDetailsActivityCommentEditDelete">
-                <p
-                  onClick={() => setCommentToEdit(comment.taskComment)}
-                  className="commentEdit"
-                >
-                  Edit
-                </p>
-                <p
-                  onClick={() => deleteComment(comment.taskComment)}
-                  className="commentDelete"
-                >
-                  Delete
-                </p>
-              </div>
-            </div>
-          );
-        })}
-      </div>
+      <Activity workspaceId={workspaceId} boardId={boardId} columnId={columnId} taskId={taskId} taskComments={taskComments} shownWorkspace={shownWorkspace} commentToEdit={commentToEdit} setCommentToEdit={setCommentToEdit} deleteComment={deleteComment} />
     </div>
   );
 };

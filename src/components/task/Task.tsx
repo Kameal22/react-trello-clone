@@ -1,7 +1,7 @@
 import "../../styles/taskStyles/task.css";
 import { useRef, useState } from "react";
 import TaskOptionsForm from "../task/TaskOptionsForm";
-import TaskDetailsPopUp from "../popups/TaskDetailsPopUp";
+import TaskDetailsPopUp from "../popups/taskDetails/TaskDetailsPopUp";
 import TaskLabelsPopUp from "../popups/TaskLabelsPopUp";
 import { TaskCommentsInterface } from "../../interfaces/WorkspaceInterface";
 import { Draggable } from "react-beautiful-dnd";
