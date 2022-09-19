@@ -18,8 +18,8 @@ interface CreateWorkspaceProps {
 const CreateWorkspacePopUp: React.FC<CreateWorkspaceProps> = ({
   forwardRef,
 }) => {
-  const [, , workspaceName, setWorkspaceName, nameError] = useInputState("");
-  const [, , workspaceDescription, setWorkspaceDescription, descriptionError] =
+  const [, , workspaceName, setWorkspaceName, , , nameError] = useInputState("");
+  const [, , , , workspaceDescription, setWorkspaceDescription, descriptionError] =
     useInputState("");
   const [workspaceId] = useState<string>(uuidv4());
 
@@ -34,38 +34,20 @@ const CreateWorkspacePopUp: React.FC<CreateWorkspaceProps> = ({
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (!nameError) {
-      if (user) {
-        dispatch(
-          addWorkspace({
-            workspaceName,
-            workspaceDescription,
-            workspaceDate: date,
-            workspaceMember: user,
-            workspaceLetterColor: generateRandomColor(),
-            workspaceBoards: [],
-            workspaceLandingPageMenu: false,
-            workspaceId,
-          })
-        );
-        hideCreating();
-      } else {
-        dispatch(
-          addWorkspace({
-            workspaceName,
-            workspaceDescription,
-            workspaceDate: date,
-            workspaceMember: guestName,
-            workspaceLetterColor: generateRandomColor(),
-            workspaceBoards: [],
-            workspaceLandingPageMenu: false,
-            workspaceId,
-          })
-        );
-        hideCreating();
-      }
-      navigate(`/workspace/${workspaceId}`, { replace: true });
-    }
+    dispatch(
+      addWorkspace({
+        workspaceName,
+        workspaceDescription,
+        workspaceDate: date,
+        workspaceMember: user ? user : guestName,
+        workspaceLetterColor: generateRandomColor(),
+        workspaceBoards: [],
+        workspaceLandingPageMenu: false,
+        workspaceId,
+      })
+    );
+    hideCreating();
+    navigate(`/workspace/${workspaceId}`, { replace: true });
   };
 
   return (

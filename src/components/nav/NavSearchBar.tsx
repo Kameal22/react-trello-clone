@@ -68,7 +68,7 @@ const NavSearchBar: React.FC = () => {
           placeholder="Search.."
           type="text"
           name="search"
-        ></input>
+        />
         <i id="navSearchIcon" className="bi bi-search" />
       </form>
 
@@ -89,7 +89,7 @@ const NavSearchBar: React.FC = () => {
                     <div
                       className="searchHintColorDiv"
                       style={{ background: `${data.background}` }}
-                    ></div>
+                    />
                     <p className="searchHint">
                       {data.name} <span>board</span>
                     </p>
