@@ -29,7 +29,7 @@ const Login: React.FC<Props> = ({ setOpen }) => {
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        const isUser = users.find(user => user.login === login) && users.find(user => user.password === password);
+        const isUser = users?.find(user => user.login === login) && users.find(user => user.password === password);
         if (!isUser) {
             handleError("Login or password doesn't match");
         } else {

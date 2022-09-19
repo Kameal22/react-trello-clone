@@ -29,10 +29,10 @@ const Register: React.FC<Props> = ({ setOpen }) => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const isUser = users.find(user => user.login === name);
+    const isUser = users?.find(user => user.login === name);
 
     if (!isUser) {
-      if (name === "" || password === "") {
+      if (name.trim() === "" || password.trim() === "") {
         handleError("Please provide name and password");
       } else if (password.length < 5) {
         handleError("Password must contain at least 5 characters");

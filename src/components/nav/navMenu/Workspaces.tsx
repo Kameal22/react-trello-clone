@@ -39,6 +39,7 @@ const Workspaces: React.FC<Props> = ({ setOpen }) => {
                 <p className="navWorkspaceItemHeading">
                   <Link
                     className="workspaceMenuLink"
+                    onClick={() => setOpen(false)}
                     to={`/workspace/${workspace.workspaceId}`}
                   >
                     <span
